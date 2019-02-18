@@ -27,12 +27,12 @@ PROGRPRINC = main.o
 PATHMAIN := $(DIRMAIN)$(PROGRPRINC)
 
 #Noms des librairies statiques et dynamiques
-DIRLIB := build/
+DIRLIB := lib/
 LINKNAME ?= Blokus
 libSTATIC := lib$(LINKNAME).a
-MAJEUR ?= .1
+MAJEUR ?= .0
 MINEUR ?= .1
-CORRECTION ?= .2
+CORRECTION ?= .0
 SONAMECOURT := lib$(LINKNAME).so
 SONAME := $(SONAMECOURT)$(MAJEUR)
 REALNAME := $(SONAME)$(MINEUR)$(CORRECTION)
@@ -48,7 +48,7 @@ ARFLAGS = rcs
 #Options des programmes en statique et dynamique
 STATIC = blokus.static
 DYNAMIC = blokus.shared
-EXE = jeuLulu.exe
+EXE = blokus.exe
 sharedLDFLAGS := -L.
 sharedLDLIBS := -l$(LINKNAME)
 staticLDFLAGS := -L.
