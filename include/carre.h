@@ -25,4 +25,5 @@ void carre_free(Carre**);
 /* Detruit une pièce entière */
 void carre_detruire(Carre**);
 
+/* Supprime tous les carrés d'une pièce */
 void liste_piece_suppr_elem(Carre**);

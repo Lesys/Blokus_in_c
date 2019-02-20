@@ -17,6 +17,8 @@ int carre_get_y (Carre* c) {
 Carre* carre_get_suiv (Carre* c) {
 	if (!carre_hors_liste(c))
 		return c->suiv;
+	else
+		return NULL;
 }
 
 int carre_hors_liste(Carre* c) {
@@ -25,11 +27,11 @@ int carre_hors_liste(Carre* c) {
 
 /* Libère un Carre */
 void carre_free(Carre** c) {
-	if (!carre_hors_liste(*c->suiv))
-		*c->suiv = NULL;
+	if (!carre_hors_liste((*c)->suiv))
+		(*c)->suiv = NULL;
 
 	free(*c);
-	*c = NULL;
+	(*c) = NULL;
 }
 
 /* Detruit une pièce entière */
@@ -38,12 +40,12 @@ void carre_detruire(Carre** c) {
 	*supp = *c;
 
 	while (!carre_hors_liste(*supp)) {
-		*c = *c->suiv;
+		*c = (*c)->suiv;
 		carre_free(supp);
 		*supp = *c;
 	}
 
-	*c = NULL;
+	(*c) = NULL;
 }
 
 /* Structure d'une pièce (qui est une liste de Carré avec comme point de référence le bas gauche de la pièce)*/
@@ -57,11 +59,11 @@ void carre_detruire(Carre** c) {
 	p->liste_carre = NULL;
 }*/
 
-/* Supprime l'élément courant de la liste (s'il n'est pas NULL)	 */
+/* Supprime la pièce courante de la liste (si elle n'est pas NULL) */
 void liste_piece_suppr_elem(Carre** c) {
 	if (!carre_hors_liste(*c)) {
-		Carre* suiv = *c->suiv;
-		carre_free(c);
+		Carre* suiv = (*c)->suiv;
+		carre_detruire(c);
 		*c = suiv;
 	}
 }

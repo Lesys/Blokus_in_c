@@ -5,3 +5,6 @@ typedef enum couleur {
     ROUGE,
     VERT
 } Couleur;
+
+/* Renvoie la couleur en chaine de caractère */
+char* couleur_tostring(Couleur);
