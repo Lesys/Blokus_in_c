@@ -19,6 +19,10 @@ Carre* carre_get_suiv (Carre*);
 
 int carre_hors_liste(Carre*);
 
+void carre_reinit_tab(char tab[5][5]);
+
+void varre_afficher(Carre*):
+
 /* Libère un Carre */
 void carre_free(Carre**);
 
