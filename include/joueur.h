@@ -10,7 +10,7 @@ struct joueur {
 	char* pseudo;
 	Couleur couleur; /* Couleur du joueur */
 	int score;
-	Carre** liste_piece; /* Liste des pièces restantes pour le joueur */
+	Piece** liste_piece; /* Liste des pièces restantes pour le joueur */
 	Type_Joueur type; /* Type de joueur (la gestion d'un tour diffère en fonction du type) */
 	Joueur* suiv; /* Joueur suivant (qu'il soit un vrai joueur ou un BOT)*/
 	Joueur* prec; /* Joueur précédent (pour que la destruction soit possible)*/

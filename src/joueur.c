@@ -21,7 +21,7 @@ int joueur_score(Joueur* j) {
 }
 
 /* Récupère la liste des pièces du joueur */
-Carre** joueur_liste_piece(Joueur* j) {
+Piece** joueur_liste_piece(Joueur* j) {
 	return j->liste_piece;
 }
 
@@ -100,6 +100,7 @@ Joueur* joueur_creation(Couleur c, ...) {
 
 	j->prec = malloc(sizeof(Joueur*));
 
+/*	j->liste_piece = piece_liste_creation();*/
 	j->liste_piece = NULL;
 
 	return j;

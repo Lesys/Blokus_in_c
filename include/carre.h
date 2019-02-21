@@ -1,3 +1,6 @@
+#ifndef CARRE_H
+#define CARRE_H
+
 /* Structure d'un carré */
 typedef struct carre Carre;
 
@@ -21,7 +24,7 @@ int carre_hors_liste(Carre*);
 
 void carre_reinit_tab(char tab[5][5]);
 
-void varre_afficher(Carre*):
+void carre_afficher(Carre*);
 
 /* Libère un Carre */
 void carre_free(Carre**);
@@ -31,3 +34,18 @@ void carre_detruire(Carre**);
 
 /* Supprime tous les carrés d'une pièce */
 void liste_piece_suppr_elem(Carre**);
+
+
+
+/* Structure d'une pièce (qui est une liste de Carré avec comme point de référence le bas gauche de la pièce)*/
+typedef struct piece {
+	Carre* liste_carre; /* Premier carré de la liste */
+} Piece;
+
+Piece** piece_liste_creation();
+
+void liste_piece_suppr_elem(Carre**);
+
+void piece_liste_detruire(Piece***);
+
+#endif
