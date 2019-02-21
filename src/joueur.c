@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "../include/joueur.h"
+#include "../include/carre.h"
+
 /*#include "../include/commun.h"*/
 
 /* Récupère le pseudo du joueur */
@@ -28,6 +30,14 @@ Piece** joueur_liste_piece(Joueur* j) {
 /* Récupère le joueur suivant */
 Joueur* joueur_suivant(Joueur* j) {
 	return j->suiv;
+}
+
+int joueur_a_abandonne(Joueur* j) {
+	return j->abandon;
+}
+
+void joueur_abandonne(Joueur* j) {
+	j->abandon = 1;
 }
 
 /* Vérifie qu'il y a un nombre correct de joueur */
@@ -80,6 +90,22 @@ Joueur* joueur_liste_creation(int nb_joueur, ...) {
 	return first;
 }
 
+/* Fonction permettant de réinitialiser la liste de Joueur pour permettre de refaire une manche avec les mêmes pseudos */
+void joueur_liste_reinit(Joueur* j) {
+	Joueur* first = j;
+
+	/* Pour tous les Joueur */
+	do {
+		j->abandon = 0;
+
+                liste_piece_detruire(&(j->liste_piece));
+
+		j->liste_piece = piece_liste_creation();
+
+		j = joueur_suivant(j);
+	} while (first != j);
+}
+
 /* Crée un joueur. Les paramètres optionnels seront le type de joueur (LOCAL par défaut) */
 Joueur* joueur_creation(Couleur c, ...) {
 	Joueur* j = malloc(sizeof(Joueur));
@@ -87,7 +113,7 @@ Joueur* joueur_creation(Couleur c, ...) {
 
 	printf("Joueur %s, veuillez indiquer votre pseudo: ", couleur_tostring(c));
 /*	scanf("%*[^\n]%*c", j->pseudo);*/
-/*	scanf("%s", j->pseudo);*/
+	scanf("%s", j->pseudo);
 
 	/* Réalloue la bonne taille pour le pseudo */
 	j->pseudo = realloc(j->pseudo, sizeof(char) * strlen(j->pseudo));
@@ -96,12 +122,14 @@ Joueur* joueur_creation(Couleur c, ...) {
 
 	j->type = LOCAL;
 
-	j->suiv = malloc(sizeof(Joueur*));
+	j->suiv = NULL;/*malloc(sizeof(Joueur*));*/
 
-	j->prec = malloc(sizeof(Joueur*));
+	j->prec = NULL;/*malloc(sizeof(Joueur*));*/
 
-/*	j->liste_piece = piece_liste_creation();*/
-	j->liste_piece = NULL;
+	j->liste_piece = piece_liste_creation();
+/*	j->liste_piece = NULL;*/
+
+	j->abandon = 0;
 
 	return j;
 }
@@ -119,6 +147,8 @@ void joueur_free(Joueur** j) {
 		if ((*j)->pseudo != NULL)
 			free((*j)->pseudo);
 		(*j)->pseudo = NULL;
+
+		liste_piece_detruire(&((*j)->liste_piece));
 
 		free(*j);
 		(*j) = NULL;

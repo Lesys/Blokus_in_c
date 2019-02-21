@@ -14,7 +14,7 @@ struct joueur {
 	Type_Joueur type; /* Type de joueur (la gestion d'un tour diffère en fonction du type) */
 	Joueur* suiv; /* Joueur suivant (qu'il soit un vrai joueur ou un BOT)*/
 	Joueur* prec; /* Joueur précédent (pour que la destruction soit possible)*/
-
+	int abandon; /* VRAI si le joueur a abandonné, FAUX sinon */
 };
 
 /* Procédures d'accès pour un Joueur */
@@ -29,10 +29,13 @@ Couleur joueur_couleur(Joueur*);
 int joueur_score(Joueur*);
 
 /* Récupère la liste des pièces du joueur */
-Carre** joueur_liste_piece(Joueur*);
+Piece** joueur_liste_piece(Joueur*);
 
 /* Récupère le joueur suivant */
 Joueur* joueur_suivant(Joueur*);
+
+/* Récupère le joueur suivant */
+int joueur_a_abandonne(Joueur*);
 
 /* Vérifie qu'il y a un nombre correct de joueur */
 int verif_nb_joueur(int, int, int);

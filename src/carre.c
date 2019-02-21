@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../include/carre.h"
 #include "../include/piece.h"
+#include "../include/commun.h"
 
 /* Procédures d'accès pour un carré */
 
@@ -104,7 +105,7 @@ void carre_detruire(Carre** c) {
 
 /* Création d'une liste de Piece */
 Piece** piece_liste_creation () {
-	Piece** p = malloc(sizeof(Piece*) * 21); /* Alloue l'espace pour 21 pointeurs de Piece */
+	Piece** p = malloc(sizeof(Piece*) * NB_PIECES); /* Alloue l'espace pour 21 pointeurs de Piece */
 	Piece** first = p;
 
 	(*p) = malloc(sizeof(Piece)); /* Alloue l'espace pour une Piece */
@@ -213,7 +214,7 @@ void liste_piece_detruire(Piece*** p) {
 	int i = 0;
 
 	if ((*p) != NULL) {
-		for (i = 0; i < 21; i++) {
+		for (i = 0; i < NB_PIECES; i++) {
 /*			printf("Destruction piece %d\n", i);*/
 /*		carre_afficher((*((*p) + i))->liste_carre);*/
 			liste_piece_suppr_elem(&((*((*p) + i))->liste_carre));

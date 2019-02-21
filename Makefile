@@ -26,6 +26,9 @@ DIRMAIN := src/
 PROGRPRINC = main.o
 PATHMAIN := $(DIRMAIN)$(PROGRPRINC)
 
+#Dossier de  l'exécutable
+DIRBUILD := build/
+
 #Noms des librairies statiques et dynamiques
 DIRLIB := lib/
 LINKNAME ?= Blokus
@@ -98,9 +101,10 @@ $(DYNAMIC): $(DIRMAIN)$(PROGRPRINC) $(REALNAME)
 execution: $(DYNAMIC) MOVE clearScreen
 	-LD_LIBRARY_PATH=./$(DIRLIB):$LD_LIBRARY_PATH ./$(DIRLIB)$(DYNAMIC)
 
-#Move les fichiers dans leur dossier respectif : .so .a et executable dans le dossier build. .o dans le dossier bin
+#Move les fichiers dans leur dossier respectif : .so .a dans le dossier lib. .o dans le dossier bin. L'exécutable dans le dossier build
 MOVE: $(DYNAMIC) $(STATIC)
-	-mv *Blokus* *blokus* ./$(DIRLIB)
+	-mv *blokus* ./$(DIRLIB)
+	-mv *Blokus* ./$(DIRBUILD)
 	-mv $(DIRMAIN)*.o $(DIRLIB)*.o *.o ./$(DIROBJ)
 
 #Nettoie les fichiers créés dans le current directory
@@ -109,7 +113,7 @@ clean: cleanNewDir
 
 #Nettoie les dossiers créés et leur contenu
 cleanNewDir:
-	-rm -R $(DIRLIB) $(DIROBJ)
+	-rm -R $(DIRLIB) $(DIROBJ) $(DIRBUILD)
 
 #Nettoie l'écran
 clearScreen: 
