@@ -2,21 +2,30 @@
 #include "../include/gestion_tour.h"
 
 
-void creation_plateau(couleur* pl);/*Alloue dynamiquement le plateau*/
 
-void detruire_plateau(couleur** pl);/*Free le plateau */
+void initialisation_partie(Joueur* j); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 
-void initialisation_partie(joueur * j1); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
+/*Initialisation de la manche*/
+void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur j);$
 
-void jouer_partie();
+void maj_scores(Joueur* j); /* Permet de mettre à jour les scores à la fin de la partie */ 
+				/* Si le petit carré a été posé en dernier, ajout des points sur le moment de la pose */
 
-void jouer_manche(Couleur pl[20][20], Joueur* j);
+int joueur_abandon(Joueur* j);/*Si tous les joueur on abandonne*/
 
-Joueur* tour_suivant(Joueur* j)
 
 int fin_de_partie(Joueur* j); /* Affiche les résultats, propose les options de fin de partie et renvoie le résultat correspondant */
 
-void maj_scores(Joueur* j, Carre *piece); /* Permet de mettre à jour les scores à la fin de la partie */ 
-				/* Si le petit carré a été posé en dernier, ajout des points sur le moment de la pose */
+Joueur* tour_suivant(Joueur* j);
 
-void maj_scores_fin(Joueur* j);/* Réalise la mise a jour du scores pour les personnes qui n'ont pas fini la partie, et appel maj_scores*/
+
+void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);$
+
+
+void jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
+
+void jouer_partie();
+
+
+
+
