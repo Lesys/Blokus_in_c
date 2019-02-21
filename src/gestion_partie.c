@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../include/gestion_partie.h"
 
-void initialisation_partie(joueur * j1){ /*Initialisation de la partie, appelle des fonctions pour crée les joueurs, le plateau*/
+void initialisation_partie(joueur * j1){ /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 	int nb_joueur=-1;
 	printf("Creation de la partie\n");
 	do{
@@ -25,21 +25,21 @@ void maj_scores(Joueur* j,Carre *piece){
 	j->score=joueur_score(j)+15;	
 	}
 	else{
-		Carre ** piece=joueur_liste_piece(j)
-		Carre ** pivot=piece;
+		Carre ** pie=joueur_liste_piece(j)
+		Carre ** pivot=pie;
 		while(joueur_liste_piece(j) != NULL ){
-			*piece=carre_get_suiv(*piece);
-			while(&pivot != &piece){
+			*pie=carre_get_suiv(*pie);
+			while(&pivot != &pie){
 				j->score=joueur_score(j)-1;
-				*piece=carre_get_suiv(*piece);
+				*pie=carre_get_suiv(*pie);
 			}
-			liste_piece_suppr_elem(piece);
+			liste_piece_suppr_elem(pie);
 		}
 	}
 }
 
 
-/*Apelle toute les fonctions pour réalisé une manche*/
+/*Appel toute les fonctions pour réalisé une manche*/
 void jouer_manche(Couleur pl[20][20], Joueur* j){
 	int x,y;
 	Carre * piece = demander_piece(j);
@@ -53,12 +53,24 @@ void jouer_manche(Couleur pl[20][20], Joueur* j){
 	tour_suivant(j);
 }
 
-/*Appelle le prochain joueur à jouer et modifie la liste joueur */
+/*Appel le prochain joueur à jouer et modifie la liste joueur */
 Joueur* tour_suivant(Joueur* j){
 	joueur_suivant(j);
-	printf("%s : A toi de jouer",joueur_pseudo(j));
+	printf("%s : A toi jouer",joueur_pseudo(j));
 }
 
+
+/* Réalise la mise a jour du scores pour les personnes qui n'ont pas fini la partie, et appel maj_scores*/
+void maj_scores_fin(Joueur* j){
+	Joueur* pivot = j;
+	joueur_suivant(j);
+	while(&j != &pivot){
+		 if(joueur_liste_piece(j) != NULL){
+        	        maj_score(j,NULL);
+	        }
+		joueur_suivant(j);
+	}
+}
 
 
 
@@ -66,6 +78,7 @@ Joueur* tour_suivant(Joueur* j){
 int fin_de_partie(Joueur* j){
 	if(joueur_liste_piece(j) == NULL)return 1;
 	int choix=0;
+	
 	printf("Fin de la partie\n");
 	afficher_resultats(j);
 	/*Affiche le pseudo gagnant ?*/
@@ -84,10 +97,14 @@ int fin_de_partie(Joueur* j){
 }
 
 
-void jouer_partie(){ /*Apelle de toute les fonctions parti */
-	joueur * j
-	initialisation_partie(j);
-	while(fin_de_partie_(Joueur* j)){
-		jouer_manche(pl,j);
+void jouer_partie(){ /*Appel de toute les fonctions partie */
+	joueur ** j
+	initialisation_partie(*j);
+	while(fin_de_partie_(*j)){
+		jouer_manche(pl,*j);
 	}
+	joueur_liste_detruire(j);
+	pl=NULL;
+
+
 }
