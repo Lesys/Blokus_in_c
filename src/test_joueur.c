@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/joueur.h"
+#include "../include/carre.h"
 
 int main() {
 	Joueur* j;
@@ -12,6 +13,10 @@ int main() {
 	j = joueur_suivant(j);
 
 	printf("Pseudo suivant: %s\n", joueur_pseudo(j));
+
+	printf("Affichage Piece\n");
+
+	carre_afficher((*joueur_liste_piece(j))->liste_carre);
 
 	printf("Destruiction: \n");
 	joueur_liste_detruire(&j);
