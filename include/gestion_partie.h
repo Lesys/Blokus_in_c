@@ -2,6 +2,10 @@
 #include "../include/gestion_tour.h"
 
 
+void creation_plateau(couleur* pl);/*Alloue dynamiquement le plateau*/
+
+void detruire_plateau(couleur** pl);/*Free le plateau */
+
 void initialisation_partie(joueur * j1); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 
 void jouer_partie();

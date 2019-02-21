@@ -2,7 +2,21 @@
 #include <stdlib.h>
 #include "../include/gestion_partie.h"
 
-void initialisation_partie(joueur * j1){ /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
+void creation_plateau(couleur* pl){
+	if(pl == NULL){
+		*pl=calloc(20*20,sizeof(Couleur));
+	}
+	else{
+		printf("Le plateau existe déjà\n");
+	}
+}
+
+void detruire_plateau(couleur** pl){
+	free(*pl);
+	*pl=NULL;
+}
+
+void initialisation_partie(joueur* j1,Couleur* pl ){ /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 	int nb_joueur=-1;
 	printf("Creation de la partie\n");
 	do{
@@ -10,18 +24,18 @@ void initialisation_partie(joueur * j1){ /*Initialisation de la partie, appel de
 		scanf("%d",&nb_joueur);
 	}while(nb_joueur < 2 && nb_joueur > 4);
 	j1=joueur_liste_creation(nb_joueur);
-	creation_plateau();
+	creation_plateau(pl);
 }
 
 /* Permet de mettre à jour les scores à la fin de la partie */ 
 /* Si le petit carré a été posé en dernier, ajout des points sur le moment de la pose */
 
-void maj_scores(Joueur* j,Carre *piece){
+void maj_scores(Joueur* j,Carre* piece){
 	if(joueur_liste_piece(j) == NULL){
 
 		if(*piece == "petit_carre"){
 		j->score=joueur_score(j)+5;
-		}
+	}
 	j->score=joueur_score(j)+15;	
 	}
 	else{
@@ -98,13 +112,14 @@ int fin_de_partie(Joueur* j){
 
 
 void jouer_partie(){ /*Appel de toute les fonctions partie */
-	joueur ** j
-	initialisation_partie(*j);
-	while(fin_de_partie_(*j)){
-		jouer_manche(pl,*j);
-	}
-	joueur_liste_detruire(j);
-	pl=NULL;
+	joueur * j;
+	Couleur *pl;
+	initialisation_partie(j,pl);
+	while(fin_de_partie_(j)){
+		jouer_manche(pl,j);
 
+	}
+	joueur_liste_detruire(&j);
+	detruire_plateau(&pl);
 
 }
