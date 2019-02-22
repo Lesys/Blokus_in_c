@@ -15,11 +15,15 @@ int main() {
     // Test d'une valeur non attendue
     pl[10][10] = 1234;
 
-    printf("Test affichage du plateau :\n\n");
+    printf("\nTest affichage du plateau :\n\n");
     afficher_plateau(pl);
 
     // Test pièces restantes
-    printf("Test affichage pièces restantes :\n\n");
+    printf("\nTest affichage pièces restantes :\n\n");
     Joueur * j = joueur_creation(ROUGE);
     afficher_pieces_dispo(j);
+
+    // Test orientations
+    printf("\nTest affichage orientations : \n\n");
+    afficher_choix_orientation(piece_suivant(piece_suivant(joueur_liste_piece(j))));
 }

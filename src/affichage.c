@@ -108,7 +108,49 @@ void afficher_pieces_dispo(Joueur* j) {
 
 void afficher_choix_orientation(Piece* p) {
 
-    return;
+    // Matrice qui contiendra une représentation de la pièce
+    Couleur mp[5][5] = {0};
+    Carre * init = p->liste_carre;
+    Carre * c = init;
+
+    // Représentation de la pièce dans la matrice
+    do {
+        mp[4 - c->x][c->y] = BLEU;
+    } while ((c = carre_get_suiv(c)) != init);
+    
+    // Affichage de toutes les orientations de la pièce en une ligne
+    for (int i = 0; i < 5; i++) {
+        for (int n = 1; n <= 4; n++) {
+            if (i == 1) {
+                printf("%d) ", n);
+            }
+            else {
+                printf("   ");
+            }
+
+            if (n == 1) {
+                for (int j = 0; j < 5; j++) {
+                    afficher_carre(mp[i][j]);
+                }
+            }
+            else if (n == 2) {
+                for (int j = 0; j < 5; j++) {
+                    afficher_carre(mp[4-i][j]);
+                }
+            }
+            else if (n == 3) {
+                for (int j = 0; j < 5; j++) {
+                    afficher_carre(mp[i][4-j]);
+                }
+            }
+            else if (n == 4) {
+                for (int j = 0; j < 5; j++) {
+                    afficher_carre(mp[4-i][4-j]);
+                }
+            }
+        }
+        printf("\n");
+    }
 }
 
 void afficher_scores(Joueur* j) {
