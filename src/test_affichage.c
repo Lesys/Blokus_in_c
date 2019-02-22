@@ -26,4 +26,10 @@ int main() {
     // Test orientations
     printf("\nTest affichage orientations : \n\n");
     afficher_choix_orientation(piece_suivant(piece_suivant(joueur_liste_piece(j))));
+
+    // Test scores
+    printf("\nTest affichage des scores :\n\n");
+    Joueur * lj = joueur_liste_creation(4);
+    printf("\n");
+    afficher_scores(lj);
 }

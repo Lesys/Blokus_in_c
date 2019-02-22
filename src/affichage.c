@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "../include/commun.h"
 #include "../include/affichage.h"
@@ -140,22 +141,64 @@ void afficher_choix_orientation(Piece* p) {
             }
             else if (n == 3) {
                 for (int j = 0; j < 5; j++) {
-                    afficher_carre(mp[i][4-j]);
+                    afficher_carre(mp[4-i][4-j]);
                 }
             }
             else if (n == 4) {
                 for (int j = 0; j < 5; j++) {
-                    afficher_carre(mp[4-i][4-j]);
+                    afficher_carre(mp[i][4-j]);
                 }
             }
+            printf(" ");
         }
         printf("\n");
     }
 }
 
 void afficher_scores(Joueur* j) {
+    
+    // Variable pour garder le premier joueur
+    Joueur * pj = j;
 
-    return;
+    // Affichage des noms avec la bonne couleur
+    do {
+        printf("|");
+        switch (joueur_couleur(j)) {
+
+            case BLEU:
+                printf(COULEUR_BLEU);
+                break;
+            case JAUNE:
+                printf(COULEUR_JAUNE);
+                break;
+            case ROUGE:
+                printf(COULEUR_ROUGE);
+                break;
+            case VERT:
+                printf(COULEUR_VERT);
+        }
+        int marges = (TAILLE_PSEUDO - strlen(j->pseudo)) / 2;
+        int decalage = strlen(j->pseudo)%2;
+        printf("%*s%s%*s", marges + decalage, "", j->pseudo, marges, "");
+        printf(FIN_COULEUR);
+        j = joueur_suivant(j);
+    } while (j != pj);
+    printf("|\n");
+    
+    // Affichage de ligne avec juste les barres
+    printf("|%*s|%*s|%*s|%*s|\n", TAILLE_PSEUDO, "", TAILLE_PSEUDO, "", TAILLE_PSEUDO, "", TAILLE_PSEUDO, "");
+    
+    // Affichage des scores
+    do {
+        printf("|");
+        char score[TAILLE_PSEUDO];
+        snprintf(score, TAILLE_PSEUDO, "%d", j->score);
+        int marges = (TAILLE_PSEUDO - strlen(score)) / 2;
+        int decalage = strlen(score)%2;
+        printf("%*s%s%*s", marges + decalage, "", score, marges, "");
+        j = joueur_suivant(j);
+    } while (j != pj);
+    printf("|\n");
 }
 
 void afficher_resultats(Joueur* j) {
