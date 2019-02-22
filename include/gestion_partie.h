@@ -1,13 +1,16 @@
+#ifndef GESTION_PARTIE_H
+#define GESTION_PARTIE_H
+
 #include "commun.h"
 #include "joueur.h"
 //#include "gestion_tour.h"
 
 
 
-void initialisation_partie(Joueur* j); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
+void initialisation_partie(Joueur** j); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 
 /*Initialisation de la manche*/
-void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j);
+void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j);
 
 void maj_scores(Joueur* j); /* Permet de mettre à jour les scores à la fin de la partie */ 
 /* Si le petit carré a été posé en dernier , ajout des points sur le moment de la pose */
@@ -27,6 +30,4 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
 
 void jouer_partie();
 
-
-
-
+#endif

@@ -1,3 +1,6 @@
+#ifndef AFFICHAGE_H
+#define AFFICHAGE_H
+
 #include "../include/couleur.h"
 /*
 #include "../include/joueur.h"
@@ -21,3 +24,5 @@ void afficher_choix_orientation(Piece* p);
 void afficher_scores(Joueur* j);
 void afficher_resultats(Joueur* j);
 */
+
+#endif

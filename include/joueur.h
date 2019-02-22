@@ -1,3 +1,6 @@
+#ifndef JOUEUR_H
+#define JOUEUR_H
+
 #include "couleur.h"
 #include "carre.h"
 
@@ -61,3 +64,5 @@ Joueur* joueur_detruire(Joueur**);
 
 /* Détruit tous les joueurs */
 void joueur_liste_detruire(Joueur**);
+
+#endif
