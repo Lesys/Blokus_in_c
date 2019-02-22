@@ -104,6 +104,10 @@ void carre_detruire(Carre** c) {
 	(*c) = NULL;
 }
 
+Carre* piece_liste_carre(Piece* p) {
+	return p->liste_carre;
+}
+
 Piece* piece_suivant(Piece* p) {
 	return p->suiv;
 }
