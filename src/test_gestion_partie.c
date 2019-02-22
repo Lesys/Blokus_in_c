@@ -17,21 +17,23 @@ int main(){
 /* Tour_suivant */
 	//AVANT
 	printf("j1 : %s",joueur_pseudo(*j));
-	*j=Tour_suivant(*j);
+	*j=tour_suivant(*j);
 	//APRES
 	printf("j2 : %s",joueur_pseudo(*j));
 
+
+/*Jouer Partie*/
+
+	jouer_partie();
+
 /* Jouer_Manche */
 
-	jouer_manche(pl,*j);
+//	jouer_manche(pl,*j);
 
 /* Maj_score */
 	/*Score pour petit_carre*/
-	maj_score(*j,"petit_carre");
-	/*Score sans le petit carre*/
-	maj_score(*j,"petit_barre");
-	/*Score non fini */
-	maj_score_fin(*j);
+	maj_scores(*j);
+
 
 /*Fin_de_partie*/
 

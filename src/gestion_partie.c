@@ -13,8 +13,9 @@ void initialisation_partie(Joueur* j ){ /*Initialisation de la partie, appel des
 	j=joueur_liste_creation(nb_joueur);
 }
 
-void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur j){
-	pl=Couleur pl1[TAILLE_PLATEAU][TAILLE_PLATEAU];
+void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
+	Couleur pl1[TAILLE_PLATEAU][TAILLE_PLATEAU];
+	pl=pl1;
 	joueur_liste_reinit(j);
 }
 
@@ -26,17 +27,12 @@ void maj_scores(Joueur* j){
 	joueur_suivant(j);
 	while(&j != &pivot){
 		if(joueur_liste_piece(j)== NULL){
-			j->score=joueur_score(j)+15
-	joueur_suivant(j);
-	while(&j != &pivot){	
+			(*j).score=joueur_score(j)+15;
 		}
 		else{
-			Carre ** pie=joueur_liste_piece(j)
-			Carre ** piv=pie;
-		while(joueur_liste_piece(j) != NULL ){
-			*pie=carre_get_suiv(*pie);
-			j->score=joueur_score(j)-nb_carre(*pie);
-			liste_piece_suppr_elem(pie);
+			(*j).score=joueur_score(j)-joueur_nb_piece_restantes(j);
+
+			
 		}
 	}
 }
@@ -84,13 +80,21 @@ Joueur* tour_suivant(Joueur* j){
 /*Appel toute les fonctions pour réalisé une tour*/
 void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j){
 	int x,y;
-	Carre * piece = demander_piece(j);
+	
+	/*Carre * piece = demander_piece(j);
 	demander_orientation(piece);
 	choisir_coordonee(pl[20][20],piece,&x,&y);
 	poser_piece(pl,piece,joueur_couleur(j),x,y,o);
 	afficher_plateau(pl);
+	*/
+	printf("Appel gestion_tour\n");
+	int i;
+	for(i=0 ; i< 2; i++){
+		tour_suivant(j);
+	}
+	j->liste_piece=NULL;
 	if(joueur_liste_piece(j) == NULL){
-		maj_score(j,piece);
+		maj_scores(j);
 	}
 	tour_suivant(j);
 }
@@ -101,22 +105,21 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	do{
 		do{
 			jouer_tour;
-			choix=fin_de_partie(pl,j)
-		}while(!(choix)){
-		initialisation_manche();
-	}while(choix == 1){
+			choix=fin_de_partie(j);
+		}while(!(choix));
+		initialisation_manche(pl,j);
+	}while(choix == 1);
 	return choix;
 }
 
 
 
 void jouer_partie(){ /*Appel de toute les fonctions partie */
-	joueur * j;
+	Joueur * j;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	do{
-		initialisation_partie(pl,j);
-	}while(jouer_manche(pl,j)== 2));
+		initialisation_partie(j);
+	}while(jouer_manche(pl,j)== 2);
 	joueur_liste_detruire(&j);
-	detruire_plateau(&pl);
 
 }
