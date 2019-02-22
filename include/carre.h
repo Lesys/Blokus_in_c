@@ -49,6 +49,6 @@ Piece* piece_liste_creation();
 /* Supprime tous les carrés d'une pièce */
 void liste_piece_suppr_elem(Piece**);
 
-void piece_liste_detruire(Piece**);
+void liste_piece_detruire(Piece**);
 
 #endif

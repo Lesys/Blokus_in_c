@@ -49,6 +49,8 @@ Joueur* joueur_liste_creation(int, ...);
 /* Crée un seul joueur (en demandant les caractéristiques */
 Joueur* joueur_creation(Couleur, ...);
 
+void joueur_liste_reinit(Joueur*);
+
 int joueur_hors_liste(Joueur*);
 
 /* Libère un Joueur */
