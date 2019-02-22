@@ -40,6 +40,8 @@ struct piece {
 	Piece* suiv, *prec;
 };
 
+Carre* piece_liste_carre(Piece*);
+
 Piece* piece_suivant(Piece*);
 
 Piece* piece_precedent(Piece*);
