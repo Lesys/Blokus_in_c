@@ -5,37 +5,42 @@
 #include "../include/joueur.h"
 #include "../include/carre.h"
 
+static void afficher_carre(Couleur couleur) {
+
+    switch(couleur) {
+     
+        case BLEU:
+            printf(COULEUR_BLEU);
+            printf("██");
+            printf(FIN_COULEUR);
+            break;
+        case JAUNE:
+            printf(COULEUR_JAUNE);
+            printf("██");
+            printf(FIN_COULEUR);
+            break;
+        case ROUGE:
+            printf(COULEUR_ROUGE);
+            printf("██");
+            printf(FIN_COULEUR);
+            break;
+        case VERT:
+            printf(COULEUR_VERT);
+            printf("██");
+            printf(FIN_COULEUR);
+            break;
+        case VIDE:
+        default:
+            printf("  ");
+    }
+}
+
 void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
         printf("%3d ", TAILLE_PLATEAU - i);
         for (int j = 0; j < TAILLE_PLATEAU; j++) {
-            switch(pl[i][j]) {
-             
-                case BLEU:
-                    printf(COULEUR_BLEU);
-                    printf("██");
-                    printf(FIN_COULEUR);
-                    break;
-                case JAUNE:
-                    printf(COULEUR_JAUNE);
-                    printf("██");
-                    printf(FIN_COULEUR);
-                    break;
-                case ROUGE:
-                    printf(COULEUR_ROUGE);
-                    printf("██");
-                    printf(FIN_COULEUR);
-                    break;
-                case VERT:
-                    printf(COULEUR_VERT);
-                    printf("██");
-                    printf(FIN_COULEUR);
-                    break;
-                case VIDE:
-                default:
-                    printf("  ");
-            }
+            afficher_carre(pl[i][j]);
         }
         printf("\n");
     }
@@ -91,32 +96,7 @@ void afficher_pieces_dispo(Joueur* j) {
                 }
 
                 for (int x = 0; x < 5; x++) {
-                    switch(rangee[p][y][x]) {
-                     
-                        case BLEU:
-                            printf(COULEUR_BLEU);
-                            printf("██");
-                            printf(FIN_COULEUR);
-                            break;
-                        case JAUNE:
-                            printf(COULEUR_JAUNE);
-                            printf("██");
-                            printf(FIN_COULEUR);
-                            break;
-                        case ROUGE:
-                            printf(COULEUR_ROUGE);
-                            printf("██");
-                            printf(FIN_COULEUR);
-                            break;
-                        case VERT:
-                            printf(COULEUR_VERT);
-                            printf("██");
-                            printf(FIN_COULEUR);
-                            break;
-                        case VIDE:
-                        default:
-                            printf("  ");
-                    }
+                    afficher_carre(rangee[p][y][x]);
                     rangee[p][y][x] = 0;
                 }
             }
