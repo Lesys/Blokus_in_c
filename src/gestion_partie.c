@@ -3,17 +3,18 @@
 #include "../include/gestion_partie.h"
 
 
-void initialisation_partie(Joueur* j ){ /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
+void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 	int nb_joueur=-1;
 	printf("Creation de la partie\n");
 	do{
 		printf("Veuillez saisir le nombre de joueur [2 a 4] \n");
 		scanf("%d",&nb_joueur);
-	}while(nb_joueur < NB_JOUEUR_MIN && nb_joueur > NB_JOUEUR_MAX);
-	j=joueur_liste_creation(nb_joueur);
+	}while(nb_joueur < NB_JOUEUR_MIN || nb_joueur > NB_JOUEUR_MAX);
+	*j=joueur_liste_creation(nb_joueur);
+	printf("Fin d'initialisation_partie\n");
 }
 
-void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
+void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	Couleur pl1[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	pl=pl1;
 	joueur_liste_reinit(j);
@@ -63,17 +64,18 @@ int fin_de_partie(Joueur* j){
 	printf("Choix 1: Recommencez une manche\n");
 	printf("Choix 2: Recommencez une partie\n");
 	printf("Choix 3: Quittez le programme\n");
-	scanf("%d",choix);
-	}while(choix < 1 && choix > 3);
-	if(choix == 3) afficher_resultats(j);	
+	scanf("%d",&choix);
+	}while(choix < 1 || choix > 3);
+	if(choix == 3) printf("Affichage Resultat\n"); //afficher_resultats(j);	
 	return choix;
 }
 
 
 /*Appel le prochain joueur à jouer et modifie la liste joueur */
 Joueur* tour_suivant(Joueur* j){
-	joueur_suivant(j);
+	j=joueur_suivant(j);
 	printf("%s : A toi jouer",joueur_pseudo(j));
+	return j;
 }
 
 
@@ -104,10 +106,10 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
 	do{
 		do{
-			jouer_tour;
+			jouer_tour(pl,j);
 			choix=fin_de_partie(j);
 		}while(!(choix));
-		initialisation_manche(pl,j);
+		initialisation_manche(pl,&j);
 	}while(choix == 1);
 	return choix;
 }
@@ -118,7 +120,7 @@ void jouer_partie(){ /*Appel de toute les fonctions partie */
 	Joueur * j;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	do{
-		initialisation_partie(j);
+		initialisation_partie(&j);
 	}while(jouer_manche(pl,j)== 2);
 	joueur_liste_detruire(&j);
 
