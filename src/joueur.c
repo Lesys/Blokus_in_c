@@ -4,8 +4,7 @@
 
 #include "../include/joueur.h"
 #include "../include/carre.h"
-
-/*#include "../include/commun.h"*/
+#include "../include/commun.h"
 
 /* Récupère le pseudo du joueur */
 char* joueur_pseudo(Joueur* j) {
@@ -41,8 +40,8 @@ void joueur_abandonne(Joueur* j) {
 }
 
 /* Vérifie qu'il y a un nombre correct de joueur */
-int verif_nb_joueur(int nb, int min, int max) {
-	return (nb >= min && nb <= max);
+int verif_nb_joueur(int nb) {
+	return (nb >= NB_JOUEUR_MIN && nb <= NB_JOUEUR_MAX);
 }
 
 /* Renvoie le nombre de pièces qui sont encore dans la liste */
@@ -62,8 +61,8 @@ int joueur_nb_piece_restantes(Joueur* j) {
 /* Les paramètres optionnels seront le nombre de BOT ainsi que le nombre de joueurs en réseau (A FAIRE PLUS TARD) */
 Joueur* joueur_liste_creation(int nb_joueur, ...) {
 
-	if (!verif_nb_joueur(nb_joueur, 2, 4)) {
-		printf("Le nombre de joueur ne correspond pas (%d au lieu d'être entre %d et %d)", nb_joueur, 2, 4);
+	if (!verif_nb_joueur(nb_joueur)) {
+		printf("Le nombre de joueur ne correspond pas (%d au lieu d'être entre %d et %d)", nb_joueur, NB_JOUEUR_MIN, NB_JOUEUR_MAX);
 		return NULL;
 	}
 
@@ -122,7 +121,7 @@ void joueur_liste_reinit(Joueur* j) {
 /* Crée un joueur. Les paramètres optionnels seront le type de joueur (LOCAL par défaut) */
 Joueur* joueur_creation(Couleur c, ...) {
 	Joueur* j = malloc(sizeof(Joueur));
-	j->pseudo = malloc(sizeof(char) * 40);
+	j->pseudo = malloc(sizeof(char) * TAILLE_PSEUDO);
 
 	printf("Joueur %s, veuillez indiquer votre pseudo: ", couleur_tostring(c));
 /*	scanf("%*[^\n]%*c", j->pseudo);*/
