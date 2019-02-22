@@ -41,7 +41,7 @@ Joueur* joueur_suivant(Joueur*);
 int joueur_a_abandonne(Joueur*);
 
 /* Vérifie qu'il y a un nombre correct de joueur */
-int verif_nb_joueur(int, int, int);
+int verif_nb_joueur(int);
 
 /* Permet de connaître le nombre de Piece que possède un Joueur à l'instant T */
 int joueur_nb_piece_restantes(Joueur*);
