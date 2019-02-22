@@ -1,14 +1,14 @@
 #include <stdio.h>
+
+#include "../include/commun.h"
 #include "../include/affichage.h"
-/*
 #include "../include/joueur.h"
 #include "../include/carre.h"
-*/
 
-void afficher_plateau(Couleur pl[TP][TP]) {
+void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     
-    for (int i = 0; i < TP; i++) {
-        for (int j = 0; j < TP; j++) {
+    for (int i = 0; i < TAILLE_PLATEAU; i++) {
+        for (int j = 0; j < TAILLE_PLATEAU; j++) {
             switch(pl[i][j]) {
              
                 case BLEU:
@@ -40,7 +40,6 @@ void afficher_plateau(Couleur pl[TP][TP]) {
     }
 }
 
-/*
 void afficher_pieces_dispo(Joueur* j) {
 
     return;
@@ -51,13 +50,12 @@ void afficher_choix_orientation(Piece* p) {
     return;
 }
 
-void afficher_scores(joueur* j) {
+void afficher_scores(Joueur* j) {
 
     return;
 }
 
-void afficher_resultats(joueur* j) {
+void afficher_resultats(Joueur* j) {
 
     return;
 }
-*/
