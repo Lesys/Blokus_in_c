@@ -1,3 +1,6 @@
+#ifndef COULEUR_H
+#define COULEUR_H
+
 typedef enum couleur {
     VIDE,
     BLEU,
@@ -8,3 +11,5 @@ typedef enum couleur {
 
 /* Renvoie la couleur en chaine de caractère */
 char* couleur_tostring(Couleur);
+
+#endif

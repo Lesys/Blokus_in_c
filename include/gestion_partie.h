@@ -1,3 +1,6 @@
+#ifndef GESTION_PARTIE_H
+#define GESTION_PARTIE_H
+
 #include "commun.h"
 #include "joueur.h"
 //#include "gestion_tour.h"
@@ -27,6 +30,4 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
 
 void jouer_partie();
 
-
-
-
+#endif
