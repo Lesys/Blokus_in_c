@@ -8,6 +8,7 @@
 void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
+        printf("%3d ", TAILLE_PLATEAU - i);
         for (int j = 0; j < TAILLE_PLATEAU; j++) {
             switch(pl[i][j]) {
              
@@ -38,6 +39,13 @@ void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
         }
         printf("\n");
     }
+
+
+    printf("    ");
+    for (int i = 1; i <= TAILLE_PLATEAU; i++) {
+        printf("%2d", i);
+    }
+    printf("\n");
 }
 
 void afficher_pieces_dispo(Joueur* j) {
