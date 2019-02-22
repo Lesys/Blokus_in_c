@@ -71,8 +71,8 @@ void carre_free(Carre** c) {
 
 /* Detruit une pièce entière */
 void carre_detruire(Carre** c) {
-	Carre** supp;
-	(*supp) = (*c)->suiv;
+	Carre** supp = malloc(sizeof(Carre*));
+	(*supp) = (*c);
 
 	while (!carre_hors_liste((*supp))) {
 /*		carre_afficher((*c));*/
@@ -99,129 +99,207 @@ void carre_detruire(Carre** c) {
 		printf("supp pas hors liste\n");*/
 	}
 
-
+	free(supp);
+	supp = NULL;
 	(*c) = NULL;
 }
 
+Piece* piece_suivant(Piece* p) {
+	return p->suiv;
+}
+
+Piece* piece_precedent(Piece* p) {
+	return p->prec;
+}
+
 /* Création d'une liste de Piece */
-Piece** piece_liste_creation () {
-	Piece** p = malloc(sizeof(Piece*) * NB_PIECES); /* Alloue l'espace pour 21 pointeurs de Piece */
-	Piece** first = p;
+Piece* piece_liste_creation () {
+	Piece* p = malloc(sizeof(Piece)); /* Alloue l'espace pour une Piece */
+	Piece* first = p;
 
-	(*p) = malloc(sizeof(Piece)); /* Alloue l'espace pour une Piece */
-	(*p)->liste_carre = piece_petit_carre(); /* Récupère l'adresse de la liste de carre */
+	p->liste_carre = piece_petit_carre(); /* Récupère l'adresse de la liste de carre */
 /*	carre_afficher((*p)->liste_carre);*/
-	p++; /* Change le pointeur */
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv; /* Change le pointeur */
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_petite_barre();
-	p++;
+	p->liste_carre = piece_petite_barre();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_petit_coin();
-	p++;
+	p->liste_carre = piece_petit_coin();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_petite_moy_barre();
-	p++;
+	p->liste_carre = piece_petite_moy_barre();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_carre();
-	p++;
+	p->liste_carre = piece_carre();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_petit_t();
-	p++;
+	p->liste_carre = piece_petit_t();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_moy_grande_barre();
-	p++;
+	p->liste_carre = piece_moy_grande_barre();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_petit_l();
-	p++;
+	p->liste_carre = piece_petit_l();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_petit_s();
-	p++;
+	p->liste_carre = piece_petit_s();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_grand_l();
-	p++;
+	p->liste_carre = piece_grand_l();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_grand_t();
-	p++;
+	p->liste_carre = piece_grand_t();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_equerre();
-	p++;
+	p->liste_carre = piece_equerre();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_long_s();
-	p++;
+	p->liste_carre = piece_long_s();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_grand_z();
-	p++;
+	p->liste_carre = piece_grand_z();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_grande_barre();
-	p++;
+	p->liste_carre = piece_grande_barre();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_pouce();
-	p++;
+	p->liste_carre = piece_pouce();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_escalier();
-	p++;
+	p->liste_carre = piece_escalier();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_petit_u();
-	p++;
+	p->liste_carre = piece_petit_u();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_autre_1();
-	p++;
+	p->liste_carre = piece_autre_1();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_croix();
-	p++;
+	p->liste_carre = piece_croix();
+	p->suiv = malloc(sizeof(Piece));
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
+	p = p->suiv;
 
-	(*p) = malloc(sizeof(Piece));
-	(*p)->liste_carre = piece_autre_2();
+	p->liste_carre = piece_autre_2();
+	p->suiv = first;;
+	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 
 	return first;
 }
 
-/* Supprime la pièce courante de la liste (si elle n'est pas NULL) */
-void liste_piece_suppr_elem(Carre** c) {
-	if (!carre_hors_liste(*c)) {
+/* Supprime la "pos"ième pièce (si elle n'est pas NULL) */
+void liste_piece_suppr_elem(Piece** p) {/*, int pos) {*/
+	if (p != NULL) {
+		Carre** c = &((*p)->liste_carre);
 /*		printf("Destruction carres\n");*/
-		Carre* suiv = carre_get_suiv(*c);
+/*		Carre* suiv = carre_get_suiv(*c);*/
+
+		/* Réctifie l'ordre de la liste */
+
+/*printf("Début\n");*/
+		Piece* suiv;
+		if ((*p) == piece_suivant(*p))
+			suiv = NULL;
+		else
+			suiv = piece_suivant(*p);
+/*printf("Milieu\n");*/
+		(*p)->prec->suiv = piece_suivant(*p);
+/*printf("Fin\n");*/
+		(*p)->suiv->prec = piece_precedent(*p);
+
+/*printf("Destructino\n");*/
 		carre_detruire(c);
 
+/*printf("Free de c\n");*/
 
+		/* Libère le pointeur de la liste de Carre */
 		if (!carre_hors_liste(*c))
 			free(*c);
 
-		(*c) = suiv;
+/*		(*c) = suiv;*/
+		(*c) = NULL;
+/*printf("Free de p\n");*/
+		/* Libère la Piece */
+		if ((*p) != NULL)
+			free(*p);
+
+		(*p) = suiv;
+
 	}
 }
 
-void liste_piece_detruire(Piece*** p) {
-	int i = 0;
+void liste_piece_detruire(Piece** p) {
+	Piece** supp = malloc(sizeof(Piece*));
 
-	if ((*p) != NULL) {
-		for (i = 0; i < NB_PIECES; i++) {
+	(*supp) = (*p);
+
+	/* Tant qu'il reste une Piece à supprimer */
+	while ((*supp) != NULL) {
+		(*supp) = piece_suivant(*p);
+
+		/* Si c'est la dernière Piece (== la suivante est elle-même) */
+		if ((*supp) == (*p))
+			(*p) = NULL;
+		else
+			(*p)->suiv = piece_suivant((*supp));
+
+		/* Supprime et libère la Piece courante */
+		liste_piece_suppr_elem(supp);
+
+		(*supp) = (*p);
+	}
+
+	free(supp);
+	supp = NULL;
+	(*p) = NULL;
+}
+/*
+		for (i = 0; i < NB_PIECES; i++) {*/
 /*			printf("Destruction piece %d\n", i);*/
 /*		carre_afficher((*((*p) + i))->liste_carre);*/
-			liste_piece_suppr_elem(&((*((*p) + i))->liste_carre));
+/*			liste_piece_suppr_elem(&((*((*p) + i))->liste_carre));
 			free(*((*p) + i));
 		}
 
 		free(*p);
 		(*p) = NULL;
 	}
-}
+}*/

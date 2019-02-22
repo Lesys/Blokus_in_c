@@ -23,7 +23,7 @@ int joueur_score(Joueur* j) {
 }
 
 /* Récupère la liste des pièces du joueur */
-Piece** joueur_liste_piece(Joueur* j) {
+Piece* joueur_liste_piece(Joueur* j) {
 	return j->liste_piece;
 }
 
@@ -43,6 +43,19 @@ void joueur_abandonne(Joueur* j) {
 /* Vérifie qu'il y a un nombre correct de joueur */
 int verif_nb_joueur(int nb, int min, int max) {
 	return (nb >= min && nb <= max);
+}
+
+/* Renvoie le nombre de pièces qui sont encore dans la liste */
+int joueur_nb_piece_restantes(Joueur* j) {
+	int i = 0;
+	Piece* init = joueur_liste_piece(j);
+	Piece* suiv = init;;
+
+	if (init != NULL)
+		/* Compte le nombre de pièces dans la liste */
+		for (i = 1; ((suiv = piece_suivant(suiv)) != init); i++);
+
+	return i;
 }
 
 /* Alloue "nb_joueur" Joueurs, demande les pseudos et ajoute chaque joueur à la suite d'un autre. Retourne le 1er joueur créé (qui sera le joueur BLEU) */

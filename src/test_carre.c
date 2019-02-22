@@ -5,12 +5,12 @@
 int main() {
 	Carre* c;
 	printf("Creation pieces\n");
-	Piece** p = piece_liste_creation();
+	Piece* p = piece_liste_creation();
 
 /*	c = piece_carre();*/
 
 	printf("Affichage pièce\n");
-	carre_afficher((*p)->liste_carre);
+	carre_afficher(p->liste_carre);
 
 	printf("Destruiction: \n");
 	liste_piece_detruire(&p);

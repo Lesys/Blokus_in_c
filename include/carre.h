@@ -3,6 +3,7 @@
 
 /* Structure d'un carré */
 typedef struct carre Carre;
+typedef struct piece Piece;
 
 struct carre {
 	int x, y; /* Coordonnées x et y par rapport au point de référence d'une pièce */
@@ -32,20 +33,22 @@ void carre_free(Carre**);
 /* Detruit une pièce entière */
 void carre_detruire(Carre**);
 
-/* Supprime tous les carrés d'une pièce */
-void liste_piece_suppr_elem(Carre**);
-
-
-
 /* Structure d'une pièce (qui est une liste de Carré avec comme point de référence le bas gauche de la pièce)*/
-typedef struct piece {
+
+struct piece {
 	Carre* liste_carre; /* Premier carré de la liste */
-} Piece;
+	Piece* suiv, *prec;
+};
 
-Piece** piece_liste_creation();
+Piece* piece_suivant(Piece*);
 
-void liste_piece_suppr_elem(Carre**);
+Piece* piece_precedent(Piece*);
 
-void piece_liste_detruire(Piece***);
+Piece* piece_liste_creation();
+
+/* Supprime tous les carrés d'une pièce */
+void liste_piece_suppr_elem(Piece**);
+
+void piece_liste_detruire(Piece**);
 
 #endif

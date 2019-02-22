@@ -10,7 +10,7 @@ struct joueur {
 	char* pseudo;
 	Couleur couleur; /* Couleur du joueur */
 	int score;
-	Piece** liste_piece; /* Liste des pièces restantes pour le joueur */
+	Piece* liste_piece; /* Liste des pièces restantes pour le joueur */
 	Type_Joueur type; /* Type de joueur (la gestion d'un tour diffère en fonction du type) */
 	Joueur* suiv; /* Joueur suivant (qu'il soit un vrai joueur ou un BOT)*/
 	Joueur* prec; /* Joueur précédent (pour que la destruction soit possible)*/
@@ -29,7 +29,7 @@ Couleur joueur_couleur(Joueur*);
 int joueur_score(Joueur*);
 
 /* Récupère la liste des pièces du joueur */
-Piece** joueur_liste_piece(Joueur*);
+Piece* joueur_liste_piece(Joueur*);
 
 /* Récupère le joueur suivant */
 Joueur* joueur_suivant(Joueur*);
@@ -39,6 +39,9 @@ int joueur_a_abandonne(Joueur*);
 
 /* Vérifie qu'il y a un nombre correct de joueur */
 int verif_nb_joueur(int, int, int);
+
+/* Permet de connaître le nombre de Piece que possède un Joueur à l'instant T */
+int joueur_nb_piece_restantes(Joueur*);
 
 /* Alloue "nb_joueur" Joueurs, demande les pseudos et ajoute chaque joueur à la suite d'un autre. Retourne le 1er joueur créé (qui sera le joueur BLEU) */
 Joueur* joueur_liste_creation(int, ...);
