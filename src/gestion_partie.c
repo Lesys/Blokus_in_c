@@ -5,6 +5,9 @@
 
 void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 	int nb_joueur=-1;
+	if( (*j) != NULL ){
+		joueur_liste_detruire(j);
+	}
 	printf("Creation de la partie\n");
 	do{
 		printf("Veuillez saisir le nombre de joueur [2 a 4] \n");
@@ -124,7 +127,7 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 void jouer_partie(){ /*Appel de toute les fonctions partie */
-	Joueur * j;
+	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	do{
 		initialisation_partie(&j);
