@@ -12,7 +12,7 @@ void initialisation_partie(Joueur** j); /*Initialisation de la partie, appel des
 /*Initialisation de la manche*/
 void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j);
 
-void maj_scores(Joueur* j); /* Permet de mettre à jour les scores à la fin de la partie */ 
+void maj_scores(Joueur** j); /* Permet de mettre à jour les scores à la fin de la partie */ 
 /* Si le petit carré a été posé en dernier , ajout des points sur le moment de la pose */
 
 int joueur_abandon(Joueur* j);/*Si tous les joueur on abandonne*/

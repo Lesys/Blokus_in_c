@@ -23,21 +23,22 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 /* Permet de mettre à jour les scores à la fin de la partie */ 
 /* Si le petit carré a été posé en dernier, ajout des points sur le moment de la pose */
 
-void maj_scores(Joueur* j){
-	Joueur* pivot = j;
-	joueur_suivant(j);
-	while(&j != &pivot){
-		if(joueur_liste_piece(j)== NULL){
-			(*j).score=joueur_score(j)+15;
-		}
-		else{
-			(*j).score=joueur_score(j)-joueur_nb_piece_restantes(j);
-
-			
-		}
-	}
+void maj_scores(Joueur** j) {
+ 
+    // On garde l'adresse du premier joueur pour
+    // savoir quand arrêter
+    Joueur * pivot = *j;
+	printf("Debut de maj_score\n");
+    do {
+        if (joueur_liste_piece(*j) == NULL) {
+            (*j)->score += 15;
+        }
+        else {
+            (*j)->score -= joueur_nb_piece_restantes(*j);
+        }
+        *j = joueur_suivant(*j);
+    } while ((*j) != pivot);
 }
-
 
 
 int joueur_abandon(Joueur* j){
@@ -54,6 +55,7 @@ int joueur_abandon(Joueur* j){
 /* Affiche les résultats, propose les options de fin de partie et renvoie le résultat correspondant */
 int fin_de_partie(Joueur* j){
 	if(joueur_liste_piece(j) == NULL)return 1;
+	printf("TEST SEGFAULT\n");
 	if(!(joueur_abandon(j)))return 1;
 	int choix=0;
 	
@@ -91,14 +93,18 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j){
 	*/
 	printf("Appel gestion_tour\n");
 	int i;
-	for(i=0 ; i< 2; i++){
+	for(i=0 ; i < 2; i++){
 		tour_suivant(j);
 	}
 	j->liste_piece=NULL;
+	printf("debut_majscores\n");
 	if(joueur_liste_piece(j) == NULL){
-		maj_scores(j);
+		maj_scores(&j);
 	}
+	printf("Fin de maj score\n");
+
 	tour_suivant(j);
+
 }
 
 
@@ -107,6 +113,7 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	do{
 		do{
 			jouer_tour(pl,j);
+			printf("JOUER MANCHE DEBUT FIN_de_PARTIE\n");
 			choix=fin_de_partie(j);
 		}while(!(choix));
 		initialisation_manche(pl,&j);
