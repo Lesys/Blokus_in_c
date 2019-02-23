@@ -17,7 +17,7 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	Couleur pl1[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	pl=pl1;
-	joueur_liste_reinit(j);
+	joueur_liste_reinit(*j);
 }
 
 /* Permet de mettre à jour les scores à la fin de la partie */ 
