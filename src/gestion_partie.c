@@ -18,8 +18,12 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 }
 
 void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
-	Couleur pl1[TAILLE_PLATEAU][TAILLE_PLATEAU];
-	pl=pl1;
+	int i,j;
+	for(i=0;i < TAILLE_PLATEAU;i++){
+		for(j=0;j < TAILLE_PLATEAU;j++){
+			pl[i][j]=0;
+		}
+	}
 	joueur_liste_reinit(*j);
 }
 
