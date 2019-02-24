@@ -26,10 +26,26 @@ int main() {
     // Test orientations
     printf("\nTest affichage orientations : \n\n");
     afficher_choix_orientation(piece_suivant(piece_suivant(joueur_liste_piece(j))));
+    
+    joueur_free(&j);
 
     // Test scores
     printf("\nTest affichage des scores :\n\n");
     Joueur * lj = joueur_liste_creation(4);
+    lj->score = 965;
+    lj = joueur_suivant(lj);
+    lj->score = 50;
+    lj = joueur_suivant(lj);
+    lj->score = 30;
+    lj = joueur_suivant(lj);
+    lj->score = 965;
+    lj = joueur_suivant(lj);
     printf("\n");
     afficher_scores(lj);
+    
+    // Test résultats
+    printf("\nTest affichage des résultats :\n\n");
+    afficher_resultats(lj);
+
+    joueur_liste_detruire(&lj);
 }
