@@ -192,7 +192,7 @@ void afficher_scores(Joueur* j) {
     do {
         printf("|");
         char score[TAILLE_PSEUDO];
-        snprintf(score, TAILLE_PSEUDO, "%d", j->score);
+        sprintf(score, "%d", j->score);
         int marges = (TAILLE_PSEUDO - strlen(score)) / 2;
         int decalage = strlen(score)%2;
         printf("%*s%s%*s", marges + decalage, "", score, marges, "");
@@ -292,7 +292,7 @@ void afficher_resultats(Joueur* j) {
         
         // Affichage score
         char score[10];
-        snprintf(score, 10, "%d", classement[i]->score);
+        sprintf(score, "%d", classement[i]->score);
         marges = (10 - strlen(score)) / 2;
         decalage = strlen(score)%2;
         printf("%*s%s%*s", marges + decalage, "", score, marges, "");
