@@ -128,7 +128,7 @@ Joueur* joueur_creation(Couleur c, ...) {
 	scanf("%s", j->pseudo);
 
 	/* Réalloue la bonne taille pour le pseudo */
-	j->pseudo = realloc(j->pseudo, sizeof(char) * strlen(j->pseudo));
+	j->pseudo = realloc(j->pseudo, sizeof(char) * (strlen(j->pseudo) + 1));
 
 	j->couleur = c;
 
