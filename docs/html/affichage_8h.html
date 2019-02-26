@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Blokus in C: Référence du fichier src/affichage.c</title>
+<title>Blokus in C: Référence du fichier include/affichage.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,50 +62,69 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier affichage.c</div>  </div>
+<div class="title">Référence du fichier affichage.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Fonctions d'affichages.  
+<p>Entête de <a class="el" href="affichage_8c.html" title="Fonctions d&#39;affichages.">affichage.c</a>.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;string.h&gt;</code><br />
-<code>#include &quot;../include/commun.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="affichage_8h_source.html">../include/affichage.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;../include/commun.h&quot;</code><br />
+<code>#include &quot;../include/couleur.h&quot;</code><br />
 <code>#include &quot;../include/joueur.h&quot;</code><br />
 <code>#include &quot;../include/carre.h&quot;</code><br />
-</div><table class="memberdecls">
+</div>
+<p><a href="affichage_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a738543d1b1ff587984b15c798227feb9"><td class="memItemLeft" align="right" valign="top"><a id="a738543d1b1ff587984b15c798227feb9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COULEUR_BLEU</b>&#160;&#160;&#160;&quot;\x1b[34m&quot; /** Couleur bleue pour affichage terminal*/</td></tr>
+<tr class="separator:a738543d1b1ff587984b15c798227feb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0157181b9fd44ddd97ba77e691a043fd"><td class="memItemLeft" align="right" valign="top"><a id="a0157181b9fd44ddd97ba77e691a043fd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COULEUR_JAUNE</b>&#160;&#160;&#160;&quot;\x1b[33m&quot; /** Couleur jaune pour affichage terminal*/</td></tr>
+<tr class="separator:a0157181b9fd44ddd97ba77e691a043fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6115f9884c0090948a487e14bd8faf2f"><td class="memItemLeft" align="right" valign="top"><a id="a6115f9884c0090948a487e14bd8faf2f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COULEUR_ROUGE</b>&#160;&#160;&#160;&quot;\x1b[31m&quot; /** Couleur rouge pour affichage terminal*/</td></tr>
+<tr class="separator:a6115f9884c0090948a487e14bd8faf2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc87ab1e4bd5f1173cb2789c40941ee"><td class="memItemLeft" align="right" valign="top"><a id="a8bc87ab1e4bd5f1173cb2789c40941ee"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COULEUR_VERT</b>&#160;&#160;&#160;&quot;\x1b[32m&quot; /** Couleur vert pour affichage terminal*/</td></tr>
+<tr class="separator:a8bc87ab1e4bd5f1173cb2789c40941ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4c6fdb827fc65018697a8078a5ff9fa"><td class="memItemLeft" align="right" valign="top"><a id="ae4c6fdb827fc65018697a8078a5ff9fa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>FIN_COULEUR</b>&#160;&#160;&#160;&quot;\x1b[0m&quot; /** Couleur blanche pour affichage terminal*/</td></tr>
+<tr class="separator:ae4c6fdb827fc65018697a8078a5ff9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a60d505d9fed5a9be9ab42dba2d769097"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#a60d505d9fed5a9be9ab42dba2d769097">afficher_str_couleur</a> (Couleur couleur, char *str)</td></tr>
+<tr class="memitem:a60d505d9fed5a9be9ab42dba2d769097"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8h.html#a60d505d9fed5a9be9ab42dba2d769097">afficher_str_couleur</a> (Couleur couleur, char *str)</td></tr>
 <tr class="memdesc:a60d505d9fed5a9be9ab42dba2d769097"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une chaine de caractères en couleur.  <a href="#a60d505d9fed5a9be9ab42dba2d769097">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a60d505d9fed5a9be9ab42dba2d769097"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af72ba27a8b6dd0a005e4462eee9ddac9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9">afficher_plateau</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
+<tr class="memitem:af72ba27a8b6dd0a005e4462eee9ddac9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8h.html#af72ba27a8b6dd0a005e4462eee9ddac9">afficher_plateau</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
 <tr class="memdesc:af72ba27a8b6dd0a005e4462eee9ddac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le plateau de jeu.  <a href="#af72ba27a8b6dd0a005e4462eee9ddac9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af72ba27a8b6dd0a005e4462eee9ddac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade7506941effd14df4d79d3dcd414493"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#ade7506941effd14df4d79d3dcd414493">afficher_pieces_dispo</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:ade7506941effd14df4d79d3dcd414493"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8h.html#ade7506941effd14df4d79d3dcd414493">afficher_pieces_dispo</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:ade7506941effd14df4d79d3dcd414493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche les pièces disponibles d'un joueur.  <a href="#ade7506941effd14df4d79d3dcd414493">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ade7506941effd14df4d79d3dcd414493"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a774f342c4bb2576f6b7e7cff62f577b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#a774f342c4bb2576f6b7e7cff62f577b3">afficher_choix_orientation</a> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="memitem:a774f342c4bb2576f6b7e7cff62f577b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8h.html#a774f342c4bb2576f6b7e7cff62f577b3">afficher_choix_orientation</a> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
 <tr class="memdesc:a774f342c4bb2576f6b7e7cff62f577b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche les orientations possibles pour une pièce.  <a href="#a774f342c4bb2576f6b7e7cff62f577b3">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a774f342c4bb2576f6b7e7cff62f577b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0607bdb91a55dfb7df2eb1c68ad45040"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#a0607bdb91a55dfb7df2eb1c68ad45040">afficher_scores</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:a0607bdb91a55dfb7df2eb1c68ad45040"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8h.html#a0607bdb91a55dfb7df2eb1c68ad45040">afficher_scores</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:a0607bdb91a55dfb7df2eb1c68ad45040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche les scores.  <a href="#a0607bdb91a55dfb7df2eb1c68ad45040">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a0607bdb91a55dfb7df2eb1c68ad45040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae57705b3eb9ad9126516ba4ee7f43810"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#ae57705b3eb9ad9126516ba4ee7f43810">afficher_resultats</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:ae57705b3eb9ad9126516ba4ee7f43810"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8h.html#ae57705b3eb9ad9126516ba4ee7f43810">afficher_resultats</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:ae57705b3eb9ad9126516ba4ee7f43810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche les résultats.  <a href="#ae57705b3eb9ad9126516ba4ee7f43810">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ae57705b3eb9ad9126516ba4ee7f43810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Fonctions d'affichages. </p>
-<p class="">Diverses fonctions d'affichage dans le terminal pour le jeu du blokus </p>
+<div class="textblock"><p class="">Entête de <a class="el" href="affichage_8c.html" title="Fonctions d&#39;affichages.">affichage.c</a>. </p>
+<p class="">Contient des constantes pour l'affichage en couleur dans le terminal et diverses fonctions d'affichage dans le terminal pour le jeu du blokus </p>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
 <a id="a774f342c4bb2576f6b7e7cff62f577b3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a774f342c4bb2576f6b7e7cff62f577b3">&#9670;&nbsp;</a></span>afficher_choix_orientation()</h2>
