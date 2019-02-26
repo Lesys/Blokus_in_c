@@ -40,6 +40,9 @@ Joueur* joueur_suivant(Joueur*);
 /* Récupère le joueur suivant */
 int joueur_a_abandonne(Joueur*);
 
+/* Change le paramètre "abandon" d'un joueur et le passe à "vrai" */
+void joueur_abandonne(Joueur*);
+
 /* Vérifie qu'il y a un nombre correct de joueur */
 int verif_nb_joueur(int);
 
