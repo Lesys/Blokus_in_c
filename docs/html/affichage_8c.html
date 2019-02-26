@@ -78,12 +78,15 @@ $(function() {
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;../include/commun.h&quot;</code><br />
-<code>#include &quot;../include/affichage.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="affichage_8h_source.html">../include/affichage.h</a>&quot;</code><br />
 <code>#include &quot;../include/joueur.h&quot;</code><br />
 <code>#include &quot;../include/carre.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
+<tr class="memitem:a60d505d9fed5a9be9ab42dba2d769097"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#a60d505d9fed5a9be9ab42dba2d769097">afficher_str_couleur</a> (Couleur couleur, char *str)</td></tr>
+<tr class="memdesc:a60d505d9fed5a9be9ab42dba2d769097"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une chaine de caractères en couleur.  <a href="#a60d505d9fed5a9be9ab42dba2d769097">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a60d505d9fed5a9be9ab42dba2d769097"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af72ba27a8b6dd0a005e4462eee9ddac9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9">afficher_plateau</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
 <tr class="memdesc:af72ba27a8b6dd0a005e4462eee9ddac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le plateau de jeu.  <a href="#af72ba27a8b6dd0a005e4462eee9ddac9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af72ba27a8b6dd0a005e4462eee9ddac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -228,6 +231,43 @@ Fonctions</h2></td></tr>
 <p class="">Affiche les scores actuels en mettant à la bonne couleur les pseudos des joueurs </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">j</td><td>Liste de structures joueurs à afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a60d505d9fed5a9be9ab42dba2d769097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60d505d9fed5a9be9ab42dba2d769097">&#9670;&nbsp;</a></span>afficher_str_couleur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_str_couleur </td>
+          <td>(</td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>couleur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche une chaine de caractères en couleur. </p>
+<p class="">Affiche une chaine de caractères en couleur, si la couleur est "VIDE" ou n'est pas reconnue alors la fonction affiche deux espaces </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">couleur</td><td>Couleur du texte à afficher </td></tr>
+    <tr><td class="paramname">str</td><td>Chaine à afficher </td></tr>
   </table>
   </dd>
 </dl>
