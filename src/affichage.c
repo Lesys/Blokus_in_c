@@ -1,3 +1,10 @@
+/**
+ * \file affichage.c
+ * \brief Fonctions d'affichages
+ * \details Diverses fonctions d'affichage dans le terminal pour
+    le jeu du blokus
+ */
+
 #include <stdio.h>
 #include <string.h>
 
@@ -6,6 +13,13 @@
 #include "../include/joueur.h"
 #include "../include/carre.h"
 
+/**
+ * \fn static void afficher_carre(Couleur couleur)
+ * \brief Affiche un carré de couleur
+ * \details Fonction statique utilisée par les autres fonctions
+    pour afficher un carré de la bonne couleur
+ * \param couleur Couleur du carré à afficher
+ */ 
 static void afficher_carre(Couleur couleur) {
 
     switch(couleur) {
@@ -36,6 +50,13 @@ static void afficher_carre(Couleur couleur) {
     }
 }
 
+/**
+ * \fn void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])
+ * \brief Affiche le plateau de jeu
+ * \details Affiche le plateau de jeu ainsi que les numéros de ligne et de
+    colonnes pour mieux se repérer
+ * \param pl Matrice de couleur représentant le plateau
+ */ 
 void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
@@ -54,7 +75,15 @@ void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     printf("\n");
 }
 
-void afficher_pieces_dispo(Joueur* j) {
+/**
+ * \fn void afficher_pieces_dispo(Joueur * j)
+ * \brief Affiche les pièces disponibles d'un joueur
+ * \details Affiche les pièces disponibles d'un joueur ainsi que des 
+    numéros pour faciliter le choix d'une pièce, de plus les pièces
+    sont de la couleur du joueur
+ * \param j Structure Joueur dont on veut afficher les pièces
+ */ 
+void afficher_pieces_dispo(Joueur * j) {
 
     int n = joueur_nb_piece_restantes(j);
     Piece* l = joueur_liste_piece(j);
@@ -107,6 +136,14 @@ void afficher_pieces_dispo(Joueur* j) {
     }
 }
 
+
+/**
+ * \fn void afficher_choix_orientation(Piece * p)
+ * \brief Affiche les orientations possibles pour une pièce
+ * \details Affiche les orientations possibles d'une pièce ainsi que des 
+    numéros pour faciliter le choix d'une orientation
+ * \param p Structure pièce dont on veut afficher les orientations
+ */ 
 void afficher_choix_orientation(Piece* p) {
 
     // Matrice qui contiendra une représentation de la pièce
@@ -155,7 +192,14 @@ void afficher_choix_orientation(Piece* p) {
     }
 }
 
-void afficher_scores(Joueur* j) {
+/**
+ * \fn void afficher_scores(Joueur * j)
+ * \brief Affiche les scores
+ * \details Affiche les scores actuels en mettant à la bonne couleur les
+    pseudos des joueurs
+ * \param j Liste de structures joueurs à afficher
+ */ 
+void afficher_scores(Joueur * j) {
     
     // Variable pour garder le premier joueur
     Joueur * pj = j;
@@ -201,6 +245,13 @@ void afficher_scores(Joueur* j) {
     printf("|\n");
 }
 
+/**
+ * \fn void afficher_résultats(Joueur * j)
+ * \brief Affiche les résultats
+ * \details Affiche les résultats de la partie en mettant à la bonne couleur les
+    pseudos des joueurs et en gérant les ex aequo
+ * \param j Liste de structures joueurs à afficher
+ */ 
 void afficher_resultats(Joueur* j) {
 
     
