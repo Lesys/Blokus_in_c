@@ -2,12 +2,19 @@
 #define CARRE_H
 
 /* Structure d'un carré */
+/**
+	\struct Carre
+	\brief Structure d'un Carre
+
+	Un Carre fait parti d'une Piece (une Piece est composée d'un ou plusieurs Carre).
+*/
 typedef struct carre Carre;
 typedef struct piece Piece;
 
 struct carre {
-	int x, y; /* Coordonnées x et y par rapport au point de référence d'une pièce */
-	Carre* suiv;
+	/* Coordonnées x et y par rapport au point de référence d'une pièce */
+	int x, y; /** Coordonnées x et y d'un Carre (le Carre est en haut à gauche d'un tableau (visuellement)) */
+	Carre* suiv; /**  */
 };
 
 /* Procédures d'accès pour un carré */
