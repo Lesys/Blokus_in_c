@@ -18,6 +18,7 @@ int main(){
 		printf("Probleme initialisation_partie renvoie du joueur\n");
 	}
 	printf("TEST %s\n",j->pseudo);
+
 /* Tour_suivant 
 	printf("TEST Tour_suivant\n");
 	//AVANT
@@ -25,7 +26,10 @@ int main(){
 	j=tour_suivant(j);
 	//APRES
 	printf("\nj2 : %s\n",joueur_pseudo(j));
-
+	j=tour_suivant(j);
+	//REJOUEUR1
+	printf("\nj3 : %s\n",joueur_pseudo(j));
+	
 
 
 /* Maj_score 

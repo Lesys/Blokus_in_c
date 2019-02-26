@@ -3,6 +3,7 @@
 
 #include "commun.h"
 #include "joueur.h"
+#include "affichage.h"
 //#include "gestion_tour.h"
 
 
@@ -18,12 +19,12 @@ void maj_scores(Joueur** j); /* Permet de mettre à jour les scores à la fin de
 int joueur_abandon(Joueur* j);/*Si tous les joueur on abandonne*/
 
 
-int fin_de_partie(Joueur* j); /* Affiche les résultats, propose les options de fin de partie et renvoie le résultat correspondant */
+int fin_de_partie(Joueur** j); /* Affiche les résultats, propose les options de fin de partie et renvoie le résultat correspondant */
 
 Joueur* tour_suivant(Joueur* j);
 
 
-void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
+void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j);
 
 
 int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
