@@ -12,6 +12,7 @@
 #define COULEUR_VERT "\x1b[32m"
 #define FIN_COULEUR "\x1b[0m"
 
+void afficher_str_couleur(Couleur couleur, char * str);
 void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
 void afficher_pieces_dispo(Joueur* j);
 void afficher_choix_orientation(Piece* p);

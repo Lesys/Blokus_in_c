@@ -14,34 +14,35 @@
 #include "../include/carre.h"
 
 /**
- * \fn static void afficher_carre(Couleur couleur)
- * \brief Affiche un carré de couleur
- * \details Fonction statique utilisée par les autres fonctions
-    pour afficher un carré de la bonne couleur
- * \param couleur Couleur du carré à afficher
+ * \fn void afficher_str_couleur(Couleur couleur, char * str)
+ * \brief Affiche une chaine de caractères en couleur
+ * \details Affiche une chaine de caractères en couleur, si la couleur
+    est "VIDE" ou n'est pas reconnue alors la fonction affiche deux espaces
+ * \param couleur Couleur du texte à afficher
+ * \param str Chaine à afficher
  */ 
-static void afficher_carre(Couleur couleur) {
+void afficher_str_couleur(Couleur couleur, char * str) {
 
     switch(couleur) {
      
         case BLEU:
             printf(COULEUR_BLEU);
-            printf("██");
+            printf("%s", str);
             printf(FIN_COULEUR);
             break;
         case JAUNE:
             printf(COULEUR_JAUNE);
-            printf("██");
+            printf("%s", str);
             printf(FIN_COULEUR);
             break;
         case ROUGE:
             printf(COULEUR_ROUGE);
-            printf("██");
+            printf("%s", str);
             printf(FIN_COULEUR);
             break;
         case VERT:
             printf(COULEUR_VERT);
-            printf("██");
+            printf("%s", str);
             printf(FIN_COULEUR);
             break;
         case VIDE:
@@ -62,7 +63,7 @@ void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
         printf("%3d ", TAILLE_PLATEAU - i);
         for (int j = 0; j < TAILLE_PLATEAU; j++) {
-            afficher_carre(pl[i][j]);
+            afficher_str_couleur(pl[i][j], "██");
         }
         printf("\n");
     }
@@ -126,7 +127,7 @@ void afficher_pieces_dispo(Joueur * j) {
                 }
 
                 for (int x = 0; x < 5; x++) {
-                    afficher_carre(rangee[p][y][x]);
+                    afficher_str_couleur(rangee[p][y][x], "██");
                     rangee[p][y][x] = 0;
                 }
             }
@@ -168,22 +169,22 @@ void afficher_choix_orientation(Piece* p) {
 
             if (n == 1) {
                 for (int j = 0; j < 5; j++) {
-                    afficher_carre(mp[i][j]);
+                    afficher_str_couleur(mp[i][j], "██");
                 }
             }
             else if (n == 2) {
                 for (int j = 0; j < 5; j++) {
-                    afficher_carre(mp[4-i][j]);
+                    afficher_str_couleur(mp[4-i][j], "██");
                 }
             }
             else if (n == 3) {
                 for (int j = 0; j < 5; j++) {
-                    afficher_carre(mp[4-i][4-j]);
+                    afficher_str_couleur(mp[4-i][4-j], "██");
                 }
             }
             else if (n == 4) {
                 for (int j = 0; j < 5; j++) {
-                    afficher_carre(mp[i][4-j]);
+                    afficher_str_couleur(mp[i][4-j], "██");
                 }
             }
             printf(" ");
