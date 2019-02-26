@@ -246,7 +246,7 @@ void afficher_scores(Joueur * j) {
 }
 
 /**
- * \fn void afficher_résultats(Joueur * j)
+ * \fn void afficher_resultats(Joueur * j)
  * \brief Affiche les résultats
  * \details Affiche les résultats de la partie en mettant à la bonne couleur les
     pseudos des joueurs et en gérant les ex aequo
