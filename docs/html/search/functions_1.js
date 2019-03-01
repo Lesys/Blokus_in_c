@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['carre',['carre',['../structcarre.html',1,'']]],
-  ['carre_2ec',['carre.c',['../carre_8c.html',1,'']]],
   ['carre_5fafficher',['carre_afficher',['../carre_8c.html#a1b37ffe4d15c1173ef309e1fdf027df8',1,'carre.c']]],
   ['carre_5fdetruire',['carre_detruire',['../carre_8c.html#aeecc5a4714e8c28b0ca0b0fd1834b5c5',1,'carre.c']]],
   ['carre_5ffree',['carre_free',['../carre_8c.html#a62d33263e009533884cd4572f0625bd2',1,'carre.c']]],

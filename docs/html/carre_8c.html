@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blokus in C: Référence du fichier src/carre.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('carre_8c.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier carre.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier de fonctions pour accesseurs et de modifications pour un Carre et une Piece.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;../include/carre.h&quot;</code><br />
+<code>#include &quot;../include/piece.h&quot;</code><br />
+<code>#include &quot;../include/commun.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aa0a61b283a32abb750fc51e77fad0af0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#aa0a61b283a32abb750fc51e77fad0af0">carre_get_x</a> (<a class="el" href="structcarre.html">Carre</a> *c)</td></tr>
+<tr class="memdesc:aa0a61b283a32abb750fc51e77fad0af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de récupérer la coordonnée x d'un Carre.  <a href="#aa0a61b283a32abb750fc51e77fad0af0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa0a61b283a32abb750fc51e77fad0af0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cf33e9afe2f95956129a250a2a063ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a1cf33e9afe2f95956129a250a2a063ff">carre_get_y</a> (<a class="el" href="structcarre.html">Carre</a> *c)</td></tr>
+<tr class="memdesc:a1cf33e9afe2f95956129a250a2a063ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de récupérer la coordonnée y d'un Carre.  <a href="#a1cf33e9afe2f95956129a250a2a063ff">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1cf33e9afe2f95956129a250a2a063ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12e163df0e81a9809416d0761cefc151"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcarre.html">Carre</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a12e163df0e81a9809416d0761cefc151">carre_get_suiv</a> (<a class="el" href="structcarre.html">Carre</a> *c)</td></tr>
+<tr class="memdesc:a12e163df0e81a9809416d0761cefc151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de récupérer le Carre suivant d'une liste de Carre.  <a href="#a12e163df0e81a9809416d0761cefc151">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a12e163df0e81a9809416d0761cefc151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c728747487fcb74a628e82536427b86"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a6c728747487fcb74a628e82536427b86">carre_hors_liste</a> (<a class="el" href="structcarre.html">Carre</a> *c)</td></tr>
+<tr class="memdesc:a6c728747487fcb74a628e82536427b86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie VRAI si le Carre* est NULL, FAUX sinon.  <a href="#a6c728747487fcb74a628e82536427b86">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6c728747487fcb74a628e82536427b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d95666bc7f00ec172bbde917d54feea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a9d95666bc7f00ec172bbde917d54feea">carre_reinit_tab</a> (char tab[5][5])</td></tr>
+<tr class="memdesc:a9d95666bc7f00ec172bbde917d54feea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet d'initialiser un tableau char [5][5] (utilisé uniquement dans la fonction d'affichage)  <a href="#a9d95666bc7f00ec172bbde917d54feea">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9d95666bc7f00ec172bbde917d54feea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b37ffe4d15c1173ef309e1fdf027df8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a1b37ffe4d15c1173ef309e1fdf027df8">carre_afficher</a> (<a class="el" href="structcarre.html">Carre</a> *c)</td></tr>
+<tr class="memdesc:a1b37ffe4d15c1173ef309e1fdf027df8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un Carre* (sous forme de '*')  <a href="#a1b37ffe4d15c1173ef309e1fdf027df8">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1b37ffe4d15c1173ef309e1fdf027df8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62d33263e009533884cd4572f0625bd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a62d33263e009533884cd4572f0625bd2">carre_free</a> (<a class="el" href="structcarre.html">Carre</a> **c)</td></tr>
+<tr class="memdesc:a62d33263e009533884cd4572f0625bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Libère un Carre (et tout ses attributs)  <a href="#a62d33263e009533884cd4572f0625bd2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a62d33263e009533884cd4572f0625bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeecc5a4714e8c28b0ca0b0fd1834b5c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#aeecc5a4714e8c28b0ca0b0fd1834b5c5">carre_detruire</a> (<a class="el" href="structcarre.html">Carre</a> **c)</td></tr>
+<tr class="memdesc:aeecc5a4714e8c28b0ca0b0fd1834b5c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Détruit un Carre* (== tous les Carre d'une liste de Carre)  <a href="#aeecc5a4714e8c28b0ca0b0fd1834b5c5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aeecc5a4714e8c28b0ca0b0fd1834b5c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2737e12ca881a1d070f8a2885d266e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcarre.html">Carre</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#ad2737e12ca881a1d070f8a2885d266e1">piece_liste_carre</a> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="memdesc:ad2737e12ca881a1d070f8a2885d266e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie le premier Carre* de la Piece (== son premier Carre)  <a href="#ad2737e12ca881a1d070f8a2885d266e1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad2737e12ca881a1d070f8a2885d266e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab9d9a7003a706e5afa85521cdfb4016"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#aab9d9a7003a706e5afa85521cdfb4016">piece_suivant</a> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="memdesc:aab9d9a7003a706e5afa85521cdfb4016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie la Piece suivante de la Piece.  <a href="#aab9d9a7003a706e5afa85521cdfb4016">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aab9d9a7003a706e5afa85521cdfb4016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9d4170b6392e768505a510df50fd6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a5a9d4170b6392e768505a510df50fd6b">piece_precedent</a> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="memdesc:a5a9d4170b6392e768505a510df50fd6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie la Piece précédente de la Piece.  <a href="#a5a9d4170b6392e768505a510df50fd6b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5a9d4170b6392e768505a510df50fd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a205c4dc3c4ea2b46ad2198a9032a0771"><td class="memItemLeft" align="right" valign="top"><a id="a205c4dc3c4ea2b46ad2198a9032a0771"></a>
+<a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>piece_liste_creation</b> ()</td></tr>
+<tr class="separator:a205c4dc3c4ea2b46ad2198a9032a0771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f21050edfa41ddb27d6c60f3d8c31af"><td class="memItemLeft" align="right" valign="top"><a id="a3f21050edfa41ddb27d6c60f3d8c31af"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_suppr_elem</b> (<a class="el" href="structpiece.html">Piece</a> **p)</td></tr>
+<tr class="separator:a3f21050edfa41ddb27d6c60f3d8c31af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a538fa7fbc763153aa6cbd08bfb0aefd3"><td class="memItemLeft" align="right" valign="top"><a id="a538fa7fbc763153aa6cbd08bfb0aefd3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire</b> (<a class="el" href="structpiece.html">Piece</a> **p)</td></tr>
+<tr class="separator:a538fa7fbc763153aa6cbd08bfb0aefd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p class="">Fichier de fonctions pour accesseurs et de modifications pour un Carre et une Piece. </p>
+<dl class="section author"><dt>Auteur</dt><dd>WIDMER Alexis </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>01/03/2019</dd></dl>
+<p>Ce fichier permet d'avoir accès aux attributs d'un Carre et d'une Piece, de les créer, de les supprimer ou de les afficher. </p>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a1b37ffe4d15c1173ef309e1fdf027df8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b37ffe4d15c1173ef309e1fdf027df8">&#9670;&nbsp;</a></span>carre_afficher()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void carre_afficher </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche un Carre* (sous forme de '*') </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Le</td><td>Carre* qu'on veut afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aeecc5a4714e8c28b0ca0b0fd1834b5c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeecc5a4714e8c28b0ca0b0fd1834b5c5">&#9670;&nbsp;</a></span>carre_detruire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void carre_detruire </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> **&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Détruit un Carre* (== tous les Carre d'une liste de Carre) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Les</td><td>Carre* qu'on veut détruire </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a62d33263e009533884cd4572f0625bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62d33263e009533884cd4572f0625bd2">&#9670;&nbsp;</a></span>carre_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void carre_free </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> **&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Libère un Carre (et tout ses attributs) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Le</td><td>Carre* qu'on veut libérer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a12e163df0e81a9809416d0761cefc151"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12e163df0e81a9809416d0761cefc151">&#9670;&nbsp;</a></span>carre_get_suiv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcarre.html">Carre</a>* carre_get_suiv </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de récupérer le Carre suivant d'une liste de Carre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Le</td><td>Carre* dont on veut le Carre suivant </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le Carre* suivant (renvoie NULL si le paramètre est NULL) </dd></dl>
+
+</div>
+</div>
+<a id="aa0a61b283a32abb750fc51e77fad0af0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0a61b283a32abb750fc51e77fad0af0">&#9670;&nbsp;</a></span>carre_get_x()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int carre_get_x </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de récupérer la coordonnée x d'un Carre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Le</td><td>Carre* dont on veut la coordonnée y </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La coordonnée x (dans la visualisation d'un tableau, ça serait la ligne) </dd></dl>
+
+</div>
+</div>
+<a id="a1cf33e9afe2f95956129a250a2a063ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cf33e9afe2f95956129a250a2a063ff">&#9670;&nbsp;</a></span>carre_get_y()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int carre_get_y </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de récupérer la coordonnée y d'un Carre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Le</td><td>Carre* dont on veut la coordonnée y </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La coordonnée y (dans la visualisation d'un tableau, ça serait la colonne) </dd></dl>
+
+</div>
+</div>
+<a id="a6c728747487fcb74a628e82536427b86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c728747487fcb74a628e82536427b86">&#9670;&nbsp;</a></span>carre_hors_liste()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int carre_hors_liste </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> *&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renvoie VRAI si le Carre* est NULL, FAUX sinon. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Le</td><td>Carre* dont on veut savoir s'il est NULL ou non </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Un entier valant VRAI ou FAUX </dd></dl>
+
+</div>
+</div>
+<a id="a9d95666bc7f00ec172bbde917d54feea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d95666bc7f00ec172bbde917d54feea">&#9670;&nbsp;</a></span>carre_reinit_tab()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void carre_reinit_tab </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>tab</em>[5][5]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet d'initialiser un tableau char [5][5] (utilisé uniquement dans la fonction d'affichage) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Le</td><td>tableau à initialiser </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad2737e12ca881a1d070f8a2885d266e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2737e12ca881a1d070f8a2885d266e1">&#9670;&nbsp;</a></span>piece_liste_carre()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcarre.html">Carre</a>* piece_liste_carre </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renvoie le premier Carre* de la Piece (== son premier Carre) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">La</td><td>Piece* dont on veut récupérer la liste de carre </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le premier Carre* de la Piece </dd></dl>
+
+</div>
+</div>
+<a id="a5a9d4170b6392e768505a510df50fd6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a9d4170b6392e768505a510df50fd6b">&#9670;&nbsp;</a></span>piece_precedent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpiece.html">Piece</a>* piece_precedent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renvoie la Piece précédente de la Piece. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">La</td><td>Piece* dont on veut récupérer la Piece* précédente </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La Piece* précédente </dd></dl>
+
+</div>
+</div>
+<a id="aab9d9a7003a706e5afa85521cdfb4016"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab9d9a7003a706e5afa85521cdfb4016">&#9670;&nbsp;</a></span>piece_suivant()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpiece.html">Piece</a>* piece_suivant </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> *&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renvoie la Piece suivante de la Piece. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">La</td><td>Piece* dont on veut récupérer la Piece* suivante </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>La Piece* suivante </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="carre_8c.html">carre.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+  </ul>
+</div>
+</body>
+</html>
