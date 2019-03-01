@@ -116,5 +116,13 @@ cleanNewDir:
 	-rm -R $(DIRLIB) $(DIROBJ) $(DIRBUILD)
 
 #Nettoie l'écran
-clearScreen: 
+clearScreen:
 	-clear
+
+#Met à jour et la push sur le git distant
+majDoc:
+	-git pull
+	-doxygen
+	-git add docs/*
+	-git commit -m "Maj doc le $(shell date "+%d/%m/%y à %H:%M:%S")"
+	-git push
