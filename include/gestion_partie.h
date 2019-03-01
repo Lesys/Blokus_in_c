@@ -1,8 +1,3 @@
-/**
-	*\file gestion_partie.h
-	*\brief Prototype de gestion_partie.c
-	*\author JODEAU ALEXANDRE
-*/
 
 #ifndef GESTION_PARTIE_H
 #define GESTION_PARTIE_H

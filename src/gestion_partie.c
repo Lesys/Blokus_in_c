@@ -240,12 +240,14 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 
 /**
-	*\fn void jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
+	*\fn int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
 	*\brief Réalise le fonctionnement d'une manche
 	*\details Réalise le fonctionnement d'une manche 
 	*\param pl Plateau de jeu pour pouvoir jouer
 	*\param j La liste de Joueur qui joue durant la manche
-	*\return renvoi le choix des joueurs ,2 Recommencez une partie,3 Quittez le programme
+	*\return Renvoie le choix des joueurs 
+		*-2 Recommence une partie
+		*-3 Quitte le programme
 */
 
 
