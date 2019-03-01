@@ -1,3 +1,13 @@
+/**
+	\file carre.c
+	\brief Fichier de fonctions pour accesseurs et de modifications pour un Carre et une Piece
+	\author WIDMER Alexis
+	\version 1.0
+	\date 01/03/2019
+
+	Ce fichier permet d'avoir accès aux attributs d'un Carre et d'une Piece, de les créer, de les supprimer ou de les afficher.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/carre.h"
@@ -7,27 +17,61 @@
 /* Procédures d'accès pour un carré */
 
 /* Permet de récupérer la coordonnée x d'un Carre */
-int carre_get_x (Carre* c) {
+/**
+	\fn int carre_get_x(Carre* c);
+	\brief Permet de récupérer la coordonnée x d'un Carre
+
+	\param Le Carre* dont on veut la coordonnée y
+	\return La coordonnée x (dans la visualisation d'un tableau, ça serait la ligne)
+*/
+int carre_get_x(Carre* c) {
 	return c->x;
 }
 
 /* Permet de récupérer la coordonnée y d'un Carre */
-int carre_get_y (Carre* c) {
+/**
+	\fn int carre_get_y(Carre* c);
+	\brief Permet de récupérer la coordonnée y d'un Carre
+
+	\param Le Carre* dont on veut la coordonnée y
+	\return La coordonnée y (dans la visualisation d'un tableau, ça serait la colonne)
+*/
+int carre_get_y(Carre* c) {
 	return c->y;
 }
 
 /* Permet de récupérer le carré suivant d'une pièce */
-Carre* carre_get_suiv (Carre* c) {
+/**
+	\fn Carre* carre_get_suiv(Carre* c);
+	\brief Permet de récupérer le Carre suivant d'une liste de Carre
+
+	\param Le Carre* dont on veut le Carre suivant
+	\return Le Carre* suivant (renvoie NULL si le paramètre est NULL)
+*/
+Carre* carre_get_suiv(Carre* c) {
 	if (!carre_hors_liste(c))
 		return c->suiv;
 	else
 		return NULL;
 }
 
+/**
+	\fn int carre_hors_liste(Carre* c);
+	\brief Renvoie VRAI si le Carre* est NULL, FAUX sinon
+
+	\param Le Carre* dont on veut savoir s'il est NULL ou non
+	\return Un entier valant VRAI ou FAUX
+*/
 int carre_hors_liste(Carre* c) {
 	return (c == NULL);
 }
 
+/**
+	\fn void carre_reinit_tab(char tab[5][5]);
+	\brief Permet d'initialiser un tableau char [5][5] (utilisé uniquement dans la fonction d'affichage)
+
+	\param Le tableau à initialiser
+*/
 void carre_reinit_tab(char tab[5][5]) {
 	int i, j;
 
@@ -37,6 +81,12 @@ void carre_reinit_tab(char tab[5][5]) {
 }
 
 /* Affiche une pièce */
+/**
+	\fn void carre_afficher(Carre* c);
+	\brief Affiche un Carre* (sous forme de '*')
+
+	\param Le Carre* qu'on veut afficher
+*/
 void carre_afficher(Carre* c) {
 	Carre* init = c;
 	char tab[5][5]; /* Tableau représentant le Carre dans un plan 5/5 (pour l'affichage) */
@@ -61,6 +111,12 @@ void carre_afficher(Carre* c) {
 
 
 /* Libère un Carre */
+/**
+	\fn void carre_free(Carre** c);
+	\brief Libère un Carre (et tout ses attributs)
+
+	\param Le Carre* qu'on veut libérer
+*/
 void carre_free(Carre** c) {
 	if (!carre_hors_liste(carre_get_suiv(*c)))
 		(*c)->suiv = NULL;
@@ -70,6 +126,12 @@ void carre_free(Carre** c) {
 }
 
 /* Detruit une pièce entière */
+/**
+	\fn void carre_detruire(Carre** c);
+	\brief Détruit un Carre* (== tous les Carre d'une liste de Carre)
+
+	\param Les Carre* qu'on veut détruire
+*/
 void carre_detruire(Carre** c) {
 	Carre** supp = malloc(sizeof(Carre*));
 	(*supp) = (*c);
@@ -104,19 +166,47 @@ void carre_detruire(Carre** c) {
 	(*c) = NULL;
 }
 
+/**
+	\fn Carre* piece_liste_carre(Piece* p);
+	\brief Renvoie le premier Carre* de la Piece (== son premier Carre)
+
+	\param La Piece* dont on veut récupérer la liste de carre
+	\return Le premier Carre* de la Piece
+*/
 Carre* piece_liste_carre(Piece* p) {
 	return p->liste_carre;
 }
 
+/**
+	\fn Piece* piece_suivant(Piece* p);
+	\brief Renvoie la Piece suivante de la Piece
+
+	\param La Piece* dont on veut récupérer la Piece* suivante
+	\return La Piece* suivante
+*/
 Piece* piece_suivant(Piece* p) {
 	return p->suiv;
 }
 
+/**
+	\fn Piece* piece_precedent(Piece* p);
+	\brief Renvoie la Piece précédente de la Piece
+
+	\param La Piece* dont on veut récupérer la Piece* précédente
+	\return La Piece* précédente
+*/
 Piece* piece_precedent(Piece* p) {
 	return p->prec;
 }
 
 /* Création d'une liste de Piece */
+/**
+	\fn Piece* piece_creation();
+	\brief Crée toutes les Piece du jeu et renvoie la première Piece (le petit carré)
+
+	\param La Piece* dont on veut récupérer la Piece* suivante
+	\return La Piece* suivante
+*/
 Piece* piece_liste_creation () {
 	Piece* p = malloc(sizeof(Piece)); /* Alloue l'espace pour une Piece */
 	Piece* first = p;
