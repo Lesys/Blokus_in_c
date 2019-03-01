@@ -58,6 +58,7 @@ var NAVTREEINDEX0 =
 "gestion__partie_8h_source.html":[2,0,0,4],
 "gestion__tour_8h_source.html":[2,0,0,5],
 "globals.html":[2,1,0],
+"globals_defs.html":[2,1,2],
 "globals_func.html":[2,1,1],
 "index.html":[],
 "joueur_8h_source.html":[2,0,0,6],
