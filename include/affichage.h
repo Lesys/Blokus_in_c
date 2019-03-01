@@ -2,8 +2,9 @@
  * \file affichage.h
  * \brief Entête de affichage.c
  * \details Contient des constantes pour l'affichage en couleur dans
-    le terminal et diverses fonctions d'affichage dans le terminal pour
+    le terminal et divers prototypes de fonctions d'affichage dans le terminal pour
     le jeu du blokus
+ * \author BASTIDE Robin
  */
 
 #ifndef AFFICHAGE_H

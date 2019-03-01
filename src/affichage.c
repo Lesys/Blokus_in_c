@@ -3,6 +3,7 @@
  * \brief Fonctions d'affichages
  * \details Diverses fonctions d'affichage dans le terminal pour
     le jeu du blokus
+ * \author BASTIDE Robin
  */
 
 #include <stdio.h>
@@ -103,10 +104,10 @@ void afficher_pieces_dispo(Joueur * j) {
         // Représentation des pièces dans leur matrice
         for (int j = 0; j < 4; j++) {
             if (i < n) {
-                Carre * init = l->liste_carre;
+                Carre * init = piece_liste_carre(l);
                 Carre * c = init;
                 do {
-	            rangee[j][4 - c->x][c->y] = couleur;
+	            rangee[j][4 - carre_get_x(c)][carre_get_y(c)] = couleur;
                 } while ((c = carre_get_suiv(c)) != init);
                 l = piece_suivant(l);
             }
@@ -149,12 +150,12 @@ void afficher_choix_orientation(Piece* p) {
 
     // Matrice qui contiendra une représentation de la pièce
     Couleur mp[5][5] = {0};
-    Carre * init = p->liste_carre;
+    Carre * init = piece_liste_carre(p);
     Carre * c = init;
 
     // Représentation de la pièce dans la matrice
     do {
-        mp[4 - c->x][c->y] = BLEU;
+        mp[4 - carre_get_x(c)][carre_get_y(c)] = BLEU;
     } while ((c = carre_get_suiv(c)) != init);
     
     // Affichage de toutes les orientations de la pièce en une ligne
@@ -222,9 +223,9 @@ void afficher_scores(Joueur * j) {
             case VERT:
                 printf(COULEUR_VERT);
         }
-        int marges = (TAILLE_PSEUDO - strlen(j->pseudo)) / 2;
-        int decalage = strlen(j->pseudo)%2;
-        printf("%*s%s%*s", marges + decalage, "", j->pseudo, marges, "");
+        int marges = (TAILLE_PSEUDO - strlen(joueur_pseudo(j))) / 2;
+        int decalage = strlen(joueur_pseudo(j))%2;
+        printf("%*s%s%*s", marges + decalage, "", joueur_pseudo(j), marges, "");
         printf(FIN_COULEUR);
         j = joueur_suivant(j);
     } while (j != pj);
@@ -237,7 +238,7 @@ void afficher_scores(Joueur * j) {
     do {
         printf("|");
         char score[TAILLE_PSEUDO];
-        sprintf(score, "%d", j->score);
+        sprintf(score, "%d", joueur_score(j));
         int marges = (TAILLE_PSEUDO - strlen(score)) / 2;
         int decalage = strlen(score)%2;
         printf("%*s%s%*s", marges + decalage, "", score, marges, "");
@@ -274,7 +275,7 @@ void afficher_resultats(Joueur* j) {
                 classement[i] = j;
                 p++;
             }
-            else if (j->score > classement[i]->score) {
+            else if (joueur_score(j) > joueur_score(classement[i])) {
                 // Placement du joueur et décalage des autres
                 tmp1 = j;
                 while (i < 4) {
@@ -310,7 +311,7 @@ void afficher_resultats(Joueur* j) {
 
         // Gestion des égalités
         int r = i; // rang réel
-        while (r-1 >= 0 && classement[r]->score == classement[r-1]->score) {
+        while (r-1 >= 0 && joueur_score(classement[r]) == joueur_score(classement[r-1])) {
             r--;
         }
         r++; // +1 pour l'affichage
@@ -337,14 +338,14 @@ void afficher_resultats(Joueur* j) {
     
         // Affichage pseudo
         char pseudo[TAILLE_PSEUDO];
-        strcpy(pseudo,classement[i]->pseudo);
+        strcpy(pseudo,joueur_pseudo(classement[i]));
         marges = (TAILLE_PSEUDO - strlen(pseudo)) / 2;
         decalage = strlen(pseudo)%2;
         printf("%*s%s%*s", marges + decalage, "", pseudo, marges, "");
         
         // Affichage score
         char score[10];
-        sprintf(score, "%d", classement[i]->score);
+        sprintf(score, "%d", joueur_score(classement[i]));
         marges = (10 - strlen(score)) / 2;
         decalage = strlen(score)%2;
         printf("%*s%s%*s", marges + decalage, "", score, marges, "");

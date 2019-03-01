@@ -21,17 +21,32 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 @licend  The above is the entire license notice
 for the JavaScript code in this file
 */
-var menudata={children:[
-{text:"Page principale",url:"index.html"},
-{text:"Pages associées",url:"pages.html"},
-{text:"Structures de données",url:"annotated.html",children:[
-{text:"Structures de données",url:"annotated.html"},
-{text:"Index des structures de données",url:"classes.html"},
-{text:"Champs de donnée",url:"functions.html",children:[
-{text:"Tout",url:"functions.html"},
-{text:"Variables",url:"functions_vars.html"}]}]},
-{text:"Fichiers",url:"files.html",children:[
-{text:"Liste des fichiers",url:"files.html"},
-{text:"Variables globale",url:"globals.html",children:[
-{text:"Tout",url:"globals.html"},
-{text:"Fonctions",url:"globals_func.html"}]}]}]}
+var NAVTREE =
+[
+  [ "Blokus in C", "index.html", [
+    [ "Blokus_in_c", "md_README.html", null ],
+    [ "Structures de données", "annotated.html", [
+      [ "Structures de données", "annotated.html", "annotated_dup" ],
+      [ "Index des structures de données", "classes.html", null ],
+      [ "Champs de donnée", "functions.html", [
+        [ "Tout", "functions.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
+    [ "Fichiers", "files.html", [
+      [ "Liste des fichiers", "files.html", "files_dup" ],
+      [ "Variables globale", "globals.html", [
+        [ "Tout", "globals.html", null ],
+        [ "Fonctions", "globals_func.html", null ]
+      ] ]
+    ] ]
+  ] ]
+];
+
+var NAVTREEINDEX =
+[
+"affichage_8c.html"
+];
+
+var SYNCONMSG = 'cliquez pour désactiver la synchronisation du panel';
+var SYNCOFFMSG = 'cliquez pour activer la synchronisation du panel';
