@@ -3,6 +3,7 @@
  * \brief Fonctions d'affichages
  * \details Diverses fonctions d'affichage dans le terminal pour
     le jeu du blokus
+ * \author BASTIDE Robin
  */
 
 #include <stdio.h>
