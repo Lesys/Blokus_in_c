@@ -21,7 +21,7 @@
 	\fn int carre_get_x(Carre* c);
 	\brief Permet de récupérer la coordonnée x d'un Carre
 
-	\param Le Carre* dont on veut la coordonnée y
+	\param c Le Carre* dont on veut la coordonnée y
 	\return La coordonnée x (dans la visualisation d'un tableau, ça serait la ligne)
 */
 int carre_get_x(Carre* c) {
@@ -33,7 +33,7 @@ int carre_get_x(Carre* c) {
 	\fn int carre_get_y(Carre* c);
 	\brief Permet de récupérer la coordonnée y d'un Carre
 
-	\param Le Carre* dont on veut la coordonnée y
+	\param c Le Carre* dont on veut la coordonnée y
 	\return La coordonnée y (dans la visualisation d'un tableau, ça serait la colonne)
 */
 int carre_get_y(Carre* c) {
@@ -45,7 +45,7 @@ int carre_get_y(Carre* c) {
 	\fn Carre* carre_get_suiv(Carre* c);
 	\brief Permet de récupérer le Carre suivant d'une liste de Carre
 
-	\param Le Carre* dont on veut le Carre suivant
+	\param c Le Carre* dont on veut le Carre suivant
 	\return Le Carre* suivant (renvoie NULL si le paramètre est NULL)
 */
 Carre* carre_get_suiv(Carre* c) {
@@ -59,7 +59,7 @@ Carre* carre_get_suiv(Carre* c) {
 	\fn int carre_hors_liste(Carre* c);
 	\brief Renvoie VRAI si le Carre* est NULL, FAUX sinon
 
-	\param Le Carre* dont on veut savoir s'il est NULL ou non
+	\param c Le Carre* dont on veut savoir s'il est NULL ou non
 	\return Un entier valant VRAI ou FAUX
 */
 int carre_hors_liste(Carre* c) {
@@ -70,7 +70,7 @@ int carre_hors_liste(Carre* c) {
 	\fn void carre_reinit_tab(char tab[5][5]);
 	\brief Permet d'initialiser un tableau char [5][5] (utilisé uniquement dans la fonction d'affichage)
 
-	\param Le tableau à initialiser
+	\param tab Le tableau à initialiser
 */
 void carre_reinit_tab(char tab[5][5]) {
 	int i, j;
@@ -85,7 +85,7 @@ void carre_reinit_tab(char tab[5][5]) {
 	\fn void carre_afficher(Carre* c);
 	\brief Affiche un Carre* (sous forme de '*')
 
-	\param Le Carre* qu'on veut afficher
+	\param c Le Carre* qu'on veut afficher
 */
 void carre_afficher(Carre* c) {
 	Carre* init = c;
@@ -115,7 +115,7 @@ void carre_afficher(Carre* c) {
 	\fn void carre_free(Carre** c);
 	\brief Libère un Carre (et tout ses attributs)
 
-	\param Le Carre* qu'on veut libérer
+	\param c L'adresse du Carre* qu'on veut libérer
 */
 void carre_free(Carre** c) {
 	if (!carre_hors_liste(carre_get_suiv(*c)))
@@ -130,7 +130,7 @@ void carre_free(Carre** c) {
 	\fn void carre_detruire(Carre** c);
 	\brief Détruit un Carre* (== tous les Carre d'une liste de Carre)
 
-	\param Les Carre* qu'on veut détruire
+	\param c L'adresse du Carre* qu'on veut détruire (donc tous les Carre* suivants)
 */
 void carre_detruire(Carre** c) {
 	Carre** supp = malloc(sizeof(Carre*));
@@ -170,7 +170,7 @@ void carre_detruire(Carre** c) {
 	\fn Carre* piece_liste_carre(Piece* p);
 	\brief Renvoie le premier Carre* de la Piece (== son premier Carre)
 
-	\param La Piece* dont on veut récupérer la liste de carre
+	\param p La Piece* dont on veut récupérer la liste de carre
 	\return Le premier Carre* de la Piece
 */
 Carre* piece_liste_carre(Piece* p) {
@@ -181,7 +181,7 @@ Carre* piece_liste_carre(Piece* p) {
 	\fn Piece* piece_suivant(Piece* p);
 	\brief Renvoie la Piece suivante de la Piece
 
-	\param La Piece* dont on veut récupérer la Piece* suivante
+	\param p La Piece* dont on veut récupérer la Piece* suivante
 	\return La Piece* suivante
 */
 Piece* piece_suivant(Piece* p) {
@@ -192,7 +192,7 @@ Piece* piece_suivant(Piece* p) {
 	\fn Piece* piece_precedent(Piece* p);
 	\brief Renvoie la Piece précédente de la Piece
 
-	\param La Piece* dont on veut récupérer la Piece* précédente
+	\param p La Piece* dont on veut récupérer la Piece* précédente
 	\return La Piece* précédente
 */
 Piece* piece_precedent(Piece* p) {
@@ -201,11 +201,10 @@ Piece* piece_precedent(Piece* p) {
 
 /* Création d'une liste de Piece */
 /**
-	\fn Piece* piece_creation();
+	\fn Piece* piece_liste_creation();
 	\brief Crée toutes les Piece du jeu et renvoie la première Piece (le petit carré)
 
-	\param La Piece* dont on veut récupérer la Piece* suivante
-	\return La Piece* suivante
+	\return La premiere Piece* créée
 */
 Piece* piece_liste_creation () {
 	Piece* p = malloc(sizeof(Piece)); /* Alloue l'espace pour une Piece */
@@ -320,6 +319,12 @@ Piece* piece_liste_creation () {
 }
 
 /* Supprime la "pos"ième pièce (si elle n'est pas NULL) */
+/**
+	\fn void liste_piece_suppr_elem(Piece** p);
+	\brief Supprime la Piece* courante du paramètre et reconstruit la liste
+
+	\param p L'adresse de la Piece* qu'on souhaite supprimer
+*/
 void liste_piece_suppr_elem(Piece** p) {/*, int pos) {*/
 	if (p != NULL) {
 		Carre** c = &((*p)->liste_carre);
@@ -360,6 +365,12 @@ void liste_piece_suppr_elem(Piece** p) {/*, int pos) {*/
 	}
 }
 
+/**
+	\fn void liste_piece_detruire(Piece** p);
+	\brief Supprime toutes les Piece* dans cette liste
+
+	\param p L'adresse d'une Piece* afin de supprimer toute la liste
+*/
 void liste_piece_detruire(Piece** p) {
 	Piece** supp = malloc(sizeof(Piece*));
 
