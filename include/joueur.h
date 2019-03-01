@@ -4,15 +4,25 @@
 #include "couleur.h"
 #include "carre.h"
 
+/**
+	\typedef Type_Joueur : Type du joueur (BOT, LOCAL ou DISTANT)
+*/
 typedef enum type_joueur {BOT = 0, LOCAL, DISTANT} Type_Joueur;
 
+/**
+	\typedef Joueur : Un joueur
+*/
 typedef struct joueur Joueur;
 
 /* Structure d'un Joueur */
+/**
+        \struct joueur
+        \brief Structure d'un Joueur
+*/
 struct joueur {
-	char* pseudo;
+	char* pseudo; /**< Pseudo du joueur */
 	Couleur couleur; /**< Couleur du joueur */
-	int score;
+	int score; /**< Score du joueur (il n'est visible qu'en fin de partir) */
 	Piece* liste_piece; /**< Liste des pièces restantes pour le joueur */
 	Type_Joueur type; /**< Type de joueur (la gestion d'un tour diffère en fonction du type) */
 	Joueur* suiv; /**< Joueur suivant (qu'il soit un vrai joueur ou un BOT)*/
