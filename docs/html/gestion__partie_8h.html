@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Blokus in C: Référence du fichier src/gestion_partie.c</title>
+<title>Blokus in C: Référence du fichier include/gestion_partie.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -77,7 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('gestion__partie_8c.html','');});
+$(document).ready(function(){initNavTree('gestion__partie_8h.html','');});
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -99,54 +99,52 @@ $(document).ready(function(){initNavTree('gestion__partie_8c.html','');});
   <div class="summary">
 <a href="#func-members">Fonctions</a>  </div>
   <div class="headertitle">
-<div class="title">Référence du fichier gestion_partie.c</div>  </div>
+<div class="title">Référence du fichier gestion_partie.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Regroupent toutes les fonctions <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c.">gestion_partie.c</a>.  
+<p>Prototype de <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c.">gestion_partie.c</a>.  
 <a href="#details">Plus de détails...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
-<code>#include &lt;ctype.h&gt;</code><br />
-<code>#include &quot;../include/commun.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;../include/commun.h&quot;</code><br />
 <code>#include &quot;../include/joueur.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="affichage_8h_source.html">../include/affichage.h</a>&quot;</code><br />
 <code>#include &quot;../include/gestion_tour.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="gestion__partie_8h_source.html">../include/gestion_partie.h</a>&quot;</code><br />
-</div><table class="memberdecls">
+</div>
+<p><a href="gestion__partie_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a4c0fcfa70d86a6bc292bb5b06537cb62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#a4c0fcfa70d86a6bc292bb5b06537cb62">initialisation_partie</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:a4c0fcfa70d86a6bc292bb5b06537cb62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#a4c0fcfa70d86a6bc292bb5b06537cb62">initialisation_partie</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="memdesc:a4c0fcfa70d86a6bc292bb5b06537cb62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise une partie.  <a href="#a4c0fcfa70d86a6bc292bb5b06537cb62">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a4c0fcfa70d86a6bc292bb5b06537cb62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade3b043dd6a1eae4be50fba2076ecad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#ade3b043dd6a1eae4be50fba2076ecad7">initialisation_manche</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:ade3b043dd6a1eae4be50fba2076ecad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#ade3b043dd6a1eae4be50fba2076ecad7">initialisation_manche</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="memdesc:ade3b043dd6a1eae4be50fba2076ecad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise une manche.  <a href="#ade3b043dd6a1eae4be50fba2076ecad7">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ade3b043dd6a1eae4be50fba2076ecad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada90f706c91efe1ab73b82898187f1b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#ada90f706c91efe1ab73b82898187f1b1">maj_scores</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:ada90f706c91efe1ab73b82898187f1b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#ada90f706c91efe1ab73b82898187f1b1">maj_scores</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="memdesc:ada90f706c91efe1ab73b82898187f1b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mets a jour le score de la partie.  <a href="#ada90f706c91efe1ab73b82898187f1b1">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ada90f706c91efe1ab73b82898187f1b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4752abe9709986b3cf2acd2c8307686"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#ab4752abe9709986b3cf2acd2c8307686">joueur_abandon</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:ab4752abe9709986b3cf2acd2c8307686"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#ab4752abe9709986b3cf2acd2c8307686">joueur_abandon</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:ab4752abe9709986b3cf2acd2c8307686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si tous les joueurs ont abandonné  <a href="#ab4752abe9709986b3cf2acd2c8307686">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab4752abe9709986b3cf2acd2c8307686"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07f1bd5c237bd32a3a9c3ad362727858"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#a07f1bd5c237bd32a3a9c3ad362727858">fin_de_partie</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:a07f1bd5c237bd32a3a9c3ad362727858"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#a07f1bd5c237bd32a3a9c3ad362727858">fin_de_partie</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="memdesc:a07f1bd5c237bd32a3a9c3ad362727858"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si c'est vraiment la fin de la partie et réalise les choix à faire.  <a href="#a07f1bd5c237bd32a3a9c3ad362727858">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a07f1bd5c237bd32a3a9c3ad362727858"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba3a3c4d624f1da955013970bf973218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#aba3a3c4d624f1da955013970bf973218">tour_suivant</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
-<tr class="memdesc:aba3a3c4d624f1da955013970bf973218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appelle le prochain Joueur.  <a href="#aba3a3c4d624f1da955013970bf973218">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aba3a3c4d624f1da955013970bf973218"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58ea1050fc334f65333957e7b244e389"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#a58ea1050fc334f65333957e7b244e389">jouer_tour</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:a902b48b60daab1fc03722bc45dfaa655"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#a902b48b60daab1fc03722bc45dfaa655">tour_suivant</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a902b48b60daab1fc03722bc45dfaa655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appelle le prochain Joueur.  <a href="#a902b48b60daab1fc03722bc45dfaa655">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a902b48b60daab1fc03722bc45dfaa655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58ea1050fc334f65333957e7b244e389"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#a58ea1050fc334f65333957e7b244e389">jouer_tour</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="memdesc:a58ea1050fc334f65333957e7b244e389"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise le fonctionnement d'un tour.  <a href="#a58ea1050fc334f65333957e7b244e389">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a58ea1050fc334f65333957e7b244e389"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabc2caddfe36658343dc331c2d919bc2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#aabc2caddfe36658343dc331c2d919bc2">jouer_manche</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
-<tr class="memdesc:aabc2caddfe36658343dc331c2d919bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise le fonctionnement d'une manche.  <a href="#aabc2caddfe36658343dc331c2d919bc2">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aabc2caddfe36658343dc331c2d919bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a125c2e2cc30aedff98dc9676e890d9db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#a125c2e2cc30aedff98dc9676e890d9db">jouer_partie</a> ()</td></tr>
+<tr class="memitem:a4b7f7e6898db0cd0485400b996767f21"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#a4b7f7e6898db0cd0485400b996767f21">jouer_manche</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a4b7f7e6898db0cd0485400b996767f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise le fonctionnement d'une manche.  <a href="#a4b7f7e6898db0cd0485400b996767f21">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4b7f7e6898db0cd0485400b996767f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a125c2e2cc30aedff98dc9676e890d9db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8h.html#a125c2e2cc30aedff98dc9676e890d9db">jouer_partie</a> ()</td></tr>
 <tr class="memdesc:a125c2e2cc30aedff98dc9676e890d9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise l'appelle de fonction pour jouer une partie.  <a href="#a125c2e2cc30aedff98dc9676e890d9db">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a125c2e2cc30aedff98dc9676e890d9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Regroupent toutes les fonctions <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c.">gestion_partie.c</a>. </p>
-<p class="">Toutes les fonctions qui permetent de gerer une partie de blokus en respectant les règles </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre </dd></dl>
+<div class="textblock"><p class="">Prototype de <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c.">gestion_partie.c</a>. </p>
+<dl class="section author"><dt>Auteur</dt><dd>JODEAU ALEXANDRE </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
 <a id="a07f1bd5c237bd32a3a9c3ad362727858"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a07f1bd5c237bd32a3a9c3ad362727858">&#9670;&nbsp;</a></span>fin_de_partie()</h2>
@@ -238,14 +236,14 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aabc2caddfe36658343dc331c2d919bc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabc2caddfe36658343dc331c2d919bc2">&#9670;&nbsp;</a></span>jouer_manche()</h2>
+<a id="a4b7f7e6898db0cd0485400b996767f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b7f7e6898db0cd0485400b996767f21">&#9670;&nbsp;</a></span>jouer_manche()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int jouer_manche </td>
+          <td class="memname">void jouer_manche </td>
           <td>(</td>
           <td class="paramtype">Couleur&#160;</td>
           <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU], </td>
@@ -386,14 +384,14 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aba3a3c4d624f1da955013970bf973218"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba3a3c4d624f1da955013970bf973218">&#9670;&nbsp;</a></span>tour_suivant()</h2>
+<a id="a902b48b60daab1fc03722bc45dfaa655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902b48b60daab1fc03722bc45dfaa655">&#9670;&nbsp;</a></span>tour_suivant()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structjoueur.html">Joueur</a>* tour_suivant </td>
+          <td class="memname"><a class="el" href="structjoueur.html">Joueur</a> * tour_suivant </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
           <td class="paramname"><em>j</em></td><td>)</td>
@@ -418,7 +416,7 @@ Fonctions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="gestion__partie_8c.html">gestion_partie.c</a></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="gestion__partie_8h.html">gestion_partie.h</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
