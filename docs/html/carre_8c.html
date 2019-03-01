@@ -146,14 +146,14 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a5a9d4170b6392e768505a510df50fd6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a5a9d4170b6392e768505a510df50fd6b">piece_precedent</a> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
 <tr class="memdesc:a5a9d4170b6392e768505a510df50fd6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie la Piece précédente de la Piece.  <a href="#a5a9d4170b6392e768505a510df50fd6b">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5a9d4170b6392e768505a510df50fd6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a205c4dc3c4ea2b46ad2198a9032a0771"><td class="memItemLeft" align="right" valign="top"><a id="a205c4dc3c4ea2b46ad2198a9032a0771"></a>
-<a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>piece_liste_creation</b> ()</td></tr>
+<tr class="memitem:a205c4dc3c4ea2b46ad2198a9032a0771"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a205c4dc3c4ea2b46ad2198a9032a0771">piece_liste_creation</a> ()</td></tr>
+<tr class="memdesc:a205c4dc3c4ea2b46ad2198a9032a0771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée toutes les Piece du jeu et renvoie la première Piece (le petit carré)  <a href="#a205c4dc3c4ea2b46ad2198a9032a0771">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a205c4dc3c4ea2b46ad2198a9032a0771"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f21050edfa41ddb27d6c60f3d8c31af"><td class="memItemLeft" align="right" valign="top"><a id="a3f21050edfa41ddb27d6c60f3d8c31af"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_suppr_elem</b> (<a class="el" href="structpiece.html">Piece</a> **p)</td></tr>
+<tr class="memitem:a3f21050edfa41ddb27d6c60f3d8c31af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a3f21050edfa41ddb27d6c60f3d8c31af">liste_piece_suppr_elem</a> (<a class="el" href="structpiece.html">Piece</a> **p)</td></tr>
+<tr class="memdesc:a3f21050edfa41ddb27d6c60f3d8c31af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supprime la Piece* courante du paramètre et reconstruit la liste.  <a href="#a3f21050edfa41ddb27d6c60f3d8c31af">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a3f21050edfa41ddb27d6c60f3d8c31af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a538fa7fbc763153aa6cbd08bfb0aefd3"><td class="memItemLeft" align="right" valign="top"><a id="a538fa7fbc763153aa6cbd08bfb0aefd3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire</b> (<a class="el" href="structpiece.html">Piece</a> **p)</td></tr>
+<tr class="memitem:a538fa7fbc763153aa6cbd08bfb0aefd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#a538fa7fbc763153aa6cbd08bfb0aefd3">liste_piece_detruire</a> (<a class="el" href="structpiece.html">Piece</a> **p)</td></tr>
+<tr class="memdesc:a538fa7fbc763153aa6cbd08bfb0aefd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supprime toutes les Piece* dans cette liste.  <a href="#a538fa7fbc763153aa6cbd08bfb0aefd3">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a538fa7fbc763153aa6cbd08bfb0aefd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
@@ -182,7 +182,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Affiche un Carre* (sous forme de '*') </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Le</td><td>Carre* qu'on veut afficher </td></tr>
+    <tr><td class="paramname">c</td><td>Le Carre* qu'on veut afficher </td></tr>
   </table>
   </dd>
 </dl>
@@ -208,7 +208,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Détruit un Carre* (== tous les Carre d'une liste de Carre) </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Les</td><td>Carre* qu'on veut détruire </td></tr>
+    <tr><td class="paramname">c</td><td>L'adresse du Carre* qu'on veut détruire (donc tous les Carre* suivants) </td></tr>
   </table>
   </dd>
 </dl>
@@ -234,7 +234,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Libère un Carre (et tout ses attributs) </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Le</td><td>Carre* qu'on veut libérer </td></tr>
+    <tr><td class="paramname">c</td><td>L'adresse du Carre* qu'on veut libérer </td></tr>
   </table>
   </dd>
 </dl>
@@ -260,7 +260,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Permet de récupérer le Carre suivant d'une liste de Carre. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Le</td><td>Carre* dont on veut le Carre suivant </td></tr>
+    <tr><td class="paramname">c</td><td>Le Carre* dont on veut le Carre suivant </td></tr>
   </table>
   </dd>
 </dl>
@@ -287,7 +287,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Permet de récupérer la coordonnée x d'un Carre. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Le</td><td>Carre* dont on veut la coordonnée y </td></tr>
+    <tr><td class="paramname">c</td><td>Le Carre* dont on veut la coordonnée y </td></tr>
   </table>
   </dd>
 </dl>
@@ -314,7 +314,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Permet de récupérer la coordonnée y d'un Carre. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Le</td><td>Carre* dont on veut la coordonnée y </td></tr>
+    <tr><td class="paramname">c</td><td>Le Carre* dont on veut la coordonnée y </td></tr>
   </table>
   </dd>
 </dl>
@@ -341,7 +341,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Renvoie VRAI si le Carre* est NULL, FAUX sinon. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Le</td><td>Carre* dont on veut savoir s'il est NULL ou non </td></tr>
+    <tr><td class="paramname">c</td><td>Le Carre* dont on veut savoir s'il est NULL ou non </td></tr>
   </table>
   </dd>
 </dl>
@@ -368,7 +368,59 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Permet d'initialiser un tableau char [5][5] (utilisé uniquement dans la fonction d'affichage) </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Le</td><td>tableau à initialiser </td></tr>
+    <tr><td class="paramname">tab</td><td>Le tableau à initialiser </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a538fa7fbc763153aa6cbd08bfb0aefd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a538fa7fbc763153aa6cbd08bfb0aefd3">&#9670;&nbsp;</a></span>liste_piece_detruire()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void liste_piece_detruire </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> **&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Supprime toutes les Piece* dans cette liste. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>L'adresse d'une Piece* afin de supprimer toute la liste </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3f21050edfa41ddb27d6c60f3d8c31af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f21050edfa41ddb27d6c60f3d8c31af">&#9670;&nbsp;</a></span>liste_piece_suppr_elem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void liste_piece_suppr_elem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> **&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Supprime la Piece* courante du paramètre et reconstruit la liste. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>L'adresse de la Piece* qu'on souhaite supprimer </td></tr>
   </table>
   </dd>
 </dl>
@@ -394,11 +446,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Renvoie le premier Carre* de la Piece (== son premier Carre) </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">La</td><td>Piece* dont on veut récupérer la liste de carre </td></tr>
+    <tr><td class="paramname">p</td><td>La Piece* dont on veut récupérer la liste de carre </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Renvoie</dt><dd>Le premier Carre* de la Piece </dd></dl>
+
+</div>
+</div>
+<a id="a205c4dc3c4ea2b46ad2198a9032a0771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a205c4dc3c4ea2b46ad2198a9032a0771">&#9670;&nbsp;</a></span>piece_liste_creation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpiece.html">Piece</a>* piece_liste_creation </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée toutes les Piece du jeu et renvoie la première Piece (le petit carré) </p>
+<dl class="section return"><dt>Renvoie</dt><dd>La premiere Piece* créée </dd></dl>
 
 </div>
 </div>
@@ -421,7 +493,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Renvoie la Piece précédente de la Piece. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">La</td><td>Piece* dont on veut récupérer la Piece* précédente </td></tr>
+    <tr><td class="paramname">p</td><td>La Piece* dont on veut récupérer la Piece* précédente </td></tr>
   </table>
   </dd>
 </dl>
@@ -448,7 +520,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>liste_piece_detruire<
 <p>Renvoie la Piece suivante de la Piece. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">La</td><td>Piece* dont on veut récupérer la Piece* suivante </td></tr>
+    <tr><td class="paramname">p</td><td>La Piece* dont on veut récupérer la Piece* suivante </td></tr>
   </table>
   </dd>
 </dl>

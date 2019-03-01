@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y',['y',['../structcarre.html#a5017517cb136670e9993efe8b6b91c8b',1,'carre']]]
+  ['prec',['prec',['../structpiece.html#a91811cbe13acb5a84029afd8ab8d9b38',1,'piece::prec()'],['../structjoueur.html#a160f732197c2542736174f6698e4e25e',1,'joueur::prec()']]]
 ];

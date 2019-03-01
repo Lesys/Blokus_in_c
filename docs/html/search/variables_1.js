@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['prec',['prec',['../structpiece.html#a91811cbe13acb5a84029afd8ab8d9b38',1,'piece']]]
+  ['couleur',['couleur',['../structjoueur.html#a12a96cd097c1f3954eae7f6b80045458',1,'joueur']]]
 ];
