@@ -1,9 +1,23 @@
+/**
+	*\file gestion_partie.c
+	*\brief Regroupent toutes les fonctions gestion_partie.c
+	*\details Toutes les fonctions qui permetent de gerer une partie de blokus en respectant les règles
+	*\author JODEAU Alexandre
+
+*/
 #include <stdio.h> 
 #include <stdlib.h>
 #include <ctype.h>
 #include "../include/gestion_partie.h"
 #include "../include/affichage.h"
 
+/**
+	*\fn void initialisation_partie(Joueur **)
+	*\brief Initialise une partie
+	*\details Initialise une partie, crée une liste de n joueur [2-4]
+	*On Detruit  la liste de Joueur si elle existe déjà et en recrée une après
+	*\param Joueur** Pointeur sur Joueur * pour modifier directement le Joueur
+*/
 void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 	int nb_joueur=-1;
 	char c;
@@ -24,6 +38,16 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	*j=joueur_liste_creation(nb_joueur);
 }
 
+
+/**
+	*\fn void initialisation_manche(Couleur ,Joueur **)
+	*\brief Initialise une manche
+	*\details Permets de réinitialisé le plateau de jeu et une liste de piece
+	*d'un joueur
+	*\param Couleur[][] Plateau de jeu a reinitialiser a 0
+	*\param Joueur** Pointeur sur Joueur * pour reinitialiser la liste de piece pour pouvoir rejouer
+*/
+
 void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	int i,x;
 
@@ -42,8 +66,13 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 
 }
 
-/* Permet de mettre à jour les scores à la fin de la partie */ 
-/* Si le petit carré a été posé en dernier, ajout des points sur le moment de la pose */
+/**
+	*\fn void maj_scores(Joueur **)
+	*\brief Mets a jour le score de la partie
+	*\details Permet de mettre à jour les scores à la fin de la partie 
+	* Si le petit carré a été posé en dernier, ajout des points sur le moment de la pose
+	*\param Joueur** Modifie le score du Joueur
+*/
 
 void maj_scores(Joueur** j) {
 
@@ -66,7 +95,16 @@ void maj_scores(Joueur** j) {
     } while ((*j) != pivot);
 }
 
-/*Vérifie si tous les joueur ont abandonné */
+
+/**
+	*\fn int joueur_abandon(Joueur* j)
+	*\brief Vérifie si tous les joueur ont abandonné 
+	*\details Si tous les joueurs on abandonné, on renvoie 1, sinon on renvoie 0
+	*\param Joueur** Modifie le score du Joueur
+*/
+
+
+
 int joueur_abandon(Joueur* j){
 	Joueur* pivot;
 	pivot=j;
@@ -79,6 +117,20 @@ int joueur_abandon(Joueur* j){
 
 	return (pivot == j && joueur_a_abandonne(j));
 }
+
+
+
+/**
+	*\fn int fin_de_partie(Joueur** j)
+	*\brief Vérifie si c'est vraiment la fin de la partie et réalise les choix a faire 
+	*\details Si le joueur a une liste_vide, on le fait abandonner
+	*Une fois que tous les Joueurs ont abandoné, affiche les résultats et demande a l'utilisateur un choix:
+	*-Recommencez une manche 
+	*-Recommencez une partie
+	*-Quittez le programme
+	*\param Joueur** Pour verifier les valeurs de joueur
+*/
+
 
 /* Affiche les résultats, propose les options de fin de partie et renvoie le résultat correspondant */
 
@@ -117,6 +169,13 @@ int fin_de_partie(Joueur** j){
 	return choix;
 }
 
+/**
+	*\fn Joueur* tour_suivant(Joueur* j)
+	*\brief Appelle le prochain joueur 
+
+	*\param Joueur* Savoir qu'elle est le prochain joueur et l'appelle
+*/
+
 
 /*Appel le prochain joueur à jouer et modifie la liste joueur */
 
@@ -127,6 +186,16 @@ Joueur* tour_suivant(Joueur* j){
 	afficher_str_couleur(joueur_couleur(j), phrase);
 	return j;
 }
+
+
+/**
+	*\fn void jouer_tour(Couleur[][],Joueur**)
+	*\brief Réalise le fonctionnement d'un tour
+	*\details Réalise le fonctionnement d'un tour en respectant les règles du blockus
+	*\param Couleur[][] Plateau de jeu pour posez les pions
+	*\param Joueur** Joueur qui joue actuellement
+*/
+
 
 
 /*Appel toute les fonctions pour réalisé un tour*/
@@ -164,6 +233,15 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 }
 
 
+/**
+	*\fn void jouer_mache(Couleur[][],Joueur*)
+	*\brief Réalise le fonctionnement d'une manche
+	*\details Réalise le fonctionnement d'une manche 
+	*\param Couleur[][] Plateau de jeu pour pouvoir jouer
+	*\param Joueur* La liste de Joueur qui joue durant la manche
+*/
+
+
 int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
 
@@ -187,6 +265,14 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	return choix;
 }
 
+
+/**
+	*\fn void jouer_partie()
+	*\brief Réalise l'appelle de fonction pour jouer une partie
+	*\details Crée une liste de joueur et un plateau de jeu
+	*\puis appelle initalisation_partie et debut_manche
+	*\param Joueur* La liste de Joueur qui joue durant la manche
+*/
 
 
 void jouer_partie(){ /*Appel de toute les fonctions partie */
