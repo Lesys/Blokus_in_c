@@ -1,9 +1,4 @@
 var searchData=
 [
-  ['piece',['piece',['../structpiece.html',1,'']]],
-  ['piece_5fliste_5fcarre',['piece_liste_carre',['../carre_8c.html#ad2737e12ca881a1d070f8a2885d266e1',1,'carre.c']]],
-  ['piece_5fliste_5fcreation',['piece_liste_creation',['../carre_8c.html#a205c4dc3c4ea2b46ad2198a9032a0771',1,'carre.c']]],
-  ['piece_5fprecedent',['piece_precedent',['../carre_8c.html#a5a9d4170b6392e768505a510df50fd6b',1,'carre.c']]],
-  ['piece_5fsuivant',['piece_suivant',['../carre_8c.html#aab9d9a7003a706e5afa85521cdfb4016',1,'carre.c']]],
-  ['prec',['prec',['../structpiece.html#a91811cbe13acb5a84029afd8ab8d9b38',1,'piece::prec()'],['../structjoueur.html#a160f732197c2542736174f6698e4e25e',1,'joueur::prec()']]]
+  ['initialisation_5fpartie',['initialisation_partie',['../gestion__partie_8c.html#a4c0fcfa70d86a6bc292bb5b06537cb62',1,'gestion_partie.c']]]
 ];
