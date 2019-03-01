@@ -135,6 +135,10 @@ int joueur_abandon(Joueur* j){
 	*-Quittez le programme
 	*\param j Liste de tous les joueurs pour vérifier s'ils ont tous abandonné
 	\return Retourne le choix de l'utilisateur (ou 0 s'il reste un joueur en jeu)
+		*-1 Recommence une manche <br>
+		*-2 Recommence une partie <br>
+		*-3 Quitte le programme
+
 */
 
 
@@ -245,8 +249,8 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	*\details Réalise le fonctionnement d'une manche 
 	*\param pl Plateau de jeu pour pouvoir jouer
 	*\param j La liste de Joueur qui joue durant la manche
-	*\return Renvoie le choix des joueurs 
-		*-2 Recommence une partie
+	*\return Renvoie le choix des joueurs <br>
+		*-2 Recommence une partie <br>
 		*-3 Quitte le programme
 */
 
@@ -255,9 +259,9 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
 
 	do{
-			char phrase[50];
-			sprintf(phrase, "\n%s : A toi de jouer\n", joueur_pseudo(j));
-			afficher_str_couleur(joueur_couleur(j), phrase);
+		char phrase[50];
+		sprintf(phrase, "\n%s : A toi de jouer\n", joueur_pseudo(j));
+		afficher_str_couleur(joueur_couleur(j), phrase);
 
 		do{
 			jouer_tour(pl,&j);
