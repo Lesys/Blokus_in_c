@@ -11,7 +11,7 @@ Piece* demander_piece(Joueur* j);
 
 void demander_orientation(Piece* p); /* Affiche les 4 orientations possibles et l'utilisateur choisit 1, 2, 3 ou 4 selon l'orientation voulue */
 
-void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Couleur c); /* Regarde si les coordonnées saisies sont dans le plateau et sur une case non prise. Renvoie les coordonnées dans x et y */
+void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j); /* Regarde si les coordonnées saisies sont dans le plateau et sur une case non prise. Renvoie les coordonnées dans x et y */
 
 int verification_position(Couleur pl[20][20], int x,int y);
 

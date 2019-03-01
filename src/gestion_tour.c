@@ -76,6 +76,13 @@ void afficher_matrice(int matrice[5][5])
 }
 */
 
+/*
+void piece_changer_orientation()
+{
+
+}
+*/
+
 /* Affiche les 4 orientations possibles de la pièce au joueur avec un numéro et attend qu'il entre un numéro */
 /* modifie également les coordonnees relatives des carres constituant la piece une fois l'orientation choisie */
 void demander_orientation(Piece* p)
@@ -175,39 +182,90 @@ int verification_couleur(Couleur pl[20][20], int x, int y, Couleur c)
 
 /* demande au joueur les coordonnees ou il désire jouer sa pièce */
 /* Tant qu'il n'est pas possible de jouer aux coords, redemande des coordonnees valides */
-void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Couleur col)
+void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j)
 {
+  int x_depart;
+  int y_depart;
   int placement = 0;
   Carre* c;
-  int coord_x, coord_y;
+
+  switch(joueur_couleur(j))
+  {
+    case BLEU:
+    x_depart = BLUE_X;
+    y_depart = BLUE_Y;
+    break;
+
+    case JAUNE:
+    x_depart = YELLOW_X;
+    y_depart = YELLOW_Y;
+    break;
+
+    case ROUGE:
+    x_depart = RED_X;
+    y_depart = RED_Y;
+    break;
+
+    case VERT:
+    x_depart = GREEN_X;
+    y_depart = GREEN_Y;
+    break;
+  }
+
   while(!placement)
   {
-    while(!verification_position(pl, coord_x, coord_y))
+    if(joueur_nb_piece_restantes(j) == NB_PIECES)
     {
-      c = piece_liste_carre(pi);
-      printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
-      printf("Entrez le x : ");
-      scanf("%d", &coord_x);
-      printf("Entrez le y : ");
-      scanf("%d", &coord_y);
-      if(!verification_position(pl, coord_x, coord_y))
-        printf("Impossible de placer la piece aux coordonnees indiquees\n");
+      /* A FAIRE verifier si piece ne sort pas du plateau */
+      do
+      {
+        c = piece_liste_carre(pi);
+
+        printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
+        printf("Entrez le x : ");
+        scanf("%d", x);
+        printf("Entrez le y : ");
+        scanf("%d", y);
+
+        if((*x != x_depart) || (*y != y_depart))
+          printf("C'est votre premier tour, vous devez jouer votre piece dans votre coin\n\n");
+
+      } while((*x != x_depart) || (*y != y_depart));
     }
+    else
+    {
+      do
+      {
+        c = piece_liste_carre(pi);
+
+        printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
+        printf("Entrez le x : ");
+        scanf("%d", x);
+        printf("Entrez le y : ");
+        scanf("%d", y);
+
+        if(!verification_position(pl, *x, *y) || !verification_couleur(pl, *x, *y, joueur_couleur(j)))
+          printf("Impossible de placer la piece aux coordonnees indiquees\n");
+
+      } while(!verification_position(pl, *x, *y) || !verification_couleur(pl, *x, *y, joueur_couleur(j)));
+    }
+
     c = carre_get_suiv(c);
-    while(((c != piece_liste_carre(pi)) && verification_position(pl, coord_x, coord_y) && verification_couleur(pl, coord_x, coord_y, col)))
+
+    while(((c != piece_liste_carre(pi)) && verification_position(pl, *x, *y) && verification_couleur(pl, *x, *y, joueur_couleur(j))))
     {
       c = carre_get_suiv(c);
     }
+
     if(c == piece_liste_carre(pi))
       placement = 1;
   }
-  *x = coord_x;
-  *y = coord_y;
 }
 
 void poser_piece(Couleur pl[20][20], Piece* pi, Couleur col, int x, int y)
 {
   Carre* c = piece_liste_carre(pi);
+
   while(c != piece_liste_carre(pi))
   {
     pl[x+carre_get_x(c)][y+carre_get_y(c)] = col;

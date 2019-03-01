@@ -21,7 +21,8 @@ typedef struct piece Piece;
 */
 struct carre {
 	/* Coordonnées x et y par rapport au point de référence d'une pièce */
-	int x, y; /**< Coordonnées x et y d'un Carre (le Carre est en haut à gauche d'un tableau (visuellement)) */
+	int x; /**< Coordonnées x d'un Carre (le Carre est en haut à gauche d'un tableau (visuellement)) */
+	int y; /**< Coordonnées y d'un Carre (le Carre est en haut à gauche d'un tableau (visuellement)) */
 	Carre* suiv; /**< Carre suivant (permet de faire une boucle sur la Piece) */
 
 };
