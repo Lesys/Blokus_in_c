@@ -37,8 +37,7 @@ var NAVTREE =
       [ "Liste des fichiers", "files.html", "files_dup" ],
       [ "Variables globale", "globals.html", [
         [ "Tout", "globals.html", null ],
-        [ "Fonctions", "globals_func.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+        [ "Fonctions", "globals_func.html", null ]
       ] ]
     ] ]
   ] ]
