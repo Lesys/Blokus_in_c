@@ -8,6 +8,10 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <ctype.h>
+#include "../include/commun.h"
+#include "../include/joueur.h"
+#include "../include/affichage.h"
+#include "../include/gestion_tour.h"
 #include "../include/gestion_partie.h"
 #include "../include/affichage.h"
 
@@ -236,7 +240,7 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 
 /**
-	*\fn void jouer_mache(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
+	*\fn void jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
 	*\brief Réalise le fonctionnement d'une manche
 	*\details Réalise le fonctionnement d'une manche 
 	*\param pl Plateau de jeu pour pouvoir jouer

@@ -1,10 +1,16 @@
+/**
+	*\file gestion_partie.h
+	*\brief Prototype de gestion_partie.c
+	*\author JODEAU ALEXANDRE
+*/
+
 #ifndef GESTION_PARTIE_H
 #define GESTION_PARTIE_H
 
-#include "commun.h"
-#include "joueur.h"
-#include "affichage.h"
-//#include "gestion_tour.h"
+#include "../include/commun.h"
+#include "../include/joueur.h"
+#include "../include/affichage.h"
+#include "../include/gestion_tour.h"
 
 
 
