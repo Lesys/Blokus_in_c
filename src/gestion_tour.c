@@ -108,18 +108,40 @@ void demander_orientation(Piece* p)
         scanf("%d", &nb);
         nb--;
     }
-    
     piece_pivoter(nb, c);
 }
 
-int verification_position(Couleur pl[20][20], int x, int y)
+int verification_position(Couleur pl[20][20], int x, int y, Piece* p)
 {
-    return (pl[x][y] == VIDE);
+    Carre* c = piece_liste_carre(p);
+
+    do
+    {
+        if(pl[x+carre_get_x(c)][y+carre_get_y(c)] != VIDE)
+            return 0;
+        c = carre_get_suiv(c);
+    } while(c != piece_liste_carre(p));
+    return 1;
 }
 
-int verification_couleur(Couleur pl[20][20], int x, int y, Couleur c)
+int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p)
 {
-    return ((pl[x-1][y] != c) && (pl[x+1][y] != c) && (pl[x][y-1] != c) && (pl[x][y+1] != c)) && ((pl[x-1][y-1] == c) || (pl[x+1][y-1] == c) || (pl[x-1][y+1] == c) || (pl[x+1][y+1] == c));
+    Carre* c = piece_liste_carre(p);
+    int angle = 0;
+
+    do
+    {
+        if(pl[x+carre_get_x(c) - 1][y+carre_get_y(c)] == col || pl[x+carre_get_x(c) + 1][y+carre_get_y(c)] == col || pl[x+carre_get_x(c)][y+carre_get_y(c) - 1] == col || pl[x+carre_get_x(c)][y+carre_get_y(c) + 1] == col)
+            return 0;
+        if((pl[x-1][y-1] == col) || (pl[x+1][y-1] == col) || (pl[x-1][y+1] == col) || (pl[x+1][y+1] == col))
+            angle = 1;
+        c = carre_get_suiv(c);
+    } while(c != piece_liste_carre(p));
+
+    if(angle)
+        return 1;
+    return 0;
+    /* return ((pl[x-1][y] != c) && (pl[x+1][y] != c) && (pl[x][y-1] != c) && (pl[x][y+1] != c)) && ((pl[x-1][y-1] == c) || (pl[x+1][y-1] == c) || (pl[x-1][y+1] == c) || (pl[x+1][y+1] == c)); */
 }
 
 /* demande au joueur les coordonnees ou il désire jouer sa pièce */
@@ -134,31 +156,85 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
     switch(joueur_couleur(j))
     {
         case BLEU:
-        x_depart = BLUE_X;
-        y_depart = BLUE_Y;
-        break;
+            x_depart = BLUE_X;
+            y_depart = BLUE_Y;
+            break;
 
         case JAUNE:
-        x_depart = YELLOW_X;
-        y_depart = YELLOW_Y;
-        break;
+            x_depart = YELLOW_X;
+            y_depart = YELLOW_Y;
+            break;
 
         case ROUGE:
-        x_depart = RED_X;
-        y_depart = RED_Y;
-        break;
+            x_depart = RED_X;
+            y_depart = RED_Y;
+            break;
 
         case VERT:
-        x_depart = GREEN_X;
-        y_depart = GREEN_Y;
-        break;
+            x_depart = GREEN_X;
+            y_depart = GREEN_Y;
+            break;
+
+        default:
+            break;
     }
 
-    while(!placement)
+    if(joueur_nb_piece_restantes(j) == NB_PIECES)
+    {
+        int coin = 0;
+        Carre* c2;
+
+        while(!coin)
+        {
+            c = piece_liste_carre(pi);
+            c2 = c;
+
+            printf("Vous devez jouer dans votre coin\n");
+            printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
+            printf("Entrez le x : ");
+            scanf("%d", x);
+            printf("Entrez le y : ");
+            scanf("%d", y);
+
+            do
+            {
+                if((*y + carre_get_y(c) == y_depart) && (*x + carre_get_x(c) == x_depart))
+                {
+                    coin = 1;
+                }
+
+                c = carre_get_suiv(c);
+            } while(c != c2);
+        }
+    }
+    else
+    {
+        /* A FAIRE
+        do
+        {*/
+            c = piece_liste_carre(pi);
+
+            printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
+            printf("Entrez le x : ");
+            scanf("%d", x);
+            printf("Entrez le y : ");
+            scanf("%d", y);
+
+            if(!verification_position(pl, *x, *y, pi) || !verification_couleur(pl, *x, *y, joueur_couleur(j), pi))
+            {
+                printf("Impossible de placer la piece aux coordonnees indiquees\n");
+                *x = *y = -1;
+            }
+
+        /*} while(!verification_position(pl, *x, *y) || !verification_couleur(pl, *x, *y, joueur_couleur(j)));*/
+    }
+
+    /*while(!placement)
     {
         if(joueur_nb_piece_restantes(j) == NB_PIECES)
         {
-            /* A FAIRE verifier si piece ne sort pas du plateau */
+            int flag = 0;
+            int coin = 0;
             do
             {
                 c = piece_liste_carre(pi);
@@ -169,10 +245,22 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
                 printf("Entrez le y : ");
                 scanf("%d", y);
 
-                if((*x != x_depart) || (*y != y_depart))
+                c = carre_get_suiv(c);
+
+                while((*y + carre_get_y(c) >= 0) && (*y + carre_get_y(c) < 20) && (*x  + carre_get_x(c) >= 0) && (*x + carre_get_x(c) < 20))
+                {
+                    c = carre_get_suiv(c);
+                    if((*y + carre_get_y(c) == y_depart) && (*x + carre_get_x(c) == x_depart))
+                        coin = 1;
+                }
+
+                if((*y + carre_get_y(c) > 0) && (*y + carre_get_y(c) < 20) && (*x  + carre_get_x(c) > 0) && (*x + carre_get_x(c) < 20))
+                    flag = 1;
+
+                if(coin)
                     printf("C'est votre premier tour, vous devez jouer votre piece dans votre coin\n\n");
 
-            } while((*x != x_depart) || (*y != y_depart));
+            } while(!flag);
         }
         else
         {
@@ -192,27 +280,29 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
             } while(!verification_position(pl, *x, *y) || !verification_couleur(pl, *x, *y, joueur_couleur(j)));
         }
 
-        c = carre_get_suiv(c);
-
-        while(((c != piece_liste_carre(pi)) && verification_position(pl, *x, *y) && verification_couleur(pl, *x, *y, joueur_couleur(j))))
-        {
-            c = carre_get_suiv(c);
-        }
-
         if(c == piece_liste_carre(pi))
             placement = 1;
-    }
+    }*/
 }
 
-void poser_piece(Couleur pl[20][20], Piece* pi, Couleur col, int x, int y)
+void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
 {
     Carre* c = piece_liste_carre(pi);
+    Piece** p = &(j->liste_piece);
+    /*Piece* p = piece_suivant(joueur_liste_piece(j));*/
 
-    while(c != piece_liste_carre(pi))
+    do
     {
-        pl[x+carre_get_x(c)][y+carre_get_y(c)] = col;
+        printf("x : %d\n",x+carre_get_x(c));
+        printf("y : %d\n",y+carre_get_y(c));
+        pl[x+carre_get_x(c)][y+carre_get_y(c)] = joueur_couleur(j);
         c = carre_get_suiv(c);
-    }
+    } while(c != piece_liste_carre(pi));
+
+    while ((*p) != pi)
+        pi = piece_suivant(pi);
+
+    liste_piece_suppr_elem(p);
 }
 
 
