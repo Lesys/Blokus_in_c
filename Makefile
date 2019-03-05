@@ -40,6 +40,12 @@ SONAMECOURT := lib$(LINKNAME).so
 SONAME := $(SONAMECOURT)$(MAJEUR)
 REALNAME := $(SONAME)$(MINEUR)$(CORRECTION)
 
+#Variables pour la confection des executables de test :
+TESTDIR := $(DIRBUILD)/test/
+TESTDIRC := src/
+TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o
+TESSTFICHIERSC = $(TESTOBJETS:.o=.c)
+
 #Options pour les librairies
 libCFLAGS = -shared -fPIC -Wl,-soname,
 libLDFLAGS = -L.
@@ -64,6 +70,9 @@ all: | MOVE
 #Création des dossiers
 MKDIR: $(DIRMAIN)$(PROGRPRINC)
 	-mkdir $(DIRLIB) $(DIROBJ)
+
+TESTMKDIR: 
+	-mkdir $(TESTDIR)
 
 #Fabrication des fichiers objet .o
 $(OBJETS): CFLAGS := $(CFLAGS)
@@ -126,3 +135,10 @@ majDoc:
 	-git add docs/*
 	-git commit -m "Maj doc le $(shell date "+%d/%m/%y à %H:%M:%S")"
 	-git push origin master
+
+#Fabrication des executables de test
+$(TESTOBJETS): CFLAGS := $(CFLAGS)
+$(TESTOBJETS): $(TESTFICHIERSC) TESTMKDIR
+
+#test_joueur: $(TESTOBJETS)
+#	$(CC) :$@ 
