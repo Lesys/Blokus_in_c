@@ -151,11 +151,6 @@ void afficher_choix_orientation(Piece* p) {
     Couleur mp[5][5] = {0};
     Carre * init = piece_liste_carre(p);
     Carre * c = init;
-
-    // Représentation de la pièce dans la matrice
-    do {
-        mp[4 - carre_get_x(c)][carre_get_y(c)] = BLEU;
-    } while ((c = carre_get_suiv(c)) != init);
     
     // Affichage de toutes les orientations de la pièce en une ligne
     for (int i = 0; i < 5; i++) {
@@ -167,26 +162,25 @@ void afficher_choix_orientation(Piece* p) {
                 printf("   ");
             }
 
-            if (n == 1) {
+
+            // Représentation de la pièce dans la matrice
+            do {
+                mp[4 - carre_get_x(c)][carre_get_y(c)] = BLEU;
+            } while ((c = carre_get_suiv(c)) != init);
+
+            // Affichage de la matrice
+            for (int j = 0; j < 5; j++) {
+                afficher_str_couleur(mp[i][j], "██");
+            }
+
+            // Remise à 0 de la matrice
+            for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
-                    afficher_str_couleur(mp[i][j], "██");
+                    mp[i][j] = 0;
                 }
             }
-            else if (n == 2) {
-                for (int j = 0; j < 5; j++) {
-                    afficher_str_couleur(mp[4-i][j], "██");
-                }
-            }
-            else if (n == 3) {
-                for (int j = 0; j < 5; j++) {
-                    afficher_str_couleur(mp[4-i][4-j], "██");
-                }
-            }
-            else if (n == 4) {
-                for (int j = 0; j < 5; j++) {
-                    afficher_str_couleur(mp[i][4-j], "██");
-                }
-            }
+
+            piece_pivoter(1, c);
             printf(" ");
         }
         printf("\n");

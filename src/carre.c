@@ -319,7 +319,13 @@ Piece* piece_liste_creation () {
 	return first;
 }
 
-// Fait pivoter la pièce de nb fois 90°
+/**
+	\fn void piece_pivoter(int nb, Carre * c) {
+	\brief Fait pivoter la pièce de nb fois 90°
+
+	\param nb Nombre de pivots à effectuer
+        \param c Pièce à faire pivoter
+*/
 void piece_pivoter(int nb, Carre * c) {
 
     int i, j;

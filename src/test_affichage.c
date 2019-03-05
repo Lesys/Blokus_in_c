@@ -25,7 +25,7 @@ int main() {
 
     // Test orientations
     printf("\nTest affichage orientations : \n\n");
-    afficher_choix_orientation(piece_suivant(piece_suivant(joueur_liste_piece(j))));
+    afficher_choix_orientation(piece_suivant(piece_suivant(piece_suivant(joueur_liste_piece(j)))));
     
     joueur_free(&j);
 
