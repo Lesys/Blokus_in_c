@@ -1,4 +1,3 @@
-
 #include "../include/gestion_partie.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -18,6 +17,7 @@ int main(){
 		printf("Probleme initialisation_partie renvoie du joueur\n");
 	}
 	printf("TEST %s\n",j->pseudo);
+*/
 
 /* Tour_suivant
 	printf("TEST Tour_suivant\n");
@@ -29,7 +29,7 @@ int main(){
 	j=tour_suivant(j);
 	//REJOUEUR1
 	printf("\nj3 : %s\n",joueur_pseudo(j));
-
+*/
 
 
 /* Maj_score
@@ -38,13 +38,13 @@ int main(){
 	maj_scores(&j);
 	printf("AVANT score %d",joueur_score(j));
 	printf("TEST FIN  maj_score\n");
-
+*/
 
 /*Fin_de_partie
 	printf("TEST DEBUT FIN DE PARTIE\n");
 	printf("%d valeur",fin_de_partie(j));
 	printf("TEST FIN FIN DE PARTIE\n");
-
+*/
 /*Jouer Partie*/
 
 	printf("TEST DEBUT jouer_partie()\n");
