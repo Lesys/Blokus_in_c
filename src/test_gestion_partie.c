@@ -9,7 +9,7 @@ int main(){
 	Joueur* j;
 	j=NULL;
 
-/* Initialisation_partie 
+/* Initialisation_partie
 
 	printf("TEST initialisation_partie\n");
 
@@ -19,7 +19,7 @@ int main(){
 	}
 	printf("TEST %s\n",j->pseudo);
 
-/* Tour_suivant 
+/* Tour_suivant
 	printf("TEST Tour_suivant\n");
 	//AVANT
 	printf("j1 : %s\n",joueur_pseudo(j));
@@ -29,10 +29,10 @@ int main(){
 	j=tour_suivant(j);
 	//REJOUEUR1
 	printf("\nj3 : %s\n",joueur_pseudo(j));
-	
 
 
-/* Maj_score 
+
+/* Maj_score
 	printf("TEST DEBUT  maj_score\n");
 	printf("AVANT score %d",joueur_score(j));
 	maj_scores(&j);
@@ -61,5 +61,3 @@ int main(){
 
 	return 0;
 }
-
-
