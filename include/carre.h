@@ -78,6 +78,8 @@ Piece* piece_precedent(Piece*);
 /* Crée les NB_PIECES Piece* dans l'ordre et crée une chaine entre elles (avec suiv et prec)*/
 Piece* piece_liste_creation();
 
+void piece_pivoter(int, Carre *);
+
 /* Supprime tous les carrés d'une pièce */
 void liste_piece_suppr_elem(Piece**);
 
