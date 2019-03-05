@@ -17,7 +17,7 @@
 
 /**
 	*\fn void initialisation_partie(Joueur **j)
-	*\details Initialise une partie, crée une liste de n Joueur [2-4].
+	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
 	* Si la liste existe, on la supprime puis on en crée une autre.
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
 */
@@ -216,32 +216,44 @@ Joueur* tour_suivant(Joueur* j){
 
 /*Appel toute les fonctions pour réalisé un tour*/
 void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int x,y;
+	int x= 0 , y = 0, a;
 	if(joueur_a_abandonne(*j)){
-		printf("Ce joueur à abandonne\n");
+		printf("\n Ce joueur à abandonne\n");
 		*j=tour_suivant(*j);
 	}
 	else{
-		/*Carre * piece = demander_piece(j);
-		demander_orientation(piece);
-		choisir_coordonee(pl[20][20],piece,&x,&y);
-		poser_piece(pl,piece,joueur_couleur(j),x,y,o);
+
 		afficher_plateau(pl);
-		*/
-
-		carre_afficher(piece_liste_carre(joueur_liste_piece(*j)));
-
-		printf("Saisir si vous posez une piece [1] ou non [0] pour abandonnez\n");
-		scanf("%d",&x);
-		if(!x){
-			printf("Vous avez abandonne\n");
+		
+		printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
+		scanf("%d",&a);
+		if(!a){
+			printf("Vous avez abandonné\n");
 			joueur_abandonne(*j);
 		}
+		else {
 
-		liste_piece_suppr_elem(&((*j)->liste_piece));
+			do{
+				if(x == -1 && y == -1){
+					printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
+					scanf("%d",&a);
+					if(!a){
+						printf("Vous avez abandonné\n");
+						joueur_abandonne(*j);
+					}
+				}
 
+				if(!joueur_a_abandonne(*j)){
+					Carre * piece = demander_piece(j);
+					demander_orientation(piece);
+					choisir_coordonee(pl,piece,&x,&y);
+				}
+			} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
 
-		*j=tour_suivant(*j);
+			poser_piece(pl,piece,j,x,y);o
+
+			*j=tour_suivant(*j);
+		}
 	}
 }
 
