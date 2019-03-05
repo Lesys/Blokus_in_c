@@ -46,7 +46,6 @@ void afficher_str_couleur(Couleur couleur, char * str) {
             printf("%s", str);
             printf(FIN_COULEUR);
             break;
-        case VIDE:
         default:
             printf("  ");
     }
@@ -222,6 +221,9 @@ void afficher_scores(Joueur * j) {
                 break;
             case VERT:
                 printf(COULEUR_VERT);
+                break;
+            default:
+                break;
         }
         int marges = (TAILLE_PSEUDO - strlen(joueur_pseudo(j))) / 2;
         int decalage = strlen(joueur_pseudo(j))%2;
@@ -307,6 +309,9 @@ void afficher_resultats(Joueur* j) {
                 break;
             case VERT:
                 printf(COULEUR_VERT);
+                break;
+            default:
+                break;
         }
 
         // Gestion des égalités
