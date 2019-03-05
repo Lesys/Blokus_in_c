@@ -15,7 +15,7 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
 
 int verification_position(Couleur pl[20][20], int x,int y);
 
-void poser_piece(Couleur pl[20][20], Piece* pi, Couleur c, int x, int y); /* Pose la pièce sur le plateau (si possible) et supprime la pièce de la liste du joueur. Si impossible de poser la pièce (car les autres cases sont prises) ==> renvoie 0. Sinon, autre chose */
+void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y); /* Pose la pièce sur le plateau (si possible) et supprime la pièce de la liste du joueur. Si impossible de poser la pièce (car les autres cases sont prises) ==> renvoie 0. Sinon, autre chose */
 
 void initialiser_matrice(int matrice[5][5]);
 

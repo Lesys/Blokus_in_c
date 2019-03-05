@@ -13,6 +13,7 @@
 #include "../include/carre.h"
 #include "../include/piece.h"
 #include "../include/commun.h"
+#include "../include/gestion_tour.h"
 
 /* Procédures d'accès pour un carré */
 
@@ -316,6 +317,74 @@ Piece* piece_liste_creation () {
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 
 	return first;
+}
+
+// Fait pivoter la pièce de nb fois 90°
+void piece_pivoter(int nb, Carre * c) {
+
+    int i, j;
+    int min_x;
+    int min_y;
+    Carre * c2 = c;
+
+    /* Pour chaque orientation, on tourne la pièce de 90° un certain nombre de fois
+         Orientation 1 : 0°
+         Orientation 2 : 90°
+         Orientation 3 : 180°
+         Orientation 4 : 270°
+    */
+    while (nb > 0)
+    {
+        int initiale[5][5];
+        initialiser_matrice(initiale);
+        affecter_matrice(initiale, c);
+        int finale[5][5];
+        initialiser_matrice(finale);
+
+        /* Modification des coordonnées des carres de la pièce dans une matrice temporaire */
+        for(i = 0; i < 5; i++)
+        {
+            for(j = 0; j < 5; j++)
+            {
+                if (initiale[i][j])
+                {
+                    finale[4 - j][i] = 1;
+                }
+            }
+        }
+
+        min_x = 5;
+        min_y = 5;
+
+        /* On calcul les coordonnees minimales des carres constituant la pièce */
+        for(i = 0; i < 5; i++)
+        {
+            for(j = 0; j < 5; j++)
+            {
+                if(finale[i][j])
+                {
+                    if(i < min_x)
+                        min_x = i;
+
+                    if(j < min_y)
+                        min_y = j;
+
+                    c->x = i;
+                    c->y = j;
+                    c = carre_get_suiv(c);
+                }
+            }
+        }
+
+        c = c2;
+
+        /* On réaffecte les coordonnees minimales des carres constituant la pièce de sorte que x et y >= 0 (On ramène la pièce dans le coin inférieur gauche) */
+        do {
+            c->x -= min_x;
+            c->y -= min_y;
+        } while ((c = carre_get_suiv(c)) != c2);
+        nb--;
+    }
 }
 
 /* Supprime la "pos"ième pièce (si elle n'est pas NULL) */

@@ -1,5 +1,6 @@
 #include "../include/gestion_tour.h"
 #include "../include/affichage.h"
+#include "../include/carre.h"
 
 #include "stdio.h"
 #include "stdlib.h"
@@ -107,67 +108,7 @@ void demander_orientation(Piece* p)
         scanf("%d", &nb);
         nb--;
     }
-
-    int i, j;
-
-    /* Pour chaque orientation, on tourne la pièce de 90° un certain nombre de fois
-         Orientation 1 : 0°
-         Orientation 2 : 90°
-         Orientation 3 : 180°
-         Orientation 4 : 270°
-    */
-    for(; nb > 0; nb--)
-    {
-        int initiale[5][5];
-        initialiser_matrice(initiale);
-        affecter_matrice(initiale, c);
-        int finale[5][5];
-        initialiser_matrice(finale);
-
-        /* Modification des coordonnées des carres de la pièce dans une matrice temporaire */
-        for(i = 0; i < 5; i++)
-        {
-            for(j = 0; j < 5; j++)
-            {
-                if (initiale[i][j])
-                {
-                    finale[4 - j][i] = 1;
-                }
-            }
-        }
-
-        min_x = 5;
-        min_y = 5;
-
-        /* On calcul les coordonnees minimales des carres constituant la pièce */
-        for(i = 0; i < 5; i++)
-        {
-            for(j = 0; j < 5; j++)
-            {
-                if(finale[i][j])
-                {
-                    if(i < min_x)
-                        min_x = i;
-
-                    if(j < min_y)
-                        min_y = j;
-
-                    c->x = i;
-                    c->y = j;
-                    c = carre_get_suiv(c);
-                }
-            }
-        }
-
-        c = piece_liste_carre(p);
-        Carre* c2 = c;
-
-        /* On réaffecte les coordonnees minimales des carres constituant la pièce de sorte que x et y >= 0 (On ramène la pièce dans le coin inférieur gauche) */
-        do {
-            c->x -= min_x;
-            c->y -= min_y;
-        } while ((c = carre_get_suiv(c)) != c2);
-    }
+    piece_pivoter(nb, c);
 }
 
 int verification_position(Couleur pl[20][20], int x, int y)
@@ -242,7 +183,27 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
                 c = carre_get_suiv(c);
             } while(c != c2);
         }
+    }
+    else
+    {
+        /* A FAIRE
+        do
+        {*/
+            c = piece_liste_carre(pi);
 
+            printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
+            printf("Entrez le x : ");
+            scanf("%d", x);
+            printf("Entrez le y : ");
+            scanf("%d", y);
+
+            if(!verification_position(pl, *x, *y) || !verification_couleur(pl, *x, *y, joueur_couleur(j)))
+            {
+                printf("Impossible de placer la piece aux coordonnees indiquees\n");
+                *x = *y = -1;
+            }
+
+        /*} while(!verification_position(pl, *x, *y) || !verification_couleur(pl, *x, *y, joueur_couleur(j)));*/
     }
 
     /*while(!placement)
@@ -301,15 +262,22 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
     }*/
 }
 
-void poser_piece(Couleur pl[20][20], Piece* pi, Couleur col, int x, int y)
+void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
 {
     Carre* c = piece_liste_carre(pi);
+    Piece** p = &(j->liste_piece);
+    /*Piece* p = piece_suivant(joueur_liste_piece(j));*/
 
-    while(c != piece_liste_carre(pi))
+    do
     {
-        pl[x+carre_get_x(c)][y+carre_get_y(c)] = col;
+        pl[x+carre_get_x(c)][y+carre_get_y(c)] = joueur_couleur(j);
         c = carre_get_suiv(c);
-    }
+    } while(c != piece_liste_carre(pi));
+
+    while ((*p) != pi)
+        pi = piece_suivant(pi);
+
+    liste_piece_suppr_elem(p);
 }
 
 

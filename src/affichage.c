@@ -46,7 +46,6 @@ void afficher_str_couleur(Couleur couleur, char * str) {
             printf("%s", str);
             printf(FIN_COULEUR);
             break;
-        case VIDE:
         default:
             printf("  ");
     }
@@ -64,7 +63,7 @@ void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
         printf("%3d ", TAILLE_PLATEAU - i);
         for (int j = 0; j < TAILLE_PLATEAU; j++) {
-            afficher_str_couleur(pl[i][j], "██");
+            afficher_str_couleur(pl[TAILLE_PLATEAU - i - 1][j], "██");
         }
         printf("\n");
     }
@@ -222,6 +221,9 @@ void afficher_scores(Joueur * j) {
                 break;
             case VERT:
                 printf(COULEUR_VERT);
+                break;
+            default:
+                break;
         }
         int marges = (TAILLE_PSEUDO - strlen(joueur_pseudo(j))) / 2;
         int decalage = strlen(joueur_pseudo(j))%2;
@@ -307,6 +309,9 @@ void afficher_resultats(Joueur* j) {
                 break;
             case VERT:
                 printf(COULEUR_VERT);
+                break;
+            default:
+                break;
         }
 
         // Gestion des égalités
