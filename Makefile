@@ -45,7 +45,7 @@ TESTDIR := $(DIRBUILD)test/
 TESTDIRC := src/
 TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o
 TESTFICHIERSC = $(TESTOBJETS:.o=.c)
-TESTEXEC = $(TESTOBJETS:.o=.exe)
+TESTEXEC = $(TESTOBJETS:%.o=%)
 #TESTSTATIC = test_blokus.static
 TESTlibSTATIC := test_lib$(LINKNAME).a
 TESTstaticLDLIBS := -l:$(TESTlibSTATIC)
@@ -170,4 +170,4 @@ $(TESTlibSTATIC): $(TESTlibSTATIC)($(OBJETS))
 $(TESTEXEC): LDFLAGS := $(staticLDFLAGS)
 $(TESTEXEC): LDLIBS := $(staticLDLIBS)
 $(TESTEXEC): $(DIRTEST)$(TESTOBJETS) $(libSTATIC)
-	$(CC) -o $@ $(@:.exe=.o) $(staticLDFLAGS) $(staticLDLIBS)
+	$(CC) -o $@ $@.o $(staticLDFLAGS) $(staticLDLIBS)
