@@ -44,7 +44,10 @@ REALNAME := $(SONAME)$(MINEUR)$(CORRECTION)
 TESTDIR := $(DIRBUILD)/test/
 TESTDIRC := src/
 TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o
-TESSTFICHIERSC = $(TESTOBJETS:.o=.c)
+TESTFICHIERSC = $(TESTOBJETS:.o=.c)
+TESTEXEC = $(TESTOBJETS:.o=.exe)
+#TESTSTATIC = test_blokus.static
+TESTlibSTATIC := test_lib$(LINKNAME).a
 
 #Options pour les librairies
 libCFLAGS = -shared -fPIC -Wl,-soname,
@@ -65,18 +68,15 @@ staticLDLIBS := -l:$(libSTATIC)
 
 #Conception du Makefile :
 #Execution du programme en entier
-all: | MOVE
+all: | MKDIR MOVE
 
 #Création des dossiers
 MKDIR: $(DIRMAIN)$(PROGRPRINC)
 	-mkdir $(DIRLIB) $(DIROBJ)
 
-TESTMKDIR: 
-	-mkdir $(TESTDIR)
-
 #Fabrication des fichiers objet .o
 $(OBJETS): CFLAGS := $(CFLAGS)
-$(OBJETS): $(FICHIERSC) MKDIR
+$(OBJETS): $(FICHIERSC)
 
 #Fabrication du fichier objet main.o
 $(PROGRPRINC): LDFLAGS := $(CFLAGS)
@@ -128,7 +128,7 @@ cleanNewDir:
 clearScreen:
 	-clear
 
-#Met à jour et la push sur le git distant
+#Mets à jour et la push sur le git distant
 majDoc:
 	-git pull
 	-doxygen
@@ -136,9 +136,41 @@ majDoc:
 	-git commit -m "Maj doc le $(shell date "+%d/%m/%y à %H:%M:%S")"
 	-git push origin master
 
-#Fabrication des executables de test
+
+##################### FICHIERS DE TEST #####################
+
+#Lancement des directives pour la création des TEST
+test: | TESTMOVE
+
+#Move les fichiers dans leur dossier respectif : .so .a dans le dossier lib. .o dans le dossier bin. Les exécutables de test dans le dossier build
+TESTMOVE: $(TESTEXEC)
+	-mv *test* ./$(DIRLIB)
+	-mv *Test* ./$(DIRBUILD)
+	-mv $(DIRMAIN)*.o $(DIRLIB)*.o *.o ./$(DIROBJ)
+
+TESTMKDIR: 
+	-mkdir $(DIRLIB) $(DIROBJ)
+	-mkdir $(TESTDIR)
+
+#Fabrication des executables de TEST
 $(TESTOBJETS): CFLAGS := $(CFLAGS)
 $(TESTOBJETS): $(TESTFICHIERSC) TESTMKDIR
 
 #test_joueur: $(TESTOBJETS)
 #	$(CC) :$@ 
+
+#Fabrication du fichier objet main.o
+#$(TESTOBJETS): LDFLAGS := $(CFLAGS)
+
+#Règle pour appeler la conception de l'archive de TEST
+$(TESTlibSTATIC): $(TESTlibSTATIC)($(OBJETS))
+
+#Conception de l'archive pour la bibliothèque statique de TEST
+#$(TESTlibSTATIC)($(OBJETS)): ARFLAGS := $(ARFLAGS)
+#$(TESTlibSTATIC)($(OBJETS)): $(OBJETS) $(TESTOBJETS)
+
+#Génération des exécutables de TEST
+$(TESTEXEC): LDFLAGS := $(staticLDFLAGS)
+$(TESTEXEC): LDLIBS := $(staticLDLIBS)
+$(TESTEXEC): $(DIRTEST)$(TESTEXEC) $(libSTATIC)
+	$(CC) -o $@ $(DIRTEST)$(TESTEXEC) $(staticLDFLAGS) $(staticLDLIBS)
