@@ -295,6 +295,7 @@ void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
 {
     Carre* c = piece_liste_carre(pi);
     Piece** p = &(j->liste_piece);
+    
     /*Piece* p = piece_suivant(joueur_liste_piece(j));*/
 
     do
@@ -304,7 +305,7 @@ void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
     } while(c != piece_liste_carre(pi));
 
     while ((*p) != pi)
-        pi = piece_suivant(pi);
+        p = piece_suivant(p);
 
     liste_piece_suppr_elem(p);
 }
