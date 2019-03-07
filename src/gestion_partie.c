@@ -217,6 +217,7 @@ Joueur* tour_suivant(Joueur* j){
 /*Appel toute les fonctions pour réalisé un tour*/
 void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int x= 0 , y = 0, a;
+	Piece* piece;
 	if(joueur_a_abandonne(*j)){
 		printf("\n Ce joueur à abandonne\n");
 		*j=tour_suivant(*j);
@@ -244,13 +245,13 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 				}
 
 				if(!joueur_a_abandonne(*j)){
-					Carre * piece = demander_piece(j);
+					piece = demander_piece(*j);
 					demander_orientation(piece);
-					choisir_coordonee(pl,piece,&x,&y);
+					choisir_coordonnee(pl,piece,&x,&y,*j);
 				}
 			} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
 
-			poser_piece(pl,piece,j,x,y);o
+			poser_piece(pl,piece,*j,x,y);
 
 			*j=tour_suivant(*j);
 		}
