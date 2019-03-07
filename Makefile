@@ -17,8 +17,8 @@ VPATH = lib:build:bin:src:include
 #Variables pour la confection de la librairie :
 #Options pour les lignes de code faites pour la confection des fichiers objets
 DIROBJ := bin/
-CFLAGS += -fPIC -Wall
-OBJETS = gestion_tour.o gestion_partie.o
+CFLAGS += -fPIC -Wall -std=c99
+OBJETS = gestion_tour.o gestion_partie.o joueur.o carre.o affichage.o couleur.o piece.o
 FICHIERSC = $(OBJETS:.o=.c)
 
 #Nom du programme principal
@@ -41,13 +41,14 @@ SONAME := $(SONAMECOURT)$(MAJEUR)
 REALNAME := $(SONAME)$(MINEUR)$(CORRECTION)
 
 #Variables pour la confection des executables de test :
-TESTDIR := $(DIRBUILD)/test/
+TESTDIR := $(DIRBUILD)test/
 TESTDIRC := src/
 TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o
 TESTFICHIERSC = $(TESTOBJETS:.o=.c)
 TESTEXEC = $(TESTOBJETS:.o=.exe)
 #TESTSTATIC = test_blokus.static
 TESTlibSTATIC := test_lib$(LINKNAME).a
+TESTstaticLDLIBS := -l:$(TESTlibSTATIC)
 
 #Options pour les librairies
 libCFLAGS = -shared -fPIC -Wl,-soname,
@@ -144,20 +145,16 @@ test: | TESTMOVE
 
 #Move les fichiers dans leur dossier respectif : .so .a dans le dossier lib. .o dans le dossier bin. Les exécutables de test dans le dossier build
 TESTMOVE: $(TESTEXEC)
-	-mv *test* ./$(DIRLIB)
-	-mv *Test* ./$(DIRBUILD)
 	-mv $(DIRMAIN)*.o $(DIRLIB)*.o *.o ./$(DIROBJ)
+	-mv *test* *Test* ./$(TESTDIR)/
 
-TESTMKDIR: 
-	-mkdir $(DIRLIB) $(DIROBJ)
+TESTMKDIR:
+	-mkdir $(DIRLIB) $(DIROBJ) $(DIRBUILD)
 	-mkdir $(TESTDIR)
 
 #Fabrication des executables de TEST
 $(TESTOBJETS): CFLAGS := $(CFLAGS)
 $(TESTOBJETS): $(TESTFICHIERSC) TESTMKDIR
-
-#test_joueur: $(TESTOBJETS)
-#	$(CC) :$@ 
 
 #Fabrication du fichier objet main.o
 #$(TESTOBJETS): LDFLAGS := $(CFLAGS)
@@ -172,5 +169,5 @@ $(TESTlibSTATIC): $(TESTlibSTATIC)($(OBJETS))
 #Génération des exécutables de TEST
 $(TESTEXEC): LDFLAGS := $(staticLDFLAGS)
 $(TESTEXEC): LDLIBS := $(staticLDLIBS)
-$(TESTEXEC): $(DIRTEST)$(TESTEXEC) $(libSTATIC)
-	$(CC) -o $@ $(DIRTEST)$(TESTEXEC) $(staticLDFLAGS) $(staticLDLIBS)
+$(TESTEXEC): $(DIRTEST)$(TESTOBJETS) $(libSTATIC)
+	$(CC) -o $@ $(@:.exe=.o) $(staticLDFLAGS) $(staticLDLIBS)
