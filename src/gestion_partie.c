@@ -233,6 +233,7 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 			joueur_abandonne(*j);
 		}
 		else {
+			Piece* piece;
 
 			do{
 				if(x == -1 && y == -1){
@@ -306,8 +307,8 @@ void jouer_partie(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	do{
-
 		initialisation_partie(&j);
+		initialisation_manche(pl, &j);
 
 	} while(jouer_manche(pl,j)== 2);
 	joueur_liste_detruire(&j);
