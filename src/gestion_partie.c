@@ -5,7 +5,7 @@
 	*\author JODEAU Alexandre
 
 */
-#include <stdio.h> 
+#include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include "../include/commun.h"
@@ -46,7 +46,7 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	*\fn void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
 	*\brief Initialise une manche.
 	*\details Permets de réinitialisé le plateau de jeu et une liste de piece d'un Joueur.
-	*\param pl Plateau de jeu à vider. 
+	*\param pl Plateau de jeu à vider.
 	*\param j Pointeur sur une liste de joueur afin de reinitialiser la liste de piece de chaque Joueur.
 */
 
@@ -73,7 +73,7 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 	*\details Permets de mettre à jour les scores à la fin de la partie: <br>
 	* +15 si le Joueur à poser toute ces Pieces. <br>
 	* -1  pour chaque carre d'une Piece.
-	*\param j Prends une liste de Joueur. 
+	*\param j Prends une liste de Joueur.
 */
 
 void maj_scores(Joueur** j) {
@@ -181,8 +181,8 @@ int fin_de_partie(Joueur** j){
 
 	} while(!isdigit(c) || choix < 1 || choix > 3);
 
-	if(choix == 3) 
-		afficher_resultats(*j);	
+	if(choix == 3)
+		afficher_resultats(*j);
 	return choix;
 }
 
@@ -190,7 +190,7 @@ int fin_de_partie(Joueur** j){
 	*\fn Joueur* tour_suivant(Joueur* j)
 	*\brief Passe au prochain Joueur.
 	*\param j Joueur actuel.
-	*\return Renvoie le prochain Joueur. 
+	*\return Renvoie le prochain Joueur.
 */
 
 
@@ -217,6 +217,7 @@ Joueur* tour_suivant(Joueur* j){
 /*Appel toute les fonctions pour réalisé un tour*/
 void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int x= 0 , y = 0, a;
+	Piece* piece;
 	if(joueur_a_abandonne(*j)){
 		printf("\n Ce joueur à abandonne\n");
 		*j=tour_suivant(*j);
@@ -224,7 +225,7 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	else{
 
 		afficher_plateau(pl);
-		
+
 		printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
 		scanf("%d",&a);
 		if(!a){
@@ -232,10 +233,10 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 			joueur_abandonne(*j);
 		}
 		else {
-			Piece* piece;
 
 			do{
 				if(x == -1 && y == -1){
+					piece=NULL;
 					printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
 					scanf("%d",&a);
 					if(!a){
