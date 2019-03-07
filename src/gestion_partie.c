@@ -232,6 +232,7 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 			joueur_abandonne(*j);
 		}
 		else {
+			Piece* piece;
 
 			do{
 				if(x == -1 && y == -1){
@@ -244,13 +245,13 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 				}
 
 				if(!joueur_a_abandonne(*j)){
-					Carre * piece = demander_piece(j);
+					piece = demander_piece(*j);
 					demander_orientation(piece);
-					choisir_coordonee(pl,piece,&x,&y);
+					choisir_coordonnee(pl,piece,&x,&y,*j);
 				}
 			} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
 
-			poser_piece(pl,piece,j,x,y);o
+			poser_piece(pl,piece,*j,x,y);
 
 			*j=tour_suivant(*j);
 		}
@@ -305,8 +306,8 @@ void jouer_partie(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	do{
-
 		initialisation_partie(&j);
+		initialisation_manche(pl, &j);
 
 	} while(jouer_manche(pl,j)== 2);
 	joueur_liste_detruire(&j);
