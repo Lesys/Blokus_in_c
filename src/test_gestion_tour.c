@@ -27,7 +27,10 @@ int main()
     demander_orientation(piece);
     carre_afficher(piece_liste_carre(piece));
     choisir_coordonnee(pl, piece, &x, &y, joueur);
-    poser_piece(pl, piece, joueur, x, y);
+    if(x != -1 || y != -1)
+    	poser_piece(pl, piece, joueur, x, y);
+    choisir_coordonnee(pl, piece, &x, &y, joueur);
+    	poser_piece(pl, piece, joueur, x, y);
     afficher_plateau(pl);
 
     return 0;
