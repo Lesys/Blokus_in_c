@@ -118,12 +118,13 @@ MOVE: $(DYNAMIC) $(STATIC)
 	-mv $(DIRMAIN)*.o $(DIRLIB)*.o *.o ./$(DIROBJ)
 
 #Nettoie les fichiers créés dans le current directory
-clean: cleanNewDir
+clean:
 	-rm *.o *Blokus* *blokus*
+	-rm -R $(DIRBUILD)
 
 #Nettoie les dossiers créés et leur contenu
-cleanNewDir:
-	-rm -R $(DIRLIB) $(DIROBJ) $(DIRBUILD)
+mrProper: clean clearScreen
+	-rm -R $(DIRLIB) $(DIROBJ)
 
 #Nettoie l'écran
 clearScreen:
