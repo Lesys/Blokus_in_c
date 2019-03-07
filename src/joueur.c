@@ -296,13 +296,9 @@ Joueur* joueur_detruire(Joueur** j) {
 	\param j L'adresse du Joueur* qu'on souhaite détruire (détruit TOUS les Joueur)
 */
 void joueur_liste_detruire(Joueur** j) {
-	Joueur* supp;
-	supp = *j;
 
 	while (!joueur_hors_liste(*j)) {
 		(*j) = joueur_detruire(j);
-		/*(*j) = NULL;
-		(*j) = supp;*/
 	}
 
 	(*j) = NULL;
