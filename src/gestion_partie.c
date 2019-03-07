@@ -224,7 +224,6 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	}
 	else{
 
-		afficher_plateau(pl);
 
 		printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
 		scanf("%d",&a);
@@ -244,7 +243,8 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 						joueur_abandonne(*j);
 					}
 				}
-
+				system("clear");
+				afficher_plateau(pl);
 				if(!joueur_a_abandonne(*j)){
 					piece = demander_piece(*j);
 					demander_orientation(piece);
@@ -255,6 +255,8 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 			poser_piece(pl,piece,*j,x,y);
 
 			*j=tour_suivant(*j);
+			afficher_plateau(pl);
+
 		}
 	}
 }
