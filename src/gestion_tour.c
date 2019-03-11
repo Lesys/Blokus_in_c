@@ -115,9 +115,13 @@ int verification_position(Couleur pl[20][20], int x, int y, Piece* p)
     do
     {
         if(pl[x+carre_get_x(c)][y+carre_get_y(c)] != VIDE)
+        {
+            printf("position ko\n");
             return 0;
+        }
         c = carre_get_suiv(c);
     } while(c != piece_liste_carre(p));
+    printf("position ok\n");
     return 1;
 }
 
@@ -129,14 +133,23 @@ int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p
     do
     {
         if(pl[x+carre_get_x(c) - 1][y+carre_get_y(c)] == col || pl[x+carre_get_x(c) + 1][y+carre_get_y(c)] == col || pl[x+carre_get_x(c)][y+carre_get_y(c) - 1] == col || pl[x+carre_get_x(c)][y+carre_get_y(c) + 1] == col)
+        {
+            printf("couleur ko 1\n");
             return 0;
-        if((pl[x-1][y-1] == col) || (pl[x+1][y-1] == col) || (pl[x-1][y+1] == col) || (pl[x+1][y+1] == col))
+        }
+        if((pl[x+carre_get_x(c)-1][y+carre_get_y(c)-1] == col) || (pl[x+carre_get_x(c)+1][y+carre_get_y(c)-1] == col) || (pl[x+carre_get_x(c)-1][y+carre_get_y(c)+1] == col) || (pl[x+carre_get_x(c)+1][y+carre_get_y(c)+1] == col))
+        {
             angle = 1;
+        }
         c = carre_get_suiv(c);
     } while(c != piece_liste_carre(p));
 
     if(angle)
+    {
+        printf("couleur ok\n");
         return 1;
+    }
+    printf("couleur ko 2\n");
     return 0;
     /* return ((pl[x-1][y] != c) && (pl[x+1][y] != c) && (pl[x][y-1] != c) && (pl[x][y+1] != c)) && ((pl[x-1][y-1] == c) || (pl[x+1][y-1] == c) || (pl[x-1][y+1] == c) || (pl[x+1][y+1] == c)); */
 }
@@ -185,8 +198,12 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
             c = piece_liste_carre(pi);
             c2 = c;
 
+            int valide;
+
             do
             {
+                valide = 1;
+
         				printf("Vous devez jouer dans votre coin\n");
         				printf("A quelles coordonnees voulez-vous jouer la pièce ? (1 a 20) :\n");
         				printf("Entrez le x : ");
@@ -195,7 +212,19 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
         				scanf("%d", y);
         				*x = *x - 1;
         				*y = *y - 1;
-        		} while(((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19)));
+
+                do
+                {
+                  if(((*x + carre_get_x(c) < 0) || (*x + carre_get_x(c) > 19)) || ((*y + carre_get_y(c) < 0) || (*y + carre_get_y(c) > 19)))
+                  {
+                    valide = 0;
+                  }
+                  c = carre_get_suiv(c);
+                } while(c != c2);
+
+        		} while((((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19))) || !(valide));
+
+
 
             do
             {
@@ -205,8 +234,8 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
                 }
 
                 c = carre_get_suiv(c);
-            } while((*x + carre_get_x(c) < 0 || *x + carre_get_x(c) > 19 || *y + carre_get_y(c) < 0 || *y + carre_get_y(c) > 19) && c != c2);
-	 }
+            } while(c != c2);
+        }
     }
     else
     {
@@ -214,6 +243,10 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
         do
         {*/
             c = piece_liste_carre(pi);
+            Carre *c2 = c;
+            carre_get_suiv(c);
+
+            int dans_plateau = 1;
 
             do
             {
@@ -223,8 +256,15 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
         				printf("Entrez le y : ");
         				scanf("%d", y);
        					*x = *x - 1;
-					*y = *y - 1;
-            } while(((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19)));
+                *y = *y - 1;
+                while(c != c2)
+                {
+                  if(((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19)))
+                  {
+                    dans_plateau = 0;
+                  }
+                }
+            } while(!dans_plateau);
 
             if(!verification_position(pl, *x, *y, pi) || !verification_couleur(pl, *x, *y, joueur_couleur(j), pi))
             {
