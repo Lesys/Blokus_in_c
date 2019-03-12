@@ -219,8 +219,8 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
 		*x = *x - 1;
 		*y = *y - 1;
 
-                do
-                {
+        do
+        {
 		    /* Si un Carre n'est pas dans le plateau */
 		    if(((*x + carre_get_x(c) < 0) || (*x + carre_get_x(c) > 19)) || ((*y + carre_get_y(c) < 0) || (*y + carre_get_y(c) > 19)))
 		    {
@@ -291,7 +291,9 @@ void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
     } while(c != piece_liste_carre(pi));
 
     while ((*p) != pi)
+    {
         *p = piece_suivant(*p);
+    }
 
 	if (pivot == *p)
 		pivot = NULL;
