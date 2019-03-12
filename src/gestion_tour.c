@@ -1,3 +1,12 @@
+/**
+	\file gestion_tour.c
+	\brief Fichier de fonctions permettant de gérer le tour d'un joueur
+    \details Contient
+	\author RIGUIDEL Hugo
+	\version 1.0
+	\date 12/03/2019
+*/
+
 #include "../include/gestion_tour.h"
 #include "../include/affichage.h"
 #include "../include/carre.h"
@@ -297,6 +306,10 @@ void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
 
 	if (pivot == *p)
 		pivot = NULL;
+
+
+    if(joueur_nb_piece_restantes(j) == 1 && c == carre_get_suiv(c))
+        j->score += 5;
 
     liste_piece_suppr_elem(p);
 
