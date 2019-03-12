@@ -2,4 +2,5 @@
 
 [Documentation du projet](https://lesys.github.io/Blokus_in_c/)
 
-[Fichier partagé contenant nos réflexions sur le projet et la première étape de conception](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet)
+[Conception V1 (console)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet)
+[Conception V2 (ajout sdl)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet-sdl)
