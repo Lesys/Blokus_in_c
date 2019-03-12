@@ -219,6 +219,7 @@ Joueur* tour_suivant(Joueur* j){
 void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int x= 0 , y = 0, a;
 	Piece* piece;
+	char c;
 	if(joueur_a_abandonne(*j)){
 		printf("\n Ce joueur à abandonne\n");
 		*j=tour_suivant(*j);
