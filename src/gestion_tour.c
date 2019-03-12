@@ -86,12 +86,12 @@ void piece_changer_orientation()
 
 /* Affiche les 4 orientations possibles de la pièce au joueur avec un numéro et attend qu'il entre un numéro */
 /* modifie également les coordonnees relatives des carres constituant la piece une fois l'orientation choisie */
-void demander_orientation(Piece* p)
+void demander_orientation(Piece* p, Joueur* j)
 {
     int nb;
     Carre* c = piece_liste_carre(p);
 
-    afficher_choix_orientation(p);
+    afficher_choix_orientation(p, couleur(joueur));
     printf("Dans quelle orientation voulez-vous jouer la pièce ? :\n");
     scanf("%d", &nb);
     nb--;
@@ -101,7 +101,7 @@ void demander_orientation(Piece* p)
     {
         printf("Veuillez entrer une orientation correcte\n");
         printf("Dans quelle orientation voulez-vous jouer la pièce ? :\n");
-        afficher_choix_orientation(p);
+        afficher_choix_orientation(p, );
         scanf("%d", &nb);
         nb--;
     }
@@ -196,6 +196,8 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
 				*x = *x - 1;
 				*y = *y - 1;
 			} while(((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19)));
+
+			printf("test\n");
 
             do
             {
