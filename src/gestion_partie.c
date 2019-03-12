@@ -178,7 +178,7 @@ int fin_de_partie(Joueur** j){
 		printf("1: Recommencez une manche\n");
 		printf("2: Recommencez une partie\n");
 		printf("3: Quittez le programme\n");
-		scanf("%c",&c);
+		scanf(" %c",&c);
 
 		/*Si l'utilisateur ne rentre pas un entier*/
 		if(isdigit(c)){
