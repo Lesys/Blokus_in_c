@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x',['x',['../structcarre.html#a8ac00f1b0d1e18b971e6c57fa400f2ce',1,'carre']]]
+  ['verif_5fnb_5fjoueur',['verif_nb_joueur',['../joueur_8c.html#ae0256bdf5ee38cd7a8a380eb592b1d1b',1,'joueur.c']]]
 ];
