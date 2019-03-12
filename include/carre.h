@@ -86,4 +86,7 @@ void liste_piece_suppr_elem(Piece**);
 /* Supprime une liste de Piece* */
 void liste_piece_detruire(Piece**);
 
+/* Fonction renvoyant le nombre de Carre d'une Piece */
+int piece_nb_carre(Piece*);
+
 #endif

@@ -483,3 +483,24 @@ void liste_piece_detruire(Piece** p) {
 		(*p) = NULL;
 	}
 }*/
+
+/**
+	\fn int piece_nb_carre(Piece*);
+	\brief Renvoie le nombre de Carre d'une Piece
+
+	\param p L'adresse de la Piece* pour laquelle on veut connaître le nombre de Carre
+*/
+int piece_nb_carre(Piece* p) {
+	Carre* c = piece_liste_carre(p);
+	Carre* init = c;
+	int nb = 0;
+
+	/* Si le Carre n'est pas vide, on compte le nombre de Carre */
+	if (!carre_hors_liste(c))
+		do {
+			nb++;
+			init = carre_get_suiv(init);
+		} while (init != c);
+
+	return nb;
+}

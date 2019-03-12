@@ -73,7 +73,7 @@ all: | MKDIR MOVE
 
 #Création des dossiers
 MKDIR: $(DIRMAIN)$(PROGRPRINC)
-	-mkdir $(DIRLIB) $(DIROBJ)
+	-mkdir $(DIRLIB) $(DIROBJ) $(DIRBUILD)
 
 #Fabrication des fichiers objet .o
 $(OBJETS): CFLAGS := $(CFLAGS)
@@ -113,7 +113,8 @@ execution: $(DYNAMIC) MOVE clearScreen
 
 #Move les fichiers dans leur dossier respectif : .so .a dans le dossier lib. .o dans le dossier bin. L'exécutable dans le dossier build
 MOVE: $(DYNAMIC) $(STATIC)
-	-mv *blokus* ./$(DIRLIB)
+	-mv *.a* *.so* ./$(DIRLIB)
+	-mv *blokus* ./$(DIRBUILD)
 	-mv *Blokus* ./$(DIRBUILD)
 	-mv $(DIRMAIN)*.o $(DIRLIB)*.o *.o ./$(DIROBJ)
 
