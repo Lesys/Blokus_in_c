@@ -89,7 +89,13 @@ void maj_scores(Joueur** j) {
         }
 
 	 else {
-            (*j)->score -= joueur_nb_piece_restantes(*j);
+		Piece * p=joueur_liste_piece(*j);
+		Piece * pivot=p;
+		do{
+			(*j)->score -= piece_nb_carre(p);
+			p=piece_suivant(p);
+		} while(p != pivot);
+
         }
 
         *j = joueur_suivant(*j);
@@ -231,7 +237,7 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 				do {
 					printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
-					scanf("%c",&c);
+					scanf(" %c",&c);
 
 					/* Si l'utilisateur ne rentre pas un entier*/
 					if (isdigit(c))
@@ -255,8 +261,8 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 				choisir_coordonnee(pl,piece,&x,&y,*j);
 			}
 		} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
-
-		poser_piece(pl,piece,*j,x,y);
+		if(!(joueur_a_abandonne(*j)))
+			poser_piece(pl,piece,*j,x,y);
 
 //		system("clear");
 		afficher_plateau(pl);
