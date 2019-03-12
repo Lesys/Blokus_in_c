@@ -2,7 +2,9 @@
 
 [Documentation du projet](https://lesys.github.io/Blokus_in_c/)
 
-[Conception V1 (console)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet)
+## Version 1 (console)
+
+[Fichier conception V1 (console)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet)
 
 Implémentation V1:
 
@@ -10,7 +12,9 @@ Implémentation V1:
 
 ![alt text](docs/IMG/gantt_blokus_version_terminal.png)
 
-[Conception V2 (ajout sdl)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet-sdl)
+## Version 2 (sdl)
+
+[Fichier conception V2 (ajout sdl)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet-sdl)
 
 Schémas de l'interface graphique:
 
