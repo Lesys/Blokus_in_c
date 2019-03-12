@@ -139,7 +139,7 @@ void afficher_pieces_dispo(Joueur * j) {
 
 
 /**
- * \fn void afficher_choix_orientation(Piece * p)
+ * \fn void afficher_choix_orientation(Piece * p, Joueur * j)
  * \brief Affiche les orientations possibles pour une pièce
  * \details Affiche les orientations possibles d'une pièce ainsi que des
     numéros pour faciliter le choix d'une orientation
