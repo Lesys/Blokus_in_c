@@ -165,6 +165,19 @@ int verification_position(Couleur pl[20][20], int x, int y, Piece* p)
 
 /* Fonction qui vérifie si aucun Carre de la Couleur du Joueur n'est adjacant aux Carre que le Joueur veut poser
 	et qu'il y a au moins un Carre de la Couleur du Joueur qui est en diagonale d'un Carre que le Joueur veut poser */
+
+/**
+ * \fn int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p)
+ * \brief Vérifie la position des pièces d'une même couleur entre elles
+ * \details Fonction qui vérifie si aucun carré de la couleur du Joueur n'est adjacant aux carrés que le joueur veut
+    poser et qu'il y a au moins un carré de la couleur du Joueur qui est en diagonale d'un carré que le joueur veut
+    poser
+ * \param pl Plateau de jeu
+ * \param x Coordonnée x du carre d'origine de la pièce entrée par le joueur
+ * \param y Coordonnée y du carre d'origine de la pièce entrée par le joueur
+ * \param col Couleur du joueur souhaitant jouer la pièce
+ * \param p Pointeur sur la pièce que l'utilisateur souhaite jouer
+ */
 int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p)
 {
     Carre* c = piece_liste_carre(p);
@@ -206,6 +219,19 @@ int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p
 
 /* Demande au joueur les coordonnees ou il désire jouer sa pièce */
 /* Tant qu'il n'est pas possible de jouer aux coords, redemande des coordonnees valides */
+
+/**
+ * \fn void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j)
+ * \brief Demande au joueur à quelles coordonnées il souhaite jouer la pièce
+ * \details Demande au joueur les coordonnees ou il désire jouer sa pièce
+    Tant qu'il n'est pas possible de jouer aux coords, redemande des coordonnees valides
+    poser
+ * \param pl Plateau de jeu
+ * \param pi Pointeur sur la pièce à placer
+ * \param x Variable dans laquelle stocker la coordonnée x du carre d'origine de la pièce
+ * \param y Variable dans laquelle stocker la coordonnée y du carre d'origine de la pièce
+ * \param j Pointeur sur le joueur choisissant les coordonnees
+ */
 void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j)
 {
     int x_depart;
@@ -325,6 +351,15 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
     }
 }
 
+/**
+ * \fn void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
+ * \brief Pose une pièce
+ * \details Pose la pièce que le joueur a choisi aux coordonnees indiquées
+ * \param pl Plateau de jeu
+ * \param pi Pointeur sur la pièce à poser
+ * \param x Coordonnée x du carre d'origine de la pièce entrée par le joueur
+ * \param y Coordonnée y du carre d'origine de la pièce entrée par le joueur
+ */
 void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
 {
     Carre* c = piece_liste_carre(pi);
