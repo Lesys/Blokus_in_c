@@ -45,7 +45,7 @@ TESTDIR := $(DIRBUILD)test/
 TESTDIRC := src/
 TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o
 TESTFICHIERSC = $(TESTOBJETS:.o=.c)
-TESTEXEC = $(TESTOBJETS:.o=.exe)
+TESTEXEC = $(TESTOBJETS:%.o=%)
 #TESTSTATIC = test_blokus.static
 TESTlibSTATIC := test_lib$(LINKNAME).a
 TESTstaticLDLIBS := -l:$(TESTlibSTATIC)
@@ -118,12 +118,13 @@ MOVE: $(DYNAMIC) $(STATIC)
 	-mv $(DIRMAIN)*.o $(DIRLIB)*.o *.o ./$(DIROBJ)
 
 #Nettoie les fichiers créés dans le current directory
-clean: cleanNewDir
+clean:
 	-rm *.o *Blokus* *blokus*
+	-rm -R $(DIRBUILD)
 
 #Nettoie les dossiers créés et leur contenu
-cleanNewDir:
-	-rm -R $(DIRLIB) $(DIROBJ) $(DIRBUILD)
+mrProper: clean clearScreen
+	-rm -R $(DIRLIB) $(DIROBJ)
 
 #Nettoie l'écran
 clearScreen:
@@ -170,4 +171,4 @@ $(TESTlibSTATIC): $(TESTlibSTATIC)($(OBJETS))
 $(TESTEXEC): LDFLAGS := $(staticLDFLAGS)
 $(TESTEXEC): LDLIBS := $(staticLDLIBS)
 $(TESTEXEC): $(DIRTEST)$(TESTOBJETS) $(libSTATIC)
-	$(CC) -o $@ $(@:.exe=.o) $(staticLDFLAGS) $(staticLDLIBS)
+	$(CC) -o $@ $@.o $(staticLDFLAGS) $(staticLDLIBS)
