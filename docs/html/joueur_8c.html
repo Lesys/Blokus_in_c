@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence du fichier src/joueur.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('joueur_8c.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('joueur_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -129,8 +120,8 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a2e579657aa3877a2c8baedd7b81bd5d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="joueur_8c.html#a2e579657aa3877a2c8baedd7b81bd5d0">joueur_suivant</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:a2e579657aa3877a2c8baedd7b81bd5d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de récupérer le prochain Joueur* à jouer.  <a href="#a2e579657aa3877a2c8baedd7b81bd5d0">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a2e579657aa3877a2c8baedd7b81bd5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75e9e308a43f1456ad657a773647110b"><td class="memItemLeft" align="right" valign="top"><a id="a75e9e308a43f1456ad657a773647110b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_a_abandonne</b> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:a75e9e308a43f1456ad657a773647110b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="joueur_8c.html#a75e9e308a43f1456ad657a773647110b">joueur_a_abandonne</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a75e9e308a43f1456ad657a773647110b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de savoir si le Joueur* a abandonné ou non.  <a href="#a75e9e308a43f1456ad657a773647110b">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a75e9e308a43f1456ad657a773647110b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5e4ec59a7aa1ec721620f5ccbd2489c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="joueur_8c.html#aa5e4ec59a7aa1ec721620f5ccbd2489c">joueur_abandonne</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:aa5e4ec59a7aa1ec721620f5ccbd2489c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fait abandonner un Joueur.  <a href="#aa5e4ec59a7aa1ec721620f5ccbd2489c">Plus de détails...</a><br /></td></tr>
@@ -138,8 +129,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_a_abandonne</b>
 <tr class="memitem:ae0256bdf5ee38cd7a8a380eb592b1d1b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="joueur_8c.html#ae0256bdf5ee38cd7a8a380eb592b1d1b">verif_nb_joueur</a> (int nb)</td></tr>
 <tr class="memdesc:ae0256bdf5ee38cd7a8a380eb592b1d1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le nombre de joueur est correct (avec les variables en DEFINE)  <a href="#ae0256bdf5ee38cd7a8a380eb592b1d1b">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ae0256bdf5ee38cd7a8a380eb592b1d1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b820f5e55fa16f0d016442ee890427a"><td class="memItemLeft" align="right" valign="top"><a id="a1b820f5e55fa16f0d016442ee890427a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restantes</b> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:a1b820f5e55fa16f0d016442ee890427a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="joueur_8c.html#a1b820f5e55fa16f0d016442ee890427a">joueur_nb_piece_restantes</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a1b820f5e55fa16f0d016442ee890427a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie le nombre de Piece qui reste au Joueur passé en paramètre.  <a href="#a1b820f5e55fa16f0d016442ee890427a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1b820f5e55fa16f0d016442ee890427a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a042a81cfa955b796e472e3ad0eac9106"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="joueur_8c.html#a042a81cfa955b796e472e3ad0eac9106">joueur_liste_creation</a> (int nb_joueur,...)</td></tr>
 <tr class="memdesc:a042a81cfa955b796e472e3ad0eac9106"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée la liste des Joueur en fonction du nombre passé en paramètre.  <a href="#a042a81cfa955b796e472e3ad0eac9106">Plus de détails...</a><br /></td></tr>
@@ -164,15 +155,38 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 <tr class="separator:a4ca883adde4e72f552102448bec4ca35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Fichier de fonctions pour accesseurs et de modifications pour un Joueur. </p>
+<div class="textblock"><p>Fichier de fonctions pour accesseurs et de modifications pour un Joueur. </p>
 <dl class="section author"><dt>Auteur</dt><dd>WIDMER Alexis </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>05/03/2019</dd></dl>
 <p>Ce fichier permet d'avoir accès aux attributs d'un Joueur, de le créer ou de le supprimer. </p>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="aa5e4ec59a7aa1ec721620f5ccbd2489c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5e4ec59a7aa1ec721620f5ccbd2489c">&#9670;&nbsp;</a></span>joueur_abandonne()</h2>
+<a class="anchor" id="a75e9e308a43f1456ad657a773647110b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int joueur_a_abandonne </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
+<p>Permet de savoir si le Joueur* a abandonné ou non. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Le Joueur* dont on veut récupérer la valeur d'abandon </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>VRAI si le Joueur* a abandonné, FAUX sinon </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa5e4ec59a7aa1ec721620f5ccbd2489c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -196,9 +210,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a0020969e75c69786a070bbc1110fbf2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0020969e75c69786a070bbc1110fbf2c">&#9670;&nbsp;</a></span>joueur_couleur()</h2>
-
+<a class="anchor" id="a0020969e75c69786a070bbc1110fbf2c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -223,9 +235,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a7b667474a9eeceb7812965f70eed1ae4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b667474a9eeceb7812965f70eed1ae4">&#9670;&nbsp;</a></span>joueur_creation()</h2>
-
+<a class="anchor" id="a7b667474a9eeceb7812965f70eed1ae4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -260,9 +270,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a866621d9d6013850b334ff0147c54614"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a866621d9d6013850b334ff0147c54614">&#9670;&nbsp;</a></span>joueur_detruire()</h2>
-
+<a class="anchor" id="a866621d9d6013850b334ff0147c54614"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -287,9 +295,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a5d0505b82127567db951e3783a35c0cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d0505b82127567db951e3783a35c0cc">&#9670;&nbsp;</a></span>joueur_free()</h2>
-
+<a class="anchor" id="a5d0505b82127567db951e3783a35c0cc"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -313,9 +319,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a63d62a11770b929d7daca7b0c1e20cba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63d62a11770b929d7daca7b0c1e20cba">&#9670;&nbsp;</a></span>joueur_hors_liste()</h2>
-
+<a class="anchor" id="a63d62a11770b929d7daca7b0c1e20cba"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -340,9 +344,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a042a81cfa955b796e472e3ad0eac9106"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a042a81cfa955b796e472e3ad0eac9106">&#9670;&nbsp;</a></span>joueur_liste_creation()</h2>
-
+<a class="anchor" id="a042a81cfa955b796e472e3ad0eac9106"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -377,9 +379,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a4ca883adde4e72f552102448bec4ca35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ca883adde4e72f552102448bec4ca35">&#9670;&nbsp;</a></span>joueur_liste_detruire()</h2>
-
+<a class="anchor" id="a4ca883adde4e72f552102448bec4ca35"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -403,9 +403,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a680d86504373ec80648c642a17624759"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a680d86504373ec80648c642a17624759">&#9670;&nbsp;</a></span>joueur_liste_piece()</h2>
-
+<a class="anchor" id="a680d86504373ec80648c642a17624759"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -430,9 +428,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a142e3967a9549274c18f1bcb5250e42b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a142e3967a9549274c18f1bcb5250e42b">&#9670;&nbsp;</a></span>joueur_liste_reinit()</h2>
-
+<a class="anchor" id="a142e3967a9549274c18f1bcb5250e42b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -456,9 +452,32 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a7827042e56b5aecbc5b4e179a207743f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7827042e56b5aecbc5b4e179a207743f">&#9670;&nbsp;</a></span>joueur_pseudo()</h2>
+<a class="anchor" id="a1b820f5e55fa16f0d016442ee890427a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int joueur_nb_piece_restantes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
+<p>Renvoie le nombre de Piece qui reste au Joueur passé en paramètre. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Le Joueur* dont on veut connaître le nombre de Piece restantes </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le nombre de Piece restantes pour le Joueur* </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7827042e56b5aecbc5b4e179a207743f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -483,9 +502,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a1cfaf534ee36265b68f4533f4f9bb6a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cfaf534ee36265b68f4533f4f9bb6a3">&#9670;&nbsp;</a></span>joueur_score()</h2>
-
+<a class="anchor" id="a1cfaf534ee36265b68f4533f4f9bb6a3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -510,9 +527,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="a2e579657aa3877a2c8baedd7b81bd5d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e579657aa3877a2c8baedd7b81bd5d0">&#9670;&nbsp;</a></span>joueur_suivant()</h2>
-
+<a class="anchor" id="a2e579657aa3877a2c8baedd7b81bd5d0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -537,9 +552,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
 
 </div>
 </div>
-<a id="ae0256bdf5ee38cd7a8a380eb592b1d1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae0256bdf5ee38cd7a8a380eb592b1d1b">&#9670;&nbsp;</a></span>verif_nb_joueur()</h2>
-
+<a class="anchor" id="ae0256bdf5ee38cd7a8a380eb592b1d1b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -572,7 +585,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>joueur_nb_piece_restan
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="joueur_8c.html">joueur.c</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

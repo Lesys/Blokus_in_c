@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
+<title>Blokus in C: Référence du fichier src/gestion_tour.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.8 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('gestion__tour_8c.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier gestion_tour.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier de fonctions permettant de gérer le tour d'un joueur.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &quot;../include/gestion_tour.h&quot;</code><br />
+<code>#include &quot;../include/affichage.h&quot;</code><br />
+<code>#include &quot;../include/carre.h&quot;</code><br />
+<code>#include &quot;stdio.h&quot;</code><br />
+<code>#include &quot;stdlib.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a1e0f3b10e6fd5a4a94f528d2015c6db3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__tour_8c.html#a1e0f3b10e6fd5a4a94f528d2015c6db3">demander_piece</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a1e0f3b10e6fd5a4a94f528d2015c6db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Demande au joueur la pièce qu'il souhaite jouer.  <a href="#a1e0f3b10e6fd5a4a94f528d2015c6db3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1e0f3b10e6fd5a4a94f528d2015c6db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f42fad27ffc54c4c1aad172d2c148a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__tour_8c.html#a5f42fad27ffc54c4c1aad172d2c148a2">initialiser_matrice</a> (int matrice[5][5])</td></tr>
+<tr class="memdesc:a5f42fad27ffc54c4c1aad172d2c148a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation d'une matrice.  <a href="#a5f42fad27ffc54c4c1aad172d2c148a2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5f42fad27ffc54c4c1aad172d2c148a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f410ddaa1402b721a55493d4e86657a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a">affecter_matrice</a> (int matrice[5][5], <a class="el" href="structcarre.html">Carre</a> *c)</td></tr>
+<tr class="memdesc:a8f410ddaa1402b721a55493d4e86657a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction d'initialisation d'une matrice.  <a href="#a8f410ddaa1402b721a55493d4e86657a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8f410ddaa1402b721a55493d4e86657a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2e1a1888c862609d990488b365f4d99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__tour_8c.html#ac2e1a1888c862609d990488b365f4d99">demander_orientation</a> (<a class="el" href="structpiece.html">Piece</a> *p, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:ac2e1a1888c862609d990488b365f4d99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Demande au joueur l'orientation de la pièce qu'il souhaite jouer.  <a href="#ac2e1a1888c862609d990488b365f4d99">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac2e1a1888c862609d990488b365f4d99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae61941a1e0d286755ef50967d185044d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__tour_8c.html#ae61941a1e0d286755ef50967d185044d">verification_position</a> (Couleur pl[20][20], int x, int y, <a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="memdesc:ae61941a1e0d286755ef50967d185044d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si la pièce peut être placée.  <a href="#ae61941a1e0d286755ef50967d185044d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae61941a1e0d286755ef50967d185044d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07a516f9e79e060f91b4b81c0a08bbf8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07a516f9e79e060f91b4b81c0a08bbf8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>verification_couleur</b> (Couleur pl[20][20], int x, int y, Couleur col, <a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="separator:a07a516f9e79e060f91b4b81c0a08bbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb19cecbb94f50afd5e76761d001103e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb19cecbb94f50afd5e76761d001103e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>choisir_coordonnee</b> (Couleur pl[20][20], <a class="el" href="structpiece.html">Piece</a> *pi, int *x, int *y, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="separator:afb19cecbb94f50afd5e76761d001103e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00358da662fcf8a76b416e5fcaa1f94f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00358da662fcf8a76b416e5fcaa1f94f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>poser_piece</b> (Couleur pl[20][20], <a class="el" href="structpiece.html">Piece</a> *pi, <a class="el" href="structjoueur.html">Joueur</a> *j, int x, int y)</td></tr>
+<tr class="separator:a00358da662fcf8a76b416e5fcaa1f94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fichier de fonctions permettant de gérer le tour d'un joueur. </p>
+<p>Contient les fonctions demandant la pièce à jouer, son orientation et ses coordonnées au joueur ainsi que les fonctions de vérification de position et de couleur et de pose de celle-ci </p><dl class="section author"><dt>Auteur</dt><dd>RIGUIDEL Hugo </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>12/03/2019 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a class="anchor" id="a8f410ddaa1402b721a55493d4e86657a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void affecter_matrice </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>matrice</em>[5][5], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structcarre.html">Carre</a> *&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation d'une matrice. </p>
+<p>Fonction affectant une pièce à une matrice en remplissant la matrice de 1 en fonction des coordonnées des carres constituant la pièce </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">matrice</td><td>La matrice à laquelle affecter la pièce </td></tr>
+    <tr><td class="paramname">c</td><td>Le premier carre de la pièce à affecter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ac2e1a1888c862609d990488b365f4d99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void demander_orientation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Demande au joueur l'orientation de la pièce qu'il souhaite jouer. </p>
+<p>Affiche les 4 orientations possibles de la pièce au joueur avec un numéro et attend qu'il entre un numéro. Modifie également les coordonnees relatives des carres constituant la pièce une fois l'orientation choisie </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>Pointeur sur la pièce que le joueur souhaite jouer </td></tr>
+    <tr><td class="paramname">j</td><td>Pointeur sur le joueur devant jouer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1e0f3b10e6fd5a4a94f528d2015c6db3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpiece.html">Piece</a>* demander_piece </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Demande au joueur la pièce qu'il souhaite jouer. </p>
+<p>Affiche les pièces qu'il reste au joueur avec un numéro et lui demande de choisir quelle pièce jouer et attend qu'il entre le numéro </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Pointeur sur le joueur devant choisir sa pièce </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5f42fad27ffc54c4c1aad172d2c148a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initialiser_matrice </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>matrice</em>[5][5]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction d'initialisation d'une matrice. </p>
+<p>Fonction initialisant une matrice de taille 5*5 en la remplissant de 0 </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">matrice</td><td>La matrice à initialiser </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae61941a1e0d286755ef50967d185044d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int verification_position </td>
+          <td>(</td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>pl</em>[20][20], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> *&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si la pièce peut être placée. </p>
+<p>Vérifie si chacun des carrés constituant la pièce peuvent être placés (La case qu'ils occuperont doit être VIDE) </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pl</td><td>Plateau de jeu </td></tr>
+    <tr><td class="paramname">x</td><td>Coordonnée x du carre d'origine de la pièce (coordonnée entrée par l'utilisateur) </td></tr>
+    <tr><td class="paramname">y</td><td>Coordonnée y du carre d'origine de la pièce (coordonnée entrée par l'utilisateur) </td></tr>
+    <tr><td class="paramname">p</td><td>Pointeur sur la pièce que l'utilisateur souhaite jouer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="gestion__tour_8c.html">gestion_tour.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+  </ul>
+</div>
+</body>
+</html>

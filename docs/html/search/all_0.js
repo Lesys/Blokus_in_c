@@ -1,6 +1,7 @@
 var searchData=
 [
   ['abandon',['abandon',['../structjoueur.html#afe6f4297587bcb36619d814d209ee793',1,'joueur']]],
+  ['affecter_5fmatrice',['affecter_matrice',['../gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a',1,'gestion_tour.c']]],
   ['affichage_2ec',['affichage.c',['../affichage_8c.html',1,'']]],
   ['afficher_5fpieces_5fdispo',['afficher_pieces_dispo',['../affichage_8c.html#ade7506941effd14df4d79d3dcd414493',1,'affichage.c']]],
   ['afficher_5fplateau',['afficher_plateau',['../affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9',1,'affichage.c']]],
