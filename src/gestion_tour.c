@@ -1,11 +1,12 @@
 /**
-	\file gestion_tour.c
-	\brief Fichier de fonctions permettant de gérer le tour d'un joueur
-    \details Contient
-	\author RIGUIDEL Hugo
-	\version 1.0
-	\date 12/03/2019
-*/
+ *	\file gestion_tour.c
+ *	\brief Fichier de fonctions permettant de gérer le tour d'un joueur
+ *  \details Contient les fonctions demandant la pièce à jouer, son orientation et ses coordonnées au joueur
+     ainsi que les fonctions de vérification de position et de couleur et de pose de celle-ci
+ *  \author RIGUIDEL Hugo
+ *	\version 1.0
+ *	\date 12/03/2019
+ */
 
 #include "../include/gestion_tour.h"
 #include "../include/affichage.h"
@@ -14,6 +15,13 @@
 #include "stdio.h"
 #include "stdlib.h"
 
+/**
+ * \fn Piece* demander_piece(Joueur* j)
+ * \brief Demande au joueur la pièce qu'il souhaite jouer
+ * \details Affiche les pièces qu'il reste au joueur avec un numéro et lui demande de choisir quelle pièce jouer
+    et attend qu'il entre le numéro
+ * \param j Pointeur sur le joueur devant choisir sa pièce
+ */
 /* Affiche les pièces qu'il reste au joueur avec un numéro et lui demande de choisir quelle pièce jouer et attend qu'il entre le numéro */
 Piece* demander_piece(Joueur* j)
 {
@@ -40,7 +48,12 @@ Piece* demander_piece(Joueur* j)
     return p;
 }
 
-/* Fonction initialisant une matrice de taille 5*5 en la remplissant de 0 */
+/**
+ * \fn void initialiser_matrice(int matrice[5][5])
+ * \brief Fonction d'initialisation d'une matrice
+ * \details Fonction initialisant une matrice de taille 5*5 en la remplissant de 0
+ * \param matrice La matrice à initialiser
+ */
 void initialiser_matrice(int matrice[5][5])
 {
     int i, j;
@@ -54,6 +67,15 @@ void initialiser_matrice(int matrice[5][5])
 
 /* Fonction affectant une pièce à une matrice
      remplit la matrice de 1 en fonction des coordonnées des carres constituant la pièce */
+
+/**
+ * \fn void affecter_matrice(int matrice[5][5], Carre* c)
+ * \brief Fonction d'initialisation d'une matrice
+ * \details Fonction affectant une pièce à une matrice en remplissant la matrice de 1 en fonction des
+    coordonnées des carres constituant la pièce
+ * \param matrice La matrice à laquelle affecter la pièce
+ * \param c Le premier carre de la pièce à affecter
+ */
 void affecter_matrice(int matrice[5][5], Carre* c)
 {
     Carre* c2 = c;
@@ -86,8 +108,14 @@ void afficher_matrice(int matrice[5][5])
 }
 */
 
-/* Affiche les 4 orientations possibles de la pièce au joueur avec un numéro et attend qu'il entre un numéro */
-/* modifie également les coordonnees relatives des carres constituant la piece une fois l'orientation choisie */
+/**
+ * \fn void demander_orientation(Piece* p, Joueur* j)
+ * \brief Demande au joueur l'orientation de la pièce qu'il souhaite jouer
+ * \details Affiche les 4 orientations possibles de la pièce au joueur avec un numéro et attend qu'il entre un numéro.
+    Modifie également les coordonnees relatives des carres constituant la pièce une fois l'orientation choisie
+ * \param p Pointeur sur la pièce que le joueur souhaite jouer
+ * \param j Pointeur sur le joueur devant jouer
+ */
 void demander_orientation(Piece* p, Joueur* j)
 {
     int nb;
@@ -110,6 +138,16 @@ void demander_orientation(Piece* p, Joueur* j)
     piece_pivoter(nb, c);
 }
 
+/**
+ * \fn int verification_position(Couleur pl[20][20], int x, int y, Piece* p)
+ * \brief Vérifie si la pièce peut être placée
+ * \details Vérifie si chacun des carrés constituant la pièce peuvent être placés (La case qu'ils occuperont
+    doit être VIDE)
+ * \param pl Plateau de jeu
+ * \param x Coordonnée x du carre d'origine de la pièce (coordonnée entrée par l'utilisateur)
+ * \param y Coordonnée y du carre d'origine de la pièce (coordonnée entrée par l'utilisateur)
+ * \param p Pointeur sur la pièce que l'utilisateur souhaite jouer
+ */
 int verification_position(Couleur pl[20][20], int x, int y, Piece* p)
 {
     Carre* c = piece_liste_carre(p);
