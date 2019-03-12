@@ -50,9 +50,11 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	*\param j Pointeur sur une liste de joueur afin de reinitialiser la liste de piece de chaque Joueur.
 */
 
+/* Permets de réinitialisé le plateau de jeu et une liste de piece d'un Joueur.*/
+
 void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	int i,x;
-
+	/* Remet les valeurs du tableau à 0*/
 	for(i=0;i < TAILLE_PLATEAU;i++){
 
 		for(x=0;x < TAILLE_PLATEAU;x++){
@@ -61,7 +63,7 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 	}
 
 	joueur_liste_reinit(*j);
-
+	/*Vue que le Blokus commence par le joueur bleu, on remets le pointeur sur le joueur bleu*/
 	while(joueur_couleur(*j) != BLEU)
 		*j=joueur_suivant(*j);
 
@@ -76,6 +78,8 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 	*\param j Prends une liste de Joueur.
 */
 
+/*Permets de mettre à jour les scores à la fin de la partie:*/
+
 void maj_scores(Joueur** j) {
 
     // On garde l'adresse du premier joueur pour
@@ -83,11 +87,11 @@ void maj_scores(Joueur** j) {
 
     Joueur * pivot = *j;
     do {
-
+	/* Si le joueur n'à plus de piece */
         if (joueur_liste_piece(*j) == NULL) {
             (*j)->score += 15;
         }
-
+	/*Alors on enleve -1 pour chaque petit carrée */
 	 else {
 		Piece * p=joueur_liste_piece(*j);
 		Piece * pivot=p;
@@ -113,12 +117,13 @@ void maj_scores(Joueur** j) {
 */
 
 
+/*Vérifie si tous les joueurs ont abandonné.*/
 
 int joueur_abandon(Joueur* j){
 	Joueur* pivot;
 	pivot=j;
 	j=joueur_suivant(j);
-
+	/*Boucle pour savoir si tous les joueurs ont abandonne*/
 	while(pivot != j && joueur_a_abandonne(j)){
 		j=joueur_suivant(j);
 
@@ -149,7 +154,11 @@ int joueur_abandon(Joueur* j){
 
 
 /* Affiche les résultats,mets à jour le score ,propose les options de fin de partie et renvoie le résultat correspondant */
-
+/*Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu):
+		*1 - Recommence une manche.
+		*2 - Recommence une partie.
+		*3 - Quitte le programme.
+*/
 int fin_de_partie(Joueur** j){
 	/*Si le joueur n'a plus de piece dans sa liste, abandonne le joueur automatiquement*/
 	if(joueur_liste_piece(*j) == NULL)
@@ -205,9 +214,11 @@ int fin_de_partie(Joueur** j){
 
 Joueur* tour_suivant(Joueur* j){
 	j=joueur_suivant(j);
+	/*Affichage */
 	char phrase[50];
 	sprintf(phrase, "\n%s : A toi de jouer\n", joueur_pseudo(j));
 	afficher_str_couleur(joueur_couleur(j), phrase);
+
 	return j;
 }
 
@@ -226,15 +237,17 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int x= -1 , y = -1, a;
 	Piece* piece;
 	char c;
+	/*Si le joueur à abandonne, on passe au joueur suivant*/
 	if(joueur_a_abandonne(*j)){
 		printf("\n Ce joueur à abandonne\n");
 		*j=tour_suivant(*j);
 	}
 	else{
+		/*Tant que la piece n'est pas valide ou que le joueur abandonne*/
 		do{
 			if(x == -1 && y == -1){
 				piece=NULL;
-
+				/*Verification saisie clavier de l'utilisateur*/
 				do {
 					printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
 					scanf(" %c",&c);
@@ -244,13 +257,14 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 						a = atoi(&c);
 
 				} while(!isdigit(c) || a < 0 || a > 1);
-
+				/*Si le joueur choisi le choix 0, il abandonne*/
 				if(!a){
 					printf("Vous avez abandonné\n");
 					joueur_abandonne(*j);
 				}
 			}
-//			system("clear");
+			/*Demande la piece, l'orientation et les cordonnee */
+
 			afficher_plateau(pl);
 			if(!joueur_a_abandonne(*j)){
 				piece = demander_piece(*j);
@@ -261,10 +275,10 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 				choisir_coordonnee(pl,piece,&x,&y,*j);
 			}
 		} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
+		/*Si le joueur a abandonne, on ne pose pas la piece */
 		if(!(joueur_a_abandonne(*j)))
 			poser_piece(pl,piece,*j,x,y);
 
-//		system("clear");
 		afficher_plateau(pl);
 
 		*j=tour_suivant(*j);
@@ -283,22 +297,24 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 		*3 - Quitte le programme.
 */
 
+/*Réalise le fonctionnement d'une manche.*/
 
 int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
-
+	/*Tant que le choix de l'utilisateur est different de 1 : voir fin_de_partie*/
 	do{
+		/*Affichage du premier joueur*/
 		char phrase[50];
 		sprintf(phrase, "\n%s : A toi de jouer\n", joueur_pseudo(j));
 		afficher_str_couleur(joueur_couleur(j), phrase);
-
+		/*Boucle de la partie, tant que les utilisateurs ne font pas de choix de parties*/
 		do{
 			jouer_tour(pl,&j);
 			choix=fin_de_partie(&j);
 		} while(!(choix));
 
 
-
+		/*Reinitialise une manche*/
 		initialisation_manche(pl,&j);
 
 
@@ -317,13 +333,16 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 void jouer_partie(){ /*Appel de toute les fonctions partie */
+	/*Creation de la liste de joueur + plateau de jeu*/
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
+	/*Initialise la partie et manche, puis joue la manche tant que les choix des joueur est different de 3*/
 	do{
 		initialisation_partie(&j);
 		initialisation_manche(pl, &j);
 
 	} while(jouer_manche(pl,j)== 2);
+	/*Destruction de la liste de joueur du a l'allocation dynamique */
 	joueur_liste_detruire(&j);
 
 }
