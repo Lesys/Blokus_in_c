@@ -254,10 +254,10 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
 
         do
         {
-			printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
-        	printf("Entrez le x : ");
+		printf("A quelles coordonnees voulez-vous jouer la pièce ? :\n");
+        	printf("Entrez la ligne : ");
         	scanf("%d", x);
-        	printf("Entrez le y : ");
+        	printf("Entrez la colonne : ");
         	scanf("%d", y);
        		*x = *x - 1;
             *y = *y - 1;
