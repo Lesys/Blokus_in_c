@@ -30,7 +30,7 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	printf("Creation de la partie\n");
 	do{
 		printf("Veuillez saisir le nombre de joueur [2 a 4] \n");
-		scanf("%c",&c);
+		scanf(" %c",&c);
 
 		/* Si l'utilisateur ne rentre pas un entier*/
 		if (isdigit(c))
