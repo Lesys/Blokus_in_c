@@ -1,6 +1,6 @@
 var affichage_8c =
 [
-    [ "afficher_choix_orientation", "affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a", null ],
+    [ "afficher_choix_orientation", "affichage_8c.html#a774f342c4bb2576f6b7e7cff62f577b3", null ],
     [ "afficher_pieces_dispo", "affichage_8c.html#ade7506941effd14df4d79d3dcd414493", null ],
     [ "afficher_plateau", "affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9", null ],
     [ "afficher_resultats", "affichage_8c.html#ae57705b3eb9ad9126516ba4ee7f43810", null ],
