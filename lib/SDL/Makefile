@@ -2,14 +2,14 @@
 all: clean compilSDL
 
 clean:
-	rm include -r
-	rm lib -r
-	rm share -r
-	rm bin -r
-	rm SDL2-2.0.9 -r
-	rm SDL2_image-2.0.4 -r
-	rm SDL2_mixer-2.0.4 -r
-	rm SDL2_ttf-2.0.15 -r
+	-rm include -r
+	-rm lib -r
+	-rm share -r
+	-rm bin -r
+	-rm SDL2-2.0.9 -r
+	-rm SDL2_image-2.0.4 -r
+	-rm SDL2_mixer-2.0.4 -r
+	-rm SDL2_ttf-2.0.15 -r
 
 compilSDL:
 	tar xvf SDL2.tar.gz
