@@ -21,11 +21,11 @@
     est "VIDE" ou n'est pas reconnue alors la fonction affiche deux espaces
  * \param couleur Couleur du texte à afficher
  * \param str Chaine à afficher
- */ 
+ */
 void afficher_str_couleur(Couleur couleur, char * str) {
 
     switch(couleur) {
-     
+
         case BLEU:
             printf(COULEUR_BLEU);
             printf("%s", str);
@@ -57,9 +57,9 @@ void afficher_str_couleur(Couleur couleur, char * str) {
  * \details Affiche le plateau de jeu ainsi que les numéros de ligne et de
     colonnes pour mieux se repérer
  * \param pl Matrice de couleur représentant le plateau
- */ 
+ */
 void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
-    
+
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
         printf("%3d ", TAILLE_PLATEAU - i);
         for (int j = 0; j < TAILLE_PLATEAU; j++) {
@@ -79,11 +79,11 @@ void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
 /**
  * \fn void afficher_pieces_dispo(Joueur * j)
  * \brief Affiche les pièces disponibles d'un joueur
- * \details Affiche les pièces disponibles d'un joueur ainsi que des 
+ * \details Affiche les pièces disponibles d'un joueur ainsi que des
     numéros pour faciliter le choix d'une pièce, de plus les pièces
     sont de la couleur du joueur
  * \param j Structure Joueur dont on veut afficher les pièces
- */ 
+ */
 void afficher_pieces_dispo(Joueur * j) {
 
     int n = joueur_nb_piece_restantes(j);
@@ -99,7 +99,7 @@ void afficher_pieces_dispo(Joueur * j) {
 
     // Pour chaque rangée
     for (int r = 0; i < n; r++) {
-	
+
         // Représentation des pièces dans leur matrice
         for (int j = 0; j < 4; j++) {
             if (i < n) {
@@ -118,7 +118,7 @@ void afficher_pieces_dispo(Joueur * j) {
         // Affichage de la rangée
         for (int y = 0; y < 5; y++) {
             for (int p = 0; p < 4; p++) {
-                
+
                 if (y == 1 && i < n) {
                     printf("%2d) ", ++i);
                 }
@@ -141,11 +141,11 @@ void afficher_pieces_dispo(Joueur * j) {
 /**
  * \fn void afficher_choix_orientation(Piece * p)
  * \brief Affiche les orientations possibles pour une pièce
- * \details Affiche les orientations possibles d'une pièce ainsi que des 
+ * \details Affiche les orientations possibles d'une pièce ainsi que des
     numéros pour faciliter le choix d'une orientation
  * \param p Structure pièce dont on veut afficher les orientations
  * \param j Joueur qui doit choisir l'orientation (pour la couleur)
- */ 
+ */
 void afficher_choix_orientation(Piece * p, Joueur * j) {
 
     // Matrice qui contiendra une représentation de la pièce
@@ -153,7 +153,7 @@ void afficher_choix_orientation(Piece * p, Joueur * j) {
     Carre * init = piece_liste_carre(p);
     Carre * c = init;
     Couleur couleur = joueur_couleur(j);
-    
+
     // Affichage de toutes les orientations de la pièce en une ligne
     for (int i = 0; i < 5; i++) {
         for (int n = 1; n <= 4; n++) {
@@ -195,9 +195,9 @@ void afficher_choix_orientation(Piece * p, Joueur * j) {
  * \details Affiche les scores actuels en mettant à la bonne couleur les
     pseudos des joueurs
  * \param j Liste de structures joueurs à afficher
- */ 
+ */
 void afficher_scores(Joueur * j) {
-    
+
     // Variable pour garder le premier joueur
     Joueur * pj = j;
 
@@ -228,10 +228,10 @@ void afficher_scores(Joueur * j) {
         j = joueur_suivant(j);
     } while (j != pj);
     printf("|\n");
-    
+
     // Affichage de ligne avec juste les barres
     printf("|%*s|%*s|%*s|%*s|\n", TAILLE_PSEUDO, "", TAILLE_PSEUDO, "", TAILLE_PSEUDO, "", TAILLE_PSEUDO, "");
-    
+
     // Affichage des scores
     do {
         printf("|");
@@ -251,10 +251,10 @@ void afficher_scores(Joueur * j) {
  * \details Affiche les résultats de la partie en mettant à la bonne couleur les
     pseudos des joueurs et en gérant les ex aequo
  * \param j Liste de structures joueurs à afficher
- */ 
+ */
 void afficher_resultats(Joueur* j) {
 
-    
+
     // Variable pour garder le premier joueur
     Joueur * pj = j;
     // Variable pour savoir si le joueur a été placé dans le classement
@@ -262,7 +262,7 @@ void afficher_resultats(Joueur* j) {
     // Variable pour le décalage des joueurs
     Joueur * tmp1;
     Joueur * tmp2;
-    
+
     // Tri des joueurs par ordre croissant de score dans un tableau
     Joueur * classement[4] = {NULL};
 
@@ -316,7 +316,7 @@ void afficher_resultats(Joueur* j) {
             r--;
         }
         r++; // +1 pour l'affichage
-        
+
         // Affichage rang
         char rang[TAILLE_PSEUDO];
         if (r == 1) {
@@ -336,14 +336,14 @@ void afficher_resultats(Joueur* j) {
         else {
             printf("          ");
         }
-    
+
         // Affichage pseudo
         char pseudo[TAILLE_PSEUDO];
         strcpy(pseudo,joueur_pseudo(classement[i]));
         marges = (TAILLE_PSEUDO - strlen(pseudo)) / 2;
         decalage = strlen(pseudo)%2;
         printf("%*s%s%*s", marges + decalage, "", pseudo, marges, "");
-        
+
         // Affichage score
         char score[10];
         sprintf(score, "%d", joueur_score(classement[i]));
