@@ -162,6 +162,7 @@ int fin_de_partie(Joueur** j){
 
 	/*Mise a jour du score vue que c'est la fin de la partie*/
 	maj_scores(j);
+	afficher_scores(*j);
 
 
 	/*On demande a l'utilisateur les choix de fin de partie */
@@ -223,10 +224,16 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 		*j=tour_suivant(*j);
 	}
 	else{
+		do{
+			printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
+			scanf("%c",&c);
 
+		/* Si l'utilisateur ne rentre pas un entier*/
+		if (isdigit(c))
+			a = atoi(&c);
 
-		printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
-		scanf("%d",&a);
+		} while(!isdigit(c) || a < 0 || a > 1);
+
 		if(!a){
 			printf("Vous avez abandonné\n");
 			joueur_abandonne(*j);
@@ -247,6 +254,10 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 				afficher_plateau(pl);
 				if(!joueur_a_abandonne(*j)){
 					piece = demander_piece(*j);
+
+					system("clear");
+					afficher_plateau(pl);
+
 					demander_orientation(piece);
 					choisir_coordonnee(pl,piece,&x,&y,*j);
 				}
