@@ -116,12 +116,10 @@ int verification_position(Couleur pl[20][20], int x, int y, Piece* p)
     {
         if(pl[x+carre_get_x(c)][y+carre_get_y(c)] != VIDE)
         {
-            printf("position ko\n");
             return 0;
         }
         c = carre_get_suiv(c);
     } while(c != piece_liste_carre(p));
-    printf("position ok\n");
     return 1;
 }
 
@@ -140,7 +138,6 @@ int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p
 		pl[x + carre_get_x(c)][y + carre_get_y(c) - 1] == col || /* A gauche */
 		pl[x + carre_get_x(c)][y + carre_get_y(c) + 1] == col) /* A droite */
         {
-            printf("couleur ko 1\n");
             return 0;
         }
 
@@ -160,12 +157,10 @@ int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p
     /* Si au moins un Carre est en diagonale d'un Carre de même Couleur déjà posé */
     if(angle)
     {
-        printf("couleur ok\n");
         return 1;
     }
 
     /* Si aucun return n'a été fait précédemment */
-    printf("couleur ko 2\n");
     return 0;
     /* return ((pl[x-1][y] != c) && (pl[x+1][y] != c) && (pl[x][y-1] != c) && (pl[x][y+1] != c)) && ((pl[x-1][y-1] == c) || (pl[x+1][y-1] == c) || (pl[x-1][y+1] == c) || (pl[x+1][y+1] == c)); */
 }
@@ -245,8 +240,6 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
                 } while(c != c2);
 
 	    } while((((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19))) || !(valide));
-
-			printf("test\n");
 
             do
             {
