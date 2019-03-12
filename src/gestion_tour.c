@@ -77,13 +77,6 @@ void afficher_matrice(int matrice[5][5])
 }
 */
 
-/*
-void piece_changer_orientation()
-{
-
-}
-*/
-
 /* Affiche les 4 orientations possibles de la pièce au joueur avec un numéro et attend qu'il entre un numéro */
 /* modifie également les coordonnees relatives des carres constituant la piece une fois l'orientation choisie */
 void demander_orientation(Piece* p, Joueur* j)
@@ -162,7 +155,6 @@ int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece* p
 
     /* Si aucun return n'a été fait précédemment */
     return 0;
-    /* return ((pl[x-1][y] != c) && (pl[x+1][y] != c) && (pl[x][y-1] != c) && (pl[x][y+1] != c)) && ((pl[x-1][y-1] == c) || (pl[x+1][y-1] == c) || (pl[x-1][y+1] == c) || (pl[x+1][y+1] == c)); */
 }
 
 /* Demande au joueur les coordonnees ou il désire jouer sa pièce */
@@ -291,7 +283,6 @@ void poser_piece(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
     Carre* c = piece_liste_carre(pi);
     Piece** p = &(j->liste_piece);
     Piece* pivot = *p;
-    /*Piece* p = piece_suivant(joueur_liste_piece(j));*/
 
     do
     {
