@@ -1,11 +1,4 @@
-#include "../include/affichage.h"
-#include "../include/carre.h"
-#include "../include/commun.h"
-#include "../include/couleur.h"
 #include "../include/gestion_partie.h"
-#include "../include/gestion_tour.h"
-#include "../include/joueur.h"
-#include "../include/piece.h"
 #include <stdio.h>
 
 int main(){
