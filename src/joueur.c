@@ -225,6 +225,8 @@ Joueur* joueur_creation(Couleur c, ...) {
 
 	j->abandon = 0;
 
+	j->score = 0;
+
 	return j;
 }
 
