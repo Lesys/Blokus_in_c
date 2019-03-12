@@ -247,6 +247,10 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 				afficher_plateau(pl);
 				if(!joueur_a_abandonne(*j)){
 					piece = demander_piece(*j);
+
+					system("clear");
+					afficher_plateau(pl);
+
 					demander_orientation(piece);
 					choisir_coordonnee(pl,piece,&x,&y,*j);
 				}
