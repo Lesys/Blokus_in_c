@@ -1,3 +1,13 @@
+/**
+	\file joueur.c
+	\brief Fichier de fonctions pour accesseurs et de modifications pour un Joueur
+	\author WIDMER Alexis
+	\version 1.0
+	\date 05/03/2019
+
+	Ce fichier permet d'avoir accès aux attributs d'un Joueur, de le créer ou de le supprimer.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
