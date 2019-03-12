@@ -14,7 +14,7 @@ int main()
 
     carre_afficher(piece_liste_carre(piece));
 
-    demander_orientation(piece);
+    demander_orientation(piece, joueur);
 
     carre_afficher(piece_liste_carre(piece));
 
@@ -24,7 +24,7 @@ int main()
 
     piece = demander_piece(joueur);
     carre_afficher(piece_liste_carre(piece));
-    demander_orientation(piece);
+    demander_orientation(piece, joueur);
     carre_afficher(piece_liste_carre(piece));
     choisir_coordonnee(pl, piece, &x, &y, joueur);
     if(x != -1 || y != -1)
