@@ -144,13 +144,15 @@ void afficher_pieces_dispo(Joueur * j) {
  * \details Affiche les orientations possibles d'une pièce ainsi que des 
     numéros pour faciliter le choix d'une orientation
  * \param p Structure pièce dont on veut afficher les orientations
+ * \param j Joueur qui doit choisir l'orientation (pour la couleur)
  */ 
-void afficher_choix_orientation(Piece* p) {
+void afficher_choix_orientation(Piece * p, Joueur * j) {
 
     // Matrice qui contiendra une représentation de la pièce
     Couleur mp[5][5] = {0};
     Carre * init = piece_liste_carre(p);
     Carre * c = init;
+    Couleur couleur = joueur_couleur(j);
     
     // Affichage de toutes les orientations de la pièce en une ligne
     for (int i = 0; i < 5; i++) {
@@ -165,7 +167,7 @@ void afficher_choix_orientation(Piece* p) {
 
             // Représentation de la pièce dans la matrice
             do {
-                mp[4 - carre_get_x(c)][carre_get_y(c)] = BLEU;
+                mp[4 - carre_get_x(c)][carre_get_y(c)] = couleur;
             } while ((c = carre_get_suiv(c)) != init);
 
             // Affichage de la matrice

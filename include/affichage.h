@@ -14,9 +14,9 @@
 
 void afficher_str_couleur(Couleur couleur, char * str);
 void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
-void afficher_pieces_dispo(Joueur* j);
-void afficher_choix_orientation(Piece* p);
-void afficher_scores(Joueur* j);
-void afficher_resultats(Joueur* j);
+void afficher_pieces_dispo(Joueur * j);
+void afficher_choix_orientation(Piece * p, Joueur * j);
+void afficher_scores(Joueur * j);
+void afficher_resultats(Joueur * j);
 
 #endif
