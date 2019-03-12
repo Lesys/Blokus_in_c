@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['piece',['piece',['../structpiece.html',1,'']]],
-  ['piece_5fliste_5fcarre',['piece_liste_carre',['../carre_8c.html#ad2737e12ca881a1d070f8a2885d266e1',1,'carre.c']]],
-  ['piece_5fliste_5fcreation',['piece_liste_creation',['../carre_8c.html#a205c4dc3c4ea2b46ad2198a9032a0771',1,'carre.c']]],
-  ['piece_5fpivoter',['piece_pivoter',['../carre_8c.html#a3bf1c1c431237cc8353bea53ce34888c',1,'carre.c']]],
-  ['piece_5fprecedent',['piece_precedent',['../carre_8c.html#a5a9d4170b6392e768505a510df50fd6b',1,'carre.c']]],
-  ['piece_5fsuivant',['piece_suivant',['../carre_8c.html#aab9d9a7003a706e5afa85521cdfb4016',1,'carre.c']]],
-  ['prec',['prec',['../structpiece.html#a91811cbe13acb5a84029afd8ab8d9b38',1,'piece::prec()'],['../structjoueur.html#a160f732197c2542736174f6698e4e25e',1,'joueur::prec()']]],
-  ['pseudo',['pseudo',['../structjoueur.html#a99413f433f9baf71bd6b9570bb2f02aa',1,'joueur']]]
+  ['jaxis',['jaxis',['../unionSDL__Event.html#ac4611acd0e9c675e67dc20919f0accb4',1,'SDL_Event']]],
+  ['jball',['jball',['../unionSDL__Event.html#ae433f511e3383d17f8fe02df745ee8f8',1,'SDL_Event']]],
+  ['jbutton',['jbutton',['../unionSDL__Event.html#a591104d64903ae1cf70874fb5d3124ff',1,'SDL_Event']]],
+  ['jdevice',['jdevice',['../unionSDL__Event.html#a17514dc19a846ea1b5fbe44123700c4c',1,'SDL_Event']]],
+  ['jhat',['jhat',['../unionSDL__Event.html#a421b40e0f8e01f181c8d5548cff1dd1d',1,'SDL_Event']]],
+  ['jouer_5fmanche',['jouer_manche',['../gestion__partie_8c.html#aabc2caddfe36658343dc331c2d919bc2',1,'gestion_partie.c']]],
+  ['jouer_5fpartie',['jouer_partie',['../gestion__partie_8c.html#a125c2e2cc30aedff98dc9676e890d9db',1,'gestion_partie.c']]],
+  ['jouer_5ftour',['jouer_tour',['../gestion__partie_8c.html#a58ea1050fc334f65333957e7b244e389',1,'gestion_partie.c']]],
+  ['joueur',['joueur',['../structjoueur.html',1,'']]],
+  ['joueur_5fabandon',['joueur_abandon',['../gestion__partie_8c.html#ab4752abe9709986b3cf2acd2c8307686',1,'gestion_partie.c']]]
 ];
