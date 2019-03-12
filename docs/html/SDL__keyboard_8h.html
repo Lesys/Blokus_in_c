@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blokus in C: Référence du fichier lib/SDL/include/SDL2/SDL_keyboard.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('SDL__keyboard_8h.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier SDL_keyboard.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="SDL__stdinc_8h_source.html">SDL_stdinc.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="SDL__error_8h_source.html">SDL_error.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="SDL__keycode_8h_source.html">SDL_keycode.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="SDL__video_8h_source.html">SDL_video.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="begin__code_8h_source.html">begin_code.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="close__code_8h_source.html">close_code.h</a>&quot;</code><br />
+</div>
+<p><a href="SDL__keyboard_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structSDL__Keysym.html">SDL_Keysym</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The SDL keysym structure, used in key events.  <a href="structSDL__Keysym.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:af8f3eff5b50843b93c04d3fd3685358f"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structSDL__Keysym.html">SDL_Keysym</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#af8f3eff5b50843b93c04d3fd3685358f">SDL_Keysym</a></td></tr>
+<tr class="memdesc:af8f3eff5b50843b93c04d3fd3685358f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The SDL keysym structure, used in key events.  <a href="#af8f3eff5b50843b93c04d3fd3685358f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af8f3eff5b50843b93c04d3fd3685358f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a20cb9d78980660f2f97f83e9080a9791"><td class="memItemLeft" align="right" valign="top"><a id="a20cb9d78980660f2f97f83e9080a9791"></a>
+DECLSPEC <a class="el" href="SDL__video_8h.html#a55a196c7d3b8497538632c79ae1e6392">SDL_Window</a> *SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a20cb9d78980660f2f97f83e9080a9791">SDL_GetKeyboardFocus</a> (void)</td></tr>
+<tr class="memdesc:a20cb9d78980660f2f97f83e9080a9791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the window which currently has keyboard focus. <br /></td></tr>
+<tr class="separator:a20cb9d78980660f2f97f83e9080a9791"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add4d65672474cedfbfe9f3d9c2972aa8"><td class="memItemLeft" align="right" valign="top">DECLSPEC const Uint8 *SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#add4d65672474cedfbfe9f3d9c2972aa8">SDL_GetKeyboardState</a> (int *numkeys)</td></tr>
+<tr class="memdesc:add4d65672474cedfbfe9f3d9c2972aa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a snapshot of the current state of the keyboard.  <a href="#add4d65672474cedfbfe9f3d9c2972aa8">Plus de détails...</a><br /></td></tr>
+<tr class="separator:add4d65672474cedfbfe9f3d9c2972aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b2ee63de74c442ac456cac9db5f8ed0"><td class="memItemLeft" align="right" valign="top"><a id="a7b2ee63de74c442ac456cac9db5f8ed0"></a>
+DECLSPEC <a class="el" href="SDL__keycode_8h.html#afa050ad71f0a5b86aa05cb13f542d747">SDL_Keymod</a> SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a7b2ee63de74c442ac456cac9db5f8ed0">SDL_GetModState</a> (void)</td></tr>
+<tr class="memdesc:a7b2ee63de74c442ac456cac9db5f8ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current key modifier state for the keyboard. <br /></td></tr>
+<tr class="separator:a7b2ee63de74c442ac456cac9db5f8ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a705c85881304eab01f00abeca2ef5846"><td class="memItemLeft" align="right" valign="top">DECLSPEC void SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a705c85881304eab01f00abeca2ef5846">SDL_SetModState</a> (<a class="el" href="SDL__keycode_8h.html#afa050ad71f0a5b86aa05cb13f542d747">SDL_Keymod</a> modstate)</td></tr>
+<tr class="memdesc:a705c85881304eab01f00abeca2ef5846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current key modifier state for the keyboard.  <a href="#a705c85881304eab01f00abeca2ef5846">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a705c85881304eab01f00abeca2ef5846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa74e6944ede98feeb09408fd97aaad57"><td class="memItemLeft" align="right" valign="top">DECLSPEC <a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a> SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#aa74e6944ede98feeb09408fd97aaad57">SDL_GetKeyFromScancode</a> (<a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a> scancode)</td></tr>
+<tr class="memdesc:aa74e6944ede98feeb09408fd97aaad57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the key code corresponding to the given scancode according to the current keyboard layout.  <a href="#aa74e6944ede98feeb09408fd97aaad57">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa74e6944ede98feeb09408fd97aaad57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36216054a385bea6898a35ded18d9c0f"><td class="memItemLeft" align="right" valign="top">DECLSPEC <a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a> SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a36216054a385bea6898a35ded18d9c0f">SDL_GetScancodeFromKey</a> (<a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a> key)</td></tr>
+<tr class="memdesc:a36216054a385bea6898a35ded18d9c0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the scancode corresponding to the given key code according to the current keyboard layout.  <a href="#a36216054a385bea6898a35ded18d9c0f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a36216054a385bea6898a35ded18d9c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81526318501fd88c503491909d9c07e"><td class="memItemLeft" align="right" valign="top">DECLSPEC const char *SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#ad81526318501fd88c503491909d9c07e">SDL_GetScancodeName</a> (<a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a> scancode)</td></tr>
+<tr class="memdesc:ad81526318501fd88c503491909d9c07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a human-readable name for a scancode.  <a href="#ad81526318501fd88c503491909d9c07e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad81526318501fd88c503491909d9c07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb32dd58d3dc5b77c9daf0b6000f93c"><td class="memItemLeft" align="right" valign="top">DECLSPEC <a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a> SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a0cb32dd58d3dc5b77c9daf0b6000f93c">SDL_GetScancodeFromName</a> (const char *name)</td></tr>
+<tr class="memdesc:a0cb32dd58d3dc5b77c9daf0b6000f93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a scancode from a human-readable name.  <a href="#a0cb32dd58d3dc5b77c9daf0b6000f93c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0cb32dd58d3dc5b77c9daf0b6000f93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d30971127cd386655b891f429b76fe9"><td class="memItemLeft" align="right" valign="top">DECLSPEC const char *SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a5d30971127cd386655b891f429b76fe9">SDL_GetKeyName</a> (<a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a> key)</td></tr>
+<tr class="memdesc:a5d30971127cd386655b891f429b76fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a human-readable name for a key.  <a href="#a5d30971127cd386655b891f429b76fe9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5d30971127cd386655b891f429b76fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4d4e79f117a9092ec269601c5423337"><td class="memItemLeft" align="right" valign="top">DECLSPEC <a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a> SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#ad4d4e79f117a9092ec269601c5423337">SDL_GetKeyFromName</a> (const char *name)</td></tr>
+<tr class="memdesc:ad4d4e79f117a9092ec269601c5423337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a key code from a human-readable name.  <a href="#ad4d4e79f117a9092ec269601c5423337">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad4d4e79f117a9092ec269601c5423337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2c8474b9a8b6d07cae4f8eceab38870"><td class="memItemLeft" align="right" valign="top">DECLSPEC void SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#ab2c8474b9a8b6d07cae4f8eceab38870">SDL_StartTextInput</a> (void)</td></tr>
+<tr class="memdesc:ab2c8474b9a8b6d07cae4f8eceab38870"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start accepting Unicode text input events. This function will show the on-screen keyboard if supported.  <a href="#ab2c8474b9a8b6d07cae4f8eceab38870">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab2c8474b9a8b6d07cae4f8eceab38870"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c84ed1daac21f8224d43bcb9d5bc597"><td class="memItemLeft" align="right" valign="top">DECLSPEC SDL_bool SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a6c84ed1daac21f8224d43bcb9d5bc597">SDL_IsTextInputActive</a> (void)</td></tr>
+<tr class="memdesc:a6c84ed1daac21f8224d43bcb9d5bc597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return whether or not Unicode text input events are enabled.  <a href="#a6c84ed1daac21f8224d43bcb9d5bc597">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6c84ed1daac21f8224d43bcb9d5bc597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab08b914cdfb2eaed26165cb2f6b110ec"><td class="memItemLeft" align="right" valign="top">DECLSPEC void SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#ab08b914cdfb2eaed26165cb2f6b110ec">SDL_StopTextInput</a> (void)</td></tr>
+<tr class="memdesc:ab08b914cdfb2eaed26165cb2f6b110ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop receiving any text input events. This function will hide the on-screen keyboard if supported.  <a href="#ab08b914cdfb2eaed26165cb2f6b110ec">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab08b914cdfb2eaed26165cb2f6b110ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a949fd9d16d5156a9d5aa0dc74580dbae"><td class="memItemLeft" align="right" valign="top">DECLSPEC void SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a949fd9d16d5156a9d5aa0dc74580dbae">SDL_SetTextInputRect</a> (<a class="el" href="structSDL__Rect.html">SDL_Rect</a> *rect)</td></tr>
+<tr class="memdesc:a949fd9d16d5156a9d5aa0dc74580dbae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the rectangle used to type Unicode text inputs. This is used as a hint for IME and on-screen keyboard placement.  <a href="#a949fd9d16d5156a9d5aa0dc74580dbae">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a949fd9d16d5156a9d5aa0dc74580dbae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a106356274c192b53844c8f1a821b00d7"><td class="memItemLeft" align="right" valign="top">DECLSPEC SDL_bool SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a106356274c192b53844c8f1a821b00d7">SDL_HasScreenKeyboardSupport</a> (void)</td></tr>
+<tr class="memdesc:a106356274c192b53844c8f1a821b00d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the platform has some screen keyboard support.  <a href="#a106356274c192b53844c8f1a821b00d7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a106356274c192b53844c8f1a821b00d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f5b73c7b71efeb68f5e9616cb918b7"><td class="memItemLeft" align="right" valign="top">DECLSPEC SDL_bool SDLCALL&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="SDL__keyboard_8h.html#a92f5b73c7b71efeb68f5e9616cb918b7">SDL_IsScreenKeyboardShown</a> (<a class="el" href="SDL__video_8h.html#a55a196c7d3b8497538632c79ae1e6392">SDL_Window</a> *window)</td></tr>
+<tr class="memdesc:a92f5b73c7b71efeb68f5e9616cb918b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether the screen keyboard is shown for given window.  <a href="#a92f5b73c7b71efeb68f5e9616cb918b7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a92f5b73c7b71efeb68f5e9616cb918b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p class="">Include file for SDL keyboard event handling </p>
+</div><h2 class="groupheader">Documentation des définitions de type</h2>
+<a id="af8f3eff5b50843b93c04d3fd3685358f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8f3eff5b50843b93c04d3fd3685358f">&#9670;&nbsp;</a></span>SDL_Keysym</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structSDL__Keysym.html">SDL_Keysym</a>  <a class="el" href="structSDL__Keysym.html">SDL_Keysym</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The SDL keysym structure, used in key events. </p>
+<dl class="section note"><dt>Note</dt><dd>If you are looking for translated character input, see the <a class="el" href="SDL__events_8h.html#a3b589e89be6b35c02e0dd34a55f3fccaa4fa2570088f6b9cbd109ae91b511368f">SDL_TEXTINPUT</a> event. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="add4d65672474cedfbfe9f3d9c2972aa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add4d65672474cedfbfe9f3d9c2972aa8">&#9670;&nbsp;</a></span>SDL_GetKeyboardState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC const Uint8* SDLCALL SDL_GetKeyboardState </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>numkeys</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a snapshot of the current state of the keyboard. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numkeys</td><td>if non-NULL, receives the length of the returned array.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>An array of key states. Indexes into this array are obtained by using <a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b" title="The SDL keyboard scancode representation.">SDL_Scancode</a> values.</dd></dl>
+<p><b>Example:</b> </p><div class="fragment"><div class="line"><span class="keyword">const</span> Uint8 *state = <a class="code" href="SDL__keyboard_8h.html#add4d65672474cedfbfe9f3d9c2972aa8">SDL_GetKeyboardState</a>(NULL);</div><div class="line"><span class="keywordflow">if</span> ( state[SDL_SCANCODE_RETURN] )   {</div><div class="line">    printf(<span class="stringliteral">&quot;&lt;RETURN&gt; is pressed.\n&quot;</span>);</div><div class="line">}</div></div><!-- fragment --> 
+</div>
+</div>
+<a id="ad4d4e79f117a9092ec269601c5423337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4d4e79f117a9092ec269601c5423337">&#9670;&nbsp;</a></span>SDL_GetKeyFromName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC <a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a> SDLCALL SDL_GetKeyFromName </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a key code from a human-readable name. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>key code, or SDLK_UNKNOWN if the name wasn't recognized</dd></dl>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171" title="The SDL virtual key representation.">SDL_Keycode</a> </dd></dl>
+
+</div>
+</div>
+<a id="aa74e6944ede98feeb09408fd97aaad57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa74e6944ede98feeb09408fd97aaad57">&#9670;&nbsp;</a></span>SDL_GetKeyFromScancode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC <a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a> SDLCALL SDL_GetKeyFromScancode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a>&#160;</td>
+          <td class="paramname"><em>scancode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the key code corresponding to the given scancode according to the current keyboard layout. </p>
+<p class="">See <a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171" title="The SDL virtual key representation.">SDL_Keycode</a> for details.</p>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#a5d30971127cd386655b891f429b76fe9" title="Get a human-readable name for a key.">SDL_GetKeyName()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a5d30971127cd386655b891f429b76fe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d30971127cd386655b891f429b76fe9">&#9670;&nbsp;</a></span>SDL_GetKeyName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC const char* SDLCALL SDL_GetKeyName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a>&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a human-readable name for a key. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>A pointer to a UTF-8 string that stays valid at least until the next call to this function. If you need it around any longer, you must copy it. If the key doesn't have a name, this function returns an empty string ("").</dd></dl>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171" title="The SDL virtual key representation.">SDL_Keycode</a> </dd></dl>
+
+</div>
+</div>
+<a id="a36216054a385bea6898a35ded18d9c0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36216054a385bea6898a35ded18d9c0f">&#9670;&nbsp;</a></span>SDL_GetScancodeFromKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC <a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a> SDLCALL SDL_GetScancodeFromKey </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="SDL__keycode_8h.html#ae9265f064f13f0f74dfca26a67875171">SDL_Keycode</a>&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the scancode corresponding to the given key code according to the current keyboard layout. </p>
+<p class="">See <a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b" title="The SDL keyboard scancode representation.">SDL_Scancode</a> for details.</p>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#ad81526318501fd88c503491909d9c07e" title="Get a human-readable name for a scancode.">SDL_GetScancodeName()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a0cb32dd58d3dc5b77c9daf0b6000f93c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cb32dd58d3dc5b77c9daf0b6000f93c">&#9670;&nbsp;</a></span>SDL_GetScancodeFromName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC <a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a> SDLCALL SDL_GetScancodeFromName </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a scancode from a human-readable name. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>scancode, or SDL_SCANCODE_UNKNOWN if the name wasn't recognized</dd></dl>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b" title="The SDL keyboard scancode representation.">SDL_Scancode</a> </dd></dl>
+
+</div>
+</div>
+<a id="ad81526318501fd88c503491909d9c07e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad81526318501fd88c503491909d9c07e">&#9670;&nbsp;</a></span>SDL_GetScancodeName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC const char* SDLCALL SDL_GetScancodeName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b">SDL_Scancode</a>&#160;</td>
+          <td class="paramname"><em>scancode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a human-readable name for a scancode. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>A pointer to the name for the scancode. If the scancode doesn't have a name, this function returns an empty string ("").</dd></dl>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__scancode_8h.html#a82ab7cff701034fb40a47b5b3a02777b" title="The SDL keyboard scancode representation.">SDL_Scancode</a> </dd></dl>
+
+</div>
+</div>
+<a id="a106356274c192b53844c8f1a821b00d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a106356274c192b53844c8f1a821b00d7">&#9670;&nbsp;</a></span>SDL_HasScreenKeyboardSupport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC SDL_bool SDLCALL SDL_HasScreenKeyboardSupport </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns whether the platform has some screen keyboard support. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>SDL_TRUE if some keyboard support is available else SDL_FALSE.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Not all screen keyboard functions are supported on all platforms.</dd></dl>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#a92f5b73c7b71efeb68f5e9616cb918b7" title="Returns whether the screen keyboard is shown for given window.">SDL_IsScreenKeyboardShown()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a92f5b73c7b71efeb68f5e9616cb918b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92f5b73c7b71efeb68f5e9616cb918b7">&#9670;&nbsp;</a></span>SDL_IsScreenKeyboardShown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC SDL_bool SDLCALL SDL_IsScreenKeyboardShown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="SDL__video_8h.html#a55a196c7d3b8497538632c79ae1e6392">SDL_Window</a> *&#160;</td>
+          <td class="paramname"><em>window</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns whether the screen keyboard is shown for given window. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>The window for which screen keyboard should be queried.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>SDL_TRUE if screen keyboard is shown else SDL_FALSE.</dd></dl>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#a106356274c192b53844c8f1a821b00d7" title="Returns whether the platform has some screen keyboard support.">SDL_HasScreenKeyboardSupport()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a6c84ed1daac21f8224d43bcb9d5bc597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c84ed1daac21f8224d43bcb9d5bc597">&#9670;&nbsp;</a></span>SDL_IsTextInputActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC SDL_bool SDLCALL SDL_IsTextInputActive </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return whether or not Unicode text input events are enabled. </p>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#ab2c8474b9a8b6d07cae4f8eceab38870" title="Start accepting Unicode text input events. This function will show the on-screen keyboard if supporte...">SDL_StartTextInput()</a> </dd>
+<dd>
+<a class="el" href="SDL__keyboard_8h.html#ab08b914cdfb2eaed26165cb2f6b110ec" title="Stop receiving any text input events. This function will hide the on-screen keyboard if supported.">SDL_StopTextInput()</a> </dd></dl>
+
+</div>
+</div>
+<a id="a705c85881304eab01f00abeca2ef5846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a705c85881304eab01f00abeca2ef5846">&#9670;&nbsp;</a></span>SDL_SetModState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC void SDLCALL SDL_SetModState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="SDL__keycode_8h.html#afa050ad71f0a5b86aa05cb13f542d747">SDL_Keymod</a>&#160;</td>
+          <td class="paramname"><em>modstate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the current key modifier state for the keyboard. </p>
+<dl class="section note"><dt>Note</dt><dd>This does not change the keyboard state, only the key modifier flags. </dd></dl>
+
+</div>
+</div>
+<a id="a949fd9d16d5156a9d5aa0dc74580dbae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a949fd9d16d5156a9d5aa0dc74580dbae">&#9670;&nbsp;</a></span>SDL_SetTextInputRect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC void SDLCALL SDL_SetTextInputRect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structSDL__Rect.html">SDL_Rect</a> *&#160;</td>
+          <td class="paramname"><em>rect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the rectangle used to type Unicode text inputs. This is used as a hint for IME and on-screen keyboard placement. </p>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#ab2c8474b9a8b6d07cae4f8eceab38870" title="Start accepting Unicode text input events. This function will show the on-screen keyboard if supporte...">SDL_StartTextInput()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ab2c8474b9a8b6d07cae4f8eceab38870"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2c8474b9a8b6d07cae4f8eceab38870">&#9670;&nbsp;</a></span>SDL_StartTextInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC void SDLCALL SDL_StartTextInput </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Start accepting Unicode text input events. This function will show the on-screen keyboard if supported. </p>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#ab08b914cdfb2eaed26165cb2f6b110ec" title="Stop receiving any text input events. This function will hide the on-screen keyboard if supported.">SDL_StopTextInput()</a> </dd>
+<dd>
+<a class="el" href="SDL__keyboard_8h.html#a949fd9d16d5156a9d5aa0dc74580dbae" title="Set the rectangle used to type Unicode text inputs. This is used as a hint for IME and on-screen keyb...">SDL_SetTextInputRect()</a> </dd>
+<dd>
+<a class="el" href="SDL__keyboard_8h.html#a106356274c192b53844c8f1a821b00d7" title="Returns whether the platform has some screen keyboard support.">SDL_HasScreenKeyboardSupport()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ab08b914cdfb2eaed26165cb2f6b110ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab08b914cdfb2eaed26165cb2f6b110ec">&#9670;&nbsp;</a></span>SDL_StopTextInput()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DECLSPEC void SDLCALL SDL_StopTextInput </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stop receiving any text input events. This function will hide the on-screen keyboard if supported. </p>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="SDL__keyboard_8h.html#ab2c8474b9a8b6d07cae4f8eceab38870" title="Start accepting Unicode text input events. This function will show the on-screen keyboard if supporte...">SDL_StartTextInput()</a> </dd>
+<dd>
+<a class="el" href="SDL__keyboard_8h.html#a106356274c192b53844c8f1a821b00d7" title="Returns whether the platform has some screen keyboard support.">SDL_HasScreenKeyboardSupport()</a> </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li><li class="navelem"><a class="el" href="dir_2dca083983425599d4cb30e341d80cfb.html">SDL</a></li><li class="navelem"><a class="el" href="dir_4525aea7f09db296ddec72fe03978edb.html">include</a></li><li class="navelem"><a class="el" href="dir_015151e22ec39e6a7888b3b1c1e8021e.html">SDL2</a></li><li class="navelem"><a class="el" href="SDL__keyboard_8h.html">SDL_keyboard.h</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+  </ul>
+</div>
+</body>
+</html>
