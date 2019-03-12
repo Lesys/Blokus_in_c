@@ -226,50 +226,43 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	}
 	else{
 		do{
-			printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
-			scanf("%c",&c);
+			if(x == -1 && y == -1){
+				piece=NULL;
 
-		/* Si l'utilisateur ne rentre pas un entier*/
-		if (isdigit(c))
-			a = atoi(&c);
-
-		} while(!isdigit(c) || a < 0 || a > 1);
-
-		if(!a){
-			printf("Vous avez abandonné\n");
-			joueur_abandonne(*j);
-		}
-		else {
-
-			do{
-				if(x == -1 && y == -1){
-					piece=NULL;
+				do {
 					printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
-					scanf("%d",&a);
-					if(!a){
-						printf("Vous avez abandonné\n");
-						joueur_abandonne(*j);
-					}
+					scanf("%c",&c);
+
+					/* Si l'utilisateur ne rentre pas un entier*/
+					if (isdigit(c))
+						a = atoi(&c);
+
+				} while(!isdigit(c) || a < 0 || a > 1);
+
+				if(!a){
+					printf("Vous avez abandonné\n");
+					joueur_abandonne(*j);
 				}
-				system("clear");
-				afficher_plateau(pl);
-				if(!joueur_a_abandonne(*j)){
-					piece = demander_piece(*j);
-
-					system("clear");
-					afficher_plateau(pl);
-
-					demander_orientation(piece,*j);
-					choisir_coordonnee(pl,piece,&x,&y,*j);
-				}
-			} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
-
-			poser_piece(pl,piece,*j,x,y);
-
-			*j=tour_suivant(*j);
+			}
+			system("clear");
 			afficher_plateau(pl);
+			if(!joueur_a_abandonne(*j)){
+				piece = demander_piece(*j);
 
-		}
+				afficher_plateau(pl);
+
+				demander_orientation(piece,*j);
+				choisir_coordonnee(pl,piece,&x,&y,*j);
+			}
+		} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
+
+		poser_piece(pl,piece,*j,x,y);
+
+		system("clear");
+		afficher_plateau(pl);
+
+		*j=tour_suivant(*j);
+
 	}
 }
 
