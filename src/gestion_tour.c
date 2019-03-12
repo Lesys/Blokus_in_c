@@ -91,7 +91,7 @@ void demander_orientation(Piece* p, Joueur* j)
     int nb;
     Carre* c = piece_liste_carre(p);
 
-    afficher_choix_orientation(p, couleur(joueur));
+    afficher_choix_orientation(p, j);
     printf("Dans quelle orientation voulez-vous jouer la pièce ? :\n");
     scanf("%d", &nb);
     nb--;
@@ -101,7 +101,7 @@ void demander_orientation(Piece* p, Joueur* j)
     {
         printf("Veuillez entrer une orientation correcte\n");
         printf("Dans quelle orientation voulez-vous jouer la pièce ? :\n");
-        afficher_choix_orientation(p, );
+        afficher_choix_orientation(p, j);
         scanf("%d", &nb);
         nb--;
     }
