@@ -67,7 +67,7 @@ Joueur* joueur_suivant(Joueur* j) {
 }
 
 /**
-	\fn int joueur_a_abaodnne(Joueur* j);
+	\fn int joueur_a_abandonne(Joueur* j);
 	\brief Permet de savoir si le Joueur* a abandonné ou non
 
 	\param j Le Joueur* dont on veut récupérer la valeur d'abandon
@@ -101,7 +101,7 @@ int verif_nb_joueur(int nb) {
 
 /* Renvoie le nombre de pièces qui sont encore dans la liste */
 /**
-	\fn int joueur_nb_piece_restantes(int nb);
+	\fn int joueur_nb_piece_restantes(Joueur* j);
 	\brief Renvoie le nombre de Piece qui reste au Joueur passé en paramètre
 
 	\param j Le Joueur* dont on veut connaître le nombre de Piece restantes
