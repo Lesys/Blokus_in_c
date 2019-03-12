@@ -7,5 +7,6 @@ var searchData=
   ['carre_5fget_5fx',['carre_get_x',['../carre_8c.html#aa0a61b283a32abb750fc51e77fad0af0',1,'carre.c']]],
   ['carre_5fget_5fy',['carre_get_y',['../carre_8c.html#a1cf33e9afe2f95956129a250a2a063ff',1,'carre.c']]],
   ['carre_5fhors_5fliste',['carre_hors_liste',['../carre_8c.html#a6c728747487fcb74a628e82536427b86',1,'carre.c']]],
-  ['carre_5freinit_5ftab',['carre_reinit_tab',['../carre_8c.html#a9d95666bc7f00ec172bbde917d54feea',1,'carre.c']]]
+  ['carre_5freinit_5ftab',['carre_reinit_tab',['../carre_8c.html#a9d95666bc7f00ec172bbde917d54feea',1,'carre.c']]],
+  ['choisir_5fcoordonnee',['choisir_coordonnee',['../gestion__tour_8c.html#afb19cecbb94f50afd5e76761d001103e',1,'gestion_tour.c']]]
 ];
