@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blokus in C: Référence du fichier src/sprite.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('sprite_8c.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier sprite.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fonctions de gestions des images pour la SDL.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_image.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;../include/sprite.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a8da64481b214edcba94aad344a861f00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structsprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sprite_8c.html#a8da64481b214edcba94aad344a861f00">init_sprite</a> (char *filename, int longueur, int largeur)</td></tr>
+<tr class="memdesc:a8da64481b214edcba94aad344a861f00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation d'un sprite.  <a href="#a8da64481b214edcba94aad344a861f00">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8da64481b214edcba94aad344a861f00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebf410753d95917b34a29c94a316d08c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sprite_8c.html#aebf410753d95917b34a29c94a316d08c">free_sprite</a> (<a class="el" href="structsprite.html">Sprite</a> **<a class="el" href="structsprite.html">sprite</a>)</td></tr>
+<tr class="memdesc:aebf410753d95917b34a29c94a316d08c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Désallocation d'un sprite.  <a href="#aebf410753d95917b34a29c94a316d08c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aebf410753d95917b34a29c94a316d08c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb2b56d4ee99efe918df0b9e9b3477a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sprite_8c.html#a7fb2b56d4ee99efe918df0b9e9b3477a">afficher_sprite</a> (<a class="el" href="structsprite.html">Sprite</a> *<a class="el" href="structsprite.html">sprite</a>, int x, int y)</td></tr>
+<tr class="memdesc:a7fb2b56d4ee99efe918df0b9e9b3477a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affichage d'un sprite.  <a href="#a7fb2b56d4ee99efe918df0b9e9b3477a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a7fb2b56d4ee99efe918df0b9e9b3477a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top"><a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b></td></tr>
+<tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fonctions de gestions des images pour la SDL. </p>
+<p>Diverses fonctions qui gèrent le chargement l'affiche et la désallocation des images </p><dl class="section author"><dt>Auteur</dt><dd>BASTIDE Robin </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a7fb2b56d4ee99efe918df0b9e9b3477a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb2b56d4ee99efe918df0b9e9b3477a">&#9670;&nbsp;</a></span>afficher_sprite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_sprite </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsprite.html">Sprite</a> *&#160;</td>
+          <td class="paramname"><em>sprite</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affichage d'un sprite. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sprite</td><td>Sprite à afficher </td></tr>
+    <tr><td class="paramname">x</td><td>Coordonnée en x du sprite </td></tr>
+    <tr><td class="paramname">y</td><td>Coordonnée en y du sprite </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aebf410753d95917b34a29c94a316d08c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebf410753d95917b34a29c94a316d08c">&#9670;&nbsp;</a></span>free_sprite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_sprite </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structsprite.html">Sprite</a> **&#160;</td>
+          <td class="paramname"><em>sprite</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Désallocation d'un sprite. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sprite</td><td>Sprite à supprimer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8da64481b214edcba94aad344a861f00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8da64481b214edcba94aad344a861f00">&#9670;&nbsp;</a></span>init_sprite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsprite.html">Sprite</a>* init_sprite </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>longueur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>largeur</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialisation d'un sprite. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>Nom du fichier à ouvrir </td></tr>
+    <tr><td class="paramname">longueur</td><td>Longueur (hauteur) du sprite à créer </td></tr>
+    <tr><td class="paramname">largeur</td><td>Largeur du sprite à créer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le sprite initialisé, NULL si erreur </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="sprite_8c.html">sprite.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>
