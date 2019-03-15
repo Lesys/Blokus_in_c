@@ -217,7 +217,9 @@ Joueur* joueur_creation(Couleur c, ...) {
 
 	printf("Joueur %s, veuillez indiquer votre pseudo: ", couleur_tostring(c));
 /*	scanf("%*[^\n]%*c", j->pseudo);*/
-	scanf("%s", j->pseudo);
+	scanf("%15s", j->pseudo);
+
+	while (getchar() != '\n');
 
 	/* Réalloue la bonne taille pour le pseudo */
 	j->pseudo = realloc(j->pseudo, sizeof(char) * (strlen(j->pseudo) + 1));
