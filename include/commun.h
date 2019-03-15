@@ -7,8 +7,8 @@
 #define NB_JOUEUR_MIN 2
 #define NB_JOUEUR_MAX 4
 
-#define L_FENETRE 1600
-#define H_FENETRE 900
+#define L_FENETRE 1280
+#define H_FENETRE 720
 #define LARG_T_VJ 38
 #define LONG_T_VJ 8
 #define LARG_T_BR 18
