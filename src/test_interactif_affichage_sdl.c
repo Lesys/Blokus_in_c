@@ -20,8 +20,6 @@ int main(int arc, char * argv[]) {
 		return 100;
 	}
 
-    SDL_SetRenderDrawColor(renderer, 54, 57, 63, 255);
-
 
     // Initialisation des objets de affichage_sdl
     Couleur plateau[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
@@ -110,5 +108,5 @@ int main(int arc, char * argv[]) {
 
 
 	// fin sdl
-	sdl_close(renderer);
+	sdl_close();
 }

@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
-#include <unistd.h>
+
 #include "../include/affichage_sdl.h"
 #include "../include/commun.h"
 
@@ -12,7 +12,7 @@ SDL_Renderer * renderer;
 int sdl_init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	TTF_Init();
-	window = SDL_CreateWindow("test_affichage_sdl", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
 	if (!window) {
 		printf("%s", SDL_GetError());
 		return 0;
@@ -33,13 +33,14 @@ int sdl_init() {
 		printf("IMG_Init: %s\n", IMG_GetError());
 	}
 
+	SDL_SetRenderDrawColor(renderer, 54, 57, 63, 255);
 	init_affichage_sdl();
 
 }
 
 int sdl_close() {
+	
 	IMG_Quit();
-
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
