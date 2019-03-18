@@ -25,6 +25,11 @@ typedef struct ressources {
 	Sprite * fond_titres;
 	Sprite * fond_config;
 	Sprite * fond_saisie;
+	Sprite * tapis_rouge;
+	Sprite * tapis_vert;
+	Sprite * tapis_jaune;
+	Sprite * tapis_bleu;
+	Sprite * fond_plateau;
 	SDL_Color noir;
 	SDL_Color jaune;
 	SDL_Color vert;

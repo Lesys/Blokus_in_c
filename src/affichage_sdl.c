@@ -88,24 +88,37 @@ int init_affichage_sdl() {
 		return 0;
 	}
 
-	ressources->carre_vide = init_sprite("../../ressources/carre_vide.png", taille_carre, taille_carre);
-	ressources->carre_rouge = init_sprite("../../ressources/carre_rouge.png", taille_carre, taille_carre);
-	ressources->carre_jaune = init_sprite("../../ressources/carre_jaune.png", taille_carre, taille_carre);
-	ressources->carre_bleu = init_sprite("../../ressources/carre_bleu.png", taille_carre, taille_carre);
-	ressources->carre_vert = init_sprite("../../ressources/carre_vert.png", taille_carre, taille_carre);
-	ressources->police_m = TTF_OpenFont("../../ressources/police.ttf", taille_carre*1.5);
-	ressources->police_p = TTF_OpenFont("../../ressources/police.ttf", taille_carre);
-	ressources->fond_score = init_sprite("../../ressources/fond_score.png", taille_carre*8, taille_carre*16);
-	ressources->fond_tour = init_sprite("../../ressources/fond_tour.png", taille_carre*8, taille_carre*16);
-	ressources->bouton = init_sprite("../../ressources/bouton.png", taille_carre*4, taille_carre*12);
-	ressources->bouton_hover = init_sprite("../../ressources/bouton_hover.png", taille_carre*4, taille_carre*12);
-	ressources->bouton_petit = init_sprite("../../ressources/bouton.png", taille_carre*2, taille_carre*6);
-	ressources->bouton_petit_hover = init_sprite("../../ressources/bouton_hover.png", taille_carre*2, taille_carre*6);
-	ressources->fond_resultats = init_sprite("../../ressources/fond_resultats.png", taille_carre*20, taille_carre*20);
-	ressources->fond_titres = init_sprite("../../ressources/fond_titres.png", hauteur_ecran, taille_carre*96);
-	ressources->fond_config = init_sprite("../../ressources/fond_config.png", taille_carre*16, taille_carre*43);
-	ressources->fond_saisie = init_sprite("../../ressources/fond_saisie.png", taille_carre*2, taille_carre*16);
-	ressources->noir.r = 0;
+	ressources->carre_vide = init_sprite("ressources/carre_vide.png", taille_carre, taille_carre);
+	ressources->carre_rouge = init_sprite("ressources/carre_rouge.png", taille_carre, taille_carre);
+	ressources->carre_jaune = init_sprite("ressources/carre_jaune.png", taille_carre, taille_carre);
+	ressources->carre_bleu = init_sprite("ressources/carre_bleu.png", taille_carre, taille_carre);
+	ressources->carre_vert = init_sprite("ressources/carre_vert.png", taille_carre, taille_carre);
+	ressources->police_m = TTF_OpenFont("ressources/police.ttf", taille_carre*1.5);
+	ressources->police_p = TTF_OpenFont("ressources/police.ttf", taille_carre);
+	ressources->fond_score = init_sprite("ressources/fond_score.png", taille_carre*8, taille_carre*16);
+	ressources->fond_tour = init_sprite("ressources/fond_tour.png", taille_carre*8, taille_carre*16);
+	ressources->bouton = init_sprite("ressources/bouton.png", taille_carre*4, taille_carre*12);
+	ressources->bouton_hover = init_sprite("ressources/bouton_hover.png", taille_carre*4, taille_carre*12);
+	ressources->bouton_petit = init_sprite("ressources/bouton.png", taille_carre*2, taille_carre*6);
+	ressources->bouton_petit_hover = init_sprite("ressources/bouton_hover.png", taille_carre*2, taille_carre*6);
+	ressources->fond_resultats = init_sprite("ressources/fond_resultats.png", taille_carre*20, taille_carre*20);
+	ressources->fond_titres = init_sprite("ressources/fond_titres.png", hauteur_ecran, taille_carre*96);
+	ressources->fond_config = init_sprite("ressources/fond_config.png", taille_carre*16, taille_carre*43);
+	ressources->fond_saisie = init_sprite("ressources/fond_saisie.png", taille_carre*2, taille_carre*16);
+	/*ressources->tapis_rouge = init_sprite("ressources/tapis_rouge.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
+	ressources->tapis_bleu = init_sprite("ressources/tapis_bleu.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
+	ressources->tapis_jaune = init_sprite("ressources/tapis_jaune.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
+	ressources->tapis_vert = init_sprite("ressources/tapis_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
+	ressources->fond_plateau = init_sprite("ressources/fond_plateau.png", taille_carre*22, taille_carre*22);
+	*/
+
+	ressources->tapis_rouge = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
+	ressources->tapis_bleu = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
+	ressources->tapis_jaune = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
+	ressources->tapis_vert = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
+	ressources->fond_plateau = init_sprite("ressources/carre_rouge.png", taille_carre*22, taille_carre*22);
+
+        ressources->noir.r = 0;
 	ressources->noir.g = 0;
 	ressources->noir.b = 0;
 	ressources->jaune.r = 240;
@@ -150,6 +163,11 @@ void free_affichage_sdl() {
 		free_sprite(&ressources->fond_titres);
 		free_sprite(&ressources->fond_config);
 		free_sprite(&ressources->fond_saisie);
+		free_sprite(&ressources->tapis_rouge);
+		free_sprite(&ressources->tapis_bleu);
+		free_sprite(&ressources->tapis_jaune);
+		free_sprite(&ressources->tapis_vert);
+		free_sprite(&ressources->fond_plateau);
 		free(ressources);
 	}
 }
@@ -161,6 +179,7 @@ void free_affichage_sdl() {
  */
 void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
 
+    	afficher_sprite(ressources->fond_plateau, largeur_ecran/2 - 11*taille_carre, hauteur_ecran/2 - 11*taille_carre);
 	int offset_x = largeur_ecran/2-10*taille_carre;
 	int offset_y = hauteur_ecran/2-10*taille_carre;
 	for (int i = 0; i < TAILLE_PLATEAU; i++) {
@@ -439,6 +458,8 @@ Couleur afficher_matrice_pieces(Reserves * r, Couleur couleur, Piece * p) {
 			// Mise en place de la position de départ
 			offset_x = r->pos_vert_x;
 			offset_y = r->pos_vert_y;
+			// Affichage du tapis
+			afficher_sprite(ressources->tapis_vert, offset_x, offset_y - (LONG_T_VJ-1)*taille_carre);
 			// Parcours de la matrice
 			for (int i = 0; i < LARG_T_VJ; i++) {
 				for (int j = LONG_T_VJ-1; j >= 0; j--) {
@@ -449,16 +470,13 @@ Couleur afficher_matrice_pieces(Reserves * r, Couleur couleur, Piece * p) {
 					else if (r->vert[i][j]) {
 						afficher_sprite(get_sprite(couleur), i * taille_carre + offset_x, -j * taille_carre + offset_y);
 					}
-					// Affichage des espaces vides pour visualisation (à enlever plus tard)
-					else {
-						afficher_sprite(get_sprite(VIDE), i * taille_carre + offset_x, -j * taille_carre + offset_y);
-					}
 				}
 			}
 			break;
 		case JAUNE:
 			offset_x = r->pos_jaune_x;
 			offset_y = r->pos_jaune_y;
+			afficher_sprite(ressources->tapis_jaune, offset_x, offset_y - (LONG_T_VJ-1)*taille_carre);
 			for (int i = 0; i < LARG_T_VJ; i++) {
 				for (int j = LONG_T_VJ-1; j >= 0; j--) {
 					if (r->jaune[i][j] == p) {
@@ -467,15 +485,13 @@ Couleur afficher_matrice_pieces(Reserves * r, Couleur couleur, Piece * p) {
 					else if (r->jaune[i][j] ) {
 						afficher_sprite(get_sprite(couleur), i * taille_carre + offset_x, -j * taille_carre + offset_y);
 					}
-					else {
-						afficher_sprite(get_sprite(VIDE), i * taille_carre + offset_x, -j * taille_carre + offset_y);
-					}
 				}
 			}
 			break;
 		case BLEU:
 			offset_x = r->pos_bleu_x;
 			offset_y = r->pos_bleu_y;
+			afficher_sprite(ressources->tapis_bleu, offset_x, offset_y - (LONG_T_BR-1)*taille_carre);
 			for (int i = 0; i < LARG_T_BR; i++) {
 				for (int j = LONG_T_BR-1; j >= 0; j--) {
 					if (r->bleu[i][j] == p) {
@@ -484,15 +500,13 @@ Couleur afficher_matrice_pieces(Reserves * r, Couleur couleur, Piece * p) {
 					else if (r->bleu[i][j]) {
 						afficher_sprite(get_sprite(couleur), i * taille_carre + offset_x, -j * taille_carre + offset_y);
 					}
-					else {
-						afficher_sprite(get_sprite(VIDE), i * taille_carre + offset_x, -j * taille_carre + offset_y);
-					}
 				}
 			}
 			break;
 		case ROUGE:
 			offset_x = r->pos_rouge_x;
 			offset_y = r->pos_rouge_y;
+			afficher_sprite(ressources->tapis_rouge, offset_x, offset_y - (LONG_T_BR-1)*taille_carre);
 			for (int i = 0; i < LARG_T_BR; i++) {
 				for (int j = LONG_T_BR-1; j >= 0; j--) {
 					if (r->rouge[i][j] == p) {
@@ -500,9 +514,6 @@ Couleur afficher_matrice_pieces(Reserves * r, Couleur couleur, Piece * p) {
 					}
 					else if (r->rouge[i][j]) {
 						afficher_sprite(get_sprite(couleur), i * taille_carre + offset_x, -j * taille_carre + offset_y);
-					}
-					else {
-						afficher_sprite(get_sprite(VIDE), i * taille_carre + offset_x, -j * taille_carre + offset_y);
 					}
 				}
 			}
