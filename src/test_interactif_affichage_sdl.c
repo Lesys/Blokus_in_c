@@ -107,6 +107,7 @@ int main(int arc, char * argv[]) {
     // fin affichage_sdl
     free_affichage_sdl();
 
+
 	// fin sdl
 	sdl_close(renderer);
 }
