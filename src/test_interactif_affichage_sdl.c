@@ -20,7 +20,7 @@ int main(int arc, char * argv[]) {
 		return 100;
 	}
 
-    SDL_SetRenderDrawColor(renderer, 240, 240, 240, 255);
+    SDL_SetRenderDrawColor(renderer, 54, 57, 63, 255);
 
 
     // Initialisation des objets de affichage_sdl
@@ -84,9 +84,6 @@ int main(int arc, char * argv[]) {
             afficher_scores_sdl(lj);
             afficher_tour_sdl(lj);
             afficher_bouton_sdl(b_abandonner);
-            afficher_resultats_sdl(lj);
-            afficher_bouton_sdl(b_continuer);
-            afficher_bouton_sdl(b_quitter_partie);
             afficher_pieces_dispo_sdl(r, lj, p);
         }
 
