@@ -1,6 +1,8 @@
 #ifndef AFFICHAGE_SDL_H
 #define AFFICHAGE_SDL_H
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "couleur.h"
 #include "commun.h"
 #include "sprite.h"

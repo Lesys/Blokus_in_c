@@ -8,30 +8,20 @@
 #include "../include/commun.h"
 #include "../include/couleur.h"
 #include "../include/joueur.h"
+#include "../include/sdl.h"
 
-SDL_Window * window;
-SDL_Renderer * renderer;
+extern SDL_Renderer * renderer;
 
 int main(int arc, char * argv[]) {
     Joueur * lj = joueur_liste_creation(4);
 
-    // Initialisation SDl
-    SDL_Init(SDL_INIT_EVERYTHING);
-    TTF_Init();
-    window = SDL_CreateWindow("test_affichage_sdl", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
-    if (!window) {
-        printf("%s", SDL_GetError());
-        return 0;
-    }
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    if (!renderer) {
-        printf("%s", SDL_GetError());
-        return 0;
-    }
+	if (!sdl_init()) {
+		printf("Pas d'accord\n");
+		return 100;
+	}
+
     SDL_SetRenderDrawColor(renderer, 240, 240, 240, 255);
 
-    // initialisation affichage_sdl
-    init_affichage_sdl();
 
     // Initialisation des objets de affichage_sdl
     Couleur plateau[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
@@ -67,7 +57,7 @@ int main(int arc, char * argv[]) {
                         break;
                 }
             }
-            if (event.type == SDL_MOUSEBUTTONDOWN) {
+            if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
                 if (ecran == 1 && curs_hover_bouton(b_jouer)) {
                     ecran++;
                 }
@@ -117,8 +107,7 @@ int main(int arc, char * argv[]) {
     // fin affichage_sdl
     free_affichage_sdl();
 
-    // fin sdl
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+
+	// fin sdl
+	sdl_close(renderer);
 }
