@@ -35,34 +35,27 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	if( (*j) != NULL ){
 		joueur_liste_detruire(j);
 	}
-	/*Affichage sur l'écran*/
-	afficher_nb_joueurs_sdl();
-	afficher_bouton_sdl(b_continuer);
-	afficher_bouton_sdl(b_nb_deux);
-	afficher_bouton_sdl(b_nb_trois);
-	afficher_bouton_sdl(b_nb_quatre);
 
-	while(continuer=1){
-		SDL_WaitEvent(&event);
-		switch(event.type){
-			case NB_JOUEURS_2:
-				nb_joueur=2;
-				break;
-			
-			case NB_JOUEURS_3:
-				nb_joueur=3;
-				break;
-			
-			case NB_JOUEURS_4:
-				nb_joueur=4;
-				break;
-			
-			case CONTINUER:
-				if(nb_joueur < 0)
-					afficher_texte("Merci de séléctionner le nombre de joueur",ressources->police_m,ressources->rouge,largeur_ecran/4,largeur_hauteur/4);
-				else{
-				continuer=0;
-				break;
+	while(continuer == 1){
+		afficher_bouton_sdl();
+		while(SDL_PollEvent(&event)){
+			if(event.type == SDL_MOUSEBUTTONDOWN){
+				if (curs_hover_bouton(b_nb_deux))
+					nb_joueur=2;
+
+				else if (curs_hover_bouton(b_nb_trois))
+					nb_joueur=3;
+
+				else if (curs_hover_bouton(b_nb_quatre))
+					nb_joueur=4;
+
+
+			}
+		}
+		if( nb > 0){
+			continuer=0;
+		}
+		SDL_RenderClear(renderer);
 
 	}
 
@@ -189,17 +182,38 @@ int fin_de_partie(Joueur** j){
 
 	int choix=0;
 	char c;
+	 int continuer=1;
+
+	/*Creation des boutons + evenement */
+        SDL_Event event_fin;
+        Bouton* b_continuer=init_bouton_sdl(CONTINUER);
+        Bouton* b_quitter=init_bouton_sdl(QUITTER);
 
 
 
-	printf("\n Fin de la partie !!! \n");
 
 	/*Mise a jour du score vue que c'est la fin de la partie*/
 	maj_scores(j);
-	afficher_scores(*j);
-
+	afficher_scores_sdl()
+	afficher_resultats_sdl()
 
 	/*On demande a l'utilisateur les choix de fin de partie */
+	afficher_bouton_sdl();
+                while(SDL_PollEvent(&event)){
+                        if(event.type == SDL_MOUSEBUTTONDOWN){
+                                if (curs_hover_bouton(b_continuer))
+                                        choix= 1;
+
+                                else if (curs_hover_bouton(b_quitter)
+                                        choix= 2;
+
+                }
+                if( choix > 0){
+                        continuer=0;
+                }
+                SDL_RenderClear(renderer);
+
+        }
 
 	do{
 		printf("\nVeuillez choisir un choix\n");
