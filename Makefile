@@ -125,7 +125,7 @@ clean:
 
 #Nettoie les dossiers créés et leur contenu
 mrProper: clean clearScreen
-	-rm -R $(DIRLIB) $(DIROBJ)
+	-rm -R $(DIRLIB)/*lib* $(DIROBJ)
 
 #Nettoie l'écran
 clearScreen:
