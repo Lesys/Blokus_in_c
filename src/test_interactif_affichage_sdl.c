@@ -67,7 +67,7 @@ int main(int arc, char * argv[]) {
                         break;
                 }
             }
-            if (event.type == SDL_MOUSEBUTTONDOWN) {
+            if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
                 if (ecran == 1 && curs_hover_bouton(b_jouer)) {
                     ecran++;
                 }
