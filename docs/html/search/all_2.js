@@ -10,5 +10,6 @@ var searchData=
   ['carre_5fget_5fy',['carre_get_y',['../carre_8c.html#a1cf33e9afe2f95956129a250a2a063ff',1,'carre.c']]],
   ['carre_5fhors_5fliste',['carre_hors_liste',['../carre_8c.html#a6c728747487fcb74a628e82536427b86',1,'carre.c']]],
   ['carre_5freinit_5ftab',['carre_reinit_tab',['../carre_8c.html#a9d95666bc7f00ec172bbde917d54feea',1,'carre.c']]],
-  ['couleur',['couleur',['../structjoueur.html#a12a96cd097c1f3954eae7f6b80045458',1,'joueur']]]
+  ['couleur',['couleur',['../structjoueur.html#a12a96cd097c1f3954eae7f6b80045458',1,'joueur']]],
+  ['curs_5fhover_5fbouton',['curs_hover_bouton',['../affichage__sdl_8c.html#abd58e21bc5b1983a489a704c2e1a8b3b',1,'affichage_sdl.c']]]
 ];

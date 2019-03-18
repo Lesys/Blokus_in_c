@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blokus in C: Référence du fichier src/affichage_sdl.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('affichage__sdl_8c.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier affichage_sdl.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fonctions d'affichages en SDL.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;SDL2/SDL.h&gt;</code><br />
+<code>#include &lt;SDL2/SDL_ttf.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;../include/sprite.h&quot;</code><br />
+<code>#include &quot;../include/affichage_sdl.h&quot;</code><br />
+<code>#include &quot;../include/couleur.h&quot;</code><br />
+<code>#include &quot;../include/commun.h&quot;</code><br />
+<code>#include &quot;../include/carre.h&quot;</code><br />
+<code>#include &quot;../include/joueur.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:ac202f574b5c1457d77c88a8fd0b671f2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ac202f574b5c1457d77c88a8fd0b671f2">init_affichage_sdl</a> ()</td></tr>
+<tr class="memdesc:ac202f574b5c1457d77c88a8fd0b671f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise le module affichage_sdl.  <a href="#ac202f574b5c1457d77c88a8fd0b671f2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac202f574b5c1457d77c88a8fd0b671f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b48364e4b76c493331529edd9482e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ab1b48364e4b76c493331529edd9482e3">free_affichage_sdl</a> ()</td></tr>
+<tr class="memdesc:ab1b48364e4b76c493331529edd9482e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quitte le module affichage_sdl.  <a href="#ab1b48364e4b76c493331529edd9482e3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab1b48364e4b76c493331529edd9482e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3eab1fff92c9fd88aae725684caa7b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ae3eab1fff92c9fd88aae725684caa7b5">afficher_plateau_sdl</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
+<tr class="memdesc:ae3eab1fff92c9fd88aae725684caa7b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le plateau de jeu.  <a href="#ae3eab1fff92c9fd88aae725684caa7b5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae3eab1fff92c9fd88aae725684caa7b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac787a6dd8742614bb41ce97e1e050b3b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structreserves.html">Reserves</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ac787a6dd8742614bb41ce97e1e050b3b">init_afficher_pieces_dispo_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:ac787a6dd8742614bb41ce97e1e050b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise les réserves de pièces pour un tour.  <a href="#ac787a6dd8742614bb41ce97e1e050b3b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac787a6dd8742614bb41ce97e1e050b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c33a7392fb48e93e1eac7b838aecc63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a0c33a7392fb48e93e1eac7b838aecc63">afficher_pieces_dispo_sdl</a> (<a class="el" href="structreserves.html">Reserves</a> *r, <a class="el" href="structjoueur.html">Joueur</a> *j, <a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="memdesc:a0c33a7392fb48e93e1eac7b838aecc63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche les pièces disponibles, possibilité d'afficher une pièce aux coordonnées de la souris.  <a href="#a0c33a7392fb48e93e1eac7b838aecc63">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a0c33a7392fb48e93e1eac7b838aecc63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a312c3d3364794215da22ddb9a7397812"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a312c3d3364794215da22ddb9a7397812">free_afficher_pieces_dispo_sdl</a> (<a class="el" href="structreserves.html">Reserves</a> **r)</td></tr>
+<tr class="memdesc:a312c3d3364794215da22ddb9a7397812"><td class="mdescLeft">&#160;</td><td class="mdescRight">Désalloue les réserves.  <a href="#a312c3d3364794215da22ddb9a7397812">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a312c3d3364794215da22ddb9a7397812"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e930c0dff5f60c5ea14734533adea5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ac9e930c0dff5f60c5ea14734533adea5">afficher_scores_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:ac9e930c0dff5f60c5ea14734533adea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche les scores en haut à gauche de l'écran.  <a href="#ac9e930c0dff5f60c5ea14734533adea5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac9e930c0dff5f60c5ea14734533adea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6baa2e79a509c2f10d8114d08170ac1c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a6baa2e79a509c2f10d8114d08170ac1c">afficher_tour_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a6baa2e79a509c2f10d8114d08170ac1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une indication sur qui doit jouer en haut à droite de l'écran.  <a href="#a6baa2e79a509c2f10d8114d08170ac1c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6baa2e79a509c2f10d8114d08170ac1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd58e21bc5b1983a489a704c2e1a8b3b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#abd58e21bc5b1983a489a704c2e1a8b3b">curs_hover_bouton</a> (<a class="el" href="structbouton.html">Bouton</a> *b)</td></tr>
+<tr class="memdesc:abd58e21bc5b1983a489a704c2e1a8b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de savoir si le curseur est au desus d'un bouton.  <a href="#abd58e21bc5b1983a489a704c2e1a8b3b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abd58e21bc5b1983a489a704c2e1a8b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abaf1e2a7bfac82d6570e250e87ab458e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbouton.html">Bouton</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#abaf1e2a7bfac82d6570e250e87ab458e">init_bouton_sdl</a> (Type_bouton b)</td></tr>
+<tr class="memdesc:abaf1e2a7bfac82d6570e250e87ab458e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Création d'un bouton.  <a href="#abaf1e2a7bfac82d6570e250e87ab458e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abaf1e2a7bfac82d6570e250e87ab458e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add838e3595b2f6d6504975ed56508f81"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#add838e3595b2f6d6504975ed56508f81">afficher_bouton_sdl</a> (<a class="el" href="structbouton.html">Bouton</a> *b)</td></tr>
+<tr class="memdesc:add838e3595b2f6d6504975ed56508f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affichage d'un bouton.  <a href="#add838e3595b2f6d6504975ed56508f81">Plus de détails...</a><br /></td></tr>
+<tr class="separator:add838e3595b2f6d6504975ed56508f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f32ce1a6b11de6f6b6df239bf99d621"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a9f32ce1a6b11de6f6b6df239bf99d621">free_bouton_sdl</a> (<a class="el" href="structbouton.html">Bouton</a> **b)</td></tr>
+<tr class="memdesc:a9f32ce1a6b11de6f6b6df239bf99d621"><td class="mdescLeft">&#160;</td><td class="mdescRight">Désallocation d'un bouton.  <a href="#a9f32ce1a6b11de6f6b6df239bf99d621">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9f32ce1a6b11de6f6b6df239bf99d621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c7805f7c17514f5a09911b50e4067f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#aa0c7805f7c17514f5a09911b50e4067f">afficher_resultats_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:aa0c7805f7c17514f5a09911b50e4067f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche les résultats de la partie en cours au millieu de l'écran.  <a href="#aa0c7805f7c17514f5a09911b50e4067f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa0c7805f7c17514f5a09911b50e4067f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fb0113fc493bf2d29c9a4d9d9443f57"><td class="memItemLeft" align="right" valign="top"><a id="a0fb0113fc493bf2d29c9a4d9d9443f57"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a0fb0113fc493bf2d29c9a4d9d9443f57">afficher_titres_sdl</a> ()</td></tr>
+<tr class="memdesc:a0fb0113fc493bf2d29c9a4d9d9443f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le fond de l'écran titre. <br /></td></tr>
+<tr class="separator:a0fb0113fc493bf2d29c9a4d9d9443f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1ac204f2e1c358f82687f6aa71d9217"><td class="memItemLeft" align="right" valign="top"><a id="af1ac204f2e1c358f82687f6aa71d9217"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#af1ac204f2e1c358f82687f6aa71d9217">afficher_nb_joueurs_sdl</a> ()</td></tr>
+<tr class="memdesc:af1ac204f2e1c358f82687f6aa71d9217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le fond et le texte demandant le nombre de joueurs. <br /></td></tr>
+<tr class="separator:af1ac204f2e1c358f82687f6aa71d9217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67958edb56ecdffccc097ee32ba93eb6"><td class="memItemLeft" align="right" valign="top"><a id="a67958edb56ecdffccc097ee32ba93eb6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a67958edb56ecdffccc097ee32ba93eb6">afficher_type_joueur_sdl</a> ()</td></tr>
+<tr class="memdesc:a67958edb56ecdffccc097ee32ba93eb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le fond et le texte demandant le type de joueur. <br /></td></tr>
+<tr class="separator:a67958edb56ecdffccc097ee32ba93eb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30aac1686ad9930300183b74dfaf9bf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a30aac1686ad9930300183b74dfaf9bf3">afficher_saisie_pseudo_sdl</a> (char *str)</td></tr>
+<tr class="memdesc:a30aac1686ad9930300183b74dfaf9bf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le fond et le texte demandant la saisie du pseudo ainsi que le pseudo en cours de saisie.  <a href="#a30aac1686ad9930300183b74dfaf9bf3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a30aac1686ad9930300183b74dfaf9bf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top"><a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b></td></tr>
+<tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbd55f65098835a23efefb99206d24d2"><td class="memItemLeft" align="right" valign="top"><a id="afbd55f65098835a23efefb99206d24d2"></a>
+<a class="el" href="structressources.html">Ressources</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ressources</b></td></tr>
+<tr class="separator:afbd55f65098835a23efefb99206d24d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abad666d1cc6a25a053819be9f01ca2a9"><td class="memItemLeft" align="right" valign="top"><a id="abad666d1cc6a25a053819be9f01ca2a9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>taille_carre</b></td></tr>
+<tr class="separator:abad666d1cc6a25a053819be9f01ca2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5023ec3139e11fad01582dfa79a33c29"><td class="memItemLeft" align="right" valign="top"><a id="a5023ec3139e11fad01582dfa79a33c29"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>largeur_ecran</b></td></tr>
+<tr class="separator:a5023ec3139e11fad01582dfa79a33c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca3d24765652ccd0a813d2a84d0bb90a"><td class="memItemLeft" align="right" valign="top"><a id="aca3d24765652ccd0a813d2a84d0bb90a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td></tr>
+<tr class="separator:aca3d24765652ccd0a813d2a84d0bb90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p class="">Fonctions d'affichages en SDL. </p>
+<p class="">Diverses fonctions d'affichage en interface graphique pour le jeu du blokus </p><dl class="section author"><dt>Auteur</dt><dd>BASTIDE Robin </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="add838e3595b2f6d6504975ed56508f81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add838e3595b2f6d6504975ed56508f81">&#9670;&nbsp;</a></span>afficher_bouton_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_bouton_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbouton.html">Bouton</a> *&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affichage d'un bouton. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Bouton à afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0c33a7392fb48e93e1eac7b838aecc63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c33a7392fb48e93e1eac7b838aecc63">&#9670;&nbsp;</a></span>afficher_pieces_dispo_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_pieces_dispo_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structreserves.html">Reserves</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structpiece.html">Piece</a> *&#160;</td>
+          <td class="paramname"><em>p</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche les pièces disponibles, possibilité d'afficher une pièce aux coordonnées de la souris. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Réserves de pièces </td></tr>
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+    <tr><td class="paramname">p</td><td>Pièce à afficher aux coordonnées de la souris (NULL pour afficher toutes les pièces à leur place) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae3eab1fff92c9fd88aae725684caa7b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3eab1fff92c9fd88aae725684caa7b5">&#9670;&nbsp;</a></span>afficher_plateau_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_plateau_sdl </td>
+          <td>(</td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le plateau de jeu. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pl</td><td>Plateau à afficher </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa0c7805f7c17514f5a09911b50e4067f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c7805f7c17514f5a09911b50e4067f">&#9670;&nbsp;</a></span>afficher_resultats_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_resultats_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche les résultats de la partie en cours au millieu de l'écran. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a30aac1686ad9930300183b74dfaf9bf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30aac1686ad9930300183b74dfaf9bf3">&#9670;&nbsp;</a></span>afficher_saisie_pseudo_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_saisie_pseudo_sdl </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le fond et le texte demandant la saisie du pseudo ainsi que le pseudo en cours de saisie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Pseudo en cours de saisie </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac9e930c0dff5f60c5ea14734533adea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9e930c0dff5f60c5ea14734533adea5">&#9670;&nbsp;</a></span>afficher_scores_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_scores_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche les scores en haut à gauche de l'écran. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6baa2e79a509c2f10d8114d08170ac1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6baa2e79a509c2f10d8114d08170ac1c">&#9670;&nbsp;</a></span>afficher_tour_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_tour_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche une indication sur qui doit jouer en haut à droite de l'écran. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abd58e21bc5b1983a489a704c2e1a8b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd58e21bc5b1983a489a704c2e1a8b3b">&#9670;&nbsp;</a></span>curs_hover_bouton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int curs_hover_bouton </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbouton.html">Bouton</a> *&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permet de savoir si le curseur est au desus d'un bouton. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Bouton que l'on veut tester </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>1 si la souris est au dessus, 0 sinon </dd></dl>
+
+</div>
+</div>
+<a id="ab1b48364e4b76c493331529edd9482e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b48364e4b76c493331529edd9482e3">&#9670;&nbsp;</a></span>free_affichage_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_affichage_sdl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Quitte le module affichage_sdl. </p>
+<p class="">Fonction à appeler après le dernier appel aux fonctions du fichier <a class="el" href="affichage__sdl_8c.html" title="Fonctions d&#39;affichages en SDL.">affichage_sdl.c</a> </p>
+
+</div>
+</div>
+<a id="a312c3d3364794215da22ddb9a7397812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a312c3d3364794215da22ddb9a7397812">&#9670;&nbsp;</a></span>free_afficher_pieces_dispo_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_afficher_pieces_dispo_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structreserves.html">Reserves</a> **&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Désalloue les réserves. </p>
+<p class="">Fonction à appeler à la fin du tour </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">r</td><td>Réserves de pièces </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9f32ce1a6b11de6f6b6df239bf99d621"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f32ce1a6b11de6f6b6df239bf99d621">&#9670;&nbsp;</a></span>free_bouton_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_bouton_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structbouton.html">Bouton</a> **&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Désallocation d'un bouton. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Bouton à désallouer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac202f574b5c1457d77c88a8fd0b671f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac202f574b5c1457d77c88a8fd0b671f2">&#9670;&nbsp;</a></span>init_affichage_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int init_affichage_sdl </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise le module affichage_sdl. </p>
+<p class="">Fonction à appeler avant tout appel a des fonctions de <a class="el" href="affichage__sdl_8c.html" title="Fonctions d&#39;affichages en SDL.">affichage_sdl.c</a> </p><dl class="section return"><dt>Renvoie</dt><dd>1 si tout est ok, 0 sinon </dd></dl>
+
+</div>
+</div>
+<a id="ac787a6dd8742614bb41ce97e1e050b3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac787a6dd8742614bb41ce97e1e050b3b">&#9670;&nbsp;</a></span>init_afficher_pieces_dispo_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structreserves.html">Reserves</a>* init_afficher_pieces_dispo_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise les réserves de pièces pour un tour. </p>
+<p class="">Fonction à appeller avant le début du tour pour obtenir les réserves </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Les réserves de pièces pour ce tour </dd></dl>
+
+</div>
+</div>
+<a id="abaf1e2a7bfac82d6570e250e87ab458e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaf1e2a7bfac82d6570e250e87ab458e">&#9670;&nbsp;</a></span>init_bouton_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structbouton.html">Bouton</a>* init_bouton_sdl </td>
+          <td>(</td>
+          <td class="paramtype">Type_bouton&#160;</td>
+          <td class="paramname"><em>b</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Création d'un bouton. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>Type de bouton à créer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le bouton créé </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="affichage__sdl_8c.html">affichage_sdl.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+  </ul>
+</div>
+</body>
+</html>
