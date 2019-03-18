@@ -12,8 +12,8 @@
 #include "../include/affichage.h"
 #include "../include/carre.h"
 
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * \fn Piece* demander_piece(Joueur* j)
