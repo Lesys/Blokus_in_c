@@ -90,6 +90,8 @@ void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p);
 
 void free_afficher_pieces_dispo_sdl(Reserves ** r);
 
+Piece * curs_hover_piece(Reserves * r, Couleur couleur);
+
 void afficher_scores_sdl(Joueur * j); // Affichage scores en haut à gauche écran
 
 void afficher_tour_sdl(Joueur * j);

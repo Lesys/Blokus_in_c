@@ -648,6 +648,64 @@ void free_afficher_pieces_dispo_sdl(Reserves ** r) {
 }
 
 /**
+ * \fn int curs_hover_piece(Reserves * r, Couleur couleur)
+ * \brief Permet de savoir si le curseur est au desus d'une pièce de la couleur choisie
+ * \param r Réserves de pièces
+ * \param couleur Couleur des pièces que l'on veut tester
+ * \return Un pointeur sur la pièce si la souris est au dessus d'une, NULL sinon
+ */
+Piece * curs_hover_piece(Reserves * r, Couleur couleur) {
+	
+	int x, y;
+	// Récupération des coordonnées de la souris
+	SDL_GetMouseState(&x, &y);
+
+	int x_gauche, x_droite, y_bas, y_haut;
+	switch (couleur) {
+		case JAUNE:
+			x_gauche = r->pos_jaune_x;
+			x_droite = x_gauche + LARG_T_VJ*taille_carre;
+			y_bas = r->pos_jaune_y;
+			y_haut = y_bas - LONG_T_VJ*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->jaune[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		case VERT:
+			x_gauche = r->pos_vert_x;
+			x_droite = x_gauche + LARG_T_VJ*taille_carre;
+			y_bas = r->pos_vert_y;
+			y_haut = y_bas - LONG_T_VJ*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->vert[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		case BLEU:
+			x_gauche = r->pos_bleu_x;
+			x_droite = x_gauche + LARG_T_BR*taille_carre;
+			y_bas = r->pos_bleu_y;
+			y_haut = y_bas - LONG_T_BR*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->bleu[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		case ROUGE:
+			x_gauche = r->pos_rouge_x;
+			x_droite = x_gauche + LARG_T_BR*taille_carre;
+			y_bas = r->pos_rouge_y;
+			y_haut = y_bas - LONG_T_BR*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->rouge[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		default:
+			return NULL;
+			break;
+	}
+	return NULL;
+}
+
+/**
  * \fn static void afficher_texte(char * str, TTF_Font * police, SDL_Color couleur, int x, int y)
  * \brief Affiche du texte centré par rapport à une position donnée
  * \param str Chaine de caractères à afficher
