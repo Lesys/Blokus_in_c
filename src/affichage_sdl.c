@@ -191,17 +191,19 @@ void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
  * \return Un pointeur sur la pièce si la souris est au dessus d'une de la bonne couleur, NULL sinon
  */
 int curs_hover_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int *x, int *y) {
+	itn x_mouse, y_mouse;
+
 	// Récupération des coordonnées de la souris
-	SDL_GetMouseState(&x, &y);
+	SDL_GetMouseState(&x_mouse, &y_mouse);
 
 	int x_gauche, x_droite, y_bas, y_haut;
         x_gauche = largeur_ecran/2 - 10*taille_carre;
         x_droite = largeur_ecran/2 + 10*taille_carre;
         y_bas = hauteur_ecran/2 - 10*taille_carre;
         y_haut = hauteur_ecran/2 + 10*taille_carre;
-        if (*x > x_gauche && *x < x_droite && *y > y_haut && *y < y_bas) {
-            *x = (x-x_gauche)/taille_carre;
-            *y = -1*(y-y_bas)/taille_carre+1;
+        if (x_mouse > x_gauche && x_mouse < x_droite && y_mouse > y_haut && y_mouse < y_bas) {
+            *x = (x_mouse - x_gauche) / taille_carre;
+            *y = -1 * (y_mouse - y_bas) / taille_carre+1;
             return 1;
         }
         else {
