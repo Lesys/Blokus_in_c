@@ -246,6 +246,8 @@ int fin_de_partie_sdl(Joueur** j){
 
 	/*On demande a l'utilisateur les choix de fin de partie */
 	while(continuer){
+		SDL_RenderClear(renderer);
+
         	while(SDL_PollEvent(&event_fin)){
                 	if(event_fin.type == SDL_MOUSEBUTTONDOWN){
                         	if (curs_hover_bouton(b_continuer))
@@ -262,7 +264,7 @@ int fin_de_partie_sdl(Joueur** j){
 		afficher_resultats_sdl(*j);
 		afficher_bouton_sdl(b_continuer);
 		afficher_bouton_sdl(b_quitter);
-	        SDL_RenderClear(renderer);
+	        SDL_RenderPresent(renderer);
 	}
 
 	return choix;
