@@ -72,6 +72,7 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 	continuer=1;
 	Joueur* j_pivot = *j;
 	do {
+		int compteur = 0;
 		continuer=1;
 		SDL_StartTextInput();
 		while(continuer){
@@ -85,12 +86,14 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 				else if(event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_RETURN)
 					continuer = 0;
 
-				else if(event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_CANCEL){
-					printf("supprime\n");
-					event_saisi.text.text[strlen(event_saisi.text.text)-1]='\0';
+				else if(event_saisi.key.keysym.sym == SDLK_BACKSPACE){
+					if (compteur >= 0) 
+						(*j)->pseudo[compteur--] = '\0';
 				}
-				else if(event_saisi.type == SDL_TEXTINPUT)
+				else if(event_saisi.type == SDL_TEXTINPUT) {
 					strcat((*j)->pseudo, event_saisi.text.text);
+					compteur++;
+				}
 			}
 
 			afficher_saisie_pseudo_sdl((*j)->pseudo);
@@ -99,6 +102,8 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 		SDL_StopTextInput();
 	        /* Réalloue la bonne taille pour le pseudo */
 	        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
+
+		(*j)->pseudo[strlen((*j)->pseudo)]='\0';
 
 		*j=joueur_suivant(*j);
 	} while (*j != j_pivot);
