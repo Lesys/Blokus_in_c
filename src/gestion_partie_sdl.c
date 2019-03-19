@@ -5,29 +5,29 @@
 	*\author JODEAU Alexandre
 
 */
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include "../include/commun.h"
 #include "../include/joueur.h"
 #include "../include/affichage.h"
 #include "../include/gestion_tour.h"
-#include "../include/gestion_partie.h"
+#include "../include/gestion_partie_sdl.h"
 #include "../include/affichage_sdl.h"
+extern SDL_Renderer* renderer;
 
 /**
-	*\fn void initialisation_partie(Joueur **j)
+	*\fn void initialisation_partie_sdl(Joueur **j)
 	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
 	* Si la liste existe, on la supprime puis on en crée une autre.
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
 */
-void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
+void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
 	int nb_joueur=-1;
 	int continuer=1;
 
 /*Creation des boutons + evenement */
 	SDL_Event event;
-	Bouton* b_continuer=init_bouton_sdl(CONTINUER);
 	Bouton* b_nb_deux=init_bouton_sdl(NB_JOUEURS_2);
 	Bouton* b_nb_trois=init_bouton_sdl(NB_JOUEURS_3);
 	Bouton* b_nb_quatre=init_bouton_sdl(NB_JOUEURS_4);
@@ -37,7 +37,7 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	}
 
 	while(continuer == 1){
-		afficher_bouton_sdl();
+		SDL_RenderClear(renderer);
 		while(SDL_PollEvent(&event)){
 			if(event.type == SDL_MOUSEBUTTONDOWN){
 				if (curs_hover_bouton(b_nb_deux))
@@ -52,14 +52,57 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 
 			}
 		}
-		if( nb > 0){
+		if( nb_joueur > 0){
 			continuer=0;
 		}
-		SDL_RenderClear(renderer);
+		/*Partie Affichage*/
+		afficher_nb_joueurs_sdl();
+		afficher_bouton_sdl(b_nb_deux);
+		afficher_bouton_sdl(b_nb_trois);
+		afficher_bouton_sdl(b_nb_quatre);
+		SDL_RenderPresent(renderer);
 
 	}
+	free_bouton_sdl(&b_nb_deux);
+	free_bouton_sdl(&b_nb_trois);
+	free_bouton_sdl(&b_nb_quatre);
 
 	*j=joueur_liste_creation(nb_joueur);
+	SDL_Event event_saisi;
+	continuer=1;
+	Joueur* j_pivot = *j;
+	do {
+		continuer=1;
+		SDL_StartTextInput();
+		while(continuer){
+
+			SDL_RenderClear(renderer);
+
+			while(SDL_PollEvent(&event_saisi)){
+
+				if(event_saisi.type == SDL_QUIT)
+					return;
+				else if(event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_RETURN)
+					continuer = 0;
+
+				else if(event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_CANCEL){
+					printf("supprime\n");
+					event_saisi.text.text[strlen(event_saisi.text.text)-1]='\0';
+				}
+				else if(event_saisi.type == SDL_TEXTINPUT)
+					strcat((*j)->pseudo, event_saisi.text.text);
+			}
+
+			afficher_saisie_pseudo_sdl((*j)->pseudo);
+			SDL_RenderPresent(renderer);
+		}
+		SDL_StopTextInput();
+	        /* Réalloue la bonne taille pour le pseudo */
+	        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
+
+		*j=joueur_suivant(*j);
+	} while (*j != j_pivot);
+
 }
 
 
@@ -71,7 +114,7 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	*\param j Pointeur sur une liste de joueur afin de reinitialiser la liste de piece de chaque Joueur.
 */
 
-void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
+void initialisation_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	int i,x;
 
 	for(i=0;i < TAILLE_PLATEAU;i++){
@@ -97,7 +140,7 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 	*\param j Prends une liste de Joueur.
 */
 
-void maj_scores(Joueur** j) {
+void maj_scores_sdl(Joueur** j) {
 
     // On garde l'adresse du premier joueur pour
     // savoir quand arrêter
@@ -135,7 +178,7 @@ void maj_scores(Joueur** j) {
 
 
 
-int joueur_abandon(Joueur* j){
+int joueur_abandon_sdl(Joueur* j){
 	Joueur* pivot;
 	pivot=j;
 	j=joueur_suivant(j);
@@ -171,7 +214,7 @@ int joueur_abandon(Joueur* j){
 
 /* Affiche les résultats,mets à jour le score ,propose les options de fin de partie et renvoie le résultat correspondant */
 
-int fin_de_partie(Joueur** j){
+int fin_de_partie_sdl(Joueur** j){
 	/*Si le joueur n'a plus de piece dans sa liste, abandonne le joueur automatiquement*/
 	if(joueur_liste_piece(*j) == NULL)
 		joueur_abandonne(*j);
@@ -187,48 +230,36 @@ int fin_de_partie(Joueur** j){
 	/*Creation des boutons + evenement */
         SDL_Event event_fin;
         Bouton* b_continuer=init_bouton_sdl(CONTINUER);
-        Bouton* b_quitter=init_bouton_sdl(QUITTER);
+        Bouton* b_quitter=init_bouton_sdl(QUITTER_PARTIE);
 
 
 
 
 	/*Mise a jour du score vue que c'est la fin de la partie*/
 	maj_scores(j);
-	afficher_scores_sdl()
-	afficher_resultats_sdl()
+	afficher_scores_sdl(*j);
+	afficher_resultats_sdl(*j);
 
 	/*On demande a l'utilisateur les choix de fin de partie */
-	afficher_bouton_sdl();
-                while(SDL_PollEvent(&event)){
-                        if(event.type == SDL_MOUSEBUTTONDOWN){
-                                if (curs_hover_bouton(b_continuer))
-                                        choix= 1;
+	afficher_bouton_sdl(b_continuer);
+	afficher_bouton_sdl(b_quitter);
 
-                                else if (curs_hover_bouton(b_quitter)
-                                        choix= 2;
+        while(SDL_PollEvent(&event_fin)){
+                if(event_fin.type == SDL_MOUSEBUTTONDOWN){
+                        if (curs_hover_bouton(b_continuer))
+                                choix= 1;
 
+                        else if (curs_hover_bouton(b_quitter))
+                                choix= 2;
+
+	        }
+  		if( choix > 0){
+                	continuer=0;
                 }
-                if( choix > 0){
-                        continuer=0;
-                }
-                SDL_RenderClear(renderer);
-
         }
-
-	do{
-		printf("\nVeuillez choisir un choix\n");
-		printf("1: Recommencez une manche\n");
-		printf("2: Recommencez une partie\n");
-		printf("3: Quittez le programme\n");
-		scanf(" %c",&c);
-
-		/*Si l'utilisateur ne rentre pas un entier*/
-		if(isdigit(c)){
-			choix=atoi(&c);
-		}
-
-
-	} while(!isdigit(c) || choix < 1 || choix > 3);
+	afficher_bouton_sdl(b_continuer);
+	afficher_bouton_sdl(b_quitter);
+        SDL_RenderClear(renderer);
 
 	if(choix == 3)
 		afficher_resultats(*j);
@@ -245,7 +276,7 @@ int fin_de_partie(Joueur** j){
 
 /*Appel le prochain joueur à jouer et modifie la liste Joueur */
 
-Joueur* tour_suivant(Joueur* j){
+Joueur* tour_suivant_sdl(Joueur* j){
 	j=joueur_suivant(j);
 	char phrase[50];
 	sprintf(phrase, "\n%s : A toi de jouer\n", joueur_pseudo(j));
@@ -264,7 +295,7 @@ Joueur* tour_suivant(Joueur* j){
 
 
 /*Appel toute les fonctions pour réalisé un tour*/
-void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
+void jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int x= -1 , y = -1, a;
 	Piece* piece;
 	char c;
@@ -326,7 +357,7 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 */
 
 
-int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
+int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
 
 	do{
@@ -358,7 +389,7 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 */
 
 
-void jouer_partie(){ /*Appel de toute les fonctions partie */
+void jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	do{
