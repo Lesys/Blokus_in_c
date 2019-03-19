@@ -4,9 +4,12 @@
 #include "joueur.h"
 #include "carre.h"
 #include "couleur.h"
+#include "affichage_sdl.h"
 
-void selection_piece(Joueur* j);
+void demander_orientation(Piece* p, Joueur* j);
 
-void gestion_jeu(Joueur* j);
+void selection_piece(Joueur* j, Reserves* r, Piece** p, int* run);
+
+void gestion_jeu(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
 
 #endif

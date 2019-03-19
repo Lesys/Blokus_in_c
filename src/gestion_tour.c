@@ -250,35 +250,35 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
 
             int valide;
 
-	    /* Tant que les coordonnées saisies ne sont pas dans le Plateau */
+	        /* Tant que les coordonnées saisies ne sont pas dans le Plateau */
             do
             {
-	        c2 = piece_liste_carre(pi);
+                c2 = piece_liste_carre(pi);
 
                 valide = 1;
 
-		printf("Vous devez jouer dans votre coin\n");
-		printf("A quelles coordonnees voulez-vous jouer la pièce ? (1 a 20) :\n");
-		printf("Entrez la ligne : ");
-		scanf("%d", x);
-		printf("Entrez la colonne : ");
-		scanf("%d", y);
-		*x = *x - 1;
-		*y = *y - 1;
+        		printf("Vous devez jouer dans votre coin\n");
+        		printf("A quelles coordonnees voulez-vous jouer la pièce ? (1 a 20) :\n");
+        		printf("Entrez la ligne : ");
+        		scanf("%d", x);
+        		printf("Entrez la colonne : ");
+        		scanf("%d", y);
+        		*x = *x - 1;
+        		*y = *y - 1;
 
-        do
-        {
-		    /* Si un Carre n'est pas dans le plateau */
-		    if(((*x + carre_get_x(c) < 0) || (*x + carre_get_x(c) > 19)) || ((*y + carre_get_y(c) < 0) || (*y + carre_get_y(c) > 19)))
-		    {
-                    	valide = 0;
-		    }
+                do
+                {
+        		    /* Si un Carre n'est pas dans le plateau */
+        		    if(((*x + carre_get_x(c) < 0) || (*x + carre_get_x(c) > 19)) || ((*y + carre_get_y(c) < 0) || (*y + carre_get_y(c) > 19)))
+        		    {
+                        valide = 0;
+        		    }
 
-		    c = carre_get_suiv(c);
+        		    c = carre_get_suiv(c);
 
                 } while(c != c2);
 
-	    } while((((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19))) || !(valide));
+            } while((((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19))) || !(valide));
 
             do
             {
