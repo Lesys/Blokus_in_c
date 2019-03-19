@@ -10,6 +10,6 @@ void demander_orientation(Piece* p, Joueur* j);
 
 void selection_piece(Joueur* j, Reserves* r, Piece** p, int* run);
 
-void gestion_jeu(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
+int gestion_jeu(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
 
 #endif

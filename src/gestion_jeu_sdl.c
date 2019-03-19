@@ -125,26 +125,19 @@ int verifier_coordonnees(Couleur pl[20][20], Piece* pi, int x, int y, Joueur* j)
         c = piece_liste_carre(pi);
 
         c2 = c;
-        fprintf(stderr, "1\n");
 
-        fprintf(stderr, "Position coin: %d %d", x_depart, y_depart);
         do
         {
-            fprintf(stderr, "Coord carre: %d %d", carre_get_x(c), carre_get_y(c));
             if((y + carre_get_y(c) == y_depart) && (x + carre_get_x(c) == x_depart))
             {
-                fprintf(stderr, "2\n");
                 coin = 1;
             }
             c = carre_get_suiv(c);
         } while(coin == 0 && c != c2);
-        fprintf(stderr, "3\n");
         if(!coin)
         {
-            fprintf(stderr, "4\n");
             return 0;
         }
-        fprintf(stderr, "5\n");
         return 1;
     }
     else
@@ -190,60 +183,58 @@ void poser_piece_sdl(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
     j->liste_piece = *p;
 }
 
-void selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reserves* r, Piece** p, Bouton* b, int* run)
+int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reserves* r, Piece** p, Bouton* b)
 {
+    int etat = -1;
+
     SDL_Event event;
 
     while(SDL_PollEvent(&event))
     {
         if(event.type == SDL_QUIT)
         {
-            *run = 0;
+            etat = 2;
         }
         else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
             *p = curs_hover_piece(r, joueur_couleur(j));
             if(curs_hover_bouton(b))
             {
-                *run = 0;
+                etat = 1;
             }
         }
         else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
         {
             int x, y;
-            fprintf(stderr, "relachement\n");
             if(curs_hover_plateau(pl, &x, &y))
             {
-                fprintf(stderr, "curs hover plateau : %d %d\n", x, y);
                 if(verifier_coordonnees(pl, *p, x, y, j))
                 {
-                    fprintf(stderr, "coord correctes\n");
                     poser_piece_sdl(pl, *p, j, x, y);
                     *p = NULL;
+                    etat = 0;
                 }
                 else
                 {
-                    fprintf(stderr, "coord incorrectes\n");
                     *p = NULL;
                 }
             }
             else
             {
-                fprintf(stderr, "curs not hover plateau\n");
                 *p = NULL;
             }
-            fprintf(stderr, "fin\n");
         }
         else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_RIGHT && *p != NULL)
         {
             changer_orientation(*p);
         }
     }
+    return etat;
 }
 
-void gestion_jeu(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
+int gestion_jeu(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
 {
-    int run = 1;
+    int etat = -1;
 
     Piece* p = NULL;
 
@@ -251,29 +242,25 @@ void gestion_jeu(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
 
     Bouton* b = init_bouton_sdl(ABANDONNER);
 
-    while(run)
+    while(etat == -1)
     {
         SDL_RenderClear(renderer);
 
-        selection_piece(pl, j, r, &p, b, &run);
+        etat = selection_piece(pl, j, r, &p, b);
 
-        fprintf(stderr, "fin selec\n");
         afficher_plateau_sdl(pl);
-        fprintf(stderr, "fin affichage palteau\n");
         afficher_pieces_dispo_sdl(r, j, p);
-        fprintf(stderr, "fin affichage pieces\n");
         afficher_scores_sdl(j);
-        fprintf(stderr, "fin score\n");
         afficher_tour_sdl(j);
-        fprintf(stderr, "fin tour\n");
         afficher_bouton_sdl(b);
-        fprintf(stderr, "fin affichage bouton\n");
 
         SDL_RenderPresent(renderer);
     }
 
     free_afficher_pieces_dispo_sdl(&r);
     free_bouton_sdl(&b);
+
+    return etat;
 }
 
 
