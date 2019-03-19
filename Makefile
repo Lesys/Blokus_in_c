@@ -18,7 +18,7 @@ VPATH = lib:build:bin:src:include
 #Options pour les lignes de code faites pour la confection des fichiers objets
 DIROBJ := bin/
 CFLAGS += -L./lib/SDL/lib -I./lib/SDL/include -lSDL2 -lSDL2_ttf -lSDL2_image -fPIC -Wall -std=c99
-OBJETS = gestion_tour.o gestion_partie.o joueur.o carre.o affichage.o couleur.o piece.o sprite.o affichage_sdl.o sdl.o test_gestion_partie_sdl.o gestion_jeu_sdl.o
+OBJETS = gestion_tour.o gestion_partie.o joueur.o carre.o affichage.o couleur.o piece.o sprite.o affichage_sdl.o sdl.o gestion_jeu_sdl.o gestion_partie_sdl.o
 FICHIERSC = $(OBJETS:.o=.c)
 
 #Nom du programme principal
@@ -43,7 +43,7 @@ REALNAME := $(SONAME)$(MINEUR)$(CORRECTION)
 #Variables pour la confection des executables de test :
 TESTDIR := $(DIRBUILD)test/
 TESTDIRC := src/
-TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o test_affichage_sdl.o test_interactif_affichage_sdl.o test_sdl.o test_gestion_jeu_sdl.o
+TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o test_affichage_sdl.o test_interactif_affichage_sdl.o test_sdl.o test_gestion_jeu_sdl.o test_gestion_partie_sdl.c
 TESTFICHIERSC = $(TESTOBJETS:.o=.c)
 TESTEXEC = $(TESTOBJETS:%.o=%)
 #TESTSTATIC = test_blokus.static
