@@ -10,8 +10,8 @@
 #include <stdlib.h>
 #include "../include/commun.h"
 #include "../include/joueur.h"
-#include "../include/affichage.h"
-#include "../include/gestion_tour.h"
+//#include "../include/affichage.h"
+#include "../include/gestion_jeu_sdl.h"
 #include "../include/gestion_partie_sdl.h"
 #include "../include/affichage_sdl.h"
 extern SDL_Renderer* renderer;
@@ -225,12 +225,11 @@ int fin_de_partie_sdl(Joueur** j){
 		joueur_abandonne(*j);
 
 	/*Si tous les joueurs n'ont pas abandonnés*/
-	if(!(joueur_abandon(*j)))
+	if(!(joueur_abandon_sdl(*j)))
 		return 0;
 
 	int choix=0;
-	char c;
-	 int continuer=1;
+	int continuer=1;
 
 	/*Creation des boutons + evenement */
         SDL_Event event_fin;
@@ -241,33 +240,31 @@ int fin_de_partie_sdl(Joueur** j){
 
 
 	/*Mise a jour du score vue que c'est la fin de la partie*/
-	maj_scores(j);
+	maj_scores_sdl(j);
 	afficher_scores_sdl(*j);
-	afficher_resultats_sdl(*j);
+
 
 	/*On demande a l'utilisateur les choix de fin de partie */
-	afficher_bouton_sdl(b_continuer);
-	afficher_bouton_sdl(b_quitter);
+	while(continuer){
+        	while(SDL_PollEvent(&event_fin)){
+                	if(event_fin.type == SDL_MOUSEBUTTONDOWN){
+                        	if (curs_hover_bouton(b_continuer))
+                                	choix= 1;
 
-        while(SDL_PollEvent(&event_fin)){
-                if(event_fin.type == SDL_MOUSEBUTTONDOWN){
-                        if (curs_hover_bouton(b_continuer))
-                                choix= 1;
+                        	else if (curs_hover_bouton(b_quitter))
+                                	choix= 3;
 
-                        else if (curs_hover_bouton(b_quitter))
-                                choix= 2;
+			        }
+				if( choix > 0){
+			        	continuer=0;
+			        }
+		}
+		afficher_resultats_sdl(*j);
+		afficher_bouton_sdl(b_continuer);
+		afficher_bouton_sdl(b_quitter);
+	        SDL_RenderClear(renderer);
+	}
 
-	        }
-  		if( choix > 0){
-                	continuer=0;
-                }
-        }
-	afficher_bouton_sdl(b_continuer);
-	afficher_bouton_sdl(b_quitter);
-        SDL_RenderClear(renderer);
-
-	if(choix == 3)
-		afficher_resultats(*j);
 	return choix;
 }
 
@@ -283,9 +280,6 @@ int fin_de_partie_sdl(Joueur** j){
 
 Joueur* tour_suivant_sdl(Joueur* j){
 	j=joueur_suivant(j);
-	char phrase[50];
-	sprintf(phrase, "\n%s : A toi de jouer\n", joueur_pseudo(j));
-	afficher_str_couleur(joueur_couleur(j), phrase);
 	return j;
 }
 
@@ -301,51 +295,21 @@ Joueur* tour_suivant_sdl(Joueur* j){
 
 /*Appel toute les fonctions pour réalisé un tour*/
 void jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int x= -1 , y = -1, a;
-	Piece* piece;
-	char c;
+	int valeur_r;
 	if(joueur_a_abandonne(*j)){
 		printf("\n Ce joueur à abandonne\n");
-		*j=tour_suivant(*j);
+		*j=tour_suivant_sdl(*j);
 	}
 	else{
-		do{
-			if(x == -1 && y == -1){
-				piece=NULL;
-
-				do {
-					printf("Voulez vous posez une piece? Saisir [1] pour oui [0] pour abandonnez\n");
-					scanf(" %c",&c);
-
-					/* Si l'utilisateur ne rentre pas un entier*/
-					if (isdigit(c))
-						a = atoi(&c);
-
-				} while(!isdigit(c) || a < 0 || a > 1);
-
-				if(!a){
+		valeur_r=gestion_jeu(pl,*j);
+				if(valeur_r == 1){
 					printf("Vous avez abandonné\n");
 					joueur_abandonne(*j);
 				}
-			}
-//			system("clear");
-			afficher_plateau(pl);
-			if(!joueur_a_abandonne(*j)){
-				piece = demander_piece(*j);
-
-				afficher_plateau(pl);
-
-				demander_orientation(piece,*j);
-				choisir_coordonnee(pl,piece,&x,&y,*j);
-			}
-		} while((x < 0 || y < 0 || x > (TAILLE_PLATEAU -1) || y > (TAILLE_PLATEAU  -1)) && (!joueur_a_abandonne(*j)));
+				//if(valeur_r == 2)
+			
 		if(!(joueur_a_abandonne(*j)))
-			poser_piece(pl,piece,*j,x,y);
-
-//		system("clear");
-		afficher_plateau(pl);
-
-		*j=tour_suivant(*j);
+			*j=tour_suivant_sdl(*j);
 
 	}
 }
@@ -371,13 +335,13 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 		afficher_str_couleur(joueur_couleur(j), phrase);
 
 		do{
-			jouer_tour(pl,&j);
-			choix=fin_de_partie(&j);
+			jouer_tour_sdl(pl,&j);
+			choix=fin_de_partie_sdl(&j);
 		} while(!(choix));
 
 
 
-		initialisation_manche(pl,&j);
+		initialisation_manche_sdl(pl,&j);
 
 
 	} while(choix == 1);
@@ -398,10 +362,10 @@ void jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	do{
-		initialisation_partie(&j);
-		initialisation_manche(pl, &j);
+		initialisation_partie_sdl(&j);
+		initialisation_manche_sdl(pl, &j);
 
-	} while(jouer_manche(pl,j)== 2);
+	} while(jouer_manche_sdl(pl,j)== 2);
 	joueur_liste_detruire(&j);
 
 }

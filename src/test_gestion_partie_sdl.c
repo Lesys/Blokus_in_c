@@ -20,7 +20,7 @@ int main(){
 	Joueur* j;
 	j=NULL;
 
-// Initialisation_partie
+/* Initialisation_partie
 
 	printf("TEST initialisation_partie\n");
 
@@ -31,6 +31,7 @@ int main(){
 	else{
 		printf("TEST %s\n",j->pseudo);
 	}
+*/
 /* Tour_suivant
 	printf("TEST Tour_suivant\n");
 	//AVANT
@@ -57,13 +58,13 @@ int main(){
 	printf("%d valeur",fin_de_partie(j));
 	printf("TEST FIN FIN DE PARTIE\n");
 */
-/*Jouer Partie
+/*Jouer Partie*/
 
 	printf("TEST DEBUT jouer_partie()\n");
-	jouer_partie();
+	jouer_partie_sdl();
 	printf("TEST FIN JOUER_PARTIE()\n");
 
-*/
+
 /* Jouer_Manche */
 
 	//jouer_manche(pl,*j);
