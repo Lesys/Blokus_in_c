@@ -79,7 +79,7 @@ int init_affichage_sdl() {
 	// Définition de la taille d'un carré
 	// Cette taille sera utilisé comme "unité de mesure"
 	// dans la suite de ce fichier
-	taille_carre = hauteur_ecran/40;
+	taille_carre = hauteur_ecran/42;
 
 	// Initialisation du struc ressources
 	ressources = malloc(sizeof(Ressources));

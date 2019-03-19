@@ -10,7 +10,7 @@
 #define L_FENETRE 1280
 #define H_FENETRE 720
 #define LARG_T_VJ 38
-#define LONG_T_VJ 8
+#define LONG_T_VJ 9
 #define LARG_T_BR 18
 #define LONG_T_BR 18
 
