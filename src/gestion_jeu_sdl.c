@@ -25,11 +25,12 @@ void selection_piece(Joueur* j)
     Reserves* r = init_afficher_pieces_dispo_sdl(j);
     Piece* p;
 
-    while(SDL_PollEvent(&event))
+    if(SDL_PollEvent(&event))
     {
         if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
             /*p = curs_hover_piece();*/
+            printf("salut");
         }
     }
 
