@@ -191,8 +191,6 @@ void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
  * \return Un pointeur sur la pièce si la souris est au dessus d'une de la bonne couleur, NULL sinon
  */
 int curs_hover_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int *x, int *y) {
-	
-	int x, y;
 	// Récupération des coordonnées de la souris
 	SDL_GetMouseState(&x, &y);
 
