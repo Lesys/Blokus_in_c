@@ -105,22 +105,15 @@ int init_affichage_sdl() {
 	ressources->fond_titres = init_sprite("ressources/fond_titres.png", hauteur_ecran, taille_carre*96);
 	ressources->fond_config = init_sprite("ressources/fond_config.png", taille_carre*16, taille_carre*43);
 	ressources->fond_saisie = init_sprite("ressources/fond_saisie.png", taille_carre*2, taille_carre*16);
-	/*ressources->tapis_rouge = init_sprite("ressources/tapis_rouge.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
+	ressources->tapis_rouge = init_sprite("ressources/tapis_rouge.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
 	ressources->tapis_bleu = init_sprite("ressources/tapis_bleu.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
 	ressources->tapis_jaune = init_sprite("ressources/tapis_jaune.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
 	ressources->tapis_vert = init_sprite("ressources/tapis_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
 	ressources->fond_plateau = init_sprite("ressources/fond_plateau.png", taille_carre*22, taille_carre*22);
-	*/
 
-	ressources->tapis_rouge = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
-	ressources->tapis_bleu = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
-	ressources->tapis_jaune = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
-	ressources->tapis_vert = init_sprite("ressources/carre_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
-	ressources->fond_plateau = init_sprite("ressources/carre_rouge.png", taille_carre*22, taille_carre*22);
-
-        ressources->noir.r = 0;
-	ressources->noir.g = 0;
-	ressources->noir.b = 0;
+    ressources->blanc.r = 190;
+	ressources->blanc.g = 190;
+	ressources->blanc.b = 205;
 	ressources->jaune.r = 240;
 	ressources->jaune.g = 240;
 	ressources->jaune.b = 0;
@@ -548,10 +541,10 @@ Reserves * init_afficher_pieces_dispo_sdl(Joueur * j) {
 	r->pos_vert_y = hauteur_ecran/2 - 12 * taille_carre;
 	r->pos_jaune_x = largeur_ecran/2 - LARG_T_VJ/2 * taille_carre;
 	r->pos_jaune_y = hauteur_ecran/2 + (LONG_T_VJ+10) * taille_carre;
-	r->pos_bleu_x = largeur_ecran/2 - (LARG_T_BR+12) * taille_carre;
-	r->pos_bleu_y = hauteur_ecran/2 + LONG_T_BR/2 * taille_carre;
-	r->pos_rouge_x = largeur_ecran/2 + 12 * taille_carre;
-	r->pos_rouge_y = hauteur_ecran/2 + LONG_T_BR/2 * taille_carre;
+	r->pos_bleu_x = largeur_ecran/2 - (LARG_T_BR+11) * taille_carre;
+	r->pos_bleu_y = hauteur_ecran/2 + (LONG_T_BR/2-1) * taille_carre;
+	r->pos_rouge_x = largeur_ecran/2 + 11 * taille_carre;
+	r->pos_rouge_y = hauteur_ecran/2 + (LONG_T_BR/2-1) * taille_carre;
 
 	// Disposition des pièces pour tout les joueurs
 	do {
@@ -648,6 +641,64 @@ void free_afficher_pieces_dispo_sdl(Reserves ** r) {
 }
 
 /**
+ * \fn int curs_hover_piece(Reserves * r, Couleur couleur)
+ * \brief Permet de savoir si le curseur est au desus d'une pièce de la couleur choisie
+ * \param r Réserves de pièces
+ * \param couleur Couleur des pièces que l'on veut tester
+ * \return Un pointeur sur la pièce si la souris est au dessus d'une de la bonne couleur, NULL sinon
+ */
+Piece * curs_hover_piece(Reserves * r, Couleur couleur) {
+	
+	int x, y;
+	// Récupération des coordonnées de la souris
+	SDL_GetMouseState(&x, &y);
+
+	int x_gauche, x_droite, y_bas, y_haut;
+	switch (couleur) {
+		case JAUNE:
+			x_gauche = r->pos_jaune_x;
+			x_droite = x_gauche + LARG_T_VJ*taille_carre;
+			y_bas = r->pos_jaune_y;
+			y_haut = y_bas - LONG_T_VJ*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->jaune[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		case VERT:
+			x_gauche = r->pos_vert_x;
+			x_droite = x_gauche + LARG_T_VJ*taille_carre;
+			y_bas = r->pos_vert_y;
+			y_haut = y_bas - LONG_T_VJ*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->vert[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		case BLEU:
+			x_gauche = r->pos_bleu_x;
+			x_droite = x_gauche + LARG_T_BR*taille_carre;
+			y_bas = r->pos_bleu_y;
+			y_haut = y_bas - LONG_T_BR*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->bleu[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		case ROUGE:
+			x_gauche = r->pos_rouge_x;
+			x_droite = x_gauche + LARG_T_BR*taille_carre;
+			y_bas = r->pos_rouge_y;
+			y_haut = y_bas - LONG_T_BR*taille_carre;
+			if (x > x_gauche && x < x_droite && y > y_haut && y < y_bas) {
+				return r->rouge[(x-x_gauche)/taille_carre][-1*(y-y_bas)/taille_carre+1];
+			}
+			break;
+		default:
+			return NULL;
+			break;
+	}
+	return NULL;
+}
+
+/**
  * \fn static void afficher_texte(char * str, TTF_Font * police, SDL_Color couleur, int x, int y)
  * \brief Affiche du texte centré par rapport à une position donnée
  * \param str Chaine de caractères à afficher
@@ -721,7 +772,7 @@ void afficher_scores_sdl(Joueur * j) {
 	// Affichage de la texture de fond
 	afficher_sprite(ressources->fond_score, 0, 0);
 	// Affichage de "SCORES" en haut des scores
-	afficher_texte("SCORES", ressources->police_m, ressources->noir, taille_carre*8, taille_carre*0.1);
+	afficher_texte("SCORES", ressources->police_m, ressources->blanc, taille_carre*8, taille_carre*0.1);
 
 	// Pour chaque joueur
 	do {
@@ -747,7 +798,7 @@ void afficher_tour_sdl(Joueur * j) {
 	// Affichage de la texture de fond
 	afficher_sprite(ressources->fond_tour, largeur_ecran - taille_carre*16, 0);
 	// Affichage du texte
-	afficher_texte("Tour de :", ressources->police_m, ressources->noir, largeur_ecran - taille_carre*8, taille_carre*1.5);
+	afficher_texte("Tour de :", ressources->police_m, ressources->blanc, largeur_ecran - taille_carre*8, taille_carre*1.5);
 	afficher_texte(joueur_pseudo(j), ressources->police_m, get_color(joueur_couleur(j)), largeur_ecran - taille_carre*8, taille_carre*4);
 }
 
@@ -776,7 +827,7 @@ static
 void afficher_bouton(char * str, int x, int y) {
 
 	afficher_sprite(ressources->bouton, x, y);
-	afficher_texte(str, ressources->police_m, ressources->noir, x + taille_carre*6 , y + taille_carre);
+	afficher_texte(str, ressources->police_m, ressources->blanc, x + taille_carre*6 , y + taille_carre);
 }
 
 /**
@@ -790,7 +841,7 @@ static
 void afficher_bouton_petit(char * str, int x, int y) {
 
 	afficher_sprite(ressources->bouton_petit, x, y);
-	afficher_texte(str, ressources->police_p, ressources->noir, x + taille_carre*3 , y + taille_carre/2);
+	afficher_texte(str, ressources->police_p, ressources->blanc, x + taille_carre*3 , y + taille_carre/2);
 }
 
 
@@ -805,7 +856,7 @@ static
 void afficher_bouton_hover(char * str, int x, int y) {
 
 	afficher_sprite(ressources->bouton_hover, x, y);
-	afficher_texte(str, ressources->police_m, ressources->noir, x + taille_carre*6 , y + taille_carre);
+	afficher_texte(str, ressources->police_m, ressources->blanc, x + taille_carre*6 , y + taille_carre);
 }
 
 /**
@@ -819,7 +870,7 @@ static
 void afficher_bouton_petit_hover(char * str, int x, int y) {
 
 	afficher_sprite(ressources->bouton_petit_hover, x, y);
-	afficher_texte(str, ressources->police_p, ressources->noir, x + taille_carre*3 , y + taille_carre/2);
+	afficher_texte(str, ressources->police_p, ressources->blanc, x + taille_carre*3 , y + taille_carre/2);
 }
 
 /**
@@ -1013,7 +1064,7 @@ void afficher_resultats_sdl(Joueur * j) {
     } while (j != pj);
 
     // Affichage de "RESULTATS" en haut des resultats
-    afficher_texte("RESULTATS", ressources->police_m, ressources->noir, largeur_ecran/2, hauteur_ecran/4 + taille_carre*0.5);
+    afficher_texte("RESULTATS", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/4 + taille_carre*0.5);
 
     // Calcul de la hauteur de départ
     int y = hauteur_ecran/4 + taille_carre*4;
@@ -1076,7 +1127,7 @@ void afficher_fond_config() {
 void afficher_nb_joueurs_sdl() {
 
 	afficher_fond_config();
-	afficher_texte("Choissisez le nombre de joueurs :", ressources->police_m, ressources->noir, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+	afficher_texte("Choissisez le nombre de joueurs :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
 }
 
 /**
@@ -1086,7 +1137,7 @@ void afficher_nb_joueurs_sdl() {
 void afficher_type_joueur_sdl() {
 
 	afficher_fond_config();
-	afficher_texte("Choissisez le type du joueur :", ressources->police_m, ressources->noir, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+	afficher_texte("Choissisez le type du joueur :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
 }
 
 /**
@@ -1099,6 +1150,6 @@ void afficher_saisie_pseudo_sdl(char * str) {
 
 	afficher_fond_config();
 	afficher_sprite(ressources->fond_saisie, largeur_ecran/2 - taille_carre*8, hauteur_ecran/2 + taille_carre*2);
-	afficher_texte("Entrez le nom du joueur (Entree pour validez) :", ressources->police_m, ressources->noir, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
-	afficher_texte(str, ressources->police_m, ressources->noir, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
+	afficher_texte("Entrez le nom du joueur (Entree pour validez) :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+	afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }

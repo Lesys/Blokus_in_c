@@ -20,8 +20,6 @@ int main(int arc, char * argv[]) {
 		return 100;
 	}
 
-    SDL_SetRenderDrawColor(renderer, 240, 240, 240, 255);
-
 
     // Initialisation des objets de affichage_sdl
     Couleur plateau[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
@@ -41,6 +39,7 @@ int main(int arc, char * argv[]) {
     // Ecran a afficher (0 titres, 1 jeu)
     int ecran = 1;
     int running = 1;
+    Piece * p = NULL;
 
     while (running) {
         // Gestion des évenements
@@ -64,6 +63,9 @@ int main(int arc, char * argv[]) {
                 else if (ecran == 2 && curs_hover_bouton(b_abandonner)) {
                     running = 0;
                 }
+                if (ecran == 2 && curs_hover_piece(r, BLEU)) {
+                    p = curs_hover_piece(r, BLEU);
+                }
             }
         }
 
@@ -80,10 +82,7 @@ int main(int arc, char * argv[]) {
             afficher_scores_sdl(lj);
             afficher_tour_sdl(lj);
             afficher_bouton_sdl(b_abandonner);
-            afficher_resultats_sdl(lj);
-            afficher_bouton_sdl(b_continuer);
-            afficher_bouton_sdl(b_quitter_partie);
-            afficher_pieces_dispo_sdl(r, lj, piece_suivant(piece_suivant(joueur_liste_piece(lj))));
+            afficher_pieces_dispo_sdl(r, lj, p);
         }
 
         SDL_RenderPresent(renderer);
@@ -109,5 +108,5 @@ int main(int arc, char * argv[]) {
 
 
 	// fin sdl
-	sdl_close(renderer);
+	sdl_close();
 }

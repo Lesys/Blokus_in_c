@@ -32,7 +32,7 @@ typedef struct ressources {
 	Sprite * tapis_jaune;
 	Sprite * tapis_bleu;
 	Sprite * fond_plateau;
-	SDL_Color noir;
+	SDL_Color blanc;
 	SDL_Color jaune;
 	SDL_Color vert;
 	SDL_Color bleu;
@@ -89,6 +89,8 @@ Reserves * init_afficher_pieces_dispo_sdl(Joueur * j);
 void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p);
 
 void free_afficher_pieces_dispo_sdl(Reserves ** r);
+
+Piece * curs_hover_piece(Reserves * r, Couleur couleur);
 
 void afficher_scores_sdl(Joueur * j); // Affichage scores en haut à gauche écran
 
