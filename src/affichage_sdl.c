@@ -741,23 +741,25 @@ Piece * curs_hover_piece(Reserves * r, Couleur couleur) {
 static
 void afficher_texte(char * str, TTF_Font * police, SDL_Color couleur, int x, int y) {
 
-	// Création de la texture
-	SDL_Surface* texte_surface = TTF_RenderText_Blended(police, str, couleur);
-	SDL_Texture* texte_texture = SDL_CreateTextureFromSurface(renderer, texte_surface);
+        if (str) {
+            // Création de la texture
+            SDL_Surface* texte_surface = TTF_RenderText_Blended(police, str, couleur);
+            SDL_Texture* texte_texture = SDL_CreateTextureFromSurface(renderer, texte_surface);
 
-	// Création du rectangle de destination
-	SDL_Rect texte_rect;
-	texte_rect.w = texte_surface->w;
-	texte_rect.h = texte_surface->h;
-	texte_rect.x = x - texte_surface->w/2;
-	texte_rect.y = y;
+            // Création du rectangle de destination
+            SDL_Rect texte_rect;
+            texte_rect.w = texte_surface->w;
+            texte_rect.h = texte_surface->h;
+            texte_rect.x = x - texte_surface->w/2;
+            texte_rect.y = y;
 
-	// Affichage à l'écran
-	SDL_RenderCopy(renderer, texte_texture, NULL, &texte_rect);
+            // Affichage à l'écran
+            SDL_RenderCopy(renderer, texte_texture, NULL, &texte_rect);
 
-	// Désallocation de la surface et de la texture
-	SDL_FreeSurface(texte_surface);
-	SDL_DestroyTexture(texte_texture);
+            // Désallocation de la surface et de la texture
+            SDL_FreeSurface(texte_surface);
+            SDL_DestroyTexture(texte_texture);
+        }
 }
 
 /**
