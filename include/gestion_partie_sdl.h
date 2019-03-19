@@ -25,7 +25,7 @@ int fin_de_partie_sdl(Joueur** j); /* Affiche les résultats, propose les option
 Joueur* tour_suivant_sdl(Joueur* j);
 
 
-void jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j);
+int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j);
 
 
 int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);

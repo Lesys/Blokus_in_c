@@ -294,7 +294,7 @@ Joueur* tour_suivant_sdl(Joueur* j){
 
 
 /*Appel toute les fonctions pour réalisé un tour*/
-void jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
+int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int valeur_r;
 	if(joueur_a_abandonne(*j)){
 		printf("\n Ce joueur à abandonne\n");
@@ -302,16 +302,18 @@ void jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	}
 	else{
 		valeur_r=gestion_jeu(pl,*j);
-				if(valeur_r == 1){
-					printf("Vous avez abandonné\n");
-					joueur_abandonne(*j);
-				}
-				//if(valeur_r == 2)
-			
+		if(valeur_r == 1){
+			printf("Vous avez abandonné\n");
+				joueur_abandonne(*j);
+		}
+		else if(valeur_r == 2){
+			return 2;
+		}
 		if(!(joueur_a_abandonne(*j)))
 			*j=tour_suivant_sdl(*j);
 
 	}
+	return valeur_r;
 }
 
 
@@ -330,12 +332,11 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
 
 	do{
-		char phrase[50];
-		sprintf(phrase, "\n%s : A toi de jouer\n", joueur_pseudo(j));
-		afficher_str_couleur(joueur_couleur(j), phrase);
 
 		do{
-			jouer_tour_sdl(pl,&j);
+			choix=jouer_tour_sdl(pl,&j);
+			if(choix == 2)
+				return choix;
 			choix=fin_de_partie_sdl(&j);
 		} while(!(choix));
 
@@ -344,7 +345,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 		initialisation_manche_sdl(pl,&j);
 
 
-	} while(choix == 1);
+	} while(choix == 1 );
 
 	return choix;
 }
@@ -361,11 +362,9 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 void jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
-	do{
-		initialisation_partie_sdl(&j);
-		initialisation_manche_sdl(pl, &j);
-
-	} while(jouer_manche_sdl(pl,j)== 2);
+	initialisation_partie_sdl(&j);
+	initialisation_manche_sdl(pl, &j);
+	jouer_manche_sdl(pl,j);
 	joueur_liste_detruire(&j);
 
 }
