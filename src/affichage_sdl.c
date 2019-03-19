@@ -203,7 +203,7 @@ int curs_hover_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int *x, int *
         y_haut = hauteur_ecran/2 - 10*taille_carre;
         if (x_mouse > x_gauche && x_mouse < x_droite && y_mouse > y_haut && y_mouse < y_bas) {
             *x = (x_mouse - x_gauche) / taille_carre;
-            *y = -1 * (y_mouse - y_bas) / taille_carre+1;
+            *y = -1 * (y_mouse - y_bas) / taille_carre;
             return 1;
         }
         else {
