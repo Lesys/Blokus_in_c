@@ -188,7 +188,6 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
     int etat = -1;
 
     SDL_Event event;
-
     while(SDL_PollEvent(&event))
     {
         if(event.type == SDL_QUIT)
@@ -229,6 +228,7 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
             changer_orientation(*p);
         }
     }
+
     return etat;
 }
 
