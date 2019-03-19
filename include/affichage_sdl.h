@@ -84,6 +84,8 @@ void free_affichage_sdl();
 
 void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]); // Affichage plateau au millieu de l'écran
 
+int curs_hover_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int *x, int *y);
+
 Reserves * init_afficher_pieces_dispo_sdl(Joueur * j);
 
 void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p);
