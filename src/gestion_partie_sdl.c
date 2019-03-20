@@ -22,7 +22,7 @@ extern SDL_Renderer* renderer;
 	* Si la liste existe, on la supprime puis on en crée une autre.
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
 */
-void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
+int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
 	int nb_joueur=-1;
 	int continuer=1;
 
@@ -82,7 +82,7 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 			while(SDL_PollEvent(&event_saisi)){
 
 				if(event_saisi.type == SDL_QUIT)
-					return;
+					return 1;
 				else if(strlen((*j)->pseudo) > 0 && event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_RETURN)
 					continuer = 0;
 
@@ -96,7 +96,7 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 				}
 			}
 
-			afficher_saisie_pseudo_sdl((*j)->pseudo);
+			afficher_saisie_pseudo_sdl(*j);
 			SDL_RenderPresent(renderer);
 		}
 		SDL_StopTextInput();
@@ -113,7 +113,7 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 
 		*j=joueur_suivant(*j);
 	} while (*j != j_pivot);
-
+	return 0;
 }
 
 
@@ -367,10 +367,13 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 */
 
 
-void jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
+int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
-	initialisation_partie_sdl(&j);
+	if (initialisation_partie_sdl(&j)){
+		joueur_liste_detruire(&j);
+		return 1;
+	}
 	initialisation_manche_sdl(pl, &j);
 	jouer_manche_sdl(pl,j);
 	joueur_liste_detruire(&j);
