@@ -112,7 +112,7 @@ void afficher_nb_joueurs_sdl();
 
 void afficher_type_joueur_sdl();
 
-void afficher_saisie_pseudo_sdl(char * str);
+void afficher_saisie_pseudo_sdl(Joueur * j);
 
 int curs_hover_bouton(Bouton * b);
 
