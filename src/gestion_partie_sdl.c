@@ -72,7 +72,7 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 	continuer=1;
 	Joueur* j_pivot = *j;
 	do {
-		int compteur = 0;
+/*		int compteur = 0;*/
 		continuer=1;
 		SDL_StartTextInput();
 		while(continuer){
@@ -83,16 +83,16 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 
 				if(event_saisi.type == SDL_QUIT)
 					return;
-				else if(event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_RETURN)
+				else if(strlen((*j)->pseudo) > 0 && event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_RETURN)
 					continuer = 0;
 
-				else if(event_saisi.key.keysym.sym == SDLK_BACKSPACE){
-					if (compteur >= 0) 
-						(*j)->pseudo[compteur--] = '\0';
+				else if(event_saisi.key.keysym.sym == SDLK_BACKSPACE && event_saisi.type == SDL_KEYDOWN){
+					if (strlen((*j)->pseudo) > 0)
+						(*j)->pseudo[strlen((*j)->pseudo) - 1] = '\0';
 				}
 				else if(event_saisi.type == SDL_TEXTINPUT) {
 					strcat((*j)->pseudo, event_saisi.text.text);
-					compteur++;
+/*					compteur++;*/
 				}
 			}
 
@@ -101,13 +101,14 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 		}
 		SDL_StopTextInput();
 
+		/* Si le pseudo n'est pas trop grand */
 		if (strlen((*j)->pseudo) < TAILLE_PSEUDO) {
 		        /* Réalloue la bonne taille pour le pseudo */
 		        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
 
 			(*j)->pseudo[strlen((*j)->pseudo)]='\0';
 		}
-		else
+		else /* S'il est trop grand: troncature */
 			(*j)->pseudo[TAILLE_PSEUDO]='\0';
 
 		*j=joueur_suivant(*j);
