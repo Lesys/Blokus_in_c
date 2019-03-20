@@ -26,6 +26,8 @@
 	\return La coordonnée x (dans la visualisation d'un tableau, ça serait la ligne)
 */
 int carre_get_x(Carre* c) {
+	if (carre_hors_liste(c))
+		return NULL;
 	return c->x;
 }
 
@@ -38,6 +40,8 @@ int carre_get_x(Carre* c) {
 	\return La coordonnée y (dans la visualisation d'un tableau, ça serait la colonne)
 */
 int carre_get_y(Carre* c) {
+	if (carre_hors_liste(c))
+		return NULL;
 	return c->y;
 }
 
