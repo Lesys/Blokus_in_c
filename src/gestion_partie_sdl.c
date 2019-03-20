@@ -39,7 +39,10 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	while(continuer == 1){
 		SDL_RenderClear(renderer);
 		while(SDL_PollEvent(&event)){
-			if(event.type == SDL_MOUSEBUTTONDOWN){
+			if(event.type == SDL_QUIT)
+				return 1;
+
+			else if(event.type == SDL_MOUSEBUTTONDOWN){
 				if (curs_hover_bouton(b_nb_deux))
 					nb_joueur=2;
 
