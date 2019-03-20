@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "../include/commun.h"
 #include "../include/joueur.h"
-#include "../include/gestion_jeu_sdl.h"
+#include "../include/gestion_tour_sdl.h"
 #include "../include/gestion_partie_sdl.h"
 #include "../include/affichage_sdl.h"
 

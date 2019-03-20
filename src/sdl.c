@@ -39,7 +39,7 @@ int sdl_init() {
 }
 
 int sdl_close() {
-	
+
 	IMG_Quit();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
