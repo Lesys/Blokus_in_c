@@ -213,7 +213,9 @@ void joueur_liste_reinit(Joueur* j) {
 */
 Joueur* joueur_creation(Couleur c, ...) {
 	Joueur* j = malloc(sizeof(Joueur));
-	j->pseudo = malloc(sizeof(char) * TAILLE_PSEUDO);
+
+	/* Permet d'avoir 15 caractères pour le pseudo + le caractère de fin de chaine */
+	j->pseudo = malloc(sizeof(char) * (TAILLE_PSEUDO + 1));
 	j->pseudo[0] = '\0';
 
 /*	printf("Joueur %s, veuillez indiquer votre pseudo: ", couleur_tostring(c));*/

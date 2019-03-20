@@ -100,10 +100,15 @@ void initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appe
 			SDL_RenderPresent(renderer);
 		}
 		SDL_StopTextInput();
-	        /* Réalloue la bonne taille pour le pseudo */
-	        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
 
-		(*j)->pseudo[strlen((*j)->pseudo)]='\0';
+		if (strlen((*j)->pseudo) < TAILLE_PSEUDO) {
+		        /* Réalloue la bonne taille pour le pseudo */
+		        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
+
+			(*j)->pseudo[strlen((*j)->pseudo)]='\0';
+		}
+		else
+			(*j)->pseudo[TAILLE_PSEUDO]='\0';
 
 		*j=joueur_suivant(*j);
 	} while (*j != j_pivot);
