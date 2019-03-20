@@ -66,6 +66,9 @@ struct piece {
 	Piece* suiv, *prec; /**< Piece* suivante et précédente de la liste */
 };
 
+/* Renvoie VRAI si la Piece est NULL, FAUX sinon */
+Piece* piece_hors_liste(Piece*)
+
 /* Renvoie la liste de Carre d'une Piece* */
 Carre* piece_liste_carre(Piece*);
 

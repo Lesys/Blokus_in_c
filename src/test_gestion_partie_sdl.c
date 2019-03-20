@@ -61,7 +61,9 @@ int main(){
 /*Jouer Partie*/
 
 	printf("TEST DEBUT jouer_partie()\n");
-	jouer_partie_sdl();
+	if(jouer_partie_sdl())
+		printf("PROGRAMME QUITTER\n");
+	else
 	printf("TEST FIN JOUER_PARTIE()\n");
 
 

@@ -9,7 +9,7 @@
 
 
 
-void initialisation_partie_sdl(Joueur** j); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
+int initialisation_partie_sdl(Joueur** j); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 
 /*Initialisation de la manche*/
 void initialisation_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j);
@@ -30,6 +30,6 @@ int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j);
 
 int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
 
-void jouer_partie_sdl();
+int jouer_partie_sdl();
 
 #endif
