@@ -227,6 +227,9 @@ void afficher_piece_sdl(Carre * c, Couleur couleur, int x, int y) {
     Couleur mp[5][5] = {0};
     Carre * init = c;
 
+    x -= taille_carre * 0.5;
+    y += taille_carre * 0.5;
+
 	// Représentation de la pièce dans la matrice
     do {
         mp[carre_get_x(c)][carre_get_y(c)] = 1;
