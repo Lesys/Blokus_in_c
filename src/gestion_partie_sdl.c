@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "../include/commun.h"
 #include "../include/joueur.h"
-#include "../include/gestion_jeu_sdl.h"
+#include "../include/gestion_tour_sdl.h"
 #include "../include/gestion_partie_sdl.h"
 #include "../include/affichage_sdl.h"
 
@@ -29,6 +29,9 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	int nb_joueur=-1;
 	int continuer=1;
 
+/********PARTIE SAISI NB DES JOUEURS*********/
+
+
 	/*Creation des boutons + evenement */
 	SDL_Event event;
 	Bouton* b_nb_deux=init_bouton_sdl(NB_JOUEURS_2);
@@ -42,23 +45,29 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	/*Tant que l'evenenement n'est pas fini*/
 	while(continuer == 1){
 		SDL_RenderClear(renderer);
+		//Attend un événement
 		while(SDL_PollEvent(&event)){
+			//Si il appuis sur la croix
 			if(event.type == SDL_QUIT)
 				return 3;
-
+			//Si il appuis sur un bouton
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
+				/*Bouton 2 joueur*/
 				if (curs_hover_bouton(b_nb_deux))
 					nb_joueur=2;
 
+				/*Bouton 3 joueur*/
 				else if (curs_hover_bouton(b_nb_trois))
 					nb_joueur=3;
 
+				/*Bouton 4 joueur*/
 				else if (curs_hover_bouton(b_nb_quatre))
 					nb_joueur=4;
 
 
 			}
 		}
+		//Si on appuis sur un bouton, alors on arrete la boucle
 		if( nb_joueur > 0){
 			continuer=0;
 		}
@@ -75,29 +84,36 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	free_bouton_sdl(&b_nb_quatre);
 
 	*j=joueur_liste_creation(nb_joueur);
-	SDL_Event event_saisi;
+
+/********PARTIE SAISI NOM DES JOUEURS*********/
+	SDL_Event event_saisie;
 	continuer=1;
 	Joueur* j_pivot = *j;
+	/*While tous les joueurs n'ont pas de pseudo*/
 	do {
 		continuer=1;
 		SDL_StartTextInput();
+		/*Boucle d'évenement*/
 		while(continuer){
 
 			SDL_RenderClear(renderer);
-
-			while(SDL_PollEvent(&event_saisi)){
-
-				if(event_saisi.type == SDL_QUIT)
+			/*Attend l'appuis d'une touche*/
+			while(SDL_PollEvent(&event_saisie)){
+				/*Si c'est la croix, on arrete*/
+				if(event_saisie.type == SDL_QUIT)
 					return 3;
-				else if(strlen((*j)->pseudo) > 0 && event_saisi.type == SDL_KEYDOWN && (event_saisi.key.keysym.sym == SDLK_RETURN || event_saisi.key.keysym.sym == SDLK_KP_ENTER) )
+				/*Si c'est la touche entrée, on passe au joueur suivant*/
+				else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) )
 					continuer = 0;
 
-				else if(event_saisi.key.keysym.sym == SDLK_BACKSPACE && event_saisi.type == SDL_KEYDOWN){
+				/*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
+				else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
 					if (strlen((*j)->pseudo) > 0)
 						(*j)->pseudo[strlen((*j)->pseudo) - 1] = '\0';
 				}
-				else if(event_saisi.type == SDL_TEXTINPUT) {
-					strcat((*j)->pseudo, event_saisi.text.text);
+				/*Si c'est une touche du clavier, on l'entre dans le pseudo*/
+				else if(event_saisie.type == SDL_TEXTINPUT) {
+					strcat((*j)->pseudo, event_saisie.text.text);
 				}
 			}
 
@@ -123,7 +139,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 
 
 /**
-	*\fn void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
+	*\fn void initialisation_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
 	*\brief Initialise une manche.
 	*\details Permets de réinitialisé le plateau de jeu et une liste de piece d'un Joueur.
 	*\param pl Plateau de jeu à vider.
@@ -149,7 +165,7 @@ void initialisation_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur
 }
 
 /**
-	*\fn void maj_scores(Joueur** j)
+	*\fn void maj_scores_sdl(Joueur** j)
 	*\details Permets de mettre à jour les scores à la fin de la partie: <br>
 	* +15 si le Joueur à poser toute ces Pieces. <br>
 	* -1  pour chaque carre d'une Piece.
@@ -185,7 +201,7 @@ void maj_scores_sdl(Joueur** j) {
 
 
 /**
-	*\fn int joueur_abandon(Joueur* j)
+	*\fn int joueur_abandon_sdl(Joueur* j)
 	*\brief Vérifie si tous les joueurs ont abandonné.
 	*\param j Reçois la liste des joueurs et vérifie la valeur d'abandon de chaque Joueur.
 	\return renvoie 1 si tous les joueurs ont abandonné, 0 sinon.
@@ -210,7 +226,7 @@ int joueur_abandon_sdl(Joueur* j){
 
 
 /**
-	*\fn int fin_de_partie(Joueur** j)
+	*\fn int fin_de_partie_sdl(Joueur** j)
 	*\brief Vérifie si c'est vraiment la fin de la partie,modifie les scores  et réalise les choix à faire.
 	*\details Si le Joueur à une liste_vide, on le fait abandonner.
 	*Une fois que tous les Joueurs ont abandoné,mets à jour le score ,affiche les résultats et demande a l'utilisateur un choix:<br>
@@ -258,8 +274,9 @@ int fin_de_partie_sdl(Joueur** j){
 	/*On demande a l'utilisateur les choix de fin de partie */
 	while(continuer){
 		SDL_RenderClear(renderer);
-
+		/*On attend la touche du joueur*/
         	while(SDL_PollEvent(&event_fin)){
+			
                 	if(event_fin.type == SDL_MOUSEBUTTONDOWN){
                         	if (curs_hover_bouton(b_continuer))
                                 	choix= 1;
@@ -314,7 +331,7 @@ int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 		*j=tour_suivant_sdl(*j);
 	}
 	else{
-		valeur_r=gestion_jeu(pl,*j);
+		valeur_r=gestion_tour_sdl(pl,*j);
 		if(valeur_r == 1){//Le joueur a abandoné
 			printf("Vous avez abandonné\n");
 				joueur_abandonne(*j);
@@ -399,9 +416,10 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 		if (retour == 1) { /*Jouer*/
 
 			retour = initialisation_partie_sdl(&j);
-			if (retour == 3) /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
+			if (retour == 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
 				joueur_liste_detruire(&j);
-
+				return retour;
+			}
 			initialisation_manche_sdl(pl, &j);
 
 			retour = jouer_manche_sdl(pl,j);
