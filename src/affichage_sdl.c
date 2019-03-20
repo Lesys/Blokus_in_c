@@ -579,8 +579,6 @@ Reserves * init_afficher_pieces_dispo_sdl(Joueur * j) {
 
 	// Disposition des pièces pour tout les joueurs
 	do {
-		Piece* l = joueur_liste_piece(j);
-		
 		switch (joueur_couleur(j)) {
 			case VERT:
 				disposer_pieces(r, j);
@@ -786,6 +784,7 @@ SDL_Color get_color(Couleur couleur) {
 			break;
 		default:
 			break;
+                        return NULL;
 	}
 }
 
