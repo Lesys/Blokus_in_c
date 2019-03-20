@@ -1179,10 +1179,13 @@ void afficher_type_joueur_sdl() {
  * pseudo ainsi que le pseudo en cours de saisie
  * \param str Pseudo en cours de saisie
  */
-void afficher_saisie_pseudo_sdl(char * str) {
+void afficher_saisie_pseudo_sdl(Joueur * j) {
+
+        char message[50];
 
 	afficher_fond_config();
 	afficher_sprite(ressources->fond_saisie, largeur_ecran/2 - taille_carre*8, hauteur_ecran/2 + taille_carre*2);
-	afficher_texte("Entrez le nom du joueur (Entree pour validez) :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
-	afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
+        sprintf(message, "Entrez le nom du joueur %s (Entree pour valider) :", couleur_tostring(joueur_couleur(j)));
+	afficher_texte(message, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+	afficher_texte(joueur_pseudo(j), ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
