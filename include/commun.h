@@ -18,9 +18,9 @@
 #define BLUE_Y 0
 #define RED_X TAILLE_PLATEAU - 1
 #define RED_Y TAILLE_PLATEAU - 1
-#define YELLOW_X 0
-#define YELLOW_Y TAILLE_PLATEAU - 1
-#define GREEN_X TAILLE_PLATEAU - 1
-#define GREEN_Y 0
+#define GREEN_X 0
+#define GREEN_Y TAILLE_PLATEAU - 1
+#define YELLOW_X TAILLE_PLATEAU - 1
+#define YELLOW_Y 0
 
 #endif

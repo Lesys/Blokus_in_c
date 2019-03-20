@@ -320,4 +320,3 @@ void joueur_liste_detruire(Joueur** j) {
 
 	(*j) = NULL;
 }
-

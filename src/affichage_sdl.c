@@ -615,7 +615,7 @@ Reserves * init_afficher_pieces_dispo_sdl(Joueur * j) {
  * afficher toutes les pièces à leur place)
  */
 void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p) {
-	
+
 	Joueur * init = j;
 	// Variable utilisée pour récupérer la couleur de la pièces
 	// à afficher aux coordonnées de la souris
@@ -623,7 +623,7 @@ void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p) {
 
 	// Pour tout les joueurs
 	do {
-		
+
 		Couleur couleur_p_tmp = -1;
 		switch (joueur_couleur(j)) {
 			case VERT:
@@ -680,7 +680,7 @@ void free_afficher_pieces_dispo_sdl(Reserves ** r) {
  * \return Un pointeur sur la pièce si la souris est au dessus d'une de la bonne couleur, NULL sinon
  */
 Piece * curs_hover_piece(Reserves * r, Couleur couleur) {
-	
+
 	int x, y;
 	// Récupération des coordonnées de la souris
 	SDL_GetMouseState(&x, &y);

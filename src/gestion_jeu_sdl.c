@@ -34,13 +34,18 @@ int verification_position_sdl(Couleur pl[20][20], int x, int y, Piece* p)
 
     do
     {
-        if(pl[x+carre_get_x(c)][y+carre_get_y(c)] != VIDE)
+        if(pl[x+carre_get_x(c)][y+carre_get_y(c)] != VIDE || x+carre_get_x(c) >= TAILLE_PLATEAU || y+carre_get_y(c) >= TAILLE_PLATEAU)
         {
             return 0;
         }
         c = carre_get_suiv(c);
     } while(c != piece_liste_carre(p));
     return 1;
+}
+
+static int coord_dans_plateau(int coord)
+{
+    return (coord >= 0 && coord < TAILLE_PLATEAU);
 }
 
 /* Fonction qui vérifie si aucun Carre de la Couleur du Joueur n'est adjacant aux Carre que le Joueur veut poser
@@ -53,19 +58,19 @@ int verification_couleur_sdl(Couleur pl[20][20], int x, int y, Couleur col, Piec
     do
     {
 	/* Vérifie qu'il n'y a aucun Carre adjacant aux Carre que le Joueur pose */
-        if(pl[x + carre_get_x(c) - 1][y + carre_get_y(c)] == col || /* Au dessus */
-		pl[x + carre_get_x(c) + 1][y + carre_get_y(c)] == col || /* En dessous */
-		pl[x + carre_get_x(c)][y + carre_get_y(c) - 1] == col || /* A gauche */
-		pl[x + carre_get_x(c)][y + carre_get_y(c) + 1] == col) /* A droite */
+        if((coord_dans_plateau(x + carre_get_x(c) - 1) && coord_dans_plateau(y + carre_get_y(c)) && pl[x + carre_get_x(c) - 1][y + carre_get_y(c)] == col) || /* Au dessus */
+		(coord_dans_plateau(x + carre_get_x(c) + 1) && coord_dans_plateau(y + carre_get_y(c)) && pl[x + carre_get_x(c) + 1][y + carre_get_y(c)] == col) || /* En dessous */
+		(coord_dans_plateau(x + carre_get_x(c)) && coord_dans_plateau(y + carre_get_y(c) - 1) && pl[x + carre_get_x(c)][y + carre_get_y(c) - 1] == col) || /* A gauche */
+		(coord_dans_plateau(x + carre_get_x(c)) && coord_dans_plateau(y + carre_get_y(c) + 1) && pl[x + carre_get_x(c)][y + carre_get_y(c) + 1] == col)) /* A droite */
         {
             return 0;
         }
 
 	/* Vérifie qu'il y a au moins un Carre que le Joueur pose qui touche diagonalement un Carre déjà posé de même Couleur */
-        if((pl[x + carre_get_x(c) - 1][y + carre_get_y(c) - 1] == col) || /* Diagonale Haut - Gauche */
-		(pl[x + carre_get_x(c) + 1][y + carre_get_y(c) - 1] == col) || /* Diagonale Bas - Gauche */
-		(pl[x + carre_get_x(c) - 1][y + carre_get_y(c) + 1] == col) || /* Diagonale Haut - Droit */
-		(pl[x + carre_get_x(c) + 1][y + carre_get_y(c) + 1] == col)) /* Diagonale Bas - Droit */
+        if((coord_dans_plateau(x + carre_get_x(c) - 1) && coord_dans_plateau(y + carre_get_y(c) - 1) && pl[x + carre_get_x(c) - 1][y + carre_get_y(c) - 1] == col) || /* Diagonale Haut - Gauche */
+		(coord_dans_plateau(x + carre_get_x(c) + 1) && coord_dans_plateau(y + carre_get_y(c) - 1) && pl[x + carre_get_x(c) + 1][y + carre_get_y(c) - 1] == col) || /* Diagonale Bas - Gauche */
+		(coord_dans_plateau(x + carre_get_x(c) - 1) && coord_dans_plateau(y + carre_get_y(c) + 1) && pl[x + carre_get_x(c) - 1][y + carre_get_y(c) + 1] == col) || /* Diagonale Haut - Droit */
+		(coord_dans_plateau(x + carre_get_x(c) + 1) && coord_dans_plateau(y + carre_get_y(c) + 1) && pl[x + carre_get_x(c) + 1][y + carre_get_y(c) + 1] == col)) /* Diagonale Bas - Droit */
         {
             angle = 1;
         }
@@ -120,6 +125,7 @@ int verifier_coordonnees(Couleur pl[20][20], Piece* pi, int x, int y, Joueur* j)
     if(joueur_nb_piece_restantes(j) == NB_PIECES)
     {
         int coin = 0;
+        int valide = 1;
         Carre* c2;
 
         c = piece_liste_carre(pi);
@@ -132,9 +138,12 @@ int verifier_coordonnees(Couleur pl[20][20], Piece* pi, int x, int y, Joueur* j)
             {
                 coin = 1;
             }
+
             c = carre_get_suiv(c);
+
         } while(coin == 0 && c != c2);
-        if(!coin)
+
+        if(!coin || !verification_position_sdl(pl, x, y, pi))
         {
             return 0;
         }

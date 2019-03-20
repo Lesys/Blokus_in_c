@@ -4,8 +4,8 @@
 typedef enum couleur {
     VIDE,
     BLEU,
-    JAUNE,
     ROUGE,
+    JAUNE,
     VERT
 } Couleur;
 
