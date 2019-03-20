@@ -167,6 +167,10 @@ void carre_detruire(Carre** c) {
 	(*c) = NULL;
 }
 
+Piece* piece_hors_liste(Piece* p) {
+	return (p == NULL);
+}
+
 /**
 	\fn Carre* piece_liste_carre(Piece* p);
 	\brief Renvoie le premier Carre* de la Piece (== son premier Carre)
@@ -175,6 +179,9 @@ void carre_detruire(Carre** c) {
 	\return Le premier Carre* de la Piece
 */
 Carre* piece_liste_carre(Piece* p) {
+	if (piece_hors_liste(p))
+		return NULL;
+
 	return p->liste_carre;
 }
 
@@ -186,6 +193,9 @@ Carre* piece_liste_carre(Piece* p) {
 	\return La Piece* suivante
 */
 Piece* piece_suivant(Piece* p) {
+	if (piece_hors_liste(p))
+		return NULL;
+
 	return p->suiv;
 }
 
@@ -197,6 +207,9 @@ Piece* piece_suivant(Piece* p) {
 	\return La Piece* précédente
 */
 Piece* piece_precedent(Piece* p) {
+	if (piece_hors_liste(p))
+		return NULL;
+
 	return p->prec;
 }
 
@@ -401,7 +414,7 @@ void piece_pivoter(int nb, Carre * c) {
 	\param p L'adresse de la Piece* qu'on souhaite supprimer
 */
 void liste_piece_suppr_elem(Piece** p) {/*, int pos) {*/
-	if (p != NULL) {
+	if (!piece_hors_liste(p)) {
 		Carre** c = &((*p)->liste_carre);
 /*		printf("Destruction carres\n");*/
 /*		Carre* suiv = carre_get_suiv(*c);*/
@@ -452,7 +465,7 @@ void liste_piece_detruire(Piece** p) {
 	(*supp) = (*p);
 
 	/* Tant qu'il reste une Piece à supprimer */
-	while ((*supp) != NULL) {
+	while (!piece_hors_liste(*supp)) {
 		(*supp) = piece_suivant(*p);
 
 		/* Si c'est la dernière Piece (== la suivante est elle-même) */
@@ -491,6 +504,10 @@ void liste_piece_detruire(Piece** p) {
 	\param p L'adresse de la Piece* pour laquelle on veut connaître le nombre de Carre
 */
 int piece_nb_carre(Piece* p) {
+	/* Si la Piece est NULL */
+	if (piece_hors_liste(p))
+		return 0; /* Il n'y a aucun Carre */
+
 	Carre* c = piece_liste_carre(p);
 	Carre* init = c;
 	int nb = 0;
