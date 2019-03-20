@@ -10,10 +10,10 @@
 #include <stdlib.h>
 #include "../include/commun.h"
 #include "../include/joueur.h"
-//#include "../include/affichage.h"
 #include "../include/gestion_jeu_sdl.h"
 #include "../include/gestion_partie_sdl.h"
 #include "../include/affichage_sdl.h"
+
 extern SDL_Renderer* renderer;
 
 /**
@@ -40,7 +40,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 		SDL_RenderClear(renderer);
 		while(SDL_PollEvent(&event)){
 			if(event.type == SDL_QUIT)
-				return 1;
+				return 3;
 
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
 				if (curs_hover_bouton(b_nb_deux))
@@ -85,7 +85,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 			while(SDL_PollEvent(&event_saisi)){
 
 				if(event_saisi.type == SDL_QUIT)
-					return 1;
+					return 3;
 				else if(strlen((*j)->pseudo) > 0 && event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_RETURN)
 					continuer = 0;
 
@@ -263,7 +263,7 @@ int fin_de_partie_sdl(Joueur** j){
                                 	choix= 1;
 
                         	else if (curs_hover_bouton(b_quitter))
-                                	choix= 3;
+                                	choix= 2;
 
 			        }
 				if( choix > 0){
@@ -313,12 +313,12 @@ int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	}
 	else{
 		valeur_r=gestion_jeu(pl,*j);
-		if(valeur_r == 1){
+		if(valeur_r == 1){//Le joueur a abandoné
 			printf("Vous avez abandonné\n");
 				joueur_abandonne(*j);
 		}
 		else if(valeur_r == 2){
-			return 2;
+			return 3;//Quitte le jeu
 		}
 		if(!(joueur_a_abandonne(*j)))
 			*j=tour_suivant_sdl(*j);
@@ -346,7 +346,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 		do{
 			choix=jouer_tour_sdl(pl,&j);
-			if(choix == 2)
+			if(choix == 3)
 				return choix;
 			choix=fin_de_partie_sdl(&j);
 		} while(!(choix));
@@ -373,12 +373,56 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
-	if (initialisation_partie_sdl(&j)){
-		joueur_liste_detruire(&j);
-		return 1;
-	}
-	initialisation_manche_sdl(pl, &j);
-	jouer_manche_sdl(pl,j);
-	joueur_liste_detruire(&j);
+	int retour = 2;
+	SDL_Event event;
+	Bouton* b_jouer = init_bouton_sdl(JOUER);
+	Bouton* b_quitter_jeu = init_bouton_sdl(QUITTER_JEU);
+	while (retour == 2){
 
+		/* Menu */
+
+		/* Ecouter les EVENT */
+                SDL_RenderClear(renderer);
+       	        while(SDL_PollEvent(&event)){
+			if(event.type == SDL_QUIT)
+				retour = 3;
+			else if(event.type == SDL_MOUSEBUTTONDOWN){
+				if(curs_hover_bouton(b_jouer))
+					retour= 1;
+				else if(curs_hover_bouton(b_quitter_jeu))
+					retour= 3;
+			}
+		}
+		/* Appuie du bouton JOUER */
+		if (retour == 1) { /*Jouer*/
+
+			retour = initialisation_partie_sdl(&j);
+			if (retour == 3) /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
+				joueur_liste_detruire(&j);
+
+			initialisation_manche_sdl(pl, &j);
+
+			retour = jouer_manche_sdl(pl,j);
+			joueur_liste_detruire(&j);
+
+			if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
+				return retour;
+		}
+		/*else if Appuie sur le bouton REGLE */
+		else if (retour == 3) { /*Appuie sur le bouton Quitter || Appuie sur la croix*/
+			return retour;
+		}
+	afficher_titres_sdl();
+ 	afficher_bouton_sdl(b_jouer);
+        afficher_bouton_sdl(b_quitter_jeu);
+	SDL_RenderPresent(renderer);
+	}
+
+	if (retour == 3) { /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
+		joueur_liste_detruire(&j);
+	}
+	free_bouton_sdl(b_jouer);
+        free_bouton_sdl(b_quitter_jeu);
+
+	return retour;
 }
