@@ -19,23 +19,27 @@ extern SDL_Renderer* renderer;
 /**
 	*\fn void initialisation_partie_sdl(Joueur **j)
 	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
+	<br>Initialise le pseudo des joueurs
 	* Si la liste existe, on la supprime puis on en crée une autre.
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
+	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
+		Retourne 0 si l'affectation a bien fonctionné
 */
 int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
 	int nb_joueur=-1;
 	int continuer=1;
 
-/*Creation des boutons + evenement */
+	/*Creation des boutons + evenement */
 	SDL_Event event;
 	Bouton* b_nb_deux=init_bouton_sdl(NB_JOUEURS_2);
 	Bouton* b_nb_trois=init_bouton_sdl(NB_JOUEURS_3);
 	Bouton* b_nb_quatre=init_bouton_sdl(NB_JOUEURS_4);
 
+	/*Si une liste de joueur existe déjà, on la supprime*/
 	if( (*j) != NULL ){
 		joueur_liste_detruire(j);
 	}
-
+	/*Tant que l'evenenement n'est pas fini*/
 	while(continuer == 1){
 		SDL_RenderClear(renderer);
 		while(SDL_PollEvent(&event)){
@@ -75,7 +79,6 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	continuer=1;
 	Joueur* j_pivot = *j;
 	do {
-/*		int compteur = 0;*/
 		continuer=1;
 		SDL_StartTextInput();
 		while(continuer){
@@ -86,7 +89,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 
 				if(event_saisi.type == SDL_QUIT)
 					return 3;
-				else if(strlen((*j)->pseudo) > 0 && event_saisi.type == SDL_KEYDOWN && event_saisi.key.keysym.sym == SDLK_RETURN)
+				else if(strlen((*j)->pseudo) > 0 && event_saisi.type == SDL_KEYDOWN && (event_saisi.key.keysym.sym == SDLK_RETURN || event_saisi.key.keysym.sym == SDLK_KP_ENTER) )
 					continuer = 0;
 
 				else if(event_saisi.key.keysym.sym == SDLK_BACKSPACE && event_saisi.type == SDL_KEYDOWN){
@@ -95,7 +98,6 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 				}
 				else if(event_saisi.type == SDL_TEXTINPUT) {
 					strcat((*j)->pseudo, event_saisi.text.text);
-/*					compteur++;*/
 				}
 			}
 
