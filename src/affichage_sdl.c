@@ -784,7 +784,6 @@ SDL_Color get_color(Couleur couleur) {
 			break;
 		default:
 			break;
-                        return NULL;
 	}
 }
 
