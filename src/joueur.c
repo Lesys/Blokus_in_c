@@ -61,6 +61,8 @@ int joueur_score(Joueur* j) {
 	\return La première Piece* du Joueur*
 */
 Piece* joueur_liste_piece(Joueur* j) {
+	if (!joueur_hors_liste(j))
+		return NULL;
 	return j->liste_piece;
 }
 

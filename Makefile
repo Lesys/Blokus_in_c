@@ -18,7 +18,7 @@ VPATH = lib:build:bin:src:include
 #Options pour les lignes de code faites pour la confection des fichiers objets
 DIROBJ := bin/
 CFLAGS += -g -L./lib/SDL/lib -I./lib/SDL/include -lSDL2 -lSDL2_ttf -lSDL2_image -fPIC -Wall -std=c99
-OBJETS = gestion_tour.o gestion_partie.o joueur.o carre.o affichage.o couleur.o piece.o sprite.o affichage_sdl.o sdl.o gestion_tour_sdl.o gestion_partie_sdl.o
+OBJETS = gestion_tour.o gestion_partie.o joueur.o carre.o affichage.o couleur.o piece.o sprite.o affichage_sdl.o sdl.o gestion_tour_sdl.o gestion_partie_sdl.o main_terminal.o main_sdl.o
 FICHIERSC = $(OBJETS:.o=.c)
 
 #Nom du programme principal
