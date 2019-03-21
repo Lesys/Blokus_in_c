@@ -62,10 +62,11 @@ ARFLAGS = rcs
 STATIC = blokus.static
 DYNAMIC = blokus.shared
 EXE = blokus.exe
-sharedLDFLAGS := -L.
+sharedLDFLAGS := $(CFLAGS)
 sharedLDLIBS := -l$(LINKNAME)
-staticLDFLAGS := -L.
-staticLDLIBS := -l:$(libSTATIC)
+staticLDFLAGS := $(CFLAGS)
+#staticLDLIBS := -l:$(libSTATIC)
+staticLDLIBS := $(libSTATIC)
 
 #Conception du Makefile :
 #Execution du programme en entier
@@ -102,17 +103,14 @@ $(STATIC): $(DIRMAIN)$(PROGRPRINC) $(libSTATIC)
 	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(staticLDFLAGS) $(staticLDLIBS)
 
 #Génération du programme dynamique
-$(DYNAMIC): LDFLAGS := $(sharedLDFLAGS)
-$(DYNAMIC): LDLIBS := $(sharedLDLIBS)
-$(DYNAMIC): $(DIRMAIN)$(PROGRPRINC) $(REALNAME)
-	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(sharedLDFLAGS) $(sharedLDLIBS)
-
-#Execution du programme dynamique
-execution: $(DYNAMIC) MOVE clearScreen
-	-LD_LIBRARY_PATH=./$(DIRLIB):$LD_LIBRARY_PATH ./$(DIRLIB)$(DYNAMIC)
+#$(DYNAMIC): LDFLAGS := $(sharedLDFLAGS)
+#$(DYNAMIC): LDLIBS := $(sharedLDLIBS)
+#$(DYNAMIC): $(DIRMAIN)$(PROGRPRINC) $(REALNAME)
+#	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(sharedLDFLAGS) $(sharedLDLIBS)
 
 #Move les fichiers dans leur dossier respectif : .so .a dans le dossier lib. .o dans le dossier bin. L'exécutable dans le dossier build
-MOVE: $(DYNAMIC) $(STATIC)
+#MOVE: $(DYNAMIC) $(STATIC)
+MOVE: $(STATIC)
 	-mv *.a* *.so* ./$(DIRLIB)
 	-mv *blokus* ./$(DIRBUILD)
 	-mv *Blokus* ./$(DIRBUILD)

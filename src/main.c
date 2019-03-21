@@ -1,4 +1,5 @@
-#include "../include/.h"
+#include "../include/main_terminal.h"
+#include "../include/main_sdl.h"
 #include <stdio.h>
 
 int main(){

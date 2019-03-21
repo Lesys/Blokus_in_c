@@ -1,5 +1,4 @@
-
-#include "gestion_partie.c"
+#include "../include/gestion_partie.h"
 
 
 int main_terminal(){
