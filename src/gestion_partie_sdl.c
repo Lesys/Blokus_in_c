@@ -262,6 +262,7 @@ int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	*\param pl Plateau de jeu .
 	*\param j La liste de Joueur qui joue durant la manche.
 	*\return Renvoie le choix des joueurs: <br>
+		
 		*2 - Retourne au menu. <br>
 		*3 - Quitte le programme.
 */
