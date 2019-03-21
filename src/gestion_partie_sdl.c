@@ -12,6 +12,7 @@
 #include "../include/joueur.h"
 #include "../include/gestion_tour_sdl.h"
 #include "../include/gestion_partie_sdl.h"
+#include "../include/gestion_partie.h"
 #include "../include/affichage_sdl.h"
 
 extern SDL_Renderer* renderer;
@@ -138,91 +139,6 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 }
 
 
-/**
-	*\fn void initialisation_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
-	*\brief Initialise une manche.
-	*\details Permets de réinitialisé le plateau de jeu et une liste de piece d'un Joueur.
-	*\param pl Plateau de jeu à vider.
-	*\param j Pointeur sur une liste de joueur afin de reinitialiser la liste de piece de chaque Joueur.
-*/
-
-void initialisation_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
-	int i,x;
-
-	for(i=0;i < TAILLE_PLATEAU;i++){
-
-		for(x=0;x < TAILLE_PLATEAU;x++){
-			pl[i][x]=0;
-		}
-	}
-
-	joueur_liste_reinit(*j);
-
-	while(joueur_couleur(*j) != BLEU)
-		*j=joueur_suivant(*j);
-
-
-}
-
-/**
-	*\fn void maj_scores_sdl(Joueur** j)
-	*\details Permets de mettre à jour les scores à la fin de la partie: <br>
-	* +15 si le Joueur à poser toute ces Pieces. <br>
-	* -1  pour chaque carre d'une Piece.
-	*\param j Prends une liste de Joueur.
-*/
-
-void maj_scores_sdl(Joueur** j) {
-
-    // On garde l'adresse du premier joueur pour
-    // savoir quand arrêter
-
-    Joueur * pivot = *j;
-    do {
-
-        if (joueur_liste_piece(*j) == NULL) {
-            (*j)->score += 15;
-        }
-
-	 else {
-		Piece * p=joueur_liste_piece(*j);
-		Piece * pivot=p;
-		do{
-			(*j)->score -= piece_nb_carre(p);
-			p=piece_suivant(p);
-		} while(p != pivot);
-
-        }
-
-        *j = joueur_suivant(*j);
-
-    } while ((*j) != pivot);
-}
-
-
-/**
-	*\fn int joueur_abandon_sdl(Joueur* j)
-	*\brief Vérifie si tous les joueurs ont abandonné.
-	*\param j Reçois la liste des joueurs et vérifie la valeur d'abandon de chaque Joueur.
-	\return renvoie 1 si tous les joueurs ont abandonné, 0 sinon.
-
-*/
-
-
-
-int joueur_abandon_sdl(Joueur* j){
-	Joueur* pivot;
-	pivot=j;
-	j=joueur_suivant(j);
-
-	while(pivot != j && joueur_a_abandonne(j)){
-		j=joueur_suivant(j);
-
-	}
-
-	return (pivot == j && joueur_a_abandonne(j));
-}
-
 
 
 /**
@@ -238,8 +154,7 @@ int joueur_abandon_sdl(Joueur* j){
 	*\param j Liste de tous les Joueurs pour vérifier s'ils ont tous abandonné.
 	\return Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu):
 		*1 - Recommence une manche. <br>
-		*2 - Recommence une partie. <br>
-		*3 - Quitte le programme.
+		*2 - Retourne au titre. <br>
 
 */
 
@@ -252,7 +167,7 @@ int fin_de_partie_sdl(Joueur** j){
 		joueur_abandonne(*j);
 
 	/*Si tous les joueurs n'ont pas abandonnés*/
-	if(!(joueur_abandon_sdl(*j)))
+	if(!(joueur_abandon(*j)))
 		return 0;
 
 	int choix=0;
@@ -267,7 +182,7 @@ int fin_de_partie_sdl(Joueur** j){
 
 
 	/*Mise a jour du score vue que c'est la fin de la partie*/
-	maj_scores_sdl(j);
+	maj_scores(j);
 	afficher_scores_sdl(*j);
 
 
@@ -276,7 +191,7 @@ int fin_de_partie_sdl(Joueur** j){
 		SDL_RenderClear(renderer);
 		/*On attend la touche du joueur*/
         	while(SDL_PollEvent(&event_fin)){
-			
+
                 	if(event_fin.type == SDL_MOUSEBUTTONDOWN){
                         	if (curs_hover_bouton(b_continuer))
                                 	choix= 1;
@@ -298,27 +213,20 @@ int fin_de_partie_sdl(Joueur** j){
 	return choix;
 }
 
-/**
-	*\fn Joueur* tour_suivant(Joueur* j)
-	*\brief Passe au prochain Joueur.
-	*\param j Joueur actuel.
-	*\return Renvoie le prochain Joueur.
-*/
 
 
-/*Appel le prochain joueur à jouer et modifie la liste Joueur */
-
-Joueur* tour_suivant_sdl(Joueur* j){
-	j=joueur_suivant(j);
-	return j;
-}
 
 
 /**
-	*\fn void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
+	*\fn int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
 	*\details Réalise le fonctionnement d'un tour en appellant les fonctions de gestion_tour .
 	*\param pl Plateau de jeu pour posez les Piece.
 	*\param j Joueur qui joue actuellement.
+	*\return 3 si le joueur a abandonné <br>
+	  renvoie le resultat de la fonction *\fn int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)<br>
+	*1 = Abandon du Joueur
+	*2 = Quitte le jeu ( Appuis sur la croix)
+	
 */
 
 
@@ -327,20 +235,21 @@ Joueur* tour_suivant_sdl(Joueur* j){
 int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int valeur_r;
 	if(joueur_a_abandonne(*j)){
-		printf("\n Ce joueur à abandonne\n");
-		*j=tour_suivant_sdl(*j);
+//		printf("\n Ce joueur à abandonne\n");
+		*j=joueur_suivant(*j);
+
 	}
 	else{
 		valeur_r=gestion_tour_sdl(pl,*j);
 		if(valeur_r == 1){//Le joueur a abandoné
-			printf("Vous avez abandonné\n");
+//			printf("Vous avez abandonné\n");
 				joueur_abandonne(*j);
 		}
 		else if(valeur_r == 2){
 			return 3;//Quitte le jeu
 		}
 		if(!(joueur_a_abandonne(*j)))
-			*j=tour_suivant_sdl(*j);
+			*j=joueur_suivant(*j);
 
 	}
 	return valeur_r;
@@ -348,12 +257,12 @@ int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 
 /**
-	*\fn int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
+	*\fn int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
 	*\brief Réalise le fonctionnement d'une manche.
 	*\param pl Plateau de jeu .
 	*\param j La liste de Joueur qui joue durant la manche.
 	*\return Renvoie le choix des joueurs: <br>
-		*2 - Recommence une partie. <br>
+		*2 - Retourne au menu. <br>
 		*3 - Quitte le programme.
 */
 
@@ -372,7 +281,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 
-		initialisation_manche_sdl(pl,&j);
+		initialisation_manche(pl,&j);
 
 
 	} while(choix == 1 );
@@ -382,7 +291,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 /**
-	*\fn void jouer_partie()
+	*\fn int jouer_partie_sdl()
 	*\brief Réalise l'appelle de fonction pour jouer une partie.
 	*\details Crée une liste de joueur et un plateau de jeu.
 	*\puis appelle initalisation_partie et debut_manche.
@@ -420,7 +329,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				joueur_liste_detruire(&j);
 				return retour;
 			}
-			initialisation_manche_sdl(pl, &j);
+			initialisation_manche(pl, &j);
 
 			retour = jouer_manche_sdl(pl,j);
 			joueur_liste_detruire(&j);
