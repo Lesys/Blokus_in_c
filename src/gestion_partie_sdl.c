@@ -100,9 +100,11 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 			SDL_RenderClear(renderer);
 			/*Attend l'appuis d'une touche*/
 			while(SDL_PollEvent(&event_saisie)){
+
 				/*Si c'est la croix, on arrete*/
 				if(event_saisie.type == SDL_QUIT)
 					return 3;
+
 				/*Si c'est la touche entrée, on passe au joueur suivant*/
 				else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) )
 					continuer = 0;
@@ -112,6 +114,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 					if (strlen((*j)->pseudo) > 0)
 						(*j)->pseudo[strlen((*j)->pseudo) - 1] = '\0';
 				}
+
 				/*Si c'est une touche du clavier, on l'entre dans le pseudo*/
 				else if(event_saisie.type == SDL_TEXTINPUT) {
 					strcat((*j)->pseudo, event_saisie.text.text);
@@ -162,11 +165,11 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 /* Affiche les résultats,mets à jour le score ,propose les options de fin de partie et renvoie le résultat correspondant */
 
 int fin_de_partie_sdl(Joueur** j){
-	/*Si le joueur n'a plus de piece dans sa liste, abandonne le joueur automatiquement*/
+	/*Si le joueur n'a plus de piece dans sa liste, fait abandonner le joueur automatiquement*/
 	if(joueur_liste_piece(*j) == NULL)
 		joueur_abandonne(*j);
 
-	/*Si tous les joueurs n'ont pas abandonnés*/
+	/* S'il reste un joueur n'ayant pas abandonné */
 	if(!(joueur_abandon(*j)))
 		return 0;
 
@@ -241,9 +244,10 @@ int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	}
 	else{
 		valeur_r=gestion_tour_sdl(pl,*j);
+
 		if(valeur_r == 1){//Le joueur a abandoné
 //			printf("Vous avez abandonné\n");
-				joueur_abandonne(*j);
+			joueur_abandonne(*j);
 		}
 		else if(valeur_r == 2){
 			return 3;//Quitte le jeu
@@ -262,7 +266,6 @@ int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	*\param pl Plateau de jeu .
 	*\param j La liste de Joueur qui joue durant la manche.
 	*\return Renvoie le choix des joueurs: <br>
-		
 		*2 - Retourne au menu. <br>
 		*3 - Quitte le programme.
 */
@@ -328,8 +331,10 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 			retour = initialisation_partie_sdl(&j);
 			if (retour == 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
 				joueur_liste_detruire(&j);
+
 				return retour;
 			}
+
 			initialisation_manche(pl, &j);
 
 			retour = jouer_manche_sdl(pl,j);
@@ -338,21 +343,24 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 			if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
 				return retour;
 		}
-		/*else if Appuie sur le bouton REGLE */
+		/* else if Appuie sur le bouton REGLE // TODO*/
 		else if (retour == 3) { /*Appuie sur le bouton Quitter || Appuie sur la croix*/
 			return retour;
 		}
-	afficher_titres_sdl();
- 	afficher_bouton_sdl(b_jouer);
-        afficher_bouton_sdl(b_quitter_jeu);
-	SDL_RenderPresent(renderer);
+
+		/* Affiche le menu */
+		afficher_titres_sdl();
+	 	afficher_bouton_sdl(b_jouer);
+	        afficher_bouton_sdl(b_quitter_jeu);
+		SDL_RenderPresent(renderer);
 	}
 
 	if (retour == 3) { /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
 		joueur_liste_detruire(&j);
 	}
-	free_bouton_sdl(b_jouer);
-        free_bouton_sdl(b_quitter_jeu);
+
+	free_bouton_sdl(&b_jouer);
+        free_bouton_sdl(&b_quitter_jeu);
 
 	return retour;
 }

@@ -1,6 +1,8 @@
 #include "../include/main_terminal.h"
 #include "../include/main_sdl.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 int main(){
 	char c;

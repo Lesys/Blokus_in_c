@@ -27,7 +27,7 @@
 */
 int carre_get_x(Carre* c) {
 	if (carre_hors_liste(c))
-		return NULL;
+		return -1;
 	return c->x;
 }
 
@@ -41,7 +41,7 @@ int carre_get_x(Carre* c) {
 */
 int carre_get_y(Carre* c) {
 	if (carre_hors_liste(c))
-		return NULL;
+		return -1;
 	return c->y;
 }
 
@@ -171,7 +171,7 @@ void carre_detruire(Carre** c) {
 	(*c) = NULL;
 }
 
-Piece* piece_hors_liste(Piece* p) {
+int piece_hors_liste(Piece* p) {
 	return (p == NULL);
 }
 
@@ -418,7 +418,7 @@ void piece_pivoter(int nb, Carre * c) {
 	\param p L'adresse de la Piece* qu'on souhaite supprimer
 */
 void liste_piece_suppr_elem(Piece** p) {/*, int pos) {*/
-	if (!piece_hors_liste(p)) {
+	if (!piece_hors_liste(*p)) {
 		Carre** c = &((*p)->liste_carre);
 /*		printf("Destruction carres\n");*/
 /*		Carre* suiv = carre_get_suiv(*c);*/

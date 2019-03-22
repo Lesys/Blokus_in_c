@@ -61,7 +61,7 @@ int joueur_score(Joueur* j) {
 	\return La première Piece* du Joueur*
 */
 Piece* joueur_liste_piece(Joueur* j) {
-	if (!joueur_hors_liste(j))
+	if (joueur_hors_liste(j))
 		return NULL;
 	return j->liste_piece;
 }
@@ -238,7 +238,6 @@ Joueur* joueur_creation(Couleur c, ...) {
 	j->prec = NULL;/*malloc(sizeof(Joueur*));*/
 
 	j->liste_piece = piece_liste_creation();
-/*	j->liste_piece = NULL;*/
 
 	j->abandon = 0;
 

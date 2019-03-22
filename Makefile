@@ -63,9 +63,9 @@ STATIC = blokus.static
 DYNAMIC = blokus.shared
 EXE = blokus.exe
 sharedLDFLAGS := $(CFLAGS)
-sharedLDLIBS := -l$(LINKNAME)
-staticLDFLAGS := $(CFLAGS)
-#staticLDLIBS := -l:$(libSTATIC)
+sharedLDLIBS := -l:$(LINKNAME)
+#staticLDFLAGS := $(CFLAGS)
+staticLDLIBS := -l:$(libSTATIC)
 staticLDLIBS := $(libSTATIC)
 
 #Conception du Makefile :
@@ -100,7 +100,7 @@ $(REALNAME): $(OBJETS)
 $(STATIC): LDFLAGS := $(staticLDFLAGS)
 $(STATIC): LDLIBS := $(staticLDLIBS)
 $(STATIC): $(DIRMAIN)$(PROGRPRINC) $(libSTATIC)
-	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(staticLDFLAGS) $(staticLDLIBS)
+	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(staticLDFLAGS) $(staticLDLIBS) $(CFLAGS)
 
 #Génération du programme dynamique
 #$(DYNAMIC): LDFLAGS := $(sharedLDFLAGS)

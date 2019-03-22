@@ -15,7 +15,7 @@ int main()
 
     sdl_init();
 
-    gestion_jeu(pl, j);
+    gestion_tour_sdl(pl, j);
 
     sdl_close();
 

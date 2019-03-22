@@ -56,7 +56,7 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 	for(i=0;i < TAILLE_PLATEAU;i++){
 
 		for(x=0;x < TAILLE_PLATEAU;x++){
-			pl[i][x]=0;
+			pl[i][x]=VIDE;
 		}
 	}
 
