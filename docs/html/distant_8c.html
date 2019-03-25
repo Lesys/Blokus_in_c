@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blokus in C: Référence du fichier src/distant.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('distant_8c.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier distant.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fonctions pour le jeu multijoueur.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdarg.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;strings.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &quot;../include/couleur.h&quot;</code><br />
+<code>#include &quot;../include/commun.h&quot;</code><br />
+<code>#include &quot;../include/joueur.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aa91adb8f875d01089b22cae039fd3010"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#aa91adb8f875d01089b22cae039fd3010">connexion</a> (char *adresse, int port)</td></tr>
+<tr class="memdesc:aa91adb8f875d01089b22cae039fd3010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effectue une connexion à un hote distant.  <a href="#aa91adb8f875d01089b22cae039fd3010">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa91adb8f875d01089b22cae039fd3010"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa958b943307bd48ec0a15007392f96b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#aaa958b943307bd48ec0a15007392f96b">accepter_connexion</a> (int port)</td></tr>
+<tr class="memdesc:aaa958b943307bd48ec0a15007392f96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accepte une connexion d'un joueur distant.  <a href="#aaa958b943307bd48ec0a15007392f96b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aaa958b943307bd48ec0a15007392f96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0f679f703c33d5f2666b7ff97b5a11c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ab0f679f703c33d5f2666b7ff97b5a11c">fermer_connexion</a> (int sockfd)</td></tr>
+<tr class="memdesc:ab0f679f703c33d5f2666b7ff97b5a11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ferme une connexion distante.  <a href="#ab0f679f703c33d5f2666b7ff97b5a11c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab0f679f703c33d5f2666b7ff97b5a11c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8981669edeedb5e7afa24381fa72c29"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ac8981669edeedb5e7afa24381fa72c29">recup_type</a> (unsigned char *buffer)</td></tr>
+<tr class="memdesc:ac8981669edeedb5e7afa24381fa72c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le type de communication contenue dans le buffer.  <a href="#ac8981669edeedb5e7afa24381fa72c29">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac8981669edeedb5e7afa24381fa72c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad18a8f5f33f00bbaa8a90936da158a00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ad18a8f5f33f00bbaa8a90936da158a00">envoyer_plateau</a> (int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
+<tr class="memdesc:ad18a8f5f33f00bbaa8a90936da158a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie l'état du plateau.  <a href="#ad18a8f5f33f00bbaa8a90936da158a00">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad18a8f5f33f00bbaa8a90936da158a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fbd636a3883eafc64482fb51736c46d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a6fbd636a3883eafc64482fb51736c46d">recevoir_plateau</a> (unsigned char *buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
+<tr class="memdesc:a6fbd636a3883eafc64482fb51736c46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit l'état du plateau.  <a href="#a6fbd636a3883eafc64482fb51736c46d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6fbd636a3883eafc64482fb51736c46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abca6be37e0da5642415cd14f6b1485cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#abca6be37e0da5642415cd14f6b1485cd">envoyer_liste_joueurs</a> (int sockfd, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:abca6be37e0da5642415cd14f6b1485cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie la liste des joueurs au joueur distant.  <a href="#abca6be37e0da5642415cd14f6b1485cd">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abca6be37e0da5642415cd14f6b1485cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a964acd81714270828b5daea75aab73f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a964acd81714270828b5daea75aab73f0">recevoir_liste_joueurs</a> (unsigned char *buffer)</td></tr>
+<tr class="memdesc:a964acd81714270828b5daea75aab73f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">recoit la liste des joueurs et en créer une local  <a href="#a964acd81714270828b5daea75aab73f0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a964acd81714270828b5daea75aab73f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa47ea55c91e11f1b401876ca14815462"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#aa47ea55c91e11f1b401876ca14815462">envoyer_abandon_joueur</a> (int sockfd, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:aa47ea55c91e11f1b401876ca14815462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoi un message annoncant l'abandon d'un joueur.  <a href="#aa47ea55c91e11f1b401876ca14815462">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa47ea55c91e11f1b401876ca14815462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5055c3172eee5061edc819523609ec39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a5055c3172eee5061edc819523609ec39">recevoir_abandon_joueur</a> (unsigned char *buffer, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a5055c3172eee5061edc819523609ec39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit un message d'abandon d'un joueur et effectue les changements dans la liste des joueurs.  <a href="#a5055c3172eee5061edc819523609ec39">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5055c3172eee5061edc819523609ec39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada838a2d0b7afe9caa7b085f2a92da77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ada838a2d0b7afe9caa7b085f2a92da77">envoyer_pseudo</a> (int sockfd, char *pseudo)</td></tr>
+<tr class="memdesc:ada838a2d0b7afe9caa7b085f2a92da77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie le pseudo choisi à l'hote.  <a href="#ada838a2d0b7afe9caa7b085f2a92da77">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ada838a2d0b7afe9caa7b085f2a92da77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b5a0b1c3b8be6e92235455605dd001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a08b5a0b1c3b8be6e92235455605dd001">recevoir_pseudo</a> (unsigned char *buffer, char *pseudo)</td></tr>
+<tr class="memdesc:a08b5a0b1c3b8be6e92235455605dd001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit un pseudo d'un joueur distant et le place dans pseudo.  <a href="#a08b5a0b1c3b8be6e92235455605dd001">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a08b5a0b1c3b8be6e92235455605dd001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p>Fonctions pour le jeu multijoueur. </p>
+<p>Fonction qui gèrent les connexions des joueurs distants ainsi que la logique du jeu pour ces joueurs </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre et BASTIDE Robin </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="aaa958b943307bd48ec0a15007392f96b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa958b943307bd48ec0a15007392f96b">&#9670;&nbsp;</a></span>accepter_connexion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int accepter_connexion </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accepte une connexion d'un joueur distant. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>Port sur lequel écouter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Numéro du socket si connexion, 0 sinon </dd></dl>
+
+</div>
+</div>
+<a id="aa91adb8f875d01089b22cae039fd3010"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa91adb8f875d01089b22cae039fd3010">&#9670;&nbsp;</a></span>connexion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int connexion </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>adresse</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Effectue une connexion à un hote distant. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">adresse</td><td>Adresse de l'hote (ip ou nom domaine) </td></tr>
+    <tr><td class="paramname">port</td><td>Port sur lequel se connecter </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Numéro du socket si connexion, 0 sinon </dd></dl>
+
+</div>
+</div>
+<a id="aa47ea55c91e11f1b401876ca14815462"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa47ea55c91e11f1b401876ca14815462">&#9670;&nbsp;</a></span>envoyer_abandon_joueur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void envoyer_abandon_joueur </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envoi un message annoncant l'abandon d'un joueur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sockfd</td><td>Numéro du socket à qui envoyer </td></tr>
+    <tr><td class="paramname">j</td><td>Joueur qui abandonne </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abca6be37e0da5642415cd14f6b1485cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abca6be37e0da5642415cd14f6b1485cd">&#9670;&nbsp;</a></span>envoyer_liste_joueurs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void envoyer_liste_joueurs </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envoie la liste des joueurs au joueur distant. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sockfd</td><td>Numéro du socket à qui envoyer </td></tr>
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad18a8f5f33f00bbaa8a90936da158a00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad18a8f5f33f00bbaa8a90936da158a00">&#9670;&nbsp;</a></span>envoyer_plateau()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void envoyer_plateau </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envoie l'état du plateau. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sockfd</td><td>Numéro du socket sur lequel envoyer </td></tr>
+    <tr><td class="paramname">pl</td><td>Plateau courant </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ada838a2d0b7afe9caa7b085f2a92da77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada838a2d0b7afe9caa7b085f2a92da77">&#9670;&nbsp;</a></span>envoyer_pseudo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void envoyer_pseudo </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>pseudo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envoie le pseudo choisi à l'hote. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sockfd</td><td>Numéro du socket à qui envoyer </td></tr>
+    <tr><td class="paramname">pseudo</td><td>Pseudo choisi </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab0f679f703c33d5f2666b7ff97b5a11c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0f679f703c33d5f2666b7ff97b5a11c">&#9670;&nbsp;</a></span>fermer_connexion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fermer_connexion </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ferme une connexion distante. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sockfd</td><td>Numéro du socket à fermer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5055c3172eee5061edc819523609ec39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5055c3172eee5061edc819523609ec39">&#9670;&nbsp;</a></span>recevoir_abandon_joueur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void recevoir_abandon_joueur </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recoit un message d'abandon d'un joueur et effectue les changements dans la liste des joueurs. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Buffer à lire </td></tr>
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a964acd81714270828b5daea75aab73f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a964acd81714270828b5daea75aab73f0">&#9670;&nbsp;</a></span>recevoir_liste_joueurs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structjoueur.html">Joueur</a>* recevoir_liste_joueurs </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>recoit la liste des joueurs et en créer une local </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>buffer à lire </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Liste des joueurs local </dd></dl>
+
+</div>
+</div>
+<a id="a6fbd636a3883eafc64482fb51736c46d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fbd636a3883eafc64482fb51736c46d">&#9670;&nbsp;</a></span>recevoir_plateau()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void recevoir_plateau </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recoit l'état du plateau. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Buffer à lire </td></tr>
+    <tr><td class="paramname">pl</td><td>Plateau local (sera modifié) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a08b5a0b1c3b8be6e92235455605dd001"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b5a0b1c3b8be6e92235455605dd001">&#9670;&nbsp;</a></span>recevoir_pseudo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void recevoir_pseudo </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>pseudo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recoit un pseudo d'un joueur distant et le place dans pseudo. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Buffer à lire </td></tr>
+    <tr><td class="paramname">pseudo</td><td>Pseudo à affecter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac8981669edeedb5e7afa24381fa72c29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8981669edeedb5e7afa24381fa72c29">&#9670;&nbsp;</a></span>recup_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int recup_type </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Récupère le type de communication contenue dans le buffer. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Buffer à lire </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>0-Erreur, 1-Liste joueurs, 2-Etat plateau, 3-Abandon joueur, 4-Pseudo </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="distant_8c.html">distant.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

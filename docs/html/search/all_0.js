@@ -1,6 +1,7 @@
 var searchData=
 [
   ['abandon',['abandon',['../structjoueur.html#afe6f4297587bcb36619d814d209ee793',1,'joueur']]],
+  ['accepter_5fconnexion',['accepter_connexion',['../distant_8c.html#aaa958b943307bd48ec0a15007392f96b',1,'distant.c']]],
   ['affecter_5fmatrice',['affecter_matrice',['../gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a',1,'gestion_tour.c']]],
   ['affichage_2ec',['affichage.c',['../affichage_8c.html',1,'']]],
   ['affichage_5fsdl_2ec',['affichage_sdl.c',['../affichage__sdl_8c.html',1,'']]],
