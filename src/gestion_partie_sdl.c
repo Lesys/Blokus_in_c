@@ -1,5 +1,5 @@
 /**
-	*\file gestion_partie.c
+	*\file gestion_partie_sdl.c
 	*\brief Regroupent toutes les fonctions gestion_partie_sdl.c
 	*\details Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles.
 	*\author JODEAU Alexandre
