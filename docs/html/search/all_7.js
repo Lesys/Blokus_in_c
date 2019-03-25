@@ -1,8 +1,11 @@
 var searchData=
 [
   ['jouer_5fmanche',['jouer_manche',['../gestion__partie_8c.html#aabc2caddfe36658343dc331c2d919bc2',1,'gestion_partie.c']]],
+  ['jouer_5fmanche_5fsdl',['jouer_manche_sdl',['../gestion__partie__sdl_8c.html#a15493976aece5f82f40652cdf75fbd64',1,'gestion_partie_sdl.c']]],
   ['jouer_5fpartie',['jouer_partie',['../gestion__partie_8c.html#a125c2e2cc30aedff98dc9676e890d9db',1,'gestion_partie.c']]],
+  ['jouer_5fpartie_5fsdl',['jouer_partie_sdl',['../gestion__partie__sdl_8c.html#a72c28677b4723f873b5ce17d960e6769',1,'gestion_partie_sdl.c']]],
   ['jouer_5ftour',['jouer_tour',['../gestion__partie_8c.html#a58ea1050fc334f65333957e7b244e389',1,'gestion_partie.c']]],
+  ['jouer_5ftour_5fsdl',['jouer_tour_sdl',['../gestion__partie__sdl_8c.html#a4c5e24acec5decd18dc6217efa2c3199',1,'gestion_partie_sdl.c']]],
   ['joueur',['joueur',['../structjoueur.html',1,'']]],
   ['joueur_2ec',['joueur.c',['../joueur_8c.html',1,'']]],
   ['joueur_5fa_5fabandonne',['joueur_a_abandonne',['../joueur_8c.html#a75e9e308a43f1456ad657a773647110b',1,'joueur.c']]],
