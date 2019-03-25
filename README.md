@@ -8,7 +8,7 @@
 
 Implémentation V1:
 
--Diagramme de gantt
+- Diagramme de gantt
 
 ![alt text](docs/IMG/gantt_blokus_version_terminal.png)
 
@@ -22,6 +22,21 @@ Schémas de l'interface graphique:
 
 ![alt text](docs/IMG/blokus_sdl_conception.png)
 
--Diagramme de gantt
+- Diagramme de gantt
 
 ![alt text](docs/IMG/gantt_blokus_version_sdl.png)
+
+- Interface sous SDL
+
+![alt text](docs/IMG/blokus_jeu_sdl.png)
+
+## Version 3 (réseau & bot)
+
+[Fichier conception V3 (réseau & bot)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet-bot-res)
+
+Implémentation V3:
+
+-Diagramme de gantt
+
+![alt text](docs/IMG/gantt_blokus_version_res_bot.png)
+
