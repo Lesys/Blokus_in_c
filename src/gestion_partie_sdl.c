@@ -226,7 +226,7 @@ int fin_de_partie_sdl(Joueur** j){
 	*\param pl Plateau de jeu pour posez les Piece.
 	*\param j Joueur qui joue actuellement.
 	*\return 3 si la croix a été saisie <br>
-	  renvoie le resultat de la fonction *\fn int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)<br>
+	  renvoie le resultat de la fonction gestion_tour_sdl<br>
 	*1 = Abandon du Joueur
 	*2 = Quitte le jeu ( Appuis sur la croix)
 	
