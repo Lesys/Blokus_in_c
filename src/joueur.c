@@ -61,6 +61,8 @@ int joueur_score(Joueur* j) {
 	\return La première Piece* du Joueur*
 */
 Piece* joueur_liste_piece(Joueur* j) {
+	if (joueur_hors_liste(j))
+		return NULL;
 	return j->liste_piece;
 }
 
@@ -213,14 +215,19 @@ void joueur_liste_reinit(Joueur* j) {
 */
 Joueur* joueur_creation(Couleur c, ...) {
 	Joueur* j = malloc(sizeof(Joueur));
-	j->pseudo = malloc(sizeof(char) * TAILLE_PSEUDO);
 
-	printf("Joueur %s, veuillez indiquer votre pseudo: ", couleur_tostring(c));
+	/* Permet d'avoir 15 caractères pour le pseudo + le caractère de fin de chaine */
+	j->pseudo = malloc(sizeof(char) * (TAILLE_PSEUDO + 1));
+	j->pseudo[0] = '\0';
+
+/*	printf("Joueur %s, veuillez indiquer votre pseudo: ", couleur_tostring(c));*/
 /*	scanf("%*[^\n]%*c", j->pseudo);*/
-	scanf("%s", j->pseudo);
+/*	scanf("%15s", j->pseudo);
+
+	while (getchar() != '\n');*/
 
 	/* Réalloue la bonne taille pour le pseudo */
-	j->pseudo = realloc(j->pseudo, sizeof(char) * (strlen(j->pseudo) + 1));
+/*	j->pseudo = realloc(j->pseudo, sizeof(char) * (strlen(j->pseudo) + 1));*/
 
 	j->couleur = c;
 
@@ -231,7 +238,6 @@ Joueur* joueur_creation(Couleur c, ...) {
 	j->prec = NULL;/*malloc(sizeof(Joueur*));*/
 
 	j->liste_piece = piece_liste_creation();
-/*	j->liste_piece = NULL;*/
 
 	j->abandon = 0;
 
@@ -315,4 +321,3 @@ void joueur_liste_detruire(Joueur** j) {
 
 	(*j) = NULL;
 }
-

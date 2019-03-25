@@ -12,8 +12,8 @@
 #include "../include/affichage.h"
 #include "../include/carre.h"
 
-#include "stdio.h"
-#include "stdlib.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * \fn Piece* demander_piece(Joueur* j)
@@ -311,7 +311,7 @@ void choisir_coordonnee(Couleur pl[20][20], Piece* pi, int* x, int* y, Joueur* j
 
                 } while(c != c2);
 
-    	    } while((((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19))) || !(valide));
+            } while((((*x < 0) || (*x > 19)) || ((*y < 0) || (*y > 19))) || !(valide));
 
             /* Si aucun des carrés constituant la pièce n'occupe la case de départ du joueur, alors les coordonnées
                ne sont pas valides */

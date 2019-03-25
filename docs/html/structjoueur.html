@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence de la structure joueur</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('structjoueur.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('structjoueur.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -128,11 +119,9 @@ Champs de données</h2></td></tr>
 <tr class="separator:afe6f4297587bcb36619d814d209ee793"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Structure d'un Joueur. </p>
+<div class="textblock"><p>Structure d'un Joueur. </p>
 </div><h2 class="groupheader">Documentation des champs</h2>
-<a id="afe6f4297587bcb36619d814d209ee793"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe6f4297587bcb36619d814d209ee793">&#9670;&nbsp;</a></span>abandon</h2>
-
+<a class="anchor" id="afe6f4297587bcb36619d814d209ee793"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -141,13 +130,11 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">VRAI si le joueur a abandonné, FAUX sinon </p>
+<p>VRAI si le joueur a abandonné, FAUX sinon </p>
 
 </div>
 </div>
-<a id="a12a96cd097c1f3954eae7f6b80045458"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12a96cd097c1f3954eae7f6b80045458">&#9670;&nbsp;</a></span>couleur</h2>
-
+<a class="anchor" id="a12a96cd097c1f3954eae7f6b80045458"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -156,13 +143,11 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Couleur du joueur </p>
+<p>Couleur du joueur </p>
 
 </div>
 </div>
-<a id="ab8645bb2ae158c61924f9da0833bcf89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8645bb2ae158c61924f9da0833bcf89">&#9670;&nbsp;</a></span>liste_piece</h2>
-
+<a class="anchor" id="ab8645bb2ae158c61924f9da0833bcf89"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -171,13 +156,11 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Liste des pièces restantes pour le joueur </p>
+<p>Liste des pièces restantes pour le joueur </p>
 
 </div>
 </div>
-<a id="a160f732197c2542736174f6698e4e25e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a160f732197c2542736174f6698e4e25e">&#9670;&nbsp;</a></span>prec</h2>
-
+<a class="anchor" id="a160f732197c2542736174f6698e4e25e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -186,13 +169,11 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Joueur précédent (pour que la destruction soit possible) </p>
+<p>Joueur précédent (pour que la destruction soit possible) </p>
 
 </div>
 </div>
-<a id="a99413f433f9baf71bd6b9570bb2f02aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99413f433f9baf71bd6b9570bb2f02aa">&#9670;&nbsp;</a></span>pseudo</h2>
-
+<a class="anchor" id="a99413f433f9baf71bd6b9570bb2f02aa"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -201,13 +182,11 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Pseudo du joueur </p>
+<p>Pseudo du joueur </p>
 
 </div>
 </div>
-<a id="ac5fb44caca18ccd66cdc0796d7b4a3db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5fb44caca18ccd66cdc0796d7b4a3db">&#9670;&nbsp;</a></span>score</h2>
-
+<a class="anchor" id="ac5fb44caca18ccd66cdc0796d7b4a3db"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -216,13 +195,11 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Score du joueur (il n'est visible qu'en fin de partir) </p>
+<p>Score du joueur (il n'est visible qu'en fin de partir) </p>
 
 </div>
 </div>
-<a id="aea95ac2c6ababb055e63d87c051ab9c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea95ac2c6ababb055e63d87c051ab9c0">&#9670;&nbsp;</a></span>suiv</h2>
-
+<a class="anchor" id="aea95ac2c6ababb055e63d87c051ab9c0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -231,13 +208,11 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Joueur suivant (qu'il soit un vrai joueur ou un BOT) </p>
+<p>Joueur suivant (qu'il soit un vrai joueur ou un BOT) </p>
 
 </div>
 </div>
-<a id="ad6aaea00832ba637ac31b481dfbe0577"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6aaea00832ba637ac31b481dfbe0577">&#9670;&nbsp;</a></span>type</h2>
-
+<a class="anchor" id="ad6aaea00832ba637ac31b481dfbe0577"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -246,7 +221,7 @@ Champs de données</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Type de joueur (la gestion d'un tour diffère en fonction du type) </p>
+<p>Type de joueur (la gestion d'un tour diffère en fonction du type) </p>
 
 </div>
 </div>
@@ -261,7 +236,7 @@ Champs de données</h2></td></tr>
     <li class="navelem"><a class="el" href="structjoueur.html">joueur</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

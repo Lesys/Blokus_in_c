@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C:  Fichier source de include/affichage.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('affichage_8h_source.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('affichage_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -100,13 +91,34 @@ $(document).ready(function(){initNavTree('affichage_8h_source.html','');});
 <div class="title">affichage.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef AFFICHAGE_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define AFFICHAGE_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;../include/commun.h&quot;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;../include/couleur.h&quot;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;../include/joueur.h&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;../include/carre.h&quot;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define COULEUR_BLEU &quot;\x1b[34m&quot; </span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define COULEUR_JAUNE &quot;\x1b[33m&quot; </span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define COULEUR_ROUGE &quot;\x1b[31m&quot; </span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define COULEUR_VERT &quot;\x1b[32m&quot; </span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define FIN_COULEUR &quot;\x1b[0m&quot; </span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">void afficher_str_couleur(Couleur couleur, char * str);</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9">afficher_plateau</a>(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#ade7506941effd14df4d79d3dcd414493">afficher_pieces_dispo</a>(<a class="code" href="structjoueur.html">Joueur</a> * j);</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a">afficher_choix_orientation</a>(<a class="code" href="structpiece.html">Piece</a> * p, <a class="code" href="structjoueur.html">Joueur</a> * j);</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#a0607bdb91a55dfb7df2eb1c68ad45040">afficher_scores</a>(<a class="code" href="structjoueur.html">Joueur</a> * j);</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#ae57705b3eb9ad9126516ba4ee7f43810">afficher_resultats</a>(<a class="code" href="structjoueur.html">Joueur</a> * j);</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="affichage_8c_html_a0607bdb91a55dfb7df2eb1c68ad45040"><div class="ttname"><a href="affichage_8c.html#a0607bdb91a55dfb7df2eb1c68ad45040">afficher_scores</a></div><div class="ttdeci">void afficher_scores(Joueur *j)</div><div class="ttdoc">Affiche les scores.</div><div class="ttdef"><b>Definition:</b> affichage.c:199</div></div>
-<div class="ttc" id="affichage_8c_html_acb37a606c7ca6314e144f6c0a419d30a"><div class="ttname"><a href="affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a">afficher_choix_orientation</a></div><div class="ttdeci">void afficher_choix_orientation(Piece *p, Joueur *j)</div><div class="ttdoc">Affiche les orientations possibles pour une pièce.</div><div class="ttdef"><b>Definition:</b> affichage.c:149</div></div>
-<div class="ttc" id="structpiece_html"><div class="ttname"><a href="structpiece.html">piece</a></div><div class="ttdoc">Structure d&amp;#39;une Piece.</div><div class="ttdef"><b>Definition:</b> carre.h:64</div></div>
-<div class="ttc" id="affichage_8c_html_ade7506941effd14df4d79d3dcd414493"><div class="ttname"><a href="affichage_8c.html#ade7506941effd14df4d79d3dcd414493">afficher_pieces_dispo</a></div><div class="ttdeci">void afficher_pieces_dispo(Joueur *j)</div><div class="ttdoc">Affiche les pièces disponibles d&amp;#39;un joueur.</div><div class="ttdef"><b>Definition:</b> affichage.c:87</div></div>
-<div class="ttc" id="structjoueur_html"><div class="ttname"><a href="structjoueur.html">joueur</a></div><div class="ttdoc">Structure d&amp;#39;un Joueur.</div><div class="ttdef"><b>Definition:</b> joueur.h:22</div></div>
-<div class="ttc" id="affichage_8c_html_ae57705b3eb9ad9126516ba4ee7f43810"><div class="ttname"><a href="affichage_8c.html#ae57705b3eb9ad9126516ba4ee7f43810">afficher_resultats</a></div><div class="ttdeci">void afficher_resultats(Joueur *j)</div><div class="ttdoc">Affiche les résultats.</div><div class="ttdef"><b>Definition:</b> affichage.c:255</div></div>
-<div class="ttc" id="affichage_8c_html_af72ba27a8b6dd0a005e4462eee9ddac9"><div class="ttname"><a href="affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9">afficher_plateau</a></div><div class="ttdeci">void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</div><div class="ttdoc">Affiche le plateau de jeu.</div><div class="ttdef"><b>Definition:</b> affichage.c:61</div></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef AFFICHAGE_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define AFFICHAGE_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;../include/commun.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;../include/couleur.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;../include/joueur.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;../include/carre.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define COULEUR_BLEU &quot;\x1b[34m&quot; </span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define COULEUR_JAUNE &quot;\x1b[33m&quot; </span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define COULEUR_ROUGE &quot;\x1b[31m&quot; </span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define COULEUR_VERT &quot;\x1b[32m&quot; </span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define FIN_COULEUR &quot;\x1b[0m&quot; </span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">void afficher_str_couleur(Couleur couleur, char * str);</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9">afficher_plateau</a>(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#ade7506941effd14df4d79d3dcd414493">afficher_pieces_dispo</a>(<a class="code" href="structjoueur.html">Joueur</a> * j);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a">afficher_choix_orientation</a>(<a class="code" href="structpiece.html">Piece</a> * p, <a class="code" href="structjoueur.html">Joueur</a> * j);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#a0607bdb91a55dfb7df2eb1c68ad45040">afficher_scores</a>(<a class="code" href="structjoueur.html">Joueur</a> * j);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="affichage_8c.html#ae57705b3eb9ad9126516ba4ee7f43810">afficher_resultats</a>(<a class="code" href="structjoueur.html">Joueur</a> * j);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="affichage_8c_html_a0607bdb91a55dfb7df2eb1c68ad45040"><div class="ttname"><a href="affichage_8c.html#a0607bdb91a55dfb7df2eb1c68ad45040">afficher_scores</a></div><div class="ttdeci">void afficher_scores(Joueur *j)</div><div class="ttdoc">Affiche les scores. </div><div class="ttdef"><b>Definition:</b> affichage.c:199</div></div>
+<div class="ttc" id="affichage_8c_html_acb37a606c7ca6314e144f6c0a419d30a"><div class="ttname"><a href="affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a">afficher_choix_orientation</a></div><div class="ttdeci">void afficher_choix_orientation(Piece *p, Joueur *j)</div><div class="ttdoc">Affiche les orientations possibles pour une pièce. </div><div class="ttdef"><b>Definition:</b> affichage.c:149</div></div>
+<div class="ttc" id="structpiece_html"><div class="ttname"><a href="structpiece.html">piece</a></div><div class="ttdoc">Structure d&#39;une Piece. </div><div class="ttdef"><b>Definition:</b> carre.h:64</div></div>
+<div class="ttc" id="affichage_8c_html_ade7506941effd14df4d79d3dcd414493"><div class="ttname"><a href="affichage_8c.html#ade7506941effd14df4d79d3dcd414493">afficher_pieces_dispo</a></div><div class="ttdeci">void afficher_pieces_dispo(Joueur *j)</div><div class="ttdoc">Affiche les pièces disponibles d&#39;un joueur. </div><div class="ttdef"><b>Definition:</b> affichage.c:87</div></div>
+<div class="ttc" id="structjoueur_html"><div class="ttname"><a href="structjoueur.html">joueur</a></div><div class="ttdoc">Structure d&#39;un Joueur. </div><div class="ttdef"><b>Definition:</b> joueur.h:22</div></div>
+<div class="ttc" id="affichage_8c_html_ae57705b3eb9ad9126516ba4ee7f43810"><div class="ttname"><a href="affichage_8c.html#ae57705b3eb9ad9126516ba4ee7f43810">afficher_resultats</a></div><div class="ttdeci">void afficher_resultats(Joueur *j)</div><div class="ttdoc">Affiche les résultats. </div><div class="ttdef"><b>Definition:</b> affichage.c:255</div></div>
+<div class="ttc" id="affichage_8c_html_af72ba27a8b6dd0a005e4462eee9ddac9"><div class="ttname"><a href="affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9">afficher_plateau</a></div><div class="ttdeci">void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</div><div class="ttdoc">Affiche le plateau de jeu. </div><div class="ttdef"><b>Definition:</b> affichage.c:61</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
@@ -115,7 +127,7 @@ $(document).ready(function(){initNavTree('affichage_8h_source.html','');});
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>affichage.h</b></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

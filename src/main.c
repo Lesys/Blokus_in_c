@@ -1,17 +1,29 @@
-#include "../include/affichage.h"
-#include "../include/carre.h"
-#include "../include/commun.h"
-#include "../include/couleur.h"
-#include "../include/gestion_partie.h"
-#include "../include/gestion_tour.h"
-#include "../include/joueur.h"
-#include "../include/piece.h"
+#include "../include/main_terminal.h"
+#include "../include/main_sdl.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 int main(){
+	char c;
+	int choix=0;
+	printf("\n Debut du pogramme \n");
+	 do{
+		printf("\n Entrer 1 pour jouer dans la version terminal, 2 pour la version SDL\n");
+                scanf(" %c",&c);
 
-	printf("\n Debut du programme\n");
-	jouer_partie();
+                /* Si l'utilisateur ne rentre pas un entier*/
+                if (isdigit(c))
+                       choix = atoi(&c);
+
+        } while(!isdigit(c) || choix < 1 || choix > 2);
+
+	if (choix == 1)
+		main_terminal();
+
+	else
+		main_sdl();
+
 	printf("\n Fin du programme\n");
 	return 0;
 }

@@ -16,4 +16,3 @@ char* couleur_tostring(Couleur c) {
 			break;
 	}
 }
-

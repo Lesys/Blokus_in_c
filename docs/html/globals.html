@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Variables globale</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('globals.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -98,32 +89,62 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <div class="contents">
 <div class="textblock">Liste de toutes les fonctions, variables, macros, enumérations, et définitions de type documentés avec des liens vers la documentation :</div>
 
-<h3><a id="index_a"></a>- a -</h3><ul>
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
 <li>affecter_matrice()
 : <a class="el" href="gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a">gestion_tour.c</a>
+</li>
+<li>afficher_bouton_sdl()
+: <a class="el" href="affichage__sdl_8c.html#add838e3595b2f6d6504975ed56508f81">affichage_sdl.c</a>
 </li>
 <li>afficher_choix_orientation()
 : <a class="el" href="affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a">affichage.c</a>
 </li>
+<li>afficher_nb_joueurs_sdl()
+: <a class="el" href="affichage__sdl_8c.html#af1ac204f2e1c358f82687f6aa71d9217">affichage_sdl.c</a>
+</li>
 <li>afficher_pieces_dispo()
 : <a class="el" href="affichage_8c.html#ade7506941effd14df4d79d3dcd414493">affichage.c</a>
+</li>
+<li>afficher_pieces_dispo_sdl()
+: <a class="el" href="affichage__sdl_8c.html#a0c33a7392fb48e93e1eac7b838aecc63">affichage_sdl.c</a>
 </li>
 <li>afficher_plateau()
 : <a class="el" href="affichage_8c.html#af72ba27a8b6dd0a005e4462eee9ddac9">affichage.c</a>
 </li>
+<li>afficher_plateau_sdl()
+: <a class="el" href="affichage__sdl_8c.html#ae3eab1fff92c9fd88aae725684caa7b5">affichage_sdl.c</a>
+</li>
 <li>afficher_resultats()
 : <a class="el" href="affichage_8c.html#ae57705b3eb9ad9126516ba4ee7f43810">affichage.c</a>
+</li>
+<li>afficher_resultats_sdl()
+: <a class="el" href="affichage__sdl_8c.html#aa0c7805f7c17514f5a09911b50e4067f">affichage_sdl.c</a>
 </li>
 <li>afficher_scores()
 : <a class="el" href="affichage_8c.html#a0607bdb91a55dfb7df2eb1c68ad45040">affichage.c</a>
 </li>
+<li>afficher_scores_sdl()
+: <a class="el" href="affichage__sdl_8c.html#ac9e930c0dff5f60c5ea14734533adea5">affichage_sdl.c</a>
+</li>
+<li>afficher_sprite()
+: <a class="el" href="sprite_8c.html#a7fb2b56d4ee99efe918df0b9e9b3477a">sprite.c</a>
+</li>
 <li>afficher_str_couleur()
 : <a class="el" href="affichage_8c.html#a60d505d9fed5a9be9ab42dba2d769097">affichage.c</a>
+</li>
+<li>afficher_titres_sdl()
+: <a class="el" href="affichage__sdl_8c.html#a0fb0113fc493bf2d29c9a4d9d9443f57">affichage_sdl.c</a>
+</li>
+<li>afficher_tour_sdl()
+: <a class="el" href="affichage__sdl_8c.html#a6baa2e79a509c2f10d8114d08170ac1c">affichage_sdl.c</a>
+</li>
+<li>afficher_type_joueur_sdl()
+: <a class="el" href="affichage__sdl_8c.html#a67958edb56ecdffccc097ee32ba93eb6">affichage_sdl.c</a>
 </li>
 </ul>
 
 
-<h3><a id="index_c"></a>- c -</h3><ul>
+<h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
 <li>carre_afficher()
 : <a class="el" href="carre_8c.html#a1b37ffe4d15c1173ef309e1fdf027df8">carre.c</a>
 </li>
@@ -151,10 +172,19 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <li>choisir_coordonnee()
 : <a class="el" href="gestion__tour_8c.html#afb19cecbb94f50afd5e76761d001103e">gestion_tour.c</a>
 </li>
+<li>curs_hover_bouton()
+: <a class="el" href="affichage__sdl_8c.html#abd58e21bc5b1983a489a704c2e1a8b3b">affichage_sdl.c</a>
+</li>
+<li>curs_hover_piece()
+: <a class="el" href="affichage__sdl_8c.html#abefdf6e33bb8c02ceb9657cc5a598c0a">affichage_sdl.c</a>
+</li>
+<li>curs_hover_plateau()
+: <a class="el" href="affichage__sdl_8c.html#a5e16200f9aca262dd443b04c4a6d796c">affichage_sdl.c</a>
+</li>
 </ul>
 
 
-<h3><a id="index_d"></a>- d -</h3><ul>
+<h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>demander_orientation()
 : <a class="el" href="gestion__tour_8c.html#ac2e1a1888c862609d990488b365f4d99">gestion_tour.c</a>
 </li>
@@ -164,14 +194,38 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </ul>
 
 
-<h3><a id="index_f"></a>- f -</h3><ul>
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
 <li>fin_de_partie()
 : <a class="el" href="gestion__partie_8c.html#a07f1bd5c237bd32a3a9c3ad362727858">gestion_partie.c</a>
+</li>
+<li>free_affichage_sdl()
+: <a class="el" href="affichage__sdl_8c.html#ab1b48364e4b76c493331529edd9482e3">affichage_sdl.c</a>
+</li>
+<li>free_afficher_pieces_dispo_sdl()
+: <a class="el" href="affichage__sdl_8c.html#a312c3d3364794215da22ddb9a7397812">affichage_sdl.c</a>
+</li>
+<li>free_bouton_sdl()
+: <a class="el" href="affichage__sdl_8c.html#a9f32ce1a6b11de6f6b6df239bf99d621">affichage_sdl.c</a>
+</li>
+<li>free_sprite()
+: <a class="el" href="sprite_8c.html#aebf410753d95917b34a29c94a316d08c">sprite.c</a>
 </li>
 </ul>
 
 
-<h3><a id="index_i"></a>- i -</h3><ul>
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>init_affichage_sdl()
+: <a class="el" href="affichage__sdl_8c.html#ac202f574b5c1457d77c88a8fd0b671f2">affichage_sdl.c</a>
+</li>
+<li>init_afficher_pieces_dispo_sdl()
+: <a class="el" href="affichage__sdl_8c.html#ac787a6dd8742614bb41ce97e1e050b3b">affichage_sdl.c</a>
+</li>
+<li>init_bouton_sdl()
+: <a class="el" href="affichage__sdl_8c.html#abaf1e2a7bfac82d6570e250e87ab458e">affichage_sdl.c</a>
+</li>
+<li>init_sprite()
+: <a class="el" href="sprite_8c.html#a8da64481b214edcba94aad344a861f00">sprite.c</a>
+</li>
 <li>initialisation_manche()
 : <a class="el" href="gestion__partie_8c.html#ade3b043dd6a1eae4be50fba2076ecad7">gestion_partie.c</a>
 </li>
@@ -184,7 +238,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </ul>
 
 
-<h3><a id="index_j"></a>- j -</h3><ul>
+<h3><a class="anchor" id="index_j"></a>- j -</h3><ul>
 <li>jouer_manche()
 : <a class="el" href="gestion__partie_8c.html#aabc2caddfe36658343dc331c2d919bc2">gestion_partie.c</a>
 </li>
@@ -245,7 +299,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </ul>
 
 
-<h3><a id="index_l"></a>- l -</h3><ul>
+<h3><a class="anchor" id="index_l"></a>- l -</h3><ul>
 <li>liste_piece_detruire()
 : <a class="el" href="carre_8c.html#a538fa7fbc763153aa6cbd08bfb0aefd3">carre.c</a>
 </li>
@@ -255,14 +309,14 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </ul>
 
 
-<h3><a id="index_m"></a>- m -</h3><ul>
+<h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
 <li>maj_scores()
 : <a class="el" href="gestion__partie_8c.html#ada90f706c91efe1ab73b82898187f1b1">gestion_partie.c</a>
 </li>
 </ul>
 
 
-<h3><a id="index_p"></a>- p -</h3><ul>
+<h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>piece_liste_carre()
 : <a class="el" href="carre_8c.html#ad2737e12ca881a1d070f8a2885d266e1">carre.c</a>
 </li>
@@ -287,14 +341,14 @@ $(document).ready(function(){initNavTree('globals.html','');});
 </ul>
 
 
-<h3><a id="index_t"></a>- t -</h3><ul>
+<h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
 <li>tour_suivant()
 : <a class="el" href="gestion__partie_8c.html#aba3a3c4d624f1da955013970bf973218">gestion_partie.c</a>
 </li>
 </ul>
 
 
-<h3><a id="index_v"></a>- v -</h3><ul>
+<h3><a class="anchor" id="index_v"></a>- v -</h3><ul>
 <li>verif_nb_joueur()
 : <a class="el" href="joueur_8c.html#ae0256bdf5ee38cd7a8a380eb592b1d1b">joueur.c</a>
 </li>
@@ -312,7 +366,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
   <ul>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

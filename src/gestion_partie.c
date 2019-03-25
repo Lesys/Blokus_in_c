@@ -22,7 +22,7 @@
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
 */
 void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
-	int nb_joueur=-1;
+	int nb_joueur=-1, i;
 	char c;
 	if( (*j) != NULL ){
 		joueur_liste_detruire(j);
@@ -39,6 +39,19 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 	} while(!isdigit(c) || nb_joueur < NB_JOUEUR_MIN || nb_joueur > NB_JOUEUR_MAX);
 
 	*j=joueur_liste_creation(nb_joueur);
+
+	/* Pour tous les Joueur */
+	for (i = 0; i < nb_joueur; i++)
+	{
+		c = joueur_couleur(*j);
+		/* Demande le pseudo du joueur actuel */
+		printf("Joueur %s, veuillez indiquer votre pseudo: ", couleur_tostring(c));
+		scanf("%15s", (*j)->pseudo);
+
+		/* Tant que le dernier caractère n'a pas été récupéré (problème de saisie sinon) */
+		while ((c = getchar()) != '\n' && c != EOF);
+		*j = joueur_suivant(*j);
+	}
 }
 
 
@@ -58,7 +71,7 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 	for(i=0;i < TAILLE_PLATEAU;i++){
 
 		for(x=0;x < TAILLE_PLATEAU;x++){
-			pl[i][x]=0;
+			pl[i][x]=VIDE;
 		}
 	}
 

@@ -10,6 +10,7 @@ var carre_8c =
     [ "carre_reinit_tab", "carre_8c.html#a9d95666bc7f00ec172bbde917d54feea", null ],
     [ "liste_piece_detruire", "carre_8c.html#a538fa7fbc763153aa6cbd08bfb0aefd3", null ],
     [ "liste_piece_suppr_elem", "carre_8c.html#a3f21050edfa41ddb27d6c60f3d8c31af", null ],
+    [ "piece_hors_liste", "carre_8c.html#a2d0d0e91a6dc75cbfe0fa38e85239e10", null ],
     [ "piece_liste_carre", "carre_8c.html#ad2737e12ca881a1d070f8a2885d266e1", null ],
     [ "piece_liste_creation", "carre_8c.html#a205c4dc3c4ea2b46ad2198a9032a0771", null ],
     [ "piece_nb_carre", "carre_8c.html#a62a3df17d80cee25ea27ce5f2d6f4427", null ],

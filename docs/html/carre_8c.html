@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence du fichier src/carre.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('carre_8c.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('carre_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -138,6 +129,9 @@ Fonctions</h2></td></tr>
 <tr class="memitem:aeecc5a4714e8c28b0ca0b0fd1834b5c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#aeecc5a4714e8c28b0ca0b0fd1834b5c5">carre_detruire</a> (<a class="el" href="structcarre.html">Carre</a> **c)</td></tr>
 <tr class="memdesc:aeecc5a4714e8c28b0ca0b0fd1834b5c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Détruit un Carre* (== tous les Carre d'une liste de Carre)  <a href="#aeecc5a4714e8c28b0ca0b0fd1834b5c5">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aeecc5a4714e8c28b0ca0b0fd1834b5c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d0d0e91a6dc75cbfe0fa38e85239e10"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d0d0e91a6dc75cbfe0fa38e85239e10"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>piece_hors_liste</b> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
+<tr class="separator:a2d0d0e91a6dc75cbfe0fa38e85239e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2737e12ca881a1d070f8a2885d266e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcarre.html">Carre</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="carre_8c.html#ad2737e12ca881a1d070f8a2885d266e1">piece_liste_carre</a> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
 <tr class="memdesc:ad2737e12ca881a1d070f8a2885d266e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renvoie le premier Carre* de la Piece (== son premier Carre)  <a href="#ad2737e12ca881a1d070f8a2885d266e1">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ad2737e12ca881a1d070f8a2885d266e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,15 +158,13 @@ Fonctions</h2></td></tr>
 <tr class="separator:a62a3df17d80cee25ea27ce5f2d6f4427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Fichier de fonctions pour accesseurs et de modifications pour un Carre et une Piece. </p>
+<div class="textblock"><p>Fichier de fonctions pour accesseurs et de modifications pour un Carre et une Piece. </p>
 <dl class="section author"><dt>Auteur</dt><dd>WIDMER Alexis </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/03/2019</dd></dl>
 <p>Ce fichier permet d'avoir accès aux attributs d'un Carre et d'une Piece, de les créer, de les supprimer ou de les afficher. </p>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="a1b37ffe4d15c1173ef309e1fdf027df8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b37ffe4d15c1173ef309e1fdf027df8">&#9670;&nbsp;</a></span>carre_afficher()</h2>
-
+<a class="anchor" id="a1b37ffe4d15c1173ef309e1fdf027df8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -196,9 +188,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aeecc5a4714e8c28b0ca0b0fd1834b5c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeecc5a4714e8c28b0ca0b0fd1834b5c5">&#9670;&nbsp;</a></span>carre_detruire()</h2>
-
+<a class="anchor" id="aeecc5a4714e8c28b0ca0b0fd1834b5c5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -222,9 +212,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a62d33263e009533884cd4572f0625bd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62d33263e009533884cd4572f0625bd2">&#9670;&nbsp;</a></span>carre_free()</h2>
-
+<a class="anchor" id="a62d33263e009533884cd4572f0625bd2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -248,9 +236,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a12e163df0e81a9809416d0761cefc151"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12e163df0e81a9809416d0761cefc151">&#9670;&nbsp;</a></span>carre_get_suiv()</h2>
-
+<a class="anchor" id="a12e163df0e81a9809416d0761cefc151"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -275,9 +261,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa0a61b283a32abb750fc51e77fad0af0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0a61b283a32abb750fc51e77fad0af0">&#9670;&nbsp;</a></span>carre_get_x()</h2>
-
+<a class="anchor" id="aa0a61b283a32abb750fc51e77fad0af0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -302,9 +286,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1cf33e9afe2f95956129a250a2a063ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cf33e9afe2f95956129a250a2a063ff">&#9670;&nbsp;</a></span>carre_get_y()</h2>
-
+<a class="anchor" id="a1cf33e9afe2f95956129a250a2a063ff"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -329,9 +311,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6c728747487fcb74a628e82536427b86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c728747487fcb74a628e82536427b86">&#9670;&nbsp;</a></span>carre_hors_liste()</h2>
-
+<a class="anchor" id="a6c728747487fcb74a628e82536427b86"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -356,9 +336,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9d95666bc7f00ec172bbde917d54feea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d95666bc7f00ec172bbde917d54feea">&#9670;&nbsp;</a></span>carre_reinit_tab()</h2>
-
+<a class="anchor" id="a9d95666bc7f00ec172bbde917d54feea"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -382,9 +360,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a538fa7fbc763153aa6cbd08bfb0aefd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a538fa7fbc763153aa6cbd08bfb0aefd3">&#9670;&nbsp;</a></span>liste_piece_detruire()</h2>
-
+<a class="anchor" id="a538fa7fbc763153aa6cbd08bfb0aefd3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -408,9 +384,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3f21050edfa41ddb27d6c60f3d8c31af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f21050edfa41ddb27d6c60f3d8c31af">&#9670;&nbsp;</a></span>liste_piece_suppr_elem()</h2>
-
+<a class="anchor" id="a3f21050edfa41ddb27d6c60f3d8c31af"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -434,9 +408,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad2737e12ca881a1d070f8a2885d266e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2737e12ca881a1d070f8a2885d266e1">&#9670;&nbsp;</a></span>piece_liste_carre()</h2>
-
+<a class="anchor" id="ad2737e12ca881a1d070f8a2885d266e1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -461,9 +433,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a205c4dc3c4ea2b46ad2198a9032a0771"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a205c4dc3c4ea2b46ad2198a9032a0771">&#9670;&nbsp;</a></span>piece_liste_creation()</h2>
-
+<a class="anchor" id="a205c4dc3c4ea2b46ad2198a9032a0771"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -481,9 +451,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a62a3df17d80cee25ea27ce5f2d6f4427"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62a3df17d80cee25ea27ce5f2d6f4427">&#9670;&nbsp;</a></span>piece_nb_carre()</h2>
-
+<a class="anchor" id="a62a3df17d80cee25ea27ce5f2d6f4427"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -507,9 +475,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3bf1c1c431237cc8353bea53ce34888c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bf1c1c431237cc8353bea53ce34888c">&#9670;&nbsp;</a></span>piece_pivoter()</h2>
-
+<a class="anchor" id="a3bf1c1c431237cc8353bea53ce34888c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -544,9 +510,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a9d4170b6392e768505a510df50fd6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a9d4170b6392e768505a510df50fd6b">&#9670;&nbsp;</a></span>piece_precedent()</h2>
-
+<a class="anchor" id="a5a9d4170b6392e768505a510df50fd6b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -571,9 +535,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aab9d9a7003a706e5afa85521cdfb4016"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aab9d9a7003a706e5afa85521cdfb4016">&#9670;&nbsp;</a></span>piece_suivant()</h2>
-
+<a class="anchor" id="aab9d9a7003a706e5afa85521cdfb4016"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -606,7 +568,7 @@ Fonctions</h2></td></tr>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="carre_8c.html">carre.c</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

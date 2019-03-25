@@ -17,8 +17,8 @@ VPATH = lib:build:bin:src:include
 #Variables pour la confection de la librairie :
 #Options pour les lignes de code faites pour la confection des fichiers objets
 DIROBJ := bin/
-CFLAGS += -fPIC -Wall -std=c99
-OBJETS = gestion_tour.o gestion_partie.o joueur.o carre.o affichage.o couleur.o piece.o
+CFLAGS += -g -L./lib/SDL/lib -I./lib/SDL/include -lSDL2 -lSDL2_ttf -lSDL2_image -fPIC -Wall -std=c99
+OBJETS = gestion_tour.o gestion_partie.o joueur.o carre.o affichage.o couleur.o piece.o sprite.o affichage_sdl.o sdl.o gestion_tour_sdl.o gestion_partie_sdl.o main_terminal.o main_sdl.o
 FICHIERSC = $(OBJETS:.o=.c)
 
 #Nom du programme principal
@@ -43,7 +43,7 @@ REALNAME := $(SONAME)$(MINEUR)$(CORRECTION)
 #Variables pour la confection des executables de test :
 TESTDIR := $(DIRBUILD)test/
 TESTDIRC := src/
-TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o
+TESTOBJETS = test_joueur.o test_carre.o test_affichage.o test_gestion_tour.o test_gestion_partie.o test_affichage_sdl.o test_interactif_affichage_sdl.o test_sdl.o test_gestion_tour_sdl.o test_gestion_partie_sdl.o
 TESTFICHIERSC = $(TESTOBJETS:.o=.c)
 TESTEXEC = $(TESTOBJETS:%.o=%)
 #TESTSTATIC = test_blokus.static
@@ -62,10 +62,11 @@ ARFLAGS = rcs
 STATIC = blokus.static
 DYNAMIC = blokus.shared
 EXE = blokus.exe
-sharedLDFLAGS := -L.
-sharedLDLIBS := -l$(LINKNAME)
-staticLDFLAGS := -L.
+sharedLDFLAGS := $(CFLAGS)
+sharedLDLIBS := -l:$(LINKNAME)
+#staticLDFLAGS := $(CFLAGS)
 staticLDLIBS := -l:$(libSTATIC)
+staticLDLIBS := $(libSTATIC)
 
 #Conception du Makefile :
 #Execution du programme en entier
@@ -99,20 +100,17 @@ $(REALNAME): $(OBJETS)
 $(STATIC): LDFLAGS := $(staticLDFLAGS)
 $(STATIC): LDLIBS := $(staticLDLIBS)
 $(STATIC): $(DIRMAIN)$(PROGRPRINC) $(libSTATIC)
-	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(staticLDFLAGS) $(staticLDLIBS)
+	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(staticLDFLAGS) $(staticLDLIBS) $(CFLAGS)
 
 #Génération du programme dynamique
-$(DYNAMIC): LDFLAGS := $(sharedLDFLAGS)
-$(DYNAMIC): LDLIBS := $(sharedLDLIBS)
-$(DYNAMIC): $(DIRMAIN)$(PROGRPRINC) $(REALNAME)
-	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(sharedLDFLAGS) $(sharedLDLIBS)
-
-#Execution du programme dynamique
-execution: $(DYNAMIC) MOVE clearScreen
-	-LD_LIBRARY_PATH=./$(DIRLIB):$LD_LIBRARY_PATH ./$(DIRLIB)$(DYNAMIC)
+#$(DYNAMIC): LDFLAGS := $(sharedLDFLAGS)
+#$(DYNAMIC): LDLIBS := $(sharedLDLIBS)
+#$(DYNAMIC): $(DIRMAIN)$(PROGRPRINC) $(REALNAME)
+#	$(CC) -o $@ $(DIRMAIN)$(PROGRPRINC) $(sharedLDFLAGS) $(sharedLDLIBS)
 
 #Move les fichiers dans leur dossier respectif : .so .a dans le dossier lib. .o dans le dossier bin. L'exécutable dans le dossier build
-MOVE: $(DYNAMIC) $(STATIC)
+#MOVE: $(DYNAMIC) $(STATIC)
+MOVE: $(STATIC)
 	-mv *.a* *.so* ./$(DIRLIB)
 	-mv *blokus* ./$(DIRBUILD)
 	-mv *Blokus* ./$(DIRBUILD)
@@ -125,7 +123,7 @@ clean:
 
 #Nettoie les dossiers créés et leur contenu
 mrProper: clean clearScreen
-	-rm -R $(DIRLIB) $(DIROBJ)
+	-rm -R $(DIRLIB)*lib* $(DIROBJ)
 
 #Nettoie l'écran
 clearScreen:
@@ -172,4 +170,4 @@ $(TESTlibSTATIC): $(TESTlibSTATIC)($(OBJETS))
 $(TESTEXEC): LDFLAGS := $(staticLDFLAGS)
 $(TESTEXEC): LDLIBS := $(staticLDLIBS)
 $(TESTEXEC): $(DIRTEST)$(TESTOBJETS) $(libSTATIC)
-	$(CC) -o $@ $@.o $(staticLDFLAGS) $(staticLDLIBS)
+	$(CC) -o $@ $@.o $(staticLDFLAGS) $(staticLDLIBS) $(CFLAGS)
