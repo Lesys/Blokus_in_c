@@ -1,14 +1,8 @@
 var indexSectionsWithContent =
 {
-<<<<<<< HEAD
-  0: "abcdfgijlmpstvxy",
-  1: "cjp",
-  2: "acgj",
-=======
   0: "abcdfgijlmprstvxy",
   1: "bcjprs",
   2: "acgjs",
->>>>>>> sdl
   3: "acdfijlmptv",
   4: "aclpstxy",
   5: "b"
