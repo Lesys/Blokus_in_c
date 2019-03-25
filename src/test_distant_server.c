@@ -6,7 +6,10 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdarg.h>
+
 #include "../include/distant.h"
+#include "../include/affichage.h"
+#include "../include/joueur.h"
 
 int main(int argc, char *argv[]) {
 
@@ -63,15 +66,31 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Erreur lors de l'acceptation d'un socket\n");
     }
 
-    unsigned char buff[1000];
-    char * str;
-    short a; 
-    int b;
+    Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
+    unsigned char buffer[1000];
 
-    recv(newsockfd, buff, 1000, 0);
-    int n = deserializef(buff, "%s%h%i", &str, &a, &b);
+    recv(newsockfd, buffer, 1000, 0);
 
-    printf("%d) %s - %d - %d\n", n, str, a, b);
+    printf("%d\n", recup_type(buffer));
+    if(recup_type(buffer) == 1) {
+        Joueur * j = recevoir_liste_joueurs(buffer);
+        printf("%s\n", j->pseudo);
+        afficher_scores(j);
+        recv(newsockfd, buffer, 1000, 0);
+        recevoir_abandon_joueur(buffer, j);
+        
+        Joueur * init =  j;
+        do {
+            if(j->abandon) {
+                printf("Le joueur %s a abandonne\n", joueur_pseudo(j));
+            }
+            j = joueur_suivant(j);
+        } while(j != init);
+    }
+    else if(recup_type(buffer) == 2) {
+        recevoir_plateau(buffer,  pl);
+        afficher_plateau(pl);
+    }
 
     // Fermeture sockets
     close(newsockfd);
