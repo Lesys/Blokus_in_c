@@ -116,7 +116,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 				}
 
 				/*Si c'est une touche du clavier, on l'entre dans le pseudo*/
-				else if(event_saisie.type == SDL_TEXTINPUT) {
+				else if(event_saisie.type == SDL_TEXTINPUT && strlen((*j)->pseudo) < TAILLE_PSEUDO) {
 					strcat((*j)->pseudo, event_saisie.text.text);
 				}
 			}
