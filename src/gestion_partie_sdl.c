@@ -433,11 +433,43 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	*\puis appelle initalisation_partie et debut_manche.
 */
 
+int type_partie(){
+	int val_retour=-1;
+	SDL_Event event;	
+	Bouton* b_creer = init_bouton_sdl(CREER_PARTIE);
+        Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
+  	Bouton* b_retour = init_bouton_sdl(RETOUR);
+	while(val_retour < 0){
+		/* Ecouter les EVENT */
+                SDL_RenderClear(renderer);
+       	        while(SDL_PollEvent(&event)){
+			if(event.type == SDL_QUIT)
+				val_retour = 3;
+			else if(event.type == SDL_MOUSEBUTTONDOWN){
+				if(curs_hover_bouton(b_creer))
+					val_retour= 1;
+				else if(curs_hover_bouton(b_rejoindre))
+					val_retour= 2;
+
+				else if(curs_hover_bouton(b_retour))
+					val_retour= 4;			
+			}
+		}
+	/* Affiche le menu type partie */
+		afficher_titres_sdl();
+	 	afficher_bouton_sdl(b_creer);
+	        afficher_bouton_sdl(b_rejoindre);
+		afficher_bouton_sdl(b_retour);
+		SDL_RenderPresent(renderer);
+	}
+	return val_retour;
+}
 
 int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
 	int retour = 2;
+	int val_partie;
 	SDL_Event event;
 	Bouton* b_jouer = init_bouton_sdl(JOUER);
 	Bouton* b_quitter_jeu = init_bouton_sdl(QUITTER_JEU);
@@ -459,17 +491,28 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 		}
 		/* Appuie du bouton JOUER */
 		if (retour == 1) { /*Jouer*/
-
-			retour = initialisation_partie_sdl(&j);
+			val_partie = type_partie();
+			if(val_partie == 1)
+				retour = initialisation_partie_sdl(&j);
+			//else if(val_partie == 2)
+				//retour = initialisation_partie_distant_sdl(&j);
+			else if(val_partie == 4)
+				retour = 2; 
+			else 
+				return val_partie;
+						
 			if (retour == 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
-				joueur_liste_detruire(&j);
+				if(j) joueur_liste_detruire(&j);
 
 				return retour;
 			}
 
-			initialisation_manche(pl, &j);
+			
+			if(val_partie == 1)
+				retour = jouer_manche_sdl(pl,j);
+			else if(val_partie == 2)
+//				retour = jouer_manche_distant_sdl(pl,j, retour);
 
-			retour = jouer_manche_sdl(pl,j);
 			joueur_liste_detruire(&j);
 
 			if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
