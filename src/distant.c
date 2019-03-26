@@ -19,9 +19,13 @@
 #include <netinet/in.h>
 #include <netdb.h> 
 
+#include "../include/distant.h"
 #include "../include/couleur.h"
 #include "../include/commun.h"
 #include "../include/joueur.h"
+
+// Variables globales externes
+extern SDL_Renderer * renderer;
 
 /**
  * \fn int connexion(char * adresse, int port);
