@@ -374,8 +374,8 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         fprintf(stderr, "HELLO");
 	SDL_Event event;
 	int continuer = 1;
-        char adresse[TAILLE_PSEUDO];
-        char pseudo[TAILLE_PSEUDO];
+        char adresse[TAILLE_PSEUDO] = {0};
+        char pseudo[TAILLE_PSEUDO] = {0};
         int sockfd;
         
         // Saisie adresse
