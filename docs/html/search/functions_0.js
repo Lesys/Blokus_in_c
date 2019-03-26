@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['accepter_5fconnexion',['accepter_connexion',['../distant_8c.html#aaa958b943307bd48ec0a15007392f96b',1,'distant.c']]],
   ['affecter_5fmatrice',['affecter_matrice',['../gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a',1,'gestion_tour.c']]],
   ['afficher_5fbouton_5fsdl',['afficher_bouton_sdl',['../affichage__sdl_8c.html#add838e3595b2f6d6504975ed56508f81',1,'affichage_sdl.c']]],
   ['afficher_5fchoix_5forientation',['afficher_choix_orientation',['../affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a',1,'affichage.c']]],
@@ -15,6 +16,5 @@ var searchData=
   ['afficher_5fsprite',['afficher_sprite',['../sprite_8c.html#a7fb2b56d4ee99efe918df0b9e9b3477a',1,'sprite.c']]],
   ['afficher_5fstr_5fcouleur',['afficher_str_couleur',['../affichage_8c.html#a60d505d9fed5a9be9ab42dba2d769097',1,'affichage.c']]],
   ['afficher_5ftitres_5fsdl',['afficher_titres_sdl',['../affichage__sdl_8c.html#a0fb0113fc493bf2d29c9a4d9d9443f57',1,'affichage_sdl.c']]],
-  ['afficher_5ftour_5fsdl',['afficher_tour_sdl',['../affichage__sdl_8c.html#a6baa2e79a509c2f10d8114d08170ac1c',1,'affichage_sdl.c']]],
-  ['afficher_5ftype_5fjoueur_5fsdl',['afficher_type_joueur_sdl',['../affichage__sdl_8c.html#a67958edb56ecdffccc097ee32ba93eb6',1,'affichage_sdl.c']]]
+  ['afficher_5ftour_5fsdl',['afficher_tour_sdl',['../affichage__sdl_8c.html#a6baa2e79a509c2f10d8114d08170ac1c',1,'affichage_sdl.c']]]
 ];
