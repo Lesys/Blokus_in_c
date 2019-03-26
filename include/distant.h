@@ -18,6 +18,6 @@ void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j);
 void envoyer_pseudo(int sockfd, char * pseudo);
 void recevoir_pseudo(unsigned char * buffer, char * pseudo);
 
-Joueur * initialisation_partie_distant_sdl();
+int initialisation_partie_distant_sdl(Joueur ** j);
 
 #endif

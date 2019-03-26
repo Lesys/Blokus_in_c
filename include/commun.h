@@ -23,4 +23,6 @@
 #define YELLOW_X TAILLE_PLATEAU - 1
 #define YELLOW_Y 0
 
+#define PORT_DEFAUT 5555
+
 #endif
