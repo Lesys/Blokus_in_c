@@ -1,5 +1,5 @@
 /**
-	*\file gestion_partie.c
+	*\file gestion_partie_sdl.c
 	*\brief Regroupent toutes les fonctions gestion_partie_sdl.c
 	*\details Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles.
 	*\author JODEAU Alexandre
@@ -194,7 +194,7 @@ int fin_de_partie_sdl(Joueur** j){
 		SDL_RenderClear(renderer);
 		/*On attend la touche du joueur*/
         	while(SDL_PollEvent(&event_fin)){
-
+			/*En attendant qu'il appuis sur le bouton*/
                 	if(event_fin.type == SDL_MOUSEBUTTONDOWN){
                         	if (curs_hover_bouton(b_continuer))
                                 	choix= 1;
@@ -225,8 +225,8 @@ int fin_de_partie_sdl(Joueur** j){
 	*\details Réalise le fonctionnement d'un tour en appellant les fonctions de gestion_tour .
 	*\param pl Plateau de jeu pour posez les Piece.
 	*\param j Joueur qui joue actuellement.
-	*\return 3 si le joueur a abandonné <br>
-	  renvoie le resultat de la fonction *\fn int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)<br>
+	*\return 3 si la croix a été saisie <br>
+	  renvoie le resultat de la fonction gestion_tour_sdl<br>
 	*1 = Abandon du Joueur
 	*2 = Quitte le jeu ( Appuis sur la croix)
 	

@@ -3,22 +3,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.8"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Blokus in C: Référence de la structure piece</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
   $(document).ready(initResizable);
-  $(window).load(resizeHeight);
 </script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-  $(document).ready(function() { searchBox.OnSelectItem(0); });
+  $(document).ready(function() { init_search(); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -28,7 +30,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td style="padding-left: 0.5em;">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -53,7 +55,7 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.8 -->
+<!-- Généré par Doxygen 1.8.13 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
 </script>
@@ -77,7 +79,7 @@ $(document).ready(function(){initNavTree('structpiece.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+</div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -103,7 +105,7 @@ $(document).ready(function(){initNavTree('structpiece.html','');});
 Champs de données</h2></td></tr>
 <tr class="memitem:a61567feb110e05f687f119889c0b4a3a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcarre.html">Carre</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpiece.html#a61567feb110e05f687f119889c0b4a3a">liste_carre</a></td></tr>
 <tr class="separator:a61567feb110e05f687f119889c0b4a3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a348415d019c0d55847147b31ba0bc4fa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a348415d019c0d55847147b31ba0bc4fa"></a>
+<tr class="memitem:a348415d019c0d55847147b31ba0bc4fa"><td class="memItemLeft" align="right" valign="top"><a id="a348415d019c0d55847147b31ba0bc4fa"></a>
 <a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>suiv</b></td></tr>
 <tr class="separator:a348415d019c0d55847147b31ba0bc4fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91811cbe13acb5a84029afd8ab8d9b38"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpiece.html">Piece</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpiece.html#a91811cbe13acb5a84029afd8ab8d9b38">prec</a></td></tr>
@@ -113,7 +115,9 @@ Champs de données</h2></td></tr>
 <div class="textblock"><p>Structure d'une Piece. </p>
 <p>Une Piece est constituée d'une liste de Carre (avec les coordonnées) et des Piece* suivante et précédente </p>
 </div><h2 class="groupheader">Documentation des champs</h2>
-<a class="anchor" id="a61567feb110e05f687f119889c0b4a3a"></a>
+<a id="a61567feb110e05f687f119889c0b4a3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61567feb110e05f687f119889c0b4a3a">&#9670;&nbsp;</a></span>liste_carre</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -126,7 +130,9 @@ Champs de données</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a91811cbe13acb5a84029afd8ab8d9b38"></a>
+<a id="a91811cbe13acb5a84029afd8ab8d9b38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91811cbe13acb5a84029afd8ab8d9b38">&#9670;&nbsp;</a></span>prec</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -150,7 +156,7 @@ Champs de données</h2></td></tr>
     <li class="navelem"><a class="el" href="structpiece.html">piece</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
   </ul>
 </div>
 </body>

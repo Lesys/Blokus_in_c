@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['verif_5fnb_5fjoueur',['verif_nb_joueur',['../joueur_8c.html#ae0256bdf5ee38cd7a8a380eb592b1d1b',1,'joueur.c']]],
-  ['verification_5fcouleur',['verification_couleur',['../gestion__tour_8c.html#a07a516f9e79e060f91b4b81c0a08bbf8',1,'gestion_tour.c']]],
-  ['verification_5fposition',['verification_position',['../gestion__tour_8c.html#ae61941a1e0d286755ef50967d185044d',1,'gestion_tour.c']]]
+  ['recevoir_5fabandon_5fjoueur',['recevoir_abandon_joueur',['../distant_8c.html#a5055c3172eee5061edc819523609ec39',1,'distant.c']]],
+  ['recevoir_5fliste_5fjoueurs',['recevoir_liste_joueurs',['../distant_8c.html#a964acd81714270828b5daea75aab73f0',1,'distant.c']]],
+  ['recevoir_5fplateau',['recevoir_plateau',['../distant_8c.html#a6fbd636a3883eafc64482fb51736c46d',1,'distant.c']]],
+  ['recevoir_5fpseudo',['recevoir_pseudo',['../distant_8c.html#a08b5a0b1c3b8be6e92235455605dd001',1,'distant.c']]],
+  ['recup_5ftype',['recup_type',['../distant_8c.html#ac8981669edeedb5e7afa24381fa72c29',1,'distant.c']]]
 ];

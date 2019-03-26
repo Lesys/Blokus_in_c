@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['accepter_5fconnexion',['accepter_connexion',['../distant_8c.html#aaa958b943307bd48ec0a15007392f96b',1,'distant.c']]],
   ['affecter_5fmatrice',['affecter_matrice',['../gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a',1,'gestion_tour.c']]],
   ['afficher_5fbouton_5fsdl',['afficher_bouton_sdl',['../affichage__sdl_8c.html#add838e3595b2f6d6504975ed56508f81',1,'affichage_sdl.c']]],
   ['afficher_5fchoix_5forientation',['afficher_choix_orientation',['../affichage_8c.html#acb37a606c7ca6314e144f6c0a419d30a',1,'affichage.c']]],
