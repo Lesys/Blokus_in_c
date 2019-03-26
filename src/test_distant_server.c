@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
             unsigned char buffer[1000] = {0};
             recv(sockfd, buffer, 1000, 0);
 
+            if (recup_type(buffer) == 0) return 1;
             printf("Reception communication type %d\n", recup_type(buffer));
             if(recup_type(buffer) == 1) {
                 Joueur * j = recevoir_liste_joueurs(buffer);
