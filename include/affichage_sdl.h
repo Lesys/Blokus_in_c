@@ -67,6 +67,9 @@ typedef enum type_bouton {
 	TYPE_JOUEUR_LOCAL,
 	TYPE_JOUEUR_DISTANT,
 	TYPE_JOUEUR_BOT
+        CREER_PARTIE,
+        REJOINDRE_PARTIE,
+        RETOUR
 } Type_bouton;
 
 typedef struct bouton {
@@ -113,6 +116,14 @@ void afficher_nb_joueurs_sdl();
 void afficher_type_joueur_sdl();
 
 void afficher_saisie_pseudo_sdl(Joueur * j);
+
+void afficher_choix_type_partie_sdl();
+
+void afficher_attente_connexion_sdl();
+
+void afficher_attente_pseudo_sdl();
+
+void afficher_saisie_pseudo_distant_sdl(Joueur * j);
 
 int curs_hover_bouton(Bouton * b);
 
