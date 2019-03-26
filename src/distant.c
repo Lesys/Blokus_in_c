@@ -364,16 +364,50 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
     memcpy(pseudo, buffer + offset, TAILLE_PSEUDO);
 }
 
-/*
-Joueur * initialisation_partie_distant_sdl() {
+int initialisation_partie_distant_sdl(Joueur ** j) {
     
-        // Saisie du pseudo
 	SDL_Event event;
 	int continuer = 1;
+        char adresse[TAILLE_PSEUDO];
         char pseudo[TAILLE_PSEUDO];
-
+        int sockfd;
+        
+        // Saisie adresse
         SDL_StartTextInput();
 
+        while(continuer){
+
+            SDL_RenderClear(renderer);
+            while(SDL_PollEvent(&event)){
+
+                if(event.type == SDL_QUIT)
+                    return 3;
+
+                else if(adresse > 0 && event.type == SDL_KEYDOWN
+                        && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                    continuer = 0;
+
+                else if(event.key.keysym.sym == SDLK_BACKSPACE
+                        && event.type == SDL_KEYDOWN) {
+                    if (adresse > 0)
+                        adresse[strlen(adresse) - 1] = '\0';
+                }
+
+                else if(event.type == SDL_TEXTINPUT && strlen(adresse) < TAILLE_PSEUDO) {
+                    strcat(adresse, event.text.text);
+                }
+            }
+
+            afficher_saisie_adresse_sdl(adresse);
+            SDL_RenderPresent(renderer);
+        }
+
+        // Connexion
+        sockfd = connexion(adresse, PORT_DEFAUT);
+        
+
+        // Saisie du pseudo
+        continuer = 1;
         while(continuer){
 
             SDL_RenderClear(renderer);
@@ -402,6 +436,10 @@ Joueur * initialisation_partie_distant_sdl() {
         }
 
         // Envoi du pseudo
+        envoyer_pseudo(sockfd, pseudo);
+        
+
+        return sockfd;
 
         SDL_StopTextInput();
-}*/
+}
