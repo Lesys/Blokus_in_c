@@ -16,6 +16,7 @@ struct coup {
 
 int gestion_tour_bot(Couleur pl[][], Joueur*);
 
+
 Coup* bot_jouer_tour(Couleur pl[][], Joueur*);
 
 int bot_jouer(Couleur pl[][], Joueur, int); /* int: la profondeur de coup (==nb_coup en prévision) */
