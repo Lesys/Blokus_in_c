@@ -23,6 +23,7 @@
 #include "../include/couleur.h"
 #include "../include/commun.h"
 #include "../include/joueur.h"
+#include "../include/affichage_sdl.h"
 
 // Variables globales externes
 extern SDL_Renderer * renderer;
@@ -370,6 +371,7 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
 
 int initialisation_partie_distant_sdl(Joueur ** j) {
     
+        fprintf(stderr, "HELLO");
 	SDL_Event event;
 	int continuer = 1;
         char adresse[TAILLE_PSEUDO];

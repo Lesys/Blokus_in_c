@@ -1231,13 +1231,10 @@ void afficher_saisie_adresse_sdl(char * str) {
     afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
 
-void afficher_saisie_pseudo_distant_sdl(Joueur * j) {
-
-    char message[50];
+void afficher_saisie_pseudo_distant_sdl(char * str) {
 
     afficher_fond_config();
     afficher_sprite(ressources->fond_saisie, largeur_ecran/2 - taille_carre*8, hauteur_ecran/2 + taille_carre*2);
-    sprintf(message, "Entrez votre Pseudo (Entree pour valider) :");
-    afficher_texte(message, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
-    afficher_texte(joueur_pseudo(j), ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
+    afficher_texte("Entrez votre pseudo (Entree pour valider) :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+    afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
