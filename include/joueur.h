@@ -28,6 +28,7 @@ struct joueur {
 	Joueur* suiv; /**< Joueur suivant (qu'il soit un vrai joueur ou un BOT)*/
 	Joueur* prec; /**< Joueur précédent (pour que la destruction soit possible)*/
 	int abandon; /**< VRAI si le joueur a abandonné, FAUX sinon */
+	int sockfd; /**< Numéro de socket pour les Joueur distants (partie réseau) */
 };
 
 /* Procédures d'accès pour un Joueur */
