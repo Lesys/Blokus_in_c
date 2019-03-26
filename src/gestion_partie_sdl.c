@@ -18,6 +18,58 @@
 extern SDL_Renderer* renderer;
 
 /**
+	*\fn void saisir_pseudo(Joueur **j)
+	*\details Initialise le pseudo du joueur
+	* Si la liste existe, on la supprime puis on en crée une autre.
+	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
+	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
+		Retourne 0 si l'affectation a bien fonctionné
+*/
+
+
+int saisir_pseudo_joueur(Joueur** j){
+/********PARTIE SAISI NOM DES JOUEURS*********/
+	SDL_Event event_saisie;
+	int continuer=1;
+	SDL_StartTextInput();
+	/*Boucle d'évenement*/
+	while(continuer){
+
+		SDL_RenderClear(renderer);
+		/*Attend l'appuis d'une touche*/
+		while(SDL_PollEvent(&event_saisie)){
+			/*Si c'est la croix, on arrete*/
+			if(event_saisie.type == SDL_QUIT)
+				return 3;
+			/*Si c'est la touche entrée, on passe au joueur suivant*/
+			else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) )
+				continuer = 0;
+			/*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
+			else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
+				if (strlen((*j)->pseudo) > 0)
+					(*j)->pseudo[strlen((*j)->pseudo) - 1] = '\0';
+			}
+			/*Si c'est une touche du clavier, on l'entre dans le pseudo*/
+			else if(event_saisie.type == SDL_TEXTINPUT && strlen((*j)->pseudo) < TAILLE_PSEUDO) {
+				strcat((*j)->pseudo, event_saisie.text.text);
+			}
+		}
+		afficher_saisie_pseudo_sdl(*j);
+		SDL_RenderPresent(renderer);
+		}
+	SDL_StopTextInput();
+	/* Si le pseudo n'est pas trop grand */
+	if (strlen((*j)->pseudo) < TAILLE_PSEUDO) {
+        /* Réalloue la bonne taille pour le pseudo */
+	        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
+		(*j)->pseudo[strlen((*j)->pseudo)]='\0';
+	}
+	else /* S'il est trop grand: troncature */
+		(*j)->pseudo[TAILLE_PSEUDO]='\0';
+	return 0;
+}
+
+/**
 	*\fn void initialisation_partie_sdl(Joueur **j)
 	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
 	<br>Initialise le pseudo des joueurs
@@ -26,23 +78,17 @@ extern SDL_Renderer* renderer;
 	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
 		Retourne 0 si l'affectation a bien fonctionné
 */
-int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
+int saisir_nb_joueur(){
+/********PARTIE SAISI NB DES JOUEURS*********/
 	int nb_joueur=-1;
 	int continuer=1;
-
-/********PARTIE SAISI NB DES JOUEURS*********/
-
-
 	/*Creation des boutons + evenement */
 	SDL_Event event;
 	Bouton* b_nb_deux=init_bouton_sdl(NB_JOUEURS_2);
 	Bouton* b_nb_trois=init_bouton_sdl(NB_JOUEURS_3);
 	Bouton* b_nb_quatre=init_bouton_sdl(NB_JOUEURS_4);
 
-	/*Si une liste de joueur existe déjà, on la supprime*/
-	if( (*j) != NULL ){
-		joueur_liste_detruire(j);
-	}
+	
 	/*Tant que l'evenenement n'est pas fini*/
 	while(continuer == 1){
 		SDL_RenderClear(renderer);
@@ -50,7 +96,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 		while(SDL_PollEvent(&event)){
 			//Si il appuis sur la croix
 			if(event.type == SDL_QUIT)
-				return 3;
+				return -1;
 			//Si il appuis sur un bouton
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
 				/*Bouton 2 joueur*/
@@ -83,59 +129,118 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	free_bouton_sdl(&b_nb_deux);
 	free_bouton_sdl(&b_nb_trois);
 	free_bouton_sdl(&b_nb_quatre);
+	return nb_joueur;
+}
 
-	*j=joueur_liste_creation(nb_joueur);
+/**
+	*\fn void initialisation_partie_sdl(Joueur **j)
+	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
+	<br>Initialise le pseudo des joueurs
+	* Si la liste existe, on la supprime puis on en crée une autre.
+	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
+	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
+		Retourne 0 si l'affectation a bien fonctionné
+*/
 
-/********PARTIE SAISI NOM DES JOUEURS*********/
-	SDL_Event event_saisie;
-	continuer=1;
-	Joueur* j_pivot = *j;
-	/*While tous les joueurs n'ont pas de pseudo*/
-	do {
-		continuer=1;
-		SDL_StartTextInput();
-		/*Boucle d'évenement*/
-		while(continuer){
+int saisir_type_joueur(Joueur** j){
+/********PARTIE SAISI TYPE DES JOUEURS*********/
+	int continuer=1;
+	Type_Joueur type_tmp;
+	/*Creation des boutons + evenement */
+	SDL_Event event;
+	Bouton* b_bot=init_bouton_sdl(TYPE_JOUEUR_BOT);
+	Bouton* b_j_local=init_bouton_sdl(TYPE_JOUEUR_LOCAL);
+	Bouton* b_j_distant=init_bouton_sdl(TYPE_JOUEUR_DISTANT);
 
-			SDL_RenderClear(renderer);
-			/*Attend l'appuis d'une touche*/
-			while(SDL_PollEvent(&event_saisie)){
-
-				/*Si c'est la croix, on arrete*/
-				if(event_saisie.type == SDL_QUIT)
-					return 3;
-
-				/*Si c'est la touche entrée, on passe au joueur suivant*/
-				else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) )
-					continuer = 0;
-
-				/*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
-				else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
-					if (strlen((*j)->pseudo) > 0)
-						(*j)->pseudo[strlen((*j)->pseudo) - 1] = '\0';
+	
+	/*Tant que l'evenenement n'est pas fini*/
+	while(continuer == 1){
+		SDL_RenderClear(renderer);
+		//Attend un événement
+		while(SDL_PollEvent(&event)){
+			//Si il appuis sur la croix
+			if(event.type == SDL_QUIT)
+				return 3;
+			//Si il appuis sur un bouton
+			else if(event.type == SDL_MOUSEBUTTONDOWN){
+				/*Bouton 2 joueur*/
+				if (curs_hover_bouton(b_bot)){
+					type_tmp=BOT;
+					//Si on appuis sur un bouton, alors on arrete la boucle*/
+					continuer=0;				
+				}
+				/*Bouton 3 joueur*/
+				else if (curs_hover_bouton(b_j_local)){
+					type_tmp=LOCAL;
+					//Si on appuis sur un bouton, alors on arrete la boucle*/
+					continuer=0;				
 				}
 
-				/*Si c'est une touche du clavier, on l'entre dans le pseudo*/
-				else if(event_saisie.type == SDL_TEXTINPUT && strlen((*j)->pseudo) < TAILLE_PSEUDO) {
-					strcat((*j)->pseudo, event_saisie.text.text);
+				/*Bouton 4 joueur*/
+				else if (curs_hover_bouton(b_j_distant)){
+					type_tmp=DISTANT;
+					//Si on appuis sur un bouton, alors on arrete la boucle*/
+					continuer=0;
 				}
+
 			}
-
-			afficher_saisie_pseudo_sdl(*j);
-			SDL_RenderPresent(renderer);
 		}
-		SDL_StopTextInput();
+		
+		/*Partie Affichage*/
+		afficher_type_joueur_sdl(*j);
+		afficher_bouton_sdl(b_bot);
+		afficher_bouton_sdl(b_j_local);
+		afficher_bouton_sdl(b_j_distant);
+		SDL_RenderPresent(renderer);
 
-		/* Si le pseudo n'est pas trop grand */
-		if (strlen((*j)->pseudo) < TAILLE_PSEUDO) {
-		        /* Réalloue la bonne taille pour le pseudo */
-		        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
+	}
+	free_bouton_sdl(&b_bot);
+	free_bouton_sdl(&b_j_local);
+	free_bouton_sdl(&b_j_distant);
+	(*j)->type=type_tmp;
+	return 0;
+}
 
-			(*j)->pseudo[strlen((*j)->pseudo)]='\0';
+int initialiser_joueur_distant(Joueur **j){
+	/*Code en cour*/
+	return 0;
+}
+
+/**
+	*\fn void initialisation_partie_sdl(Joueur **j)
+	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
+	<br>Initialise le pseudo des joueurs
+	* Si la liste existe, on la supprime puis on en crée une autre.
+	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
+	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
+		Retourne 0 si l'affectation a bien fonctionné
+*/
+int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
+	int nb=saisir_nb_joueur();
+		
+	if(nb == -1)
+		return 3;
+	 
+	*j=joueur_liste_creation(nb);
+	Joueur* j_pivot = *j;
+	/*Tant que tous les joueurs n'ont pas de pseudo*/
+	do{
+		if(saisir_type_joueur(j))
+			return 3;
+		switch((*j)->type){
+			case BOT: sprintf((*j)->pseudo,"Bot %s",couleur_tostring((*j)->couleur));break;
+			
+			case LOCAL: if(saisir_pseudo_joueur(j))
+					return 3;
+				break;
+
+			case DISTANT: if(initialiser_joueur_distant(j))
+					return 3;
+				break;
+
+			default:return 3;
 		}
-		else /* S'il est trop grand: troncature */
-			(*j)->pseudo[TAILLE_PSEUDO]='\0';
-
+		
 		*j=joueur_suivant(*j);
 	} while (*j != j_pivot);
 	return 0;
@@ -232,10 +337,34 @@ int fin_de_partie_sdl(Joueur** j){
 	
 */
 
+/*Appel toute les fonctions pour réalisé un tour*/
+int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
+	int valeur_r;
+	if(joueur_a_abandonne(*j)){
+//		printf("\n Ce joueur à abandonne\n");
+		*j=joueur_suivant(*j);
+
+	}
+	else{
+		valeur_r=1;/*fonction bot*/
+
+		if(valeur_r == 1){//Le joueur a abandoné
+//			printf("Vous avez abandonné\n");
+			joueur_abandonne(*j);
+		}
+		else if(valeur_r == 2){
+			return 3;//Quitte le jeu
+		}
+		if(!(joueur_a_abandonne(*j)))
+			*j=joueur_suivant(*j);
+
+	}
+	return valeur_r;
+}
 
 
 /*Appel toute les fonctions pour réalisé un tour*/
-int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
+int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int valeur_r;
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
@@ -277,7 +406,10 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	do{
 
 		do{
-			choix=jouer_tour_sdl(pl,&j);
+			if(j->type == BOT)
+				choix=jouer_tour_bot_sdl(pl,&j);
+			else
+				choix=jouer_tour_joueur_sdl(pl,&j);
 			if(choix == 3)
 				return choix;
 			choix=fin_de_partie_sdl(&j);
