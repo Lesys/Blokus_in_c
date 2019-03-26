@@ -8,6 +8,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <SDL2/SDL.h>
 #include <stdarg.h>
 #include <string.h>
 #include <strings.h>
@@ -362,3 +363,45 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
     // Récuperation du pseudo
     memcpy(pseudo, buffer + offset, TAILLE_PSEUDO);
 }
+
+/*
+Joueur * initialisation_partie_distant_sdl() {
+    
+        // Saisie du pseudo
+	SDL_Event event;
+	int continuer = 1;
+        char pseudo[TAILLE_PSEUDO];
+
+        SDL_StartTextInput();
+
+        while(continuer){
+
+            SDL_RenderClear(renderer);
+            while(SDL_PollEvent(&event)){
+
+                if(event.type == SDL_QUIT)
+                    return 3;
+
+                else if(pseudo > 0 && event.type == SDL_KEYDOWN
+                        && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                    continuer = 0;
+
+                else if(event.key.keysym.sym == SDLK_BACKSPACE
+                        && event.type == SDL_KEYDOWN) {
+                    if (pseudo > 0)
+                        pseudo[strlen(pseudo) - 1] = '\0';
+                }
+
+                else if(event.type == SDL_TEXTINPUT && strlen(pseudo) < TAILLE_PSEUDO) {
+                    strcat(pseudo, event.text.text);
+                }
+            }
+
+            afficher_saisie_pseudo_distant_sdl(pseudo);
+            SDL_RenderPresent(renderer);
+        }
+
+        // Envoi du pseudo
+
+        SDL_StopTextInput();
+}*/
