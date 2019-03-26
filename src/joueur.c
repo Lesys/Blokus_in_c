@@ -67,8 +67,8 @@ Piece* joueur_liste_piece(Joueur* j) {
 }
 
 Type_Joueur joueur_type_joueur(Joueur* j) {
-	if (joueur_hors_liste(j))
-		return NULL;
+/*	if (joueur_hors_liste(j))
+		return NULL;*/
 	return j->type;
 }
 
@@ -107,12 +107,12 @@ void joueur_abandonne(Joueur* j) {
 
 
 Joueur* joueur_copier(Joueur* j) {
-	Joueur* j_copie = joueur_creation();
+	Joueur* j_copie = joueur_creation(joueur_couleur(j));
 	strcpy(j_copie->pseudo, j->pseudo);
 
-	Piece* p_copie = liste_piece_copie(jouer_liste_piece(j));
+	Piece* p_copie = liste_piece_copie(joueur_liste_piece(j));
 
-	j_copie->couleur = joueur_couleur(j);
+/*	j_copie->couleur = joueur_couleur(j);*/
 
 /*	j_copie->type = joueur_type_joueur(j);*/
 	j_copie->abandon = joueur_a_abandonne(j);

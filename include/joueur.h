@@ -45,6 +45,8 @@ int joueur_score(Joueur*);
 /* Récupère la liste des pièces du joueur */
 Piece* joueur_liste_piece(Joueur*);
 
+Type_Joueur joueur_type_joueur(Joueur*);
+
 /* Récupère le joueur suivant */
 Joueur* joueur_suivant(Joueur*);
 
@@ -53,6 +55,8 @@ int joueur_a_abandonne(Joueur*);
 
 /* Change le paramètre "abandon" d'un joueur et le passe à "vrai" */
 void joueur_abandonne(Joueur*);
+
+Joueur* joueur_copier(Joueur*);
 
 /* Vérifie qu'il y a un nombre correct de joueur */
 int verif_nb_joueur(int);
