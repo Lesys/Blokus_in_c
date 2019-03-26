@@ -89,7 +89,7 @@ static int verification_couleur_sdl(Couleur pl[20][20], int x, int y, Couleur co
     return 0;
 }
 
-static int verifier_coordonnees(Couleur pl[20][20], Piece* pi, int x, int y, Joueur* j)
+int verifier_coordonnees(Couleur pl[20][20], Piece* pi, int x, int y, Joueur* j)
 {
     int x_depart;
     int y_depart;

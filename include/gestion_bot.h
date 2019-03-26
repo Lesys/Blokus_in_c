@@ -7,8 +7,8 @@
 
 int gestion_tour_bot(Couleur pl[][], Joueur*);
 
-int bot_jouer(Couleur pl[][], Joueur);
-int adversaire_jouer(Couleur pl[][], Joueur, Joueur); /* Premier Joueur: le bot qui doit jouer. Deuxième Joueur: L'adversaire pour lequel on projette le coup */
+int bot_jouer(Couleur pl[][], Joueur, int);
+int adversaire_jouer(Couleur pl[][], Joueur, Joueur, int); /* Premier Joueur: le bot qui doit jouer. Deuxième Joueur: L'adversaire pour lequel on projette le coup */
 
 int eval_coup_bot(Couleur pl[][], Piece*, Joueur*);
 
