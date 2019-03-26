@@ -123,6 +123,8 @@ void afficher_attente_connexion_sdl();
 
 void afficher_attente_pseudo_sdl();
 
+void afficher_saisie_adresse_sdl(char * str);
+
 void afficher_saisie_pseudo_distant_sdl(Joueur * j);
 
 int curs_hover_bouton(Bouton * b);

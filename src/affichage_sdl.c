@@ -1180,10 +1180,12 @@ void afficher_nb_joueurs_sdl() {
  * \fn void afficher_type_joueur_sdl()
  * \brief Affiche le fond et le texte demandant le type de joueur
  */
-void afficher_type_joueur_sdl() {
+void afficher_type_joueur_sdl(Joueur * j) {
 
+    char message[100];
     afficher_fond_config();
-    afficher_texte("Choissisez le type du joueur :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+    sprintf(message, "Choissisez le type du joueur %s :", couleur_tostring(joueur_couleur(j)));
+    afficher_texte(message, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
 }
 
 /**
@@ -1219,6 +1221,14 @@ void afficher_attente_pseudo_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente de la saisie du pseudo par le joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+}
+
+void afficher_saisie_adresse_sdl(char * str) {
+
+    afficher_fond_config();
+    afficher_sprite(ressources->fond_saisie, largeur_ecran/2 - taille_carre*8, hauteur_ecran/2 + taille_carre*2);
+    afficher_texte("Entrez l'adresse de l'hote (Entree pour valider) :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+    afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
 
 void afficher_saisie_pseudo_distant_sdl(Joueur * j) {
