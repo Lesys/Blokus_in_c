@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "../include/distant.h"
 #include "../include/commun.h"
 #include "../include/joueur.h"
 #include "../include/gestion_tour_sdl.h"
@@ -494,8 +495,10 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 			val_partie = type_partie();
 			if(val_partie == 1)
 				retour = initialisation_partie_sdl(&j);
-			//else if(val_partie == 2)
-				//retour = initialisation_partie_distant_sdl(&j);
+			else if(val_partie == 2){
+								
+				retour = initialisation_partie_distant_sdl(&j);
+			}
 			else if(val_partie == 4)
 				retour = 2; 
 			else 
