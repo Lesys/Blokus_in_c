@@ -230,12 +230,16 @@ int initialiser_joueur_distant(Joueur **j){
 		Retourne 0 si l'affectation a bien fonctionné
 */
 int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
-	int nb=saisir_nb_joueur();
+		
+	int nb;
+	nb=saisir_nb_joueur();
 	int retour=4;
 	if(nb == -1)
 		return 3;
 	else if(nb == 5)
 		return 2;
+	if(*j)
+		joueur_liste_detruire(j);
 	*j=joueur_liste_creation(nb);
 	Joueur* j_pivot = *j;
 	/*Tant que tous les joueurs n'ont pas de pseudo*/
@@ -244,6 +248,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 			retour=saisir_type_joueur(j);		
 			if(retour)
 				return retour;
+		
 		
 			switch((*j)->type){
 				case BOT: sprintf((*j)->pseudo,"Bot %s",couleur_tostring((*j)->couleur));break;
@@ -262,6 +267,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 					default:return 3;
 			}
 		}
+		retour=4;
 		*j=joueur_suivant(*j);
 	} while (*j != j_pivot);
 	return 0;
@@ -423,7 +429,7 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 
 int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
-
+	initialisation_manche(pl,&j);
 	do{
 
 		do{
@@ -512,35 +518,45 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 		}
 		/* Appuie du bouton JOUER */
 		if (retour == 1) { /*Jouer*/
-			while(retour == 1 ||retour == 2 && val_partie != 4){
+			while((retour == 1) ||(retour == 2 && val_partie != 4)){
 				val_partie = type_partie();
-				if(val_partie == 1)
-					retour = initialisation_partie_sdl(&j);
+								
+				/*Partie local*/				
+				if(val_partie == 1){
+					retour=4;				
+					while((val_partie == 1)&&(retour ==4)){//Cas 4 si on appuis sur retour après nb nombre
+						retour = initialisation_partie_sdl(&j);
+					}
+					
+				}				
+				/*Partie rejoindre */
 				else if(val_partie == 2)				
 					retour = initialisation_partie_distant_sdl(&j);
-				
-			}
-			if(val_partie == 4)
-				retour = 2; 
-			else 
-				return val_partie;
+				/*Retour au menu*/
+				else if(val_partie == 4)
+					retour = 2; 
+				else 
+					return val_partie;
 						
+	
+			}
+			if(retour == 4)
+				retour =2;			
 			if (retour == 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
 				if(j) joueur_liste_detruire(&j);
 
 				return retour;
 			}
+			else{
+				if(val_partie == 1)
+					retour = jouer_manche_sdl(pl,j);
+				else if(val_partie == 2)
+//					retour = jouer_manche_distant_sdl(pl,j, retour);
+				joueur_liste_detruire(&j);
 
-			
-			if(val_partie == 1)
-				retour = jouer_manche_sdl(pl,j);
-			else if(val_partie == 2)
-//				retour = jouer_manche_distant_sdl(pl,j, retour);
-
-			joueur_liste_detruire(&j);
-
-			if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
-				return retour;
+				if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
+					return retour;
+			}	
 		}
 		/* else if Appuie sur le bouton REGLE // TODO*/
 		else if (retour == 3) { /*Appuie sur le bouton Quitter || Appuie sur la croix*/
