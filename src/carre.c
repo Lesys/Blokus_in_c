@@ -102,6 +102,7 @@ void carre_afficher(Carre* c) {
 
 		/* Tant que le Carre qu'on regarde n'est pas le premier qu'on a eu (== la boucle n'est pas terminée) */
 		do {
+			fprintf(stderr, "Coord x: %d Coord y: %d\n", c->x, c->y);
 			tab[4 - c->x][c->y] = '*'; /* Pour centrer la pièce en bas à gauche */
 		} while ((c = carre_get_suiv(c)) != init);
 

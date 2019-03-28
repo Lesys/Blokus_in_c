@@ -374,7 +374,7 @@ int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	}
 	else{
 		valeur_r=gestion_tour_bot(pl, *j);/*fonction bot*/
-
+		fprintf(stderr, "Après tour du bot");
 		if(valeur_r == 1){//Le joueur a abandoné
 //			printf("Vous avez abandonné\n");
 			joueur_abandonne(*j);

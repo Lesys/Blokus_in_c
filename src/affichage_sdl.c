@@ -786,6 +786,7 @@ SDL_Color get_color(Couleur couleur) {
             return ressources->rouge;
             break;
         default:
+            return ressources->blanc;
             break;
     }
 }
