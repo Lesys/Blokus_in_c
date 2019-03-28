@@ -5,20 +5,42 @@
 
 #include <time.h>
 
-static int poser_piece_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
+/* Accesseurs */
+Piece* coup_piece (Coup* coup) {
+	if (coup != NULL)
+		return coup->p;
+	return NULL;
+}
+
+Couleur coup_couleur (Coup* coup) {
+	return coup->c;
+}
+
+int coup_coord_x (Coup* coup) {
+	return coup->x;
+}
+
+int coup_coord_y (Coup* coup) {
+	return coup->y;
+}
+
+int coup_valeur (Coup*) {
+	return coup->valeur_coup;
+}
+
+static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
     if(!piece_hors_liste(coup_piece(coup)))
     {
+	int x = coup_coord_x(coup);
+	int y = coup_coord_y(coup);
+
         Carre* c = piece_liste_carre(coup_piece(coup));
-        Piece** p = &(j->liste_piece);
-        Piece* pivot = *p;
 
         do
         {
             pl[x+carre_get_x(c)][y+carre_get_y(c)] = coup_couleur(coup);
             c = carre_get_suiv(c);
-        } while(c != piece_liste_carre(pi));
-/* TODO */
-
+        } while(c != piece_liste_carre(coup_piece(coup)));
     }
 }
 
@@ -31,6 +53,10 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 			pl2[i][j] = pl[i][j];
 
 	poser_piece_bot(pl2, coup);
+
+	/* Evalue le nombre de cases disponibles (== VIDE) autour de la nouvelle Piece posée */
+	eval_cases_dispo(pl2, coup);
+
 } /* TODO */
 
 int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
