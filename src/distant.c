@@ -164,7 +164,7 @@ int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
             nb_lus++;
         }
         else if (n < 0) {
-            return nb_lus
+            return nb_lus;
         }
         else {
             return -1;
