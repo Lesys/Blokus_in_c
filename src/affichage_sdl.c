@@ -744,7 +744,7 @@ void afficher_texte(char * str, TTF_Font * police, SDL_Color couleur, int x, int
 
     if (str && str[0]) {
         // Création de la texture
-        SDL_Surface* texte_surface = TTF_RenderText_Blended(police, str, couleur);
+        SDL_Surface* texte_surface = TTF_RenderUTF8_Blended(police, str, couleur);
         SDL_Texture* texte_texture = SDL_CreateTextureFromSurface(renderer, texte_surface);
 
         // Création du rectangle de destination
