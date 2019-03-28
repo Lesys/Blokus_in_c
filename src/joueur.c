@@ -264,6 +264,8 @@ Joueur* joueur_creation(Couleur c, ...) {
 
 	j->score = 0;
 
+        j->sockfd = 0;
+
 	return j;
 }
 
