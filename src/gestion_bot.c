@@ -1,7 +1,8 @@
-#include "../include/gestion_tour_bot.h"
+#include "../include/gestion_bot.h"
 #include "../include/gestion_tour.h"
 #include "../include/couleur.h"
 #include "../include/joueur.h"
+#include "../include/commun.h"
 
 #include <time.h>
 
@@ -24,8 +25,23 @@ int coup_coord_y (Coup* coup) {
 	return coup->y;
 }
 
-int coup_valeur (Coup*) {
+int coup_valeur (Coup* coup) {
 	return coup->valeur_coup;
+}
+
+Coup* coup_copie(Coup* coup) {
+	if (coup == NULL)
+		return NULL;
+
+	Coup* copie = malloc(sizeof(coup));
+
+	copie->p = coup_piece(coup);
+	copie->c = coup_couleur(coup);
+	copie->x = coup_coord_x(coup);
+	copie->y = coup_coord_y(coup);
+	copie->valeur_coup = coup_valeur(coup);
+
+	return copie;
 }
 
 static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
@@ -46,6 +62,7 @@ static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 
 int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+	
 
 	int i, j;
 	for (i = 0; i < TAILLE_PLATEAU; i++)
@@ -120,7 +137,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
                         tab[compteur] = malloc(sizeof(*tab[compteur]));
 
-                        tab[compteur]->p = piece_copie(p);
+                        tab[compteur]->p = p;
 
 			/* Enlève la Piece actuelle de la liste temporairement */
 			tab[compteur]->p->prec->suiv = tab[compteur]->p->suiv;
