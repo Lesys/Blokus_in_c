@@ -468,7 +468,7 @@ int type_partie(){
 
 int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Joueur * j = NULL;
-	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU];
+	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
 	int retour = 2;
 	int val_partie;
 	SDL_Event event;
