@@ -22,6 +22,7 @@ Couleur coup_couleur (Coup*);
 int coup_coord_x (Coup*);
 int coup_coord_y (Coup*);
 int coup_valeur (Coup*);
+Coup* coup_copie(Coup*);
 
 int gestion_tour_bot (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*);
 
