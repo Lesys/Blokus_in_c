@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence du fichier src/distant.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('distant_8c.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -97,7 +88,8 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Fonctions</a>  </div>
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier distant.c</div>  </div>
 </div><!--header-->
@@ -117,9 +109,11 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 <code>#include &lt;sys/socket.h&gt;</code><br />
 <code>#include &lt;netinet/in.h&gt;</code><br />
 <code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &quot;../include/distant.h&quot;</code><br />
 <code>#include &quot;../include/couleur.h&quot;</code><br />
 <code>#include &quot;../include/commun.h&quot;</code><br />
 <code>#include &quot;../include/joueur.h&quot;</code><br />
+<code>#include &quot;../include/affichage_sdl.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
@@ -159,14 +153,21 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a08b5a0b1c3b8be6e92235455605dd001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a08b5a0b1c3b8be6e92235455605dd001">recevoir_pseudo</a> (unsigned char *buffer, char *pseudo)</td></tr>
 <tr class="memdesc:a08b5a0b1c3b8be6e92235455605dd001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit un pseudo d'un joueur distant et le place dans pseudo.  <a href="#a08b5a0b1c3b8be6e92235455605dd001">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a08b5a0b1c3b8be6e92235455605dd001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a66821bb11425511c990520e3499cef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a66821bb11425511c990520e3499cef"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>initialisation_partie_distant_sdl</b> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="separator:a1a66821bb11425511c990520e3499cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b></td></tr>
+<tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Fonctions pour le jeu multijoueur. </p>
-<p class="">Fonction qui gèrent les connexions des joueurs distants ainsi que la logique du jeu pour ces joueurs </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre et BASTIDE Robin </dd></dl>
+<div class="textblock"><p>Fonctions pour le jeu multijoueur. </p>
+<p>Fonction qui gèrent les connexions des joueurs distants ainsi que la logique du jeu pour ces joueurs </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre et BASTIDE Robin </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="aaa958b943307bd48ec0a15007392f96b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa958b943307bd48ec0a15007392f96b">&#9670;&nbsp;</a></span>accepter_connexion()</h2>
-
+<a class="anchor" id="aaa958b943307bd48ec0a15007392f96b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -191,9 +192,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa91adb8f875d01089b22cae039fd3010"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa91adb8f875d01089b22cae039fd3010">&#9670;&nbsp;</a></span>connexion()</h2>
-
+<a class="anchor" id="aa91adb8f875d01089b22cae039fd3010"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -229,9 +228,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa47ea55c91e11f1b401876ca14815462"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa47ea55c91e11f1b401876ca14815462">&#9670;&nbsp;</a></span>envoyer_abandon_joueur()</h2>
-
+<a class="anchor" id="aa47ea55c91e11f1b401876ca14815462"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -266,9 +263,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="abca6be37e0da5642415cd14f6b1485cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abca6be37e0da5642415cd14f6b1485cd">&#9670;&nbsp;</a></span>envoyer_liste_joueurs()</h2>
-
+<a class="anchor" id="abca6be37e0da5642415cd14f6b1485cd"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -303,9 +298,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad18a8f5f33f00bbaa8a90936da158a00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad18a8f5f33f00bbaa8a90936da158a00">&#9670;&nbsp;</a></span>envoyer_plateau()</h2>
-
+<a class="anchor" id="ad18a8f5f33f00bbaa8a90936da158a00"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -340,9 +333,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="ada838a2d0b7afe9caa7b085f2a92da77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada838a2d0b7afe9caa7b085f2a92da77">&#9670;&nbsp;</a></span>envoyer_pseudo()</h2>
-
+<a class="anchor" id="ada838a2d0b7afe9caa7b085f2a92da77"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -377,9 +368,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab0f679f703c33d5f2666b7ff97b5a11c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0f679f703c33d5f2666b7ff97b5a11c">&#9670;&nbsp;</a></span>fermer_connexion()</h2>
-
+<a class="anchor" id="ab0f679f703c33d5f2666b7ff97b5a11c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -403,9 +392,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5055c3172eee5061edc819523609ec39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5055c3172eee5061edc819523609ec39">&#9670;&nbsp;</a></span>recevoir_abandon_joueur()</h2>
-
+<a class="anchor" id="a5055c3172eee5061edc819523609ec39"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -440,9 +427,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a964acd81714270828b5daea75aab73f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a964acd81714270828b5daea75aab73f0">&#9670;&nbsp;</a></span>recevoir_liste_joueurs()</h2>
-
+<a class="anchor" id="a964acd81714270828b5daea75aab73f0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -467,9 +452,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6fbd636a3883eafc64482fb51736c46d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fbd636a3883eafc64482fb51736c46d">&#9670;&nbsp;</a></span>recevoir_plateau()</h2>
-
+<a class="anchor" id="a6fbd636a3883eafc64482fb51736c46d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -504,9 +487,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a08b5a0b1c3b8be6e92235455605dd001"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08b5a0b1c3b8be6e92235455605dd001">&#9670;&nbsp;</a></span>recevoir_pseudo()</h2>
-
+<a class="anchor" id="a08b5a0b1c3b8be6e92235455605dd001"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -541,9 +522,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac8981669edeedb5e7afa24381fa72c29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8981669edeedb5e7afa24381fa72c29">&#9670;&nbsp;</a></span>recup_type()</h2>
-
+<a class="anchor" id="ac8981669edeedb5e7afa24381fa72c29"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -576,7 +555,7 @@ Fonctions</h2></td></tr>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="distant_8c.html">distant.c</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>
