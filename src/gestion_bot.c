@@ -99,6 +99,8 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	coup_afficher(c);
 	fprintf(stderr, "Avant psoe piece\n");
     poser_piece_sdl(pl, coup_piece(c), bot, coup_coord_x(c), coup_coord_y(c));
+	if (coup_piece(c) == NULL)
+		fprintf(stderr, "Ma piece est NULL\n");
 free(c);
     Reserves* r = init_afficher_pieces_dispo_sdl(bot);
     SDL_RenderClear(renderer);
@@ -217,6 +219,13 @@ tab[compteur]->valeur_coup = 0;
 
 						/* Remet la Piece dans la liste */
 						tab[compteur]->p->prec->suiv = tab[compteur]->p;
+						fprintf(stderr, "Piece suivante de p\n");
+						carre_afficher(piece_liste_carre(piece_suivant(p)));
+						fprintf(stderr, "p\n");
+						carre_afficher(piece_liste_carre(p));
+						fprintf(stderr, "Piece précédente de p\n");
+						carre_afficher(piece_liste_carre(piece_precedent(p)));
+
 						fprintf(stderr, "nb coup possibles %d\n", compteur);
 						coup_afficher(tab[compteur]);
 
