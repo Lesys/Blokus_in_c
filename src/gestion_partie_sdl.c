@@ -233,8 +233,31 @@ int saisir_type_joueur(Joueur** j){
 
 int initialiser_joueur_distant(Joueur **j){
 	/*Code en cour*/
-//	(*j)−>sockfd=
-//	(*j)->pseudo=
+	SDL_RenderClear(renderer);
+	afficher_attente_connexion_sdl();
+	SDL_RenderPresent(renderer);
+	int sockfd = accepter_connexion(PORT_DEFAUT);
+	unsigned char buffer[TAILLE_BUFF];
+	if(sockfd > 0){
+		int r = recevoir_buffer(sockfd, buffer);
+		while(r == 0){
+			SDL_RenderClear(renderer);
+			afficher_attente_pseudo_sdl();
+			SDL_RenderPresent(renderer);
+			r=recevoir_buffer(sockfd, buffer) < 0;
+		}
+		if (r < 0) {
+			return 3;
+		}
+		else {
+			(*j)->sockfd=sockfd;
+			recevoir_pseudo(buffer,(*j)->pseudo);
+		}
+	}
+	else{
+		fprintf(stderr,"Problème de connexion");
+		return 1;
+	}
 	return 0;
 }
 
@@ -344,8 +367,11 @@ int fin_de_partie_sdl(Joueur** j){
 		SDL_RenderClear(renderer);
 		/*On attend la touche du joueur*/
         	while(SDL_PollEvent(&event_fin)){
+			//Si il appuis sur la croix
+			if(event.type == SDL_QUIT)
+				return 3;
 			/*En attendant qu'il appuis sur le bouton*/
-                	if(event_fin.type == SDL_MOUSEBUTTONDOWN){
+                	else if(event_fin.type == SDL_MOUSEBUTTONDOWN){
                         	if (curs_hover_bouton(b_continuer))
                                 	choix= 1;
 
@@ -391,8 +417,8 @@ int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 	}
 	else{
-		valeur_r=gestion_tour_bot(pl, *j);/*fonction bot*/
-
+		//valeur_r=gestion_tour_bot(pl, *j);/*fonction bot*/
+		valeur_r=1;
 		if(valeur_r == 1){//Le joueur a abandoné
 //			printf("Vous avez abandonné\n");
 			joueur_abandonne(*j);
