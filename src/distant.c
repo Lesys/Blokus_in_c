@@ -371,7 +371,6 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
 
 int initialisation_partie_distant_sdl(Joueur ** j) {
     
-        fprintf(stderr, "HELLO");
 	SDL_Event event;
 	int continuer = 1;
         char adresse[TAILLE_PSEUDO] = {0};
