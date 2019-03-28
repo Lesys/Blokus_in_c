@@ -164,15 +164,10 @@ int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
             nb_lus++;
         }
         else if (n < 0) {
-            if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                return nb_lus;   
-            }
-            else  {
-                return -errno;
-            }
+            return nb_lus
         }
         else {
-            return 0;
+            return -1;
         }
     }
     return nb_lus;
