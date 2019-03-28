@@ -244,7 +244,7 @@ int initialiser_joueur_distant(Joueur **j){
 			SDL_RenderClear(renderer);
 			afficher_attente_pseudo_sdl();
 			SDL_RenderPresent(renderer);
-			r=recevoir_buffer(sockfd, buffer) < 0;
+			r = recevoir_buffer(sockfd, buffer);
 		}
 		if (r < 0) {
 			return 3;

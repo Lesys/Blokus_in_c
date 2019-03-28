@@ -174,10 +174,10 @@ void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
 
     afficher_sprite(ressources->fond_plateau, largeur_ecran/2 - 11*taille_carre, hauteur_ecran/2 - 11*taille_carre);
     int offset_x = largeur_ecran/2-10*taille_carre;
-    int offset_y = hauteur_ecran/2-10*taille_carre;
+    int offset_y = hauteur_ecran/2+10*taille_carre;
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
         for (int j = 0; j < TAILLE_PLATEAU; j++) {
-            afficher_sprite(get_sprite(pl[i][TAILLE_PLATEAU - j - 1]), i * taille_carre + offset_x, j * taille_carre + offset_y);
+            afficher_sprite(get_sprite(pl[i][j]), i * taille_carre + offset_x, -(j+1) * taille_carre + offset_y);
         }
     }
 }
@@ -1215,6 +1215,12 @@ void afficher_attente_connexion_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente de la connexion d'un joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+}
+
+void afficher_attente_debut_sdl() {
+
+    afficher_fond_config();
+    afficher_texte("En attente du début de la partie ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
 void afficher_attente_pseudo_sdl() {
