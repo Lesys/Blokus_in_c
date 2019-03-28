@@ -311,6 +311,12 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 		retour=4;
 		*j=joueur_suivant(*j);
 	} while (*j != j_pivot);
+
+	do{
+		if((*j)->sockfd)
+			envoyer_liste_joueurs((*j)->sockfd,*j);
+		*j=joueur_suivant(*j);
+	} while(*j != j_pivot);
 	return 0;
 }
 
@@ -521,7 +527,6 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 				choix=jouer_tour_bot_sdl(pl,&j);
 			else if(j->type == DISTANT)
 				choix=jouer_tour_joueur_distant_sdl(pl,&j);
-				
 			else
 				choix=jouer_tour_joueur_sdl(pl,&j);
 			if(choix == 3)
