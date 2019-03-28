@@ -472,7 +472,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         
         SDL_StopTextInput();
 
-        /* Attente du début de la partie
+        // Attente du début de la partie
         unsigned char buffer[TAILLE_BUFF];
         int r;
 
@@ -486,7 +486,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         }
         else {
             *j = recevoir_liste_joueurs(buffer);
-        }*/
+        }
 
         return sockfd;
 
