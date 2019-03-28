@@ -1217,6 +1217,12 @@ void afficher_attente_connexion_sdl() {
     afficher_texte("En attente de la connexion d'un joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
+void afficher_attente_debut_sdl() {
+
+    afficher_fond_config();
+    afficher_texte("En attente du début de la partie ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+}
+
 void afficher_attente_pseudo_sdl() {
 
     afficher_fond_config();

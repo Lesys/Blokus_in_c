@@ -470,8 +470,29 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         // Envoi du pseudo
         envoyer_pseudo(sockfd, pseudo);
         
+        SDL_StopTextInput();
+
+        /* Attente du début de la partie
+        unsigned char buffer[TAILLE_BUFF];
+        int r;
+
+        while (r = recevoir_buffer(sockfd, buffer)) {
+            SDL_RenderClear(renderer);
+            afficher_attente_debut_sdl();
+            SDL_RenderPresent(renderer);
+        }
+        if (r < 0) {
+            return 3;
+        }
+        else {
+            *j = recevoir_liste_joueurs(buffer);
+        }*/
 
         return sockfd;
 
-        SDL_StopTextInput();
+}
+
+// Renvoie 2 si ecran titres, 3 si croix
+int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j) {
+
 }
