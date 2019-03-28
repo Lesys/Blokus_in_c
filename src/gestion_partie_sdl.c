@@ -368,7 +368,7 @@ int fin_de_partie_sdl(Joueur** j){
 		/*On attend la touche du joueur*/
         	while(SDL_PollEvent(&event_fin)){
 			//Si il appuis sur la croix
-			if(event.type == SDL_QUIT)
+			if(event_fin.type == SDL_QUIT)
 				return 3;
 			/*En attendant qu'il appuis sur le bouton*/
                 	else if(event_fin.type == SDL_MOUSEBUTTONDOWN){
