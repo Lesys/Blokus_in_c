@@ -1,4 +1,4 @@
-#include "../include/gestion_tour_bot.h"
+#include "../include/gestion_bot.h"
 #include "../include/gestion_tour.h"
 #include "../include/couleur.h"
 #include "../include/joueur.h"
@@ -24,15 +24,15 @@ int coup_coord_y (Coup* coup) {
 	return coup->y;
 }
 
-int coup_valeur (Coup*) {
+int coup_valeur (Coup* coup) {
 	return coup->valeur_coup;
 }
 
 static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
     if(!piece_hors_liste(coup_piece(coup)))
     {
-	int x = coup_coord_x(coup);
-	int y = coup_coord_y(coup);
+		int x = coup_coord_x(coup);
+		int y = coup_coord_y(coup);
 
         Carre* c = piece_liste_carre(coup_piece(coup));
 
@@ -60,11 +60,11 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 } /* TODO */
 
 int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
-	Piece* p = bot_jouer_tour(pl, bot);
-        poser_piece_sdl(pl, *p, bot, x, y);
+	Coup* c = bot_jouer_tour(pl, bot);
+    poser_piece_bot(pl, c);
 }
 
-int bot_jouer(Couleur pl[][], Joueur bot, int profondeur)
+int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profondeur)
 {
     if(profondeur)
     {
@@ -72,9 +72,25 @@ int bot_jouer(Couleur pl[][], Joueur bot, int profondeur)
     }
 }
 
-int adversaire_jouer(Couleur pl[][], Joueur bot, Joueur joueur, int profondeur)
+int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur)
 {
 
+}
+
+static void free_tab_coup(Coup*** tab, int taille)
+{
+    int i;
+
+    if (*tab != NULL) {
+        for(i = 0; i < taille; i++)
+        {
+            free((*tab)[i]);
+        }
+
+        free(*tab);
+    }
+
+    *tab = NULL;
 }
 
 /* Gestion du premier tour du bot */
@@ -94,7 +110,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
     Piece * init = p;
 
     Coup** tab = NULL;
-    int compteur_tab = 0;
+    int compteur = 0;
 
     /* Pour chaque position de la matrice */
     for(i = 0; i < TAILLE_PLATEAU; i++)
@@ -120,24 +136,24 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
                         tab[compteur] = malloc(sizeof(*tab[compteur]));
 
-                        tab[compteur]->p = piece_copie(p);
+                        tab[compteur]->p = p;
 
-			/* Enlève la Piece actuelle de la liste temporairement */
-			tab[compteur]->p->prec->suiv = tab[compteur]->p->suiv;
+						/* Enlève la Piece actuelle de la liste temporairement */
+						tab[compteur]->p->prec->suiv = tab[compteur]->p->suiv;
 
-			/* Affecte le Coup dans le tableau */
+						/* Affecte le Coup dans le tableau */
                         tab[compteur]->x = i;
                         tab[compteur]->y = j;
 
                         /* tab[compteur]->valeur_coup = eval_coup_bot(pl, bot, tab[compteur]->p); */
 
-                        adversaire_jouer(pl, joueur_suivant(bot));
+                        adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
 
-			/* Remet la Piece dans la liste */
-			tab[compteur]->p->prec->suiv = tab[compteur];
+						/* Remet la Piece dans la liste */
+						tab[compteur]->p->prec->suiv = tab[compteur];
                     }
 
-                    changer_orientation(p)
+                    changer_orientation(p);
                 }
 
                 p = piece_suivant(p);
@@ -158,20 +174,4 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
     /* On retourne le coup estimé comme étant le meilleur. NULL si aucun coup n'est possible */
     return coup;
-}
-
-static void free_tab_coup(Coup*** tab, int taille)
-{
-    int i;
-
-    if (*tab != NULL) {
-        for(i = 0; i < taille; i++)
-        {
-            free((*tab)[i]);
-        }
-
-        free(*tab);
-    }
-
-    *tab = NULL;
 }

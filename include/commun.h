@@ -25,4 +25,6 @@
 
 #define PORT_DEFAUT 5555
 
+#define PROFONDEUR 5
+
 #endif
