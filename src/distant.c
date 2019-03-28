@@ -13,6 +13,8 @@
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -135,6 +137,11 @@ int accepter_connexion(int port) {
 
     close(sockfd);
 
+    // Mise du socket en non bloquant
+    int flags = fcntl(newsockfd, F_GETFL);
+    fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
+
+
     return newsockfd;
 }
 
@@ -146,6 +153,31 @@ int accepter_connexion(int port) {
 void fermer_connexion(int sockfd) {
     close(sockfd);
 }
+
+int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
+    int nb_lus = 0;
+
+    while (nb_lus < TAILLE_BUFF) {
+        int n = recv(sockfd, buffer + nb_lus, 1, 0);
+
+        if (n > 0) {
+            nb_lus++;
+        }
+        else if (n < 0) {
+            if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                return nb_lus;   
+            }
+            else  {
+                return -errno;
+            }
+        }
+        else {
+            return 0;
+        }
+    }
+    return nb_lus;
+}
+
 
 /**
  * \fn int recup_type(unsigned char * buffer);

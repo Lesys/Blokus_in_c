@@ -24,5 +24,6 @@
 #define YELLOW_Y 0
 
 #define PORT_DEFAUT 5555
+#define TAILLE_BUFF 1000
 
 #endif
