@@ -197,7 +197,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
                         if (tab == NULL)
                             tab = malloc(sizeof(*tab));
                         else
-                            tab = realloc(tab, sizeof(Coup*) * (compteur++ + 2));
+                            tab = realloc(tab, sizeof(*tab) * (compteur++ + 2));
 
 
                         tab[compteur] = malloc(sizeof(*tab[compteur]));
@@ -205,7 +205,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
                         tab[compteur]->p = p;
 
 						/* Enlève la Piece actuelle de la liste temporairement */
-						tab[compteur]->p->prec->suiv = tab[compteur]->p->suiv;
+						/*tab[compteur]->p->prec->suiv = tab[compteur]->p->suiv;*/
 
 						/* Affecte le Coup dans le tableau */
                         tab[compteur]->x = i;
@@ -218,7 +218,7 @@ tab[compteur]->valeur_coup = 0;
                         adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
 
 						/* Remet la Piece dans la liste */
-						tab[compteur]->p->prec->suiv = tab[compteur]->p;
+						/*tab[compteur]->p->prec->suiv = tab[compteur]->p;*/
 						fprintf(stderr, "Piece suivante de p\n");
 						carre_afficher(piece_liste_carre(piece_suivant(p)));
 						fprintf(stderr, "p\n");

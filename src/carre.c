@@ -331,7 +331,7 @@ Piece* piece_liste_creation () {
 	p = p->suiv;
 
 	p->liste_carre = piece_autre_2();
-	p->suiv = first;;
+	p->suiv = first;
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 
 	return first;
