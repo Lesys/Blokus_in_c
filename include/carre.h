@@ -78,6 +78,8 @@ Piece* piece_suivant(Piece*);
 /* Renvoie la Piece* précédente */
 Piece* piece_precedent(Piece*);
 
+int piece_meme_orientation(Piece*, Piece*);
+
 /* Crée les NB_PIECES Piece* dans l'ordre et crée une chaine entre elles (avec suiv et prec)*/
 Piece* piece_liste_creation();
 

@@ -9,7 +9,8 @@
 typedef struct coup Coup;
 
 struct coup {
-	Piece* p;
+	Piece* piece_copie;
+	Piece* piece_origine;
 	Couleur c;
 	int x;
 	int y;
@@ -18,6 +19,7 @@ struct coup {
 
 /* Accesseurs */
 Piece* coup_piece (Coup*);
+Piece* coup_piece_origine (Coup*);
 Couleur coup_couleur (Coup*);
 int coup_coord_x (Coup*);
 int coup_coord_y (Coup*);

@@ -18,7 +18,13 @@ extern SDL_Renderer* renderer;
 /* Accesseurs */
 Piece* coup_piece (Coup* coup) {
 	if (coup != NULL)
-		return coup->p;
+		return coup->piece_copie;
+	return NULL;
+}
+
+Piece* coup_piece_origine (Coup* coup) {
+	if (coup != NULL)
+		return coup->piece_origine;
 	return NULL;
 }
 
@@ -38,13 +44,28 @@ int coup_valeur (Coup* coup) {
 	return coup->valeur_coup;
 }
 
+void coup_detruire(Coup** coup) {
+	if ((*coup) != NULL) {
+		if ((*coup)->piece_copie != NULL)
+			liste_piece_detruire(&((*coup)->piece_copie));
+
+		free(*coup);
+	}
+
+	*coup = NULL;
+}
+
 Coup* coup_copie(Coup* coup) {
 	if (coup == NULL)
 		return NULL;
 
 	Coup* copie = malloc(sizeof(*copie));
 
-	copie->p = coup_piece(coup);
+	/* Copie la Piece (car elle peut être modifiée plus tard. On ne veut pas) */
+	copie->piece_copie = piece_copie(coup_piece(coup));
+
+	/* Enregistrement de son adresse pour la supprimer si on la pose */
+	copie->piece_origine = coup_piece_origine(coup);
 	copie->c = coup_couleur(coup);
 	copie->x = coup_coord_x(coup);
 	copie->y = coup_coord_y(coup);
@@ -55,14 +76,18 @@ Coup* coup_copie(Coup* coup) {
 
 void coup_afficher(Coup* coup) {
 	printf("Couleur: %s\nX: %d, Y: %d\n", couleur_tostring(coup_couleur(coup)), coup_coord_x(coup), coup_coord_y(coup));
-	carre_afficher(coup_piece(piece_liste_carre(coup)));
+
+	printf("Piece copie\n");
+	carre_afficher(piece_liste_carre(coup_piece(coup)));
+	printf("Piece origine\n");
+	carre_afficher(piece_liste_carre(coup_piece_origine(coup)));
 }
 
 static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
     if(!piece_hors_liste(coup_piece(coup)))
     {
-		int x = coup_coord_x(coup);
-		int y = coup_coord_y(coup);
+	int x = coup_coord_x(coup);
+	int y = coup_coord_y(coup);
 
         Carre* c = piece_liste_carre(coup_piece(coup));
 
@@ -70,7 +95,7 @@ static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
         {
             pl[x+carre_get_x(c)][y+carre_get_y(c)] = coup_couleur(coup);
             c = carre_get_suiv(c);
-        } while(c != piece_liste_carre(coup_piece(piece_liste_carre(coup))));
+        } while(c != piece_liste_carre(coup_piece(coup)));
     }
 
 	return 0;
@@ -87,6 +112,7 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 
 	poser_piece_bot(pl2, coup);
 
+	return 1;
 	/* Evalue le nombre de cases disponibles (== VIDE) autour de la nouvelle Piece posée */
 	/*eval_cases_dispo(pl2, coup);*/
 
@@ -96,37 +122,33 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	int retour = 0;
 
 	Coup* c = bot_jouer_tour(pl, bot);
-	coup_afficher(c);
-	fprintf(stderr, "Avant psoe piece\n");
-    poser_piece_sdl(pl, coup_piece(c), bot, coup_coord_x(c), coup_coord_y(c));
-	if (coup_piece(c) == NULL)
-		fprintf(stderr, "Ma piece est NULL\n");
-free(c);
+
+	/* Si aucun Coup n'a été trouvé */
+	if (c == NULL)
+		return 1;
+
+	while (!piece_meme_orientation(coup_piece(c), coup_piece_origine(c)))
+		piece_pivoter(1, piece_liste_carre(coup_piece_origine(c)));
+
+	poser_piece_sdl(pl, coup_piece_origine(c), bot, coup_coord_x(c), coup_coord_y(c));
+
+	coup_detruire(&c);
+
     Reserves* r = init_afficher_pieces_dispo_sdl(bot);
     SDL_RenderClear(renderer);
 
 
-	fprintf(stderr, "Avant refresh\n");
     afficher_plateau_sdl(pl);
-	fprintf(stderr, "Avant refresh 1\n");
+
     afficher_pieces_dispo_sdl(r, bot, NULL);
-	fprintf(stderr, "Avant refresh 2\n");
-    /*afficher_scores_sdl(bot);
-	fprintf(stderr, "Avant refresh 3\n");*/
-    /*afficher_tour_sdl(bot);
-	fprintf(stderr, "Avant refresh 4\n");*/
+
+    afficher_scores_sdl(bot);
+
+    afficher_tour_sdl(bot);
 
     SDL_RenderPresent(renderer);
-	fprintf(stderr, "Avant refresh 5\n");
 
     free_afficher_pieces_dispo_sdl(&r);
-
-	fprintf(stderr, "Après refresh\n");
-
-	fprintf(stderr, "Avant affichage\n");
-	afficher_plateau(pl);
-
-	fprintf(stderr, "Après pose piece\n");
 
 	return retour;
 }
@@ -137,11 +159,13 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
     {
 
     }
+
+	return 1;
 }
 
 int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur)
 {
-
+	return -1;
 }
 
 static void free_tab_coup(Coup*** tab, int taille)
@@ -149,9 +173,9 @@ static void free_tab_coup(Coup*** tab, int taille)
     int i;
 
     if (*tab != NULL) {
-        for(i = 0; i < taille; i++)
-        {
-            free((*tab)[i]);
+        for(i = taille - 1; i >= 0; i--)
+	{
+            coup_detruire(&((*tab)[i]));
         }
 
         free(*tab);
@@ -166,12 +190,6 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
     int i, j, k, nb;
 
     srand(time(NULL));
-
-    /* Création d'un petit carre*/
-/*    Piece* carre = malloc(sizeof(Piece));
-    carre->liste_carre = piece_petit_carre();
-    carre->suiv = carre;
-    carre->prec = carre;*/
 
     Piece * p = joueur_liste_piece(bot);
     Piece * init = p;
@@ -194,73 +212,55 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
                     if(verifier_coordonnees(pl, p, i, j, bot))
                     {
                         /* On enregistre le coup puis on estime sa valeur */
-                        if (tab == NULL)
+                        if (tab == NULL) {
                             tab = malloc(sizeof(*tab));
+			}
                         else
-                            tab = realloc(tab, sizeof(*tab) * (compteur++ + 2));
+                            tab = realloc(tab, sizeof(*tab) * (compteur + 1));
 
 
                         tab[compteur] = malloc(sizeof(*tab[compteur]));
 
-                        tab[compteur]->p = p;
+                        tab[compteur]->piece_origine = p;
 
-						/* Enlève la Piece actuelle de la liste temporairement */
-						/*tab[compteur]->p->prec->suiv = tab[compteur]->p->suiv;*/
+                        tab[compteur]->piece_copie = piece_copie(p);
 
-						/* Affecte le Coup dans le tableau */
+			/* Enlève la Piece actuelle de la liste temporairement */
+			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
+
+			/* Affecte le Coup dans le tableau */
                         tab[compteur]->x = i;
                         tab[compteur]->y = j;
 
-						tab[compteur]->c = joueur_couleur(bot);
-tab[compteur]->valeur_coup = 0;
+			tab[compteur]->c = joueur_couleur(bot);
+			tab[compteur]->valeur_coup = 0;
                         /* tab[compteur]->valeur_coup = eval_coup_bot(pl, bot, tab[compteur]->p); */
 
                         adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
 
-						/* Remet la Piece dans la liste */
-						/*tab[compteur]->p->prec->suiv = tab[compteur]->p;*/
-						fprintf(stderr, "Piece suivante de p\n");
-						carre_afficher(piece_liste_carre(piece_suivant(p)));
-						fprintf(stderr, "p\n");
-						carre_afficher(piece_liste_carre(p));
-						fprintf(stderr, "Piece précédente de p\n");
-						carre_afficher(piece_liste_carre(piece_precedent(p)));
+			/* Remet la Piece dans la liste */
+			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
 
-						fprintf(stderr, "nb coup possibles %d\n", compteur);
-						coup_afficher(tab[compteur]);
-
-						printf("\n");
+			compteur++;
                     }
                     changer_orientation(p);
-
-					if (!compteur)
-						compteur++;
                 }
-				/*printf("fin de boucle %d\n", tmp);*/
+
                 p = piece_suivant(p);
-tmp++;
+
             } while (p != init);
         }
     }
 
     Coup* coup = NULL;
 
-	fprintf(stderr, "Avant rand\n");
     if (compteur) {
         nb = rand() % compteur;
-			fprintf(stderr, "Avant copie\n");
-			coup_afficher(tab[nb]);
         coup = coup_copie(tab[nb]);
-			fprintf(stderr, "après copie\n");
-			coup_afficher(coup);
     }
-	fprintf(stderr, "Après rand\n");
 
-	fprintf(stderr, "Avant free\n");
     free_tab_coup(&tab, compteur);
-	fprintf(stderr, "Après Free\n");
-		coup_afficher(coup);
-			fprintf(stderr, "après affichage\n");
+//	afficher_pieces_dispo(bot);
 
     /* On retourne le coup estimé comme étant le meilleur. NULL si aucun coup n'est possible */
     return coup;

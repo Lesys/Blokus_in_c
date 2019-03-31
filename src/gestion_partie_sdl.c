@@ -433,7 +433,7 @@ int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 		else if(valeur_r == 2){
 			return 3;//Quitte le jeu
 		}
-
+		*j=joueur_suivant(*j);
 	}
 	return valeur_r;
 }
@@ -474,6 +474,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		else if(valeur_r == 2){
 			return 3;//Quitte le jeu
 		}
+		*j=joueur_suivant(*j);
 
 	}
 	return valeur_r;

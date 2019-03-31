@@ -811,7 +811,6 @@ void afficher_scores_sdl(Joueur * j) {
 
     // Pour chaque joueur
     do {
-        fprintf(stderr, "couleur: %s\n", couleur_tostring(joueur_couleur(j)));
         // Affichage
         afficher_texte(joueur_pseudo(j), ressources->police_p, get_color(joueur_couleur(j)), taille_carre*6, y);
         sprintf(score, "%d", joueur_score(j));

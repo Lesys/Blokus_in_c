@@ -252,7 +252,7 @@ int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
     Reserves* r = init_afficher_pieces_dispo_sdl(j);
 
     Bouton* b = init_bouton_sdl(ABANDONNER);
-fprintf(stderr, "tour du joueur\n");
+
     while(etat == -1)
     {
         SDL_RenderClear(renderer);

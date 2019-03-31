@@ -337,6 +337,68 @@ Piece* piece_liste_creation () {
 	return first;
 }
 
+Piece* piece_copie(Piece* p) {
+	if (p == NULL)
+		return NULL;
+
+	Piece* copie = malloc(sizeof(Piece));
+	/* Cette copie de Piece n'est pas faite pour parcourir une liste */
+	copie->suiv = copie->prec = copie;
+
+	Carre* init = piece_liste_carre(p);
+	Carre* parcours_p = init, *first, *parcours_copie;
+
+	copie->liste_carre = malloc(sizeof(Carre));
+	parcours_copie = first = copie->liste_carre;
+
+	parcours_copie->x = parcours_p->x;
+	parcours_copie->y = parcours_p->y;
+	parcours_copie->suiv = first;
+
+
+	/* Tant que les Carre qu'on parcours ne sont pas retournés au premier Carre */
+	while ((parcours_p = carre_get_suiv(parcours_p)) != init) {
+		/* Alloue de l'espace pour une novuelle Piece et nous place dessus */
+		parcours_copie->suiv = malloc(sizeof(Carre));
+		parcours_copie = parcours_copie->suiv;
+
+		parcours_copie->x = parcours_p->x;
+		parcours_copie->y = parcours_p->y;
+		parcours_copie->suiv = first;
+
+	}
+
+	return copie;
+}
+
+int piece_meme_orientation(Piece* modele, Piece* pivote) {
+	Carre* c_modele = piece_liste_carre(modele);
+	Carre* c_pivote = piece_liste_carre(pivote);
+	Carre* init_modele = c_modele, *init_pivote = c_pivote;
+	int diff = 0, meme_carre = 0;
+
+	/* Tant qu'on n'a pas parcouru tous les Carre de la Piece à pivoter OU qu'un Carre n'a pas trouvé de correspondance */
+	do {
+		meme_carre = 0;
+		c_modele = init_modele;
+
+		do {
+			/* Si le Carre du modele possède les mêmes coordonnées que le Carre de la Piece à comparer */
+			if (carre_get_x(c_modele) == carre_get_x(c_pivote) && carre_get_y(c_modele) == carre_get_y(c_pivote))
+				meme_carre = 1;
+
+		} while (!meme_carre && (c_modele = carre_get_suiv(c_modele)) != init_modele);
+
+		/* Si aucune correspondance n'est trouvée */
+		if (!meme_carre)
+			diff = 1;
+
+	} while (!diff && (c_pivote = carre_get_suiv(c_pivote)) != init_pivote);
+
+	/* On regarde si on n'a pas de différence ET qu'on est bien retourné au début de notre modèle (2ème vérification inutile) */
+	return (!diff && c_pivote == init_pivote);
+}
+
 Piece* liste_piece_copie(Piece* p) {
 	Piece* init = p;
 
