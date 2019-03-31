@@ -24,6 +24,7 @@
 #define INVALID_SOCKET -1
 #define SOCKET_ERROR -1
 #define closesocket(s) close(s)
+#define h_addr h_addr_list[0]
 typedef int SOCKET;
 typedef struct sockaddr_in SOCKADDR_IN;
 typedef struct sockaddr SOCKADDR;
@@ -51,42 +52,6 @@ extern SDL_Renderer * renderer;
  * \return Numéro du socket si connexion, 0 sinon
  */
 int connexion(char * adresse, int port) {
-/*
-    int sockfd;
-    struct sockaddr_in serv_addr;
-    struct hostent * server;
-    
-    // Ouverture du socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) {
-        fprintf(stderr, "Erreur lors de l'ouverture du socket\n");
-        return 0;
-    }
-
-    // Résolution du nom de domaine
-    server = gethostbyname(adresse);
-    if (server == NULL) {
-        fprintf(stderr,"Erreur, host introuvable\n");
-        return 0;
-    }
-
-    // Mise à zéro de la structure de l'adresse du serveur   
-    memset(&serv_addr, 0, sizeof(serv_addr));
-
-    // IPv4
-    serv_addr.sin_family = AF_INET;
-    
-    // Copie de l'adresse dans la structure
-    memcpy(server->h_addr_list[0], &serv_addr.sin_addr.s_addr, server->h_length);
-
-    // Copie du port dans la structure
-    serv_addr.sin_port = htons(port);
-
-    // Connexion
-    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) { 
-        fprintf(stderr, "Erreur lors de la connexion\n");
-        return 0;
-    }*/
 
     SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if(sockfd == INVALID_SOCKET)
@@ -135,55 +100,6 @@ int connexion(char * adresse, int port) {
  * \return Numéro du socket si connexion, 0 sinon
  */
 int accepter_connexion(int port) {
-
-    /*int sockfd, newsockfd;
-    socklen_t clilen;
-    struct sockaddr_in serv_addr, cli_addr;
-
-    // Ouverture du socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
-    if (sockfd < 0) { 
-        fprintf(stderr,"Erreur lors de l'ouverture du socket\n");
-        return 0;
-    }
-    
-    // Mise à zéro de la structure de l'adresse du serveur
-    memset(&serv_addr, 0, sizeof(serv_addr));
-
-    // IPv4
-    serv_addr.sin_family = AF_INET;
-    
-    // Réception sur toutes les interfaces
-    serv_addr.sin_addr.s_addr = INADDR_ANY;
-
-    // Copie du port dans la structure
-    serv_addr.sin_port = htons(port);
-
-    // Copie de l'adresse dans la structure
-    if (bind(sockfd, (struct sockaddr *) &serv_addr, 
-        sizeof(serv_addr)) < 0) { 
-            fprintf(stderr,"Erreur lors du bind\n");
-            return 0;
-    }
-
-    // Ecoute sur le socket créé
-    listen(sockfd,1);
-
-    // Taille adresse client 
-    clilen = sizeof(cli_addr);
-
-    // Acceptation de la connexion
-    newsockfd = accept(sockfd, 
-                (struct sockaddr *) &cli_addr, 
-                &clilen);
-    
-    if (newsockfd < 0) {
-        fprintf(stderr, "Erreur lors de l'acceptation d'un socket\n");
-        return 0;
-    }
-
-    closesocket(sockfd);*/
 
     SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if(sockfd == INVALID_SOCKET)
