@@ -94,4 +94,6 @@ void liste_piece_detruire(Piece**);
 /* Fonction renvoyant le nombre de Carre d'une Piece */
 int piece_nb_carre(Piece*);
 
+Piece* liste_piece_copie(Piece* p);
+
 #endif

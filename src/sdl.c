@@ -2,6 +2,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
+#ifdef WINDOWS
+#include <winsock2.h>
+#endif
 
 #include "../include/affichage_sdl.h"
 #include "../include/commun.h"
@@ -36,6 +39,12 @@ int sdl_init() {
 	SDL_SetRenderDrawColor(renderer, 54, 57, 63, 255);
 	init_affichage_sdl();
 
+	// Initialisation sockets windows
+	#ifdef WINDOWS
+	WSADATA wsa;
+	WSAStartup(MAKEWORD(2, 2), &wsa);
+	#endif
+
 }
 
 int sdl_close() {
@@ -44,5 +53,10 @@ int sdl_close() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
+
+	// Fermeture sockets windows
+	#ifdef WINDOWS
+	WSACleanup();
+	#endif
 
 }

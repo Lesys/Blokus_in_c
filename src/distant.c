@@ -15,11 +15,25 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#ifndef WINDOWS
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h> 
+#include <netdb.h>
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+#define closesocket(s) close(s)
+#define h_addr h_addr_list[0]
+typedef int SOCKET;
+typedef struct sockaddr_in SOCKADDR_IN;
+typedef struct sockaddr SOCKADDR;
+typedef struct in_addr IN_ADDR;
+#endif
+#ifdef WINDOWS
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#endif
 
 #include "../include/distant.h"
 #include "../include/couleur.h"
@@ -39,43 +53,42 @@ extern SDL_Renderer * renderer;
  */
 int connexion(char * adresse, int port) {
 
-    int sockfd;
-    struct sockaddr_in serv_addr;
-    struct hostent * server;
-    
-    // Ouverture du socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) {
-        fprintf(stderr, "Erreur lors de l'ouverture du socket\n");
+    SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if(sockfd == INVALID_SOCKET)
+    {
+        fprintf(stderr, "Erreur socket()\n");
         return 0;
     }
 
-    // Résolution du nom de domaine
-    server = gethostbyname(adresse);
-    if (server == NULL) {
-        fprintf(stderr,"Erreur, host introuvable\n");
+    struct hostent *hostinfo = NULL;
+    SOCKADDR_IN sin = { 0 }; /* initialise la structure avec des 0 */
+
+    hostinfo = gethostbyname(adresse); /* on récupère les informations de l'hôte auquel on veut se connecter */
+    if (hostinfo == NULL) /* l'hôte n'existe pas */
+    {
+        fprintf(stderr, "Erreur résolution hote\n");
         return 0;
     }
 
-    // Mise à zéro de la structure de l'adresse du serveur   
-    bzero(&serv_addr, sizeof(serv_addr));
+    sin.sin_addr = *(IN_ADDR *) hostinfo->h_addr; /* l'adresse se trouve dans le champ h_addr de la structure hostinfo */
+    sin.sin_port = htons(port); /* on utilise htons pour le port */
+    sin.sin_family = AF_INET;
 
-    // IPv4
-    serv_addr.sin_family = AF_INET;
-    
-    // Copie de l'adresse dans la structure
-    bcopy((char *)server->h_addr_list[0], 
-         (char *)&serv_addr.sin_addr.s_addr,
-         server->h_length);
-
-    // Copie du port dans la structure
-    serv_addr.sin_port = htons(port);
-
-    // Connexion
-    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) { 
-        fprintf(stderr, "Erreur lors de la connexion\n");
+    if(connect(sockfd,(SOCKADDR *) &sin, sizeof(SOCKADDR)) == SOCKET_ERROR)
+    {
+        fprintf(stderr, "Erreur connect()\n");
         return 0;
     }
+
+    // Mise du socket en non bloquant
+    #ifndef WINDOWS
+    int flags = fcntl(sockfd, F_GETFL);
+    fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    #endif
+    #ifdef WINDOWS
+    unsigned long mode = 1;
+    ioctlsocket(sockfd, FIONBIO, &mode);
+    #endif
 
     return sockfd;
 }
@@ -88,58 +101,57 @@ int connexion(char * adresse, int port) {
  */
 int accepter_connexion(int port) {
 
-    int sockfd, newsockfd;
-    socklen_t clilen;
-    struct sockaddr_in serv_addr, cli_addr;
-
-    // Ouverture du socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
-    if (sockfd < 0) { 
-        fprintf(stderr,"Erreur lors de l'ouverture du socket\n");
-        return 0;
-    }
-    
-    // Mise à zéro de la structure de l'adresse du serveur
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-
-    // IPv4
-    serv_addr.sin_family = AF_INET;
-    
-    // Réception sur toutes les interfaces
-    serv_addr.sin_addr.s_addr = INADDR_ANY;
-
-    // Copie du port dans la structure
-    serv_addr.sin_port = htons(port);
-
-    // Copie de l'adresse dans la structure
-    if (bind(sockfd, (struct sockaddr *) &serv_addr, 
-        sizeof(serv_addr)) < 0) { 
-            fprintf(stderr,"Erreur lors du bind\n");
-            return 0;
-    }
-
-    // Ecoute sur le socket créé
-    listen(sockfd,1);
-
-    // Taille adresse client 
-    clilen = sizeof(cli_addr);
-
-    // Acceptation de la connexion
-    newsockfd = accept(sockfd, 
-                (struct sockaddr *) &cli_addr, 
-                &clilen);
-    
-    if (newsockfd < 0) {
-        fprintf(stderr, "Erreur lors de l'acceptation d'un socket\n");
+    SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if(sockfd == INVALID_SOCKET)
+    {
+        fprintf(stderr, "Erreur socket()\n");
         return 0;
     }
 
-    close(sockfd);
+    SOCKADDR_IN sin = { 0 };
+
+    sin.sin_addr.s_addr = htonl(INADDR_ANY); /* nous sommes un serveur, nous acceptons n'importe quelle adresse */
+
+    sin.sin_family = AF_INET;
+
+    sin.sin_port = htons(PORT_DEFAUT);
+
+    if(bind (sockfd, (SOCKADDR *) &sin, sizeof sin) == SOCKET_ERROR)
+    {
+        fprintf(stderr, "Erreur bind()\n");
+        return 0;
+    }
+
+    if(listen(sockfd, 1) == SOCKET_ERROR)
+    {
+        fprintf(stderr, "Erreur listen\n");
+        return 0;
+    }
+
+    SOCKADDR_IN csin = { 0 };
+    SOCKET newsockfd;
+
+    int sinsize = sizeof csin;
+
+    newsockfd = accept(sockfd, (SOCKADDR *)&csin, &sinsize);
+
+    closesocket(sockfd);
+
+    if(newsockfd == INVALID_SOCKET)
+    {
+        fprintf(stderr, "Erreur accept()\n");
+        return 0;
+    }
 
     // Mise du socket en non bloquant
+    #ifndef WINDOWS
     int flags = fcntl(newsockfd, F_GETFL);
     fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
+    #endif
+    #ifdef WINDOWS
+    unsigned long mode = 1;
+    ioctlsocket(newsockfd, FIONBIO, &mode);
+    #endif
 
 
     return newsockfd;
@@ -151,7 +163,7 @@ int accepter_connexion(int port) {
  * \param sockfd Numéro du socket à fermer
  */
 void fermer_connexion(int sockfd) {
-    close(sockfd);
+    closesocket(sockfd);
 }
 
 int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {

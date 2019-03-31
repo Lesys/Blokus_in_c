@@ -397,7 +397,7 @@ void affecter_piece(Reserves * r, Joueur * j, Piece * l, int x, int y) {
 static
 void disposer_pieces(Reserves * r, Joueur *  joueur) {
 
-    Piece * l = joueur_liste_piece(joueur);
+    Piece * l = piece_precedent(joueur_liste_piece(joueur));
     Piece * init = l;
 
     // Récupération des dimensions de la réserve du joueur
@@ -457,7 +457,7 @@ void disposer_pieces(Reserves * r, Joueur *  joueur) {
                 }
             }
         }
-        l = piece_suivant(l);
+        l = piece_precedent(l);
     } while (l != init);
 }
 
@@ -812,6 +812,9 @@ void afficher_scores_sdl(Joueur * j) {
     // Pour chaque joueur
     do {
         // Affichage
+        if (joueur_a_abandonne(j)) {
+            afficher_texte("X", ressources->police_p, get_color(joueur_couleur(j)), taille_carre, y);
+        }
         afficher_texte(joueur_pseudo(j), ressources->police_p, get_color(joueur_couleur(j)), taille_carre*6, y);
         sprintf(score, "%d", joueur_score(j));
         afficher_texte(score, ressources->police_p, get_color(joueur_couleur(j)), taille_carre*14, y);
@@ -1111,7 +1114,7 @@ void afficher_resultats_sdl(Joueur * j) {
     } while (j != pj);
 
     // Affichage de "RESULTATS" en haut des resultats
-    afficher_texte("RESULTATS", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/4 + taille_carre*0.5);
+    afficher_texte("RESULTATS", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/4 + taille_carre*1);
 
     // Calcul de la hauteur de départ
     int y = hauteur_ecran/4 + taille_carre*4;
