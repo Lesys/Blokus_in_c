@@ -14,6 +14,7 @@
 #include "../include/gestion_tour_sdl.h"
 #include "../include/gestion_partie_sdl.h"
 #include "../include/gestion_partie.h"
+#include "../include/gestion_bot.h"
 #include "../include/affichage_sdl.h"
 
 extern SDL_Renderer* renderer;
@@ -238,14 +239,15 @@ int initialiser_joueur_distant(Joueur **j){
 	SDL_RenderPresent(renderer);
 	int sockfd = accepter_connexion(PORT_DEFAUT);
 	unsigned char buffer[TAILLE_BUFF];
+	int r;
+
 	if(sockfd > 0){
-		int r = recevoir_buffer(sockfd, buffer);
-		while(r == 0){
+		do {
 			SDL_RenderClear(renderer);
 			afficher_attente_pseudo_sdl();
 			SDL_RenderPresent(renderer);
 			r = recevoir_buffer(sockfd, buffer);
-		}
+		} while(r == 0);
 		if (r < 0) {
 			return 3;
 		}
