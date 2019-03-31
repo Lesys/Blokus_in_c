@@ -20,5 +20,6 @@ void envoyer_pseudo(int sockfd, char * pseudo);
 void recevoir_pseudo(unsigned char * buffer, char * pseudo);
 
 int initialisation_partie_distant_sdl(Joueur ** j);
+int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote);
 
 #endif
