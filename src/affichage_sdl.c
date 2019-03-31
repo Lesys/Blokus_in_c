@@ -1114,7 +1114,7 @@ void afficher_resultats_sdl(Joueur * j) {
     } while (j != pj);
 
     // Affichage de "RESULTATS" en haut des resultats
-    afficher_texte("RESULTATS", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/4 + taille_carre*0.5);
+    afficher_texte("RESULTATS", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/4 + taille_carre*1);
 
     // Calcul de la hauteur de départ
     int y = hauteur_ecran/4 + taille_carre*4;
