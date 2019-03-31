@@ -15,11 +15,17 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#ifndef WINDOWS
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h> 
+#include <netdb.h>
+#endif
+#ifdef WINDOWS
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#endif
 
 #include "../include/distant.h"
 #include "../include/couleur.h"
@@ -58,15 +64,13 @@ int connexion(char * adresse, int port) {
     }
 
     // Mise à zéro de la structure de l'adresse du serveur   
-    bzero(&serv_addr, sizeof(serv_addr));
+    memset(&serv_addr, 0, sizeof(serv_addr));
 
     // IPv4
     serv_addr.sin_family = AF_INET;
     
     // Copie de l'adresse dans la structure
-    bcopy((char *)server->h_addr_list[0], 
-         (char *)&serv_addr.sin_addr.s_addr,
-         server->h_length);
+    memcpy(server->h_addr_list[0], &serv_addr.sin_addr.s_addr, server->h_length);
 
     // Copie du port dans la structure
     serv_addr.sin_port = htons(port);
@@ -76,6 +80,16 @@ int connexion(char * adresse, int port) {
         fprintf(stderr, "Erreur lors de la connexion\n");
         return 0;
     }
+
+    // Mise du socket en non bloquant
+    #ifndef WINDOWS
+    int flags = fcntl(sockfd, F_GETFL);
+    fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    #endif
+    #ifdef WINDOWS
+    unsigned long mode = 0;
+    ioctlsocket(sockfd, FIONBIO, &mode);
+    #endif
 
     return sockfd;
 }
@@ -101,7 +115,7 @@ int accepter_connexion(int port) {
     }
     
     // Mise à zéro de la structure de l'adresse du serveur
-    bzero((char *) &serv_addr, sizeof(serv_addr));
+    memset(&serv_addr, 0, sizeof(serv_addr));
 
     // IPv4
     serv_addr.sin_family = AF_INET;
@@ -138,8 +152,14 @@ int accepter_connexion(int port) {
     close(sockfd);
 
     // Mise du socket en non bloquant
+    #ifndef WINDOWS
     int flags = fcntl(newsockfd, F_GETFL);
     fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
+    #endif
+    #ifdef WINDOWS
+    unsigned long mode = 0;
+    ioctlsocket(newsockfd, FIONBIO, &mode);
+    #endif
 
 
     return newsockfd;
