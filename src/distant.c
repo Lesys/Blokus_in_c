@@ -110,6 +110,9 @@ int accepter_connexion(int port) {
         return 0;
     }
 
+    int enable = 1;
+    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int));
+
     SOCKADDR_IN sin = { 0 };
 
     sin.sin_addr.s_addr = htonl(INADDR_ANY); /* nous sommes un serveur, nous acceptons n'importe quelle adresse */
