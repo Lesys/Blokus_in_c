@@ -150,10 +150,10 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 	/* Evalue le nombre de cases disponibles (== VIDE) autour de la nouvelle Piece posée */
 	eval += eval_nb_carres_poses(coup) * COEF_CARRES_POSES;
 
-//	if (joueur_nb_piece_restantes(bot) > NB_PIECES - 4)
+	if (joueur_nb_piece_restantes(bot) > NB_PIECES - 4)
 		eval += eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE;
-//	else
-//		eval += (int)(eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE / 2);
+	else
+		eval += (int)(eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE / 2);
 	/*eval += eval_cases_dispo(pl2, coup) * COEF_CASES_DISPO;
 	eval += eval_nb_nouveaux_coins(pl2, coup) * COEF_NOUVEAUX_COINS;
 	eval += eval_nb_coins_bloques(pl2, coup) * COEF_COINS_BLOQUES;
@@ -335,10 +335,10 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
                         tab[compteur]->piece_origine = p;
 
                         tab[compteur]->piece_copie = piece_copie(p);
-fprintf(stderr, "Compteur: %d\n", compteur);
-fprintf(stderr, "Avant changement liste: nb: %d\n", joueur_nb_piece_restantes(bot));
+
 			/* Enlève la Piece actuelle de la liste temporairement */
 			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
+			bot->liste_piece = piece_suivant(p);
 
 			/* Affecte le Coup dans le tableau */
                         tab[compteur]->x = i;
@@ -346,15 +346,13 @@ fprintf(stderr, "Avant changement liste: nb: %d\n", joueur_nb_piece_restantes(bo
 
 			tab[compteur]->c = joueur_couleur(bot);
 /*			tab[compteur]->valeur_coup = 0;*/
-fprintf(stderr, "Après changement liste: avant eval nb: %d\n", joueur_nb_piece_restantes(bot));
                         tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
 
                         adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
-fprintf(stderr, "Après changement liste: après eval: nb: %d\n", joueur_nb_piece_restantes(bot));
 
 			/* Remet la Piece dans la liste */
 			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
-fprintf(stderr, "Après changement liste: nb: %d\n", joueur_nb_piece_restantes(bot));
+			bot->liste_piece = p;
 
 			compteur++;
                     }
