@@ -98,4 +98,6 @@ int piece_nb_carre(Piece*);
 
 Piece* liste_piece_copie(Piece* p);
 
+Piece* piece_copie(Piece*);
+
 #endif

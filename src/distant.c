@@ -40,6 +40,8 @@ typedef struct in_addr IN_ADDR;
 #include "../include/commun.h"
 #include "../include/joueur.h"
 #include "../include/affichage_sdl.h"
+#include "../include/gestion_partie.h"
+#include "../include/gestion_partie_sdl.h"
 
 // Variables globales externes
 extern SDL_Renderer * renderer;
@@ -412,99 +414,123 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
     
 	SDL_Event event;
 	int continuer = 1;
-        char adresse[TAILLE_PSEUDO] = {0};
-        char pseudo[TAILLE_PSEUDO] = {0};
-        int sockfd;
-        
-        // Saisie adresse
-        SDL_StartTextInput();
+    char adresse[TAILLE_PSEUDO] = {0};
+    char pseudo[TAILLE_PSEUDO] = {0};
+    int sockfd;
+    
+    // Saisie adresse
+    SDL_StartTextInput();
 
-        while(continuer){
+    while(continuer){
 
-            SDL_RenderClear(renderer);
-            while(SDL_PollEvent(&event)){
+        SDL_RenderClear(renderer);
+        while(SDL_PollEvent(&event)){
 
-                if(event.type == SDL_QUIT)
-                    return 3;
+            if(event.type == SDL_QUIT)
+                return 3;
 
-                else if(adresse > 0 && event.type == SDL_KEYDOWN
-                        && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
-                    continuer = 0;
+            else if(adresse > 0 && event.type == SDL_KEYDOWN
+                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                continuer = 0;
 
-                else if(event.key.keysym.sym == SDLK_BACKSPACE
-                        && event.type == SDL_KEYDOWN) {
-                    if (adresse > 0)
-                        adresse[strlen(adresse) - 1] = '\0';
-                }
-
-                else if(event.type == SDL_TEXTINPUT && strlen(adresse) < TAILLE_PSEUDO) {
-                    strcat(adresse, event.text.text);
-                }
+            else if(event.key.keysym.sym == SDLK_BACKSPACE
+                    && event.type == SDL_KEYDOWN) {
+                if (adresse > 0)
+                    adresse[strlen(adresse) - 1] = '\0';
             }
 
-            afficher_saisie_adresse_sdl(adresse);
-            SDL_RenderPresent(renderer);
+            else if(event.type == SDL_TEXTINPUT && strlen(adresse) < TAILLE_PSEUDO) {
+                strcat(adresse, event.text.text);
+            }
         }
 
-        // Connexion
-        sockfd = connexion(adresse, PORT_DEFAUT);
-        
+        afficher_saisie_adresse_sdl(adresse);
+        SDL_RenderPresent(renderer);
+    }
 
-        // Saisie du pseudo
-        continuer = 1;
-        while(continuer){
+    // Connexion
+    sockfd = connexion(adresse, PORT_DEFAUT);
+    
 
-            SDL_RenderClear(renderer);
-            while(SDL_PollEvent(&event)){
+    // Saisie du pseudo
+    continuer = 1;
+    while(continuer){
 
-                if(event.type == SDL_QUIT)
-                    return 3;
+        SDL_RenderClear(renderer);
+        while(SDL_PollEvent(&event)){
 
-                else if(pseudo > 0 && event.type == SDL_KEYDOWN
-                        && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
-                    continuer = 0;
+            if(event.type == SDL_QUIT)
+                return 3;
 
-                else if(event.key.keysym.sym == SDLK_BACKSPACE
-                        && event.type == SDL_KEYDOWN) {
-                    if (pseudo > 0)
-                        pseudo[strlen(pseudo) - 1] = '\0';
-                }
+            else if(pseudo > 0 && event.type == SDL_KEYDOWN
+                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                continuer = 0;
 
-                else if(event.type == SDL_TEXTINPUT && strlen(pseudo) < TAILLE_PSEUDO) {
-                    strcat(pseudo, event.text.text);
-                }
+            else if(event.key.keysym.sym == SDLK_BACKSPACE
+                    && event.type == SDL_KEYDOWN) {
+                if (pseudo > 0)
+                    pseudo[strlen(pseudo) - 1] = '\0';
             }
 
-            afficher_saisie_pseudo_distant_sdl(pseudo);
-            SDL_RenderPresent(renderer);
+            else if(event.type == SDL_TEXTINPUT && strlen(pseudo) < TAILLE_PSEUDO) {
+                strcat(pseudo, event.text.text);
+            }
         }
 
-        // Envoi du pseudo
-        envoyer_pseudo(sockfd, pseudo);
-        
-        SDL_StopTextInput();
+        afficher_saisie_pseudo_distant_sdl(pseudo);
+        SDL_RenderPresent(renderer);
+    }
 
-        // Attente du début de la partie
-        unsigned char buffer[TAILLE_BUFF];
-        int r;
+    // Envoi du pseudo
+    envoyer_pseudo(sockfd, pseudo);
+    
+    SDL_StopTextInput();
 
-        while (r = recevoir_buffer(sockfd, buffer)) {
-            SDL_RenderClear(renderer);
-            afficher_attente_debut_sdl();
-            SDL_RenderPresent(renderer);
-        }
-        if (r < 0) {
-            return 3;
-        }
-        else {
-            *j = recevoir_liste_joueurs(buffer);
-        }
+    // Attente du début de la partie
+    unsigned char buffer[TAILLE_BUFF];
+    int r;
 
-        return sockfd;
+    do {
+        SDL_RenderClear(renderer);
+        afficher_attente_debut_sdl();
+        SDL_RenderPresent(renderer);
+        r = recevoir_buffer(sockfd, buffer);
+    } while (r == 0);
+    if (r < 0) {
+        return 3;
+    }
+    else {
+        *j = recevoir_liste_joueurs(buffer);
+        Joueur * init = *j;
+        do {
+            if (strcmp(joueur_pseudo(*j), pseudo)  == 0) {
+                (*j)->sockfd = -1;
+            }
+            *j = joueur_suivant(*j);
+        } while (*j  != init);
+    }
+
+    return sockfd;
 
 }
 
 // Renvoie 2 si ecran titres, 3 si croix
-int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j) {
+int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote) {
+    
+    int choix;
 
+    do{
+        initialisation_manche(pl,&j);
+        do {
+            if(j->sockfd == -1) {
+                choix = jouer_tour_joueur_sdl(pl,&j);
+                envoyer_plateau(hote, pl);
+            }
+            if(choix == 3)
+                return choix;
+            choix=fin_de_partie_sdl(&j);
+        } while(!(choix));
+    } while(choix == 1 );
+
+    return choix;
 }

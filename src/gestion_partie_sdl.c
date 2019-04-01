@@ -442,9 +442,10 @@ int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r=-1;
+	int valeur_r = 0;
 	Piece* p = NULL;
-    	Reserves* r = init_afficher_pieces_dispo_sdl((*j));
+	unsigned char buffer[TAILLE_BUFF];
+    Reserves* r = init_afficher_pieces_dispo_sdl((*j));
 	SDL_Event event;
 
 	if(joueur_a_abandonne(*j)){
@@ -454,7 +455,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 	}
 	else{
 
-		while(valeur_r == -1){
+		while(valeur_r == 0){
 			SDL_RenderClear(renderer);
 	    		while(SDL_PollEvent(&event)) {
       				if(event.type == SDL_QUIT){
@@ -462,18 +463,24 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
         			}
 			}
 			afficher_plateau_sdl(pl);
-        		afficher_pieces_dispo_sdl(r, (*j), p);
-        		afficher_scores_sdl((*j));
-        		afficher_tour_sdl((*j));
-		        SDL_RenderPresent(renderer);
+        	afficher_pieces_dispo_sdl(r, (*j), p);
+        	afficher_scores_sdl((*j));
+        	afficher_tour_sdl((*j));
+		    SDL_RenderPresent(renderer);
 
-			//valeur_r=Fonction qui fait jouer le joueur en face;
+		    valeur_r = recevoir_buffer((*j)->sockfd, buffer);
 		}
-		if(valeur_r == 1){//Le joueur a abandoné
+
+		valeur_r = recup_type(buffer);
+
+		if (valeur_r == 2) { // Le joueur a jouer
+			recevoir_plateau(buffer, pl);
+		}
+		else if(valeur_r == 3){//Le joueur a abandoné
 //			printf("Vous avez abandonné\n");
 			joueur_abandonne(*j);
 		}
-		else if(valeur_r == 2){
+		else {
 			return 3;//Quitte le jeu
 		}
 		*j=joueur_suivant(*j);
@@ -531,8 +538,6 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 				choix=jouer_tour_bot_sdl(pl,&j);
 			else if(j->type == DISTANT)
 				choix=jouer_tour_joueur_distant_sdl(pl,&j);
-
-
 			else
 				choix=jouer_tour_joueur_sdl(pl,&j);
 			if(choix == 3)
@@ -650,7 +655,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				if(val_partie == 1)
 					retour = jouer_manche_sdl(pl,j);
 				else if(val_partie == 2)
-//					retour = jouer_manche_distant_sdl(pl,j, retour);
+					retour = jouer_manche_distant_sdl(pl, j, retour);
 				joueur_liste_detruire(&j);
 
 				if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
