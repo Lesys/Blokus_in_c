@@ -254,6 +254,7 @@ int initialiser_joueur_distant(Joueur **j){
 		else {
 			(*j)->sockfd=sockfd;
 			recevoir_pseudo(buffer,(*j)->pseudo);
+                        (*j)->type = DISTANT;
 		}
 	}
 	else{
@@ -316,7 +317,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 
 	do{
 		if((*j)->sockfd)
-			envoyer_liste_joueurs((*j)->sockfd,*j);
+			envoyer_liste_joueurs((*j)->sockfd, j_pivot);
 		*j=joueur_suivant(*j);
 	} while(*j != j_pivot);
 	return 0;
@@ -463,12 +464,14 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
         			}
 			}
 			afficher_plateau_sdl(pl);
-        	afficher_pieces_dispo_sdl(r, (*j), p);
-        	afficher_scores_sdl((*j));
-        	afficher_tour_sdl((*j));
-		    SDL_RenderPresent(renderer);
+                        afficher_pieces_dispo_sdl(r, (*j), p);
+                        afficher_scores_sdl((*j));
+                        afficher_tour_sdl((*j));
+                        SDL_RenderPresent(renderer);
 
-		    valeur_r = recevoir_buffer((*j)->sockfd, buffer);
+                        if (valeur_r == 0) {
+                            valeur_r = recevoir_buffer((*j)->sockfd, buffer);
+                        }
 		}
 
 		valeur_r = recup_type(buffer);
@@ -531,17 +534,38 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
 	initialisation_manche(pl,&j);
+        Joueur * init;
 	do{
 
 		do{
-			if(j->type == BOT)
+                        init = j;
+
+                        if(j->type == BOT) {
 				choix=jouer_tour_bot_sdl(pl,&j);
-			else if(j->type == DISTANT)
+                        }
+			else if(j->type == DISTANT) {
 				choix=jouer_tour_joueur_distant_sdl(pl,&j);
-			else
+                        }
+			else {
 				choix=jouer_tour_joueur_sdl(pl,&j);
+                        }
+
 			if(choix == 3)
 				return choix;
+
+                        while (j != init) {
+                            if (j->sockfd) {
+                                if(!joueur_a_abandonne(init)) {
+                                    envoyer_plateau(j->sockfd, pl);
+                                }
+                                else {
+                                    envoyer_abandon_joueur(j->sockfd, joueur_pseudo(init));
+                                }
+                            }
+                            j = joueur_suivant(j);
+                        }
+                        j = joueur_suivant(j);
+
 			choix=fin_de_partie_sdl(&j);
 		} while(!(choix));
 
