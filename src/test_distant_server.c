@@ -13,27 +13,29 @@ int main(int argc, char *argv[]) {
 
     if (sockfd) {
         Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
+        unsigned char buffer[TAILLE_BUFF];
 
         while(1) {
 
-            unsigned char buffer[1000] = {0};
-            recv(sockfd, buffer, 1000, 0);
+            if (recevoir_buffer(sockfd, buffer) > 0) {
+                if (recup_type(buffer) == 0) return 1;
 
-            if (recup_type(buffer) == 0) return 1;
-            printf("Reception communication type %d\n", recup_type(buffer));
-            if(recup_type(buffer) == 1) {
-                Joueur * j = recevoir_liste_joueurs(buffer);
-                afficher_scores(j);
+                printf("Reception communication type %d\n", recup_type(buffer));
+                if(recup_type(buffer) == 1) {
+                    Joueur * j = recevoir_liste_joueurs(buffer);
+                    afficher_scores(j);
+                }
+                else if(recup_type(buffer) == 2) {
+                    recevoir_plateau(buffer,  pl);
+                    afficher_plateau(pl);
+                }
+                else if(recup_type(buffer) == 3) {
+                    char pseudo[TAILLE_PSEUDO];
+                    recevoir_pseudo(buffer, pseudo);
+                    printf("Le joueur a choisi le pseudo %s\n", pseudo);
+                }
             }
-            else if(recup_type(buffer) == 2) {
-                recevoir_plateau(buffer,  pl);
-                afficher_plateau(pl);
-            }
-            else if(recup_type(buffer) == 4) {
-                char pseudo[TAILLE_PSEUDO];
-                recevoir_pseudo(buffer, pseudo);
-                printf("Le joueur a choisi le pseudo %s\n", pseudo);
-            }
+
         }
 
 

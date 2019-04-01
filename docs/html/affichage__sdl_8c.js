@@ -9,7 +9,7 @@ var affichage__sdl_8c =
     [ "afficher_plateau_sdl", "affichage__sdl_8c.html#ae3eab1fff92c9fd88aae725684caa7b5", null ],
     [ "afficher_resultats_sdl", "affichage__sdl_8c.html#aa0c7805f7c17514f5a09911b50e4067f", null ],
     [ "afficher_saisie_adresse_sdl", "affichage__sdl_8c.html#a0c74628be0ca8f12978e25aa550c5131", null ],
-    [ "afficher_saisie_pseudo_distant_sdl", "affichage__sdl_8c.html#ab1db9364393c481ea366077f994c70bb", null ],
+    [ "afficher_saisie_pseudo_distant_sdl", "affichage__sdl_8c.html#a50a075e9d767e0bed13c77fbb7b9b379", null ],
     [ "afficher_saisie_pseudo_sdl", "affichage__sdl_8c.html#adf4ef7f46accd970810a6f205329a65c", null ],
     [ "afficher_scores_sdl", "affichage__sdl_8c.html#ac9e930c0dff5f60c5ea14734533adea5", null ],
     [ "afficher_titres_sdl", "affichage__sdl_8c.html#a0fb0113fc493bf2d29c9a4d9d9443f57", null ],

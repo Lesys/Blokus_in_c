@@ -97,7 +97,8 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Fonctions</a>  </div>
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">Référence du fichier distant.c</div>  </div>
 </div><!--header-->
@@ -117,9 +118,11 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 <code>#include &lt;sys/socket.h&gt;</code><br />
 <code>#include &lt;netinet/in.h&gt;</code><br />
 <code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &quot;../include/distant.h&quot;</code><br />
 <code>#include &quot;../include/couleur.h&quot;</code><br />
 <code>#include &quot;../include/commun.h&quot;</code><br />
 <code>#include &quot;../include/joueur.h&quot;</code><br />
+<code>#include &quot;../include/affichage_sdl.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
@@ -159,6 +162,15 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a08b5a0b1c3b8be6e92235455605dd001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a08b5a0b1c3b8be6e92235455605dd001">recevoir_pseudo</a> (unsigned char *buffer, char *pseudo)</td></tr>
 <tr class="memdesc:a08b5a0b1c3b8be6e92235455605dd001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit un pseudo d'un joueur distant et le place dans pseudo.  <a href="#a08b5a0b1c3b8be6e92235455605dd001">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a08b5a0b1c3b8be6e92235455605dd001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a66821bb11425511c990520e3499cef"><td class="memItemLeft" align="right" valign="top"><a id="a1a66821bb11425511c990520e3499cef"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>initialisation_partie_distant_sdl</b> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="separator:a1a66821bb11425511c990520e3499cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top"><a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b></td></tr>
+<tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p class="">Fonctions pour le jeu multijoueur. </p>

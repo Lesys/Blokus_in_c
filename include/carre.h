@@ -72,11 +72,15 @@ int piece_hors_liste(Piece*);
 /* Renvoie la liste de Carre d'une Piece* */
 Carre* piece_liste_carre(Piece*);
 
+Piece* piece_copie(Piece*);
+
 /* Renvoie la Piece* suivante */
 Piece* piece_suivant(Piece*);
 
 /* Renvoie la Piece* précédente */
 Piece* piece_precedent(Piece*);
+
+int piece_meme_orientation(Piece*, Piece*);
 
 /* Crée les NB_PIECES Piece* dans l'ordre et crée une chaine entre elles (avec suiv et prec)*/
 Piece* piece_liste_creation();
@@ -91,5 +95,9 @@ void liste_piece_detruire(Piece**);
 
 /* Fonction renvoyant le nombre de Carre d'une Piece */
 int piece_nb_carre(Piece*);
+
+Piece* liste_piece_copie(Piece* p);
+
+Piece* piece_copie(Piece*);
 
 #endif

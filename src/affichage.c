@@ -60,10 +60,10 @@ void afficher_str_couleur(Couleur couleur, char * str) {
  */
 void afficher_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
 
-    for (int i = 0; i < TAILLE_PLATEAU; i++) {
-        printf("%3d ", TAILLE_PLATEAU - i);
-        for (int j = 0; j < TAILLE_PLATEAU; j++) {
-            afficher_str_couleur(pl[TAILLE_PLATEAU - i - 1][j], "██");
+    for (int y = TAILLE_PLATEAU - 1; y >= 0; y--) {
+        printf("%3d ", y + 1);
+        for (int x = 0; x < TAILLE_PLATEAU; x++) {
+            afficher_str_couleur(pl[x][y], "██");
         }
         printf("\n");
     }
@@ -106,7 +106,7 @@ void afficher_pieces_dispo(Joueur * j) {
                 Carre * init = piece_liste_carre(l);
                 Carre * c = init;
                 do {
-	            rangee[j][4 - carre_get_x(c)][carre_get_y(c)] = couleur;
+	            rangee[j][carre_get_x(c)][carre_get_y(c)] = couleur;
                 } while ((c = carre_get_suiv(c)) != init);
                 l = piece_suivant(l);
             }
@@ -116,10 +116,10 @@ void afficher_pieces_dispo(Joueur * j) {
         i -= 4;
 
         // Affichage de la rangée
-        for (int y = 0; y < 5; y++) {
+        for (int y = 4; y >= 0; y--) {
             for (int p = 0; p < 4; p++) {
 
-                if (y == 1 && i < n) {
+                if (y == 3 && i < n) {
                     printf("%2d) ", ++i);
                 }
                 else {
@@ -127,8 +127,8 @@ void afficher_pieces_dispo(Joueur * j) {
                 }
 
                 for (int x = 0; x < 5; x++) {
-                    afficher_str_couleur(rangee[p][y][x], "██");
-                    rangee[p][y][x] = 0;
+                    afficher_str_couleur(rangee[p][x][y], "██");
+                    rangee[p][x][y] = 0;
                 }
             }
             printf("\n");
@@ -155,9 +155,9 @@ void afficher_choix_orientation(Piece * p, Joueur * j) {
     Couleur couleur = joueur_couleur(j);
 
     // Affichage de toutes les orientations de la pièce en une ligne
-    for (int i = 0; i < 5; i++) {
+    for (int y = 4; y >= 0; y--) {
         for (int n = 1; n <= 4; n++) {
-            if (i == 1) {
+            if (y == 3) {
                 printf("%d) ", n);
             }
             else {
@@ -167,12 +167,12 @@ void afficher_choix_orientation(Piece * p, Joueur * j) {
 
             // Représentation de la pièce dans la matrice
             do {
-                mp[4 - carre_get_x(c)][carre_get_y(c)] = couleur;
+                mp[carre_get_x(c)][carre_get_y(c)] = couleur;
             } while ((c = carre_get_suiv(c)) != init);
 
             // Affichage de la matrice
-            for (int j = 0; j < 5; j++) {
-                afficher_str_couleur(mp[i][j], "██");
+            for (int x = 0; x < 5; x++) {
+                afficher_str_couleur(mp[x][y], "██");
             }
 
             // Remise à 0 de la matrice

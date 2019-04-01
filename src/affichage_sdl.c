@@ -174,10 +174,10 @@ void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
 
     afficher_sprite(ressources->fond_plateau, largeur_ecran/2 - 11*taille_carre, hauteur_ecran/2 - 11*taille_carre);
     int offset_x = largeur_ecran/2-10*taille_carre;
-    int offset_y = hauteur_ecran/2-10*taille_carre;
+    int offset_y = hauteur_ecran/2+10*taille_carre;
     for (int i = 0; i < TAILLE_PLATEAU; i++) {
         for (int j = 0; j < TAILLE_PLATEAU; j++) {
-            afficher_sprite(get_sprite(pl[i][TAILLE_PLATEAU - j - 1]), i * taille_carre + offset_x, j * taille_carre + offset_y);
+            afficher_sprite(get_sprite(pl[i][j]), i * taille_carre + offset_x, -(j+1) * taille_carre + offset_y);
         }
     }
 }
@@ -397,7 +397,7 @@ void affecter_piece(Reserves * r, Joueur * j, Piece * l, int x, int y) {
 static
 void disposer_pieces(Reserves * r, Joueur *  joueur) {
 
-    Piece * l = joueur_liste_piece(joueur);
+    Piece * l = piece_precedent(joueur_liste_piece(joueur));
     Piece * init = l;
 
     // Récupération des dimensions de la réserve du joueur
@@ -457,7 +457,7 @@ void disposer_pieces(Reserves * r, Joueur *  joueur) {
                 }
             }
         }
-        l = piece_suivant(l);
+        l = piece_precedent(l);
     } while (l != init);
 }
 
@@ -744,7 +744,7 @@ void afficher_texte(char * str, TTF_Font * police, SDL_Color couleur, int x, int
 
     if (str && str[0]) {
         // Création de la texture
-        SDL_Surface* texte_surface = TTF_RenderText_Blended(police, str, couleur);
+        SDL_Surface* texte_surface = TTF_RenderUTF8_Blended(police, str, couleur);
         SDL_Texture* texte_texture = SDL_CreateTextureFromSurface(renderer, texte_surface);
 
         // Création du rectangle de destination
@@ -786,6 +786,7 @@ SDL_Color get_color(Couleur couleur) {
             return ressources->rouge;
             break;
         default:
+            return ressources->blanc;
             break;
     }
 }
@@ -811,6 +812,9 @@ void afficher_scores_sdl(Joueur * j) {
     // Pour chaque joueur
     do {
         // Affichage
+        if (joueur_a_abandonne(j)) {
+            afficher_texte("X", ressources->police_p, get_color(joueur_couleur(j)), taille_carre, y);
+        }
         afficher_texte(joueur_pseudo(j), ressources->police_p, get_color(joueur_couleur(j)), taille_carre*6, y);
         sprintf(score, "%d", joueur_score(j));
         afficher_texte(score, ressources->police_p, get_color(joueur_couleur(j)), taille_carre*14, y);
@@ -1110,7 +1114,7 @@ void afficher_resultats_sdl(Joueur * j) {
     } while (j != pj);
 
     // Affichage de "RESULTATS" en haut des resultats
-    afficher_texte("RESULTATS", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/4 + taille_carre*0.5);
+    afficher_texte("RESULTATS", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/4 + taille_carre*1);
 
     // Calcul de la hauteur de départ
     int y = hauteur_ecran/4 + taille_carre*4;
@@ -1215,6 +1219,12 @@ void afficher_attente_connexion_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente de la connexion d'un joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+}
+
+void afficher_attente_debut_sdl() {
+
+    afficher_fond_config();
+    afficher_texte("En attente du début de la partie ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
 void afficher_attente_pseudo_sdl() {

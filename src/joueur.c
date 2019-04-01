@@ -143,11 +143,12 @@ int verif_nb_joueur(int nb) {
 int joueur_nb_piece_restantes(Joueur* j) {
 	int i = 0;
 	Piece* init = joueur_liste_piece(j);
-	Piece* suiv = init;;
+	Piece* suiv = init;
 
 	if (init != NULL)
 		/* Compte le nombre de pièces dans la liste */
 		for (i = 1; ((suiv = piece_suivant(suiv)) != init); i++);
+			/*fprintf(stderr, "compteur: %d\n", i);*/
 
 	return i;
 }
@@ -263,6 +264,8 @@ Joueur* joueur_creation(Couleur c, ...) {
 	j->abandon = 0;
 
 	j->score = 0;
+
+        j->sockfd = 0;
 
 	return j;
 }

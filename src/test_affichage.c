@@ -8,6 +8,8 @@ int main() {
 
     // Test des différentes couleurs
     pl[0][0] = ROUGE;
+    pl[1][1] = ROUGE;
+    pl[0][1] = ROUGE;
     pl[TAILLE_PLATEAU-1][0] = JAUNE;
     pl[0][TAILLE_PLATEAU-1] = VERT;
     pl[TAILLE_PLATEAU-1][TAILLE_PLATEAU-1] = BLEU;

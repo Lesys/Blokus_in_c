@@ -13,17 +13,35 @@
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#ifndef WINDOWS
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <netdb.h> 
+#include <netdb.h>
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+#define closesocket(s) close(s)
+#define h_addr h_addr_list[0]
+typedef int SOCKET;
+typedef struct sockaddr_in SOCKADDR_IN;
+typedef struct sockaddr SOCKADDR;
+typedef struct in_addr IN_ADDR;
+#endif
+#ifdef WINDOWS
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#endif
 
 #include "../include/distant.h"
 #include "../include/couleur.h"
 #include "../include/commun.h"
 #include "../include/joueur.h"
 #include "../include/affichage_sdl.h"
+#include "../include/gestion_partie.h"
+#include "../include/gestion_partie_sdl.h"
 
 // Variables globales externes
 extern SDL_Renderer * renderer;
@@ -37,43 +55,42 @@ extern SDL_Renderer * renderer;
  */
 int connexion(char * adresse, int port) {
 
-    int sockfd;
-    struct sockaddr_in serv_addr;
-    struct hostent * server;
-    
-    // Ouverture du socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd < 0) {
-        fprintf(stderr, "Erreur lors de l'ouverture du socket\n");
+    SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if(sockfd == INVALID_SOCKET)
+    {
+        fprintf(stderr, "Erreur socket()\n");
         return 0;
     }
 
-    // Résolution du nom de domaine
-    server = gethostbyname(adresse);
-    if (server == NULL) {
-        fprintf(stderr,"Erreur, host introuvable\n");
+    struct hostent *hostinfo = NULL;
+    SOCKADDR_IN sin = { 0 }; /* initialise la structure avec des 0 */
+
+    hostinfo = gethostbyname(adresse); /* on récupère les informations de l'hôte auquel on veut se connecter */
+    if (hostinfo == NULL) /* l'hôte n'existe pas */
+    {
+        fprintf(stderr, "Erreur résolution hote\n");
         return 0;
     }
 
-    // Mise à zéro de la structure de l'adresse du serveur   
-    bzero(&serv_addr, sizeof(serv_addr));
+    sin.sin_addr = *(IN_ADDR *) hostinfo->h_addr; /* l'adresse se trouve dans le champ h_addr de la structure hostinfo */
+    sin.sin_port = htons(port); /* on utilise htons pour le port */
+    sin.sin_family = AF_INET;
 
-    // IPv4
-    serv_addr.sin_family = AF_INET;
-    
-    // Copie de l'adresse dans la structure
-    bcopy((char *)server->h_addr_list[0], 
-         (char *)&serv_addr.sin_addr.s_addr,
-         server->h_length);
-
-    // Copie du port dans la structure
-    serv_addr.sin_port = htons(port);
-
-    // Connexion
-    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) { 
-        fprintf(stderr, "Erreur lors de la connexion\n");
+    if(connect(sockfd,(SOCKADDR *) &sin, sizeof(SOCKADDR)) == SOCKET_ERROR)
+    {
+        fprintf(stderr, "Erreur connect()\n");
         return 0;
     }
+
+    // Mise du socket en non bloquant
+    #ifndef WINDOWS
+    int flags = fcntl(sockfd, F_GETFL);
+    fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    #endif
+    #ifdef WINDOWS
+    unsigned long mode = 1;
+    ioctlsocket(sockfd, FIONBIO, &mode);
+    #endif
 
     return sockfd;
 }
@@ -86,54 +103,58 @@ int connexion(char * adresse, int port) {
  */
 int accepter_connexion(int port) {
 
-    int sockfd, newsockfd;
-    socklen_t clilen;
-    struct sockaddr_in serv_addr, cli_addr;
-
-    // Ouverture du socket
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-
-    if (sockfd < 0) { 
-        fprintf(stderr,"Erreur lors de l'ouverture du socket\n");
-        return 0;
-    }
-    
-    // Mise à zéro de la structure de l'adresse du serveur
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-
-    // IPv4
-    serv_addr.sin_family = AF_INET;
-    
-    // Réception sur toutes les interfaces
-    serv_addr.sin_addr.s_addr = INADDR_ANY;
-
-    // Copie du port dans la structure
-    serv_addr.sin_port = htons(port);
-
-    // Copie de l'adresse dans la structure
-    if (bind(sockfd, (struct sockaddr *) &serv_addr, 
-        sizeof(serv_addr)) < 0) { 
-            fprintf(stderr,"Erreur lors du bind\n");
-            return 0;
-    }
-
-    // Ecoute sur le socket créé
-    listen(sockfd,1);
-
-    // Taille adresse client 
-    clilen = sizeof(cli_addr);
-
-    // Acceptation de la connexion
-    newsockfd = accept(sockfd, 
-                (struct sockaddr *) &cli_addr, 
-                &clilen);
-    
-    if (newsockfd < 0) {
-        fprintf(stderr, "Erreur lors de l'acceptation d'un socket\n");
+    SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if(sockfd == INVALID_SOCKET)
+    {
+        fprintf(stderr, "Erreur socket()\n");
         return 0;
     }
 
-    close(sockfd);
+    SOCKADDR_IN sin = { 0 };
+
+    sin.sin_addr.s_addr = htonl(INADDR_ANY); /* nous sommes un serveur, nous acceptons n'importe quelle adresse */
+
+    sin.sin_family = AF_INET;
+
+    sin.sin_port = htons(PORT_DEFAUT);
+
+    if(bind (sockfd, (SOCKADDR *) &sin, sizeof sin) == SOCKET_ERROR)
+    {
+        fprintf(stderr, "Erreur bind()\n");
+        return 0;
+    }
+
+    if(listen(sockfd, 1) == SOCKET_ERROR)
+    {
+        fprintf(stderr, "Erreur listen\n");
+        return 0;
+    }
+
+    SOCKADDR_IN csin = { 0 };
+    SOCKET newsockfd;
+
+    int sinsize = sizeof csin;
+
+    newsockfd = accept(sockfd, (SOCKADDR *)&csin, &sinsize);
+
+    closesocket(sockfd);
+
+    if(newsockfd == INVALID_SOCKET)
+    {
+        fprintf(stderr, "Erreur accept()\n");
+        return 0;
+    }
+
+    // Mise du socket en non bloquant
+    #ifndef WINDOWS
+    int flags = fcntl(newsockfd, F_GETFL);
+    fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
+    #endif
+    #ifdef WINDOWS
+    unsigned long mode = 1;
+    ioctlsocket(newsockfd, FIONBIO, &mode);
+    #endif
+
 
     return newsockfd;
 }
@@ -144,8 +165,28 @@ int accepter_connexion(int port) {
  * \param sockfd Numéro du socket à fermer
  */
 void fermer_connexion(int sockfd) {
-    close(sockfd);
+    closesocket(sockfd);
 }
+
+int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
+    int nb_lus = 0;
+
+    while (nb_lus < TAILLE_BUFF) {
+        int n = recv(sockfd, buffer + nb_lus, 1, 0);
+
+        if (n > 0) {
+            nb_lus++;
+        }
+        else if (n < 0) {
+            return nb_lus;
+        }
+        else {
+            return -1;
+        }
+    }
+    return nb_lus;
+}
+
 
 /**
  * \fn int recup_type(unsigned char * buffer);
@@ -371,81 +412,125 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
 
 int initialisation_partie_distant_sdl(Joueur ** j) {
     
-        fprintf(stderr, "HELLO");
 	SDL_Event event;
 	int continuer = 1;
-        char adresse[TAILLE_PSEUDO] = {0};
-        char pseudo[TAILLE_PSEUDO] = {0};
-        int sockfd;
-        
-        // Saisie adresse
-        SDL_StartTextInput();
+    char adresse[TAILLE_PSEUDO] = {0};
+    char pseudo[TAILLE_PSEUDO] = {0};
+    int sockfd;
+    
+    // Saisie adresse
+    SDL_StartTextInput();
 
-        while(continuer){
+    while(continuer){
 
-            SDL_RenderClear(renderer);
-            while(SDL_PollEvent(&event)){
+        SDL_RenderClear(renderer);
+        while(SDL_PollEvent(&event)){
 
-                if(event.type == SDL_QUIT)
-                    return 3;
+            if(event.type == SDL_QUIT)
+                return 3;
 
-                else if(adresse > 0 && event.type == SDL_KEYDOWN
-                        && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
-                    continuer = 0;
+            else if(adresse > 0 && event.type == SDL_KEYDOWN
+                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                continuer = 0;
 
-                else if(event.key.keysym.sym == SDLK_BACKSPACE
-                        && event.type == SDL_KEYDOWN) {
-                    if (adresse > 0)
-                        adresse[strlen(adresse) - 1] = '\0';
-                }
-
-                else if(event.type == SDL_TEXTINPUT && strlen(adresse) < TAILLE_PSEUDO) {
-                    strcat(adresse, event.text.text);
-                }
+            else if(event.key.keysym.sym == SDLK_BACKSPACE
+                    && event.type == SDL_KEYDOWN) {
+                if (adresse > 0)
+                    adresse[strlen(adresse) - 1] = '\0';
             }
 
-            afficher_saisie_adresse_sdl(adresse);
-            SDL_RenderPresent(renderer);
+            else if(event.type == SDL_TEXTINPUT && strlen(adresse) < TAILLE_PSEUDO) {
+                strcat(adresse, event.text.text);
+            }
         }
 
-        // Connexion
-        sockfd = connexion(adresse, PORT_DEFAUT);
-        
+        afficher_saisie_adresse_sdl(adresse);
+        SDL_RenderPresent(renderer);
+    }
 
-        // Saisie du pseudo
-        continuer = 1;
-        while(continuer){
+    // Connexion
+    sockfd = connexion(adresse, PORT_DEFAUT);
+    
 
-            SDL_RenderClear(renderer);
-            while(SDL_PollEvent(&event)){
+    // Saisie du pseudo
+    continuer = 1;
+    while(continuer){
 
-                if(event.type == SDL_QUIT)
-                    return 3;
+        SDL_RenderClear(renderer);
+        while(SDL_PollEvent(&event)){
 
-                else if(pseudo > 0 && event.type == SDL_KEYDOWN
-                        && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
-                    continuer = 0;
+            if(event.type == SDL_QUIT)
+                return 3;
 
-                else if(event.key.keysym.sym == SDLK_BACKSPACE
-                        && event.type == SDL_KEYDOWN) {
-                    if (pseudo > 0)
-                        pseudo[strlen(pseudo) - 1] = '\0';
-                }
+            else if(pseudo > 0 && event.type == SDL_KEYDOWN
+                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                continuer = 0;
 
-                else if(event.type == SDL_TEXTINPUT && strlen(pseudo) < TAILLE_PSEUDO) {
-                    strcat(pseudo, event.text.text);
-                }
+            else if(event.key.keysym.sym == SDLK_BACKSPACE
+                    && event.type == SDL_KEYDOWN) {
+                if (pseudo > 0)
+                    pseudo[strlen(pseudo) - 1] = '\0';
             }
 
-            afficher_saisie_pseudo_distant_sdl(pseudo);
-            SDL_RenderPresent(renderer);
+            else if(event.type == SDL_TEXTINPUT && strlen(pseudo) < TAILLE_PSEUDO) {
+                strcat(pseudo, event.text.text);
+            }
         }
 
-        // Envoi du pseudo
-        envoyer_pseudo(sockfd, pseudo);
-        
+        afficher_saisie_pseudo_distant_sdl(pseudo);
+        SDL_RenderPresent(renderer);
+    }
 
-        return sockfd;
+    // Envoi du pseudo
+    envoyer_pseudo(sockfd, pseudo);
+    
+    SDL_StopTextInput();
 
-        SDL_StopTextInput();
+    // Attente du début de la partie
+    unsigned char buffer[TAILLE_BUFF];
+    int r;
+
+    do {
+        SDL_RenderClear(renderer);
+        afficher_attente_debut_sdl();
+        SDL_RenderPresent(renderer);
+        r = recevoir_buffer(sockfd, buffer);
+    } while (r == 0);
+    if (r < 0) {
+        return 3;
+    }
+    else {
+        *j = recevoir_liste_joueurs(buffer);
+        Joueur * init = *j;
+        do {
+            if (strcmp(joueur_pseudo(*j), pseudo)  == 0) {
+                (*j)->sockfd = -1;
+            }
+            *j = joueur_suivant(*j);
+        } while (*j  != init);
+    }
+
+    return sockfd;
+
+}
+
+// Renvoie 2 si ecran titres, 3 si croix
+int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote) {
+    
+    int choix;
+
+    do{
+        initialisation_manche(pl,&j);
+        do {
+            if(j->sockfd == -1) {
+                choix = jouer_tour_joueur_sdl(pl,&j);
+                envoyer_plateau(hote, pl);
+            }
+            if(choix == 3)
+                return choix;
+            choix=fin_de_partie_sdl(&j);
+        } while(!(choix));
+    } while(choix == 1 );
+
+    return choix;
 }
