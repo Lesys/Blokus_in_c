@@ -487,7 +487,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		*j=joueur_suivant(*j);
 
 	}
-	return 1;
+	return valeur_r;
 }
 
 
