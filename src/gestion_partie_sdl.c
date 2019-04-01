@@ -477,9 +477,11 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 		if (valeur_r == 2) { // Le joueur a jouer
 			recevoir_plateau(buffer, pl);
+			valeur_r = 0; /* Le joueru a réussi à poser sa Piece */
 		}
 		else if(valeur_r == 3){//Le joueur a abandoné
 			joueur_abandonne(*j);
+			valeur_r = 1; /* Le joueur a abandonné */
 		}
 		else {
 			return 3;//Quitte le jeu
