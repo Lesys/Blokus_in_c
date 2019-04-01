@@ -506,6 +506,9 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             if (strcmp(joueur_pseudo(*j), pseudo)  == 0) {
                 (*j)->sockfd = -1;
             }
+            else {
+                (*j)->sockfd = sockfd;
+            }
             *j = joueur_suivant(*j);
         } while (*j  != init);
     }
@@ -524,7 +527,15 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
         do {
             if(j->sockfd == -1) {
                 choix = jouer_tour_joueur_sdl(pl,&j);
-                envoyer_plateau(hote, pl);
+                if (joueur_a_abandonne(j)) {
+                    envoyer_abandon_joueur(hote, joueur_pseudo(j));
+                }
+                else {
+                    envoyer_plateau(hote, pl);
+                }
+            }
+            else {
+		choix = jouer_tour_joueur_distant_sdl(pl,&j);
             }
             if(choix == 3)
                 return choix;
