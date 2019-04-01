@@ -26,6 +26,22 @@
 #define PORT_DEFAUT 5555
 #define TAILLE_BUFF 1000
 
+/* Define pour le BOT */
 #define PROFONDEUR 5
+
+/* Entre 0 et 9 (0 == bord, 9 == 1 case du centre) */
+#define COUP_MAUVAIS 3
+#define COUP_MOYEN 5
+#define COUP_BON 7
+
+#define COEF_COUP_BON 3
+#define COEF_COUP_MOYEN 2
+#define COEF_COUP_MAUVAIS 1
+
+#define COEF_CARRES_POSES 1
+#define COEF_EMPLACEMENT_PIECE 1
+#define COEF_CASES_DISPO 2
+#define COEF_NOUVEAUX_COINS 2
+#define COEF_COINS_BLOQUES 3
 
 #endif

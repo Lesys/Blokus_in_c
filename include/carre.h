@@ -72,6 +72,8 @@ int piece_hors_liste(Piece*);
 /* Renvoie la liste de Carre d'une Piece* */
 Carre* piece_liste_carre(Piece*);
 
+Piece* piece_copie(Piece*);
+
 /* Renvoie la Piece* suivante */
 Piece* piece_suivant(Piece*);
 

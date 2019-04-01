@@ -34,6 +34,9 @@ int bot_jouer (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*, int); /* int
 int adversaire_jouer (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*, Joueur*, int); /* Premier Joueur: le bot qui doit jouer. Deuxième Joueur: L'adversaire pour lequel on projette le coup */
 
 int eval_coup_bot (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*);
+int eval_nb_carres_poses(Coup*);
+int eval_emplacement_piece(Coup*);
+
 #endif
 
 /* Evaluer la valeur de la case (moins il y a de cases prises autour, plus elle a de valeur) */
