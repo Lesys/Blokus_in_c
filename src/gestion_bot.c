@@ -224,6 +224,32 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	} while ((c = carre_get_suiv(c)) != init);
 }
 
+/**
+	return L'ancien nombre de coins libres - le nouveau nombre de coins libres
+*/
+int eval_nb_nouveaux_coins(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, int ancien_nb_coup) {
+	int coord_x = coup_coord_x(coup);
+	int coord_y = coup_coord_y(coup);
+
+	Carre* init = piece_liste_carre(coup_piece(coup));
+	Carre* c = init;
+	int x = 0, y = 0;
+
+	/* Regarde tous les Carre et leur position */
+	do {
+		/* Récupère les coordonnées du Carre sur le plateau */
+		x = coord_x + carre_get_x(c);
+		y = coord_y + carre_get_y(c);
+/*		if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
+			mauvais++;
+		else if (x <= COUP_MOYEN || x >= TAILLE_PLATEAU - COUP_MOYEN || y <= COUP_MOYEN || y >= TAILLE_PLATEAU - COUP_MOYEN)
+			moyen++;
+		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
+			bon++;*/
+
+	} while ((c = carre_get_suiv(c)) != init);
+}
+
 int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	int retour = 0;
 
