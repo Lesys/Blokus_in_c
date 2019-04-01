@@ -120,6 +120,7 @@ int accepter_connexion(int port) {
 
     if(bind (sockfd, (SOCKADDR *) &sin, sizeof sin) == SOCKET_ERROR)
     {
+        perror("Erreur Bind()");
         fprintf(stderr, "Erreur bind()\n");
         return 0;
     }
@@ -521,14 +522,16 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote) {
     
     int choix;
+    Joueur * init;
 
     do{
         initialisation_manche(pl,&j);
         do {
             if(j->sockfd == -1) {
+                init = j;
                 choix = jouer_tour_joueur_sdl(pl,&j);
-                if (joueur_a_abandonne(j)) {
-                    envoyer_abandon_joueur(hote, joueur_pseudo(j));
+                if (joueur_a_abandonne(init)) {
+                    envoyer_abandon_joueur(hote, init);
                 }
                 else {
                     envoyer_plateau(hote, pl);

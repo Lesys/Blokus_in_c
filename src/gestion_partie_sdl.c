@@ -452,7 +452,6 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
 		*j=joueur_suivant(*j);
-
 	}
 	else{
 
@@ -480,7 +479,6 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 			recevoir_plateau(buffer, pl);
 		}
 		else if(valeur_r == 3){//Le joueur a abandoné
-//			printf("Vous avez abandonné\n");
 			joueur_abandonne(*j);
 		}
 		else {
@@ -489,7 +487,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		*j=joueur_suivant(*j);
 
 	}
-	return valeur_r;
+	return 1;
 }
 
 
@@ -559,7 +557,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
                                     envoyer_plateau(j->sockfd, pl);
                                 }
                                 else {
-                                    envoyer_abandon_joueur(j->sockfd, joueur_pseudo(init));
+                                    envoyer_abandon_joueur(j->sockfd, init);
                                 }
                             }
                             j = joueur_suivant(j);
