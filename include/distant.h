@@ -5,6 +5,13 @@
 #include "../include/couleur.h"
 #include "../include/joueur.h"
 
+typedef enum type_message {
+	LISTE_JOUEURS = 1,
+	PLATEAU,
+	ABANDON_JOUEUR,
+	PSEUDO
+} Type_message;
+
 int connexion(char * adresse, int port);
 int accepter_connexion(int port);
 void fermer_connexion(int sockfd);

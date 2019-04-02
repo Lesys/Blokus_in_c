@@ -110,7 +110,7 @@ int accepter_connexion(int port) {
         return 0;
     }
 
-    int enable = 1;
+    char enable = 1;
     setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int));
 
     SOCKADDR_IN sin = { 0 };
@@ -217,7 +217,7 @@ int recup_type(unsigned char * buffer) {
  */
 void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece) {
 
-    int type = 2;
+    int type = PLATEAU;
     unsigned char buffer[500] = {0};
     int offset = 0;
     unsigned char tmp;
@@ -277,7 +277,7 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
  */
 void envoyer_liste_joueurs(int sockfd, Joueur * j) {
 
-    int type = 1;
+    int type = LISTE_JOUEURS;
     unsigned char buffer[TAILLE_PSEUDO*5] = {0};
     int offset = 0;
 
@@ -345,7 +345,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
  */
 void envoyer_abandon_joueur(int sockfd, Joueur * j) {
 
-    int type = 3;
+    int type = ABANDON_JOUEUR;
     unsigned char buffer[TAILLE_PSEUDO*2] = {0};
     int offset = 0;
 
@@ -395,7 +395,7 @@ void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j) {
  */
 void envoyer_pseudo(int sockfd, char * pseudo) {
 
-    int type = 4;
+    int type = PSEUDO;
     unsigned char buffer[TAILLE_PSEUDO*2] = {0};
     int offset = 0;
 
@@ -553,10 +553,13 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                 }
             }
             else {
-		choix = jouer_tour_joueur_distant_sdl(pl,&j);
+                choix = jouer_tour_joueur_distant_sdl(pl,&j);
             }
-            if(choix == 3)
+
+            if(choix == 3) {
                 return choix;
+            }
+            
             choix=fin_de_partie_sdl(&j);
         } while(!(choix));
     } while(choix == 1 );

@@ -234,6 +234,7 @@ int saisir_type_joueur(Joueur** j){
 
 
 int initialiser_joueur_distant(Joueur **j){
+	
 	SDL_RenderClear(renderer);
 	afficher_attente_connexion_sdl();
 	SDL_RenderPresent(renderer);
@@ -254,10 +255,10 @@ int initialiser_joueur_distant(Joueur **j){
 		else {
 			(*j)->sockfd=sockfd;
 			recevoir_pseudo(buffer,(*j)->pseudo);
-                        (*j)->type = DISTANT;
+            (*j)->type = DISTANT;
 		}
 	}
-	else{
+	else {
 		fprintf(stderr,"Problème de connexion");
 		return 1;
 	}
@@ -502,7 +503,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 		valeur_r = recup_type(buffer);
 
-		if (valeur_r == 2) { // Le joueur a jouer
+		if (valeur_r == PLATEAU) { // Le joueur a jouer
 			id_piece = recevoir_plateau(buffer, pl);
 			if ( id_piece > 0) {
                                 Piece** p = &((*j)->liste_piece);
@@ -529,7 +530,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 			valeur_r = id_piece * -1; /* Le joueur a réussi à poser sa Piece */
 		}
-		else if(valeur_r == 3){//Le joueur a abandoné
+		else if(valeur_r == ABANDON_JOUEUR){//Le joueur a abandoné
 			joueur_abandonne(*j);
 			valeur_r = 1; /* Le joueur a abandonné */
 		}
