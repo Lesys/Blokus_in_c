@@ -42,6 +42,7 @@ typedef struct in_addr IN_ADDR;
 #include "../include/affichage_sdl.h"
 #include "../include/gestion_partie.h"
 #include "../include/gestion_partie_sdl.h"
+#include "../include/son.h"
 
 // Variables globales externes
 extern SDL_Renderer * renderer;
@@ -602,7 +603,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             if(event.type == SDL_QUIT)
                 return 3;
         }
-        
+
         SDL_RenderClear(renderer);
         afficher_attente_debut_sdl();
         SDL_RenderPresent(renderer);
@@ -640,13 +641,16 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
         initialisation_manche(pl,&j);
         do {
             if(j->sockfd == -1) {
+                jouer_son(CLOCHE);
                 init = j;
                 choix = jouer_tour_joueur_sdl(pl,&j);
                 if(choix != 4) {
                     if (joueur_a_abandonne(init)) {
+                        jouer_son(ABANDON);
                         r = envoyer_abandon_joueur(hote, init);
                     }
                     else {
+                        jouer_son(POSE_PIECE);
                         r = envoyer_plateau(hote, pl, choix * -1);
                     }
                 }
@@ -657,6 +661,12 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
             }
             else {
                 choix = jouer_tour_joueur_distant_sdl(pl,&j);
+                if (choix < 0) {
+                    jouer_son(POSE_PIECE);
+                }
+                else if (choix != 4) {
+                    jouer_son(ABANDON);
+                }
             }
 
             if (choix == -1) {

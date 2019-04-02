@@ -8,13 +8,26 @@
 
 #include "../include/affichage_sdl.h"
 #include "../include/commun.h"
+#include "../include/son.h"
 
 SDL_Window * window;
 SDL_Renderer * renderer;
 
 int sdl_init() {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	TTF_Init();
+	if (SDL_Init(SDL_INIT_EVERYTHING)) {
+		printf("Erreur initialisation SDL\n");
+		return 0;
+	}
+	
+	if (TTF_Init()) {
+		printf("Erreur initialisation SDL_ttf\n");
+		return 0;
+	}
+
+	if (!init_son()) {
+		printf("Erreur initialisation SDL_mixer\n");
+		return 0;
+	}
 	window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
 	if (!window) {
 		printf("%s", SDL_GetError());
@@ -50,6 +63,7 @@ int sdl_init() {
 int sdl_close() {
 
 	IMG_Quit();
+	free_son();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

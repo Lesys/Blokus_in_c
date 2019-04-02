@@ -17,6 +17,7 @@
 #include "../include/gestion_partie.h"
 #include "../include/gestion_bot.h"
 #include "../include/affichage_sdl.h"
+#include "../include/son.h"
 
 extern SDL_Renderer* renderer;
 
@@ -658,6 +659,15 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 			}
 			//Si le joueur n'a pas déjà abandonné
 			if(choix != 4){
+					// Sons
+					if(joueur_a_abandonne(init)) {
+                        jouer_son(ABANDON);
+                    }
+                    else {
+                        jouer_son(POSE_PIECE);
+                    }
+
+					// Envoi aux joueurs distants
                     while (j != init) {
                         		if (j->sockfd) {
                                 		if(!joueur_a_abandonne(init)) {
