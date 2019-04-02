@@ -11,6 +11,7 @@
 #include "../include/distant.h"
 #include "../include/commun.h"
 #include "../include/joueur.h"
+#include "../include/carre.h"
 #include "../include/gestion_tour_sdl.h"
 #include "../include/gestion_partie_sdl.h"
 #include "../include/gestion_partie.h"
@@ -511,7 +512,6 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 					liste_piece_suppr_elem(&p);
 				}
 			}
-			liste_piece_suppr_elem(p);
 
 			valeur_r = 0; /* Le joueru a réussi à poser sa Piece */
 		}
