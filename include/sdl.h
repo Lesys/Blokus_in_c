@@ -1,3 +1,3 @@
 int sdl_init(int fullscreen);
 
-int sdl_close();
+void sdl_close();

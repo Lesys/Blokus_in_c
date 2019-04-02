@@ -96,6 +96,12 @@ int connexion(char * adresse, int port) {
     return sockfd;
 }
 
+/**
+ * \fn int creer_socket_connexion(int port)
+ * \brief Créé un socket le met sur écoute
+ * \param port Port sur lequel créer le socket
+ * \return Numéro du socket si réussi, 0 sinon
+ */
 int creer_socket_connexion(int port) {
 
     SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -143,10 +149,10 @@ int creer_socket_connexion(int port) {
 }
 
 /**
- * \fn int accepter_connexion(int port);
- * \brief Accepte une connexion d'un joueur distant
- * \param port Port sur lequel écouter
- * \return Numéro du socket si connexion, 0 sinon
+ * \fn int accepter_connexion(int sockfd);
+ * \brief Accepte une connexion d'un joueur distant sur un socket d'écoute
+ * \param sockfd Socket sur lequel écouter
+ * \return Numéro du socket si connexion, -1 sinon
  */
 int accepter_connexion(int sockfd) {
 
@@ -186,6 +192,11 @@ void fermer_connexion(int sockfd) {
     closesocket(sockfd);
 }
 
+/**
+ * \fn void fermer_connexions_distantes(Joueur * j)
+ * \brief Ferme les connexions à tout les joueurs distants
+ * \param j Liste des joueurs
+ */
 void fermer_connexions_distantes(Joueur * j) {
 
     Joueur * init = j;
@@ -199,6 +210,13 @@ void fermer_connexions_distantes(Joueur * j) {
     } while (j !=  init);
 }
 
+/**
+ * \fn int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF])
+ * \brief Recoit un buffer
+ * \param sockfd Socket depuis lequel lire
+ * \param buffer Buffer dans lequel écrire
+ * \param Nombre d'octets lus, -1 si erreur
+ */
 int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
     int nb_lus = 0;
 
@@ -223,7 +241,7 @@ int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
  * \fn int recup_type(unsigned char * buffer);
  * \brief Récupère le type de communication contenue dans le buffer
  * \param buffer Buffer à lire
- * \return 0-Erreur, 1-Liste joueurs, 2-Etat plateau, 3-Abandon joueur, 4-Pseudo
+ * \return Le type (voir enum)
  */
 int recup_type(unsigned char * buffer) {
 
@@ -241,6 +259,7 @@ int recup_type(unsigned char * buffer) {
  * \param sockfd Numéro du socket sur lequel envoyer
  * \param pl Plateau courant
  * \param id_piece Id de la piece posée
+ * \param Nombre d'octets envoyés, -1 si erreur 
  */
 int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece) {
 
@@ -307,6 +326,7 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
  * \brief Envoie la liste des joueurs au joueur distant
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Liste des joueurs
+ * \param Nombre d'octets lus, -1 si erreur
  */
 int envoyer_liste_joueurs(int sockfd, Joueur * j) {
 
@@ -381,6 +401,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
  * \brief Envoi un message annoncant l'abandon d'un joueur
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Joueur qui abandonne
+ * \param Nombre d'octets lus, -1 si erreur
  */
 int envoyer_abandon_joueur(int sockfd, Joueur * j) {
 
@@ -437,8 +458,9 @@ void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j) {
  * \brief Envoie le pseudo choisi à l'hote
  * \param sockfd Numéro du socket à qui envoyer
  * \param pseudo Pseudo choisi
+ * \param Nombre d'octets lus, -1 si erreur
  */
-int  envoyer_pseudo(int sockfd, char * pseudo) {
+int envoyer_pseudo(int sockfd, char * pseudo) {
 
     int type = PSEUDO;
     unsigned char buffer[TAILLE_PSEUDO*2] = {0};
@@ -475,6 +497,11 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
     memcpy(pseudo, buffer + offset, TAILLE_PSEUDO);
 }
 
+/**
+ * \fn int erreur_reseau()
+ * \brief Affiche un message d'erreur réseau avec un bouton retour
+ * \return 2 si appui sur le bouton retour, 3 si appui sur la croix
+ */
 int erreur_reseau() {
 
     int r = 1;
@@ -501,6 +528,12 @@ int erreur_reseau() {
     return r;
 }
 
+/**
+ * \fn int initialisation_partie_distant_sdl(Joueur ** j)
+ * \brief Initialise la connexion avec un hote et attends le début de la partie
+ * \param j Liste des joueurs
+ * \return numéro de socket de l'hote si ok,  2 si appui sur le bouton retour, 3 si appui sur la croix
+ */
 int initialisation_partie_distant_sdl(Joueur ** j) {
 
 	SDL_Event event;
@@ -635,7 +668,14 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
 }
 
-// Renvoie 2 si ecran titres, 3 si croix
+/**
+ * \fn int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote)
+ * \brief Joue une manche en tant que joueur distant
+ * \param pl Plateau courant
+ * \param j Liste des joueurs
+ * \param hote Numéro  de socket de l'hote
+ * \return 2 si retour ecran titre, 3 si fermeture directe
+ */
 int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote) {
 
     int choix;

@@ -65,9 +65,11 @@ int sdl_init(int fullscreen) {
 	WSAStartup(MAKEWORD(2, 2), &wsa);
 	#endif
 
+	return 1;
+
 }
 
-int sdl_close() {
+void sdl_close() {
 
 	IMG_Quit();
 	free_son();

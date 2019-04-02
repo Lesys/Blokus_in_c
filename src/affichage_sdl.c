@@ -58,6 +58,7 @@ Sprite * get_sprite(Couleur couleur) {
  * \brief Initialise le module affichage_sdl
  * \details Fonction à appeler avant tout appel a des
  * fonctions de affichage_sdl.c
+ * \param fullscreen Plein ecran ou non
  * \return 1 si tout est ok, 0 sinon
  */
 int init_affichage_sdl(int fullscreen) {
@@ -190,7 +191,7 @@ void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
  * \param pl Plateau de jeu
  * \param x Paramètre formel pour retour coordonnée x
  * \param y Paramètre formel pour retour coordonnée y
- * \return Un pointeur sur la pièce si la souris est au dessus d'une de la bonne couleur, NULL sinon
+ * \return 1 si au dessus plateau, 0 sinon
  */
 int curs_hover_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int *x, int *y) {
     int x_mouse, y_mouse;
@@ -253,7 +254,7 @@ void afficher_piece_sdl(Carre * c, Couleur couleur, int x, int y) {
  * \param x Coordonnée en x de la pièce
  * \param y Coordonnée en y de la pièce
  * \param largeur Largeur de la matrice
- * \param longueur Longueur du tableau
+ * \param longueur Longueur de la matrice
  * \return 1 si valide, 0 sinon
  */
 static
@@ -420,6 +421,7 @@ void disposer_pieces(Reserves * r, Joueur *  joueur) {
             largeur = LARG_T_BR;
             longueur = LONG_T_BR;
         default:
+            return;
             break;
     }
 
@@ -624,7 +626,7 @@ void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p) {
     Joueur * init = j;
     // Variable utilisée pour récupérer la couleur de la pièces
     // à afficher aux coordonnées de la souris
-    Couleur couleur_p;
+    Couleur couleur_p = -1;
 
     // Pour tout les joueurs
     do {
@@ -847,7 +849,7 @@ void afficher_tour_sdl(Joueur * j) {
 
 /**
  * \fn int curs_hover_bouton(Bouton * b)
- * \brief Permet de savoir si le curseur est au desus d'un bouton
+ * \brief Permet de savoir si le curseur est au dessus d'un bouton
  * \param b Bouton que l'on veut tester
  * \return 1 si la souris est au dessus, 0 sinon
  */
@@ -862,7 +864,7 @@ int curs_hover_bouton(Bouton * b) {
 /**
  * \fn static void afficher_bouton(char * str, int x, int y)
  * \brief Affiche un bouton de taille standard aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -876,7 +878,7 @@ void afficher_bouton(char * str, int x, int y) {
 /**
  * \fn static void afficher_bouton_petit(char * str, int x, int y)
  * \brief Affiche un petit bouton aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -891,7 +893,7 @@ void afficher_bouton_petit(char * str, int x, int y) {
 /**
  * \fn static void afficher_bouton_hover(char * str, int x, int y)
  * \brief Affiche un bouton de taille standard avec sa texture "hover" aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -905,7 +907,7 @@ void afficher_bouton_hover(char * str, int x, int y) {
 /**
  * \fn static void afficher_bouton_petit_hover(char * str, int x, int y)
  * \brief Affiche un petit bouton avec sa texture "hover" aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -1198,10 +1200,10 @@ void afficher_type_joueur_sdl(Joueur * j) {
 }
 
 /**
- * \fn void afficher_saisie_pseudo_sdl(char * str)
+ * \fn void afficher_saisie_pseudo_sdl(Joueur * j)
  * \brief Affiche le fond et le texte demandant la saisie du
  * pseudo ainsi que le pseudo en cours de saisie
- * \param str Pseudo en cours de saisie
+ * \param j Joueur dont on saisie le pseudo
  */
 void afficher_saisie_pseudo_sdl(Joueur * j) {
 
@@ -1214,30 +1216,51 @@ void afficher_saisie_pseudo_sdl(Joueur * j) {
     afficher_texte(joueur_pseudo(j), ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
 
+/**
+ * \fn void afficher_choix_type_partie_sdl()
+ * \brief Affiche le choix du type de partie
+ */
 void afficher_choix_type_partie_sdl() {
 
     afficher_fond_config();
     afficher_texte("Choissisez le type de partie :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
 }
 
+/**
+ * \fn void afficher_attente_connexion_sdl()
+ * \brief Affiche un message d'attente de connexion
+ */
 void afficher_attente_connexion_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente de la connexion d'un joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
+/**
+ * \fn void afficher_attente_debut_sdl()
+ * \brief Affiche un message d'attente du début de la partie
+ */
 void afficher_attente_debut_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente du début de la partie ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
+/**
+ * \fn void afficher_attente_pseudo_sdl()
+ * \brief Affiche un message d'attente de la saisie du pseudo par un joueur distant
+ */
 void afficher_attente_pseudo_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente de la saisie du pseudo par le joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
+/**
+ * \fn void afficher_saisie_adresse_sdl(char * str)
+ * \brief Affiche un message demandant la saisie de l'adresse ainsi que l'adresse en cours de saisie
+ * \param str Adresse en cours de saisie
+ */
 void afficher_saisie_adresse_sdl(char * str) {
 
     afficher_fond_config();
@@ -1246,6 +1269,11 @@ void afficher_saisie_adresse_sdl(char * str) {
     afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
 
+/**
+ * \fn void afficher_saisie_pseudo_distant_sdl(char * str)
+ * \brief Affiche un message demandant la saisie du pseudo ainsi que le pseudo en cours de saisie (pour distant)
+ * \param str Pseudo en cours de saisie
+ */
 void afficher_saisie_pseudo_distant_sdl(char * str) {
 
     afficher_fond_config();
@@ -1254,6 +1282,10 @@ void afficher_saisie_pseudo_distant_sdl(char * str) {
     afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
 
+/**
+ * \fn void afficher_erreur_reseau()
+ * \brief Affiche un message d'erreur de connexion
+ */
 void afficher_erreur_reseau() {
 
     afficher_fond_config();
