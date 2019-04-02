@@ -573,9 +573,9 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
         Joueur * init;
 	do{
+		initialisation_manche(pl,&j);
 
 		do{
-			initialisation_manche(pl,&j);
 
                         init = j;
 
