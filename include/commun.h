@@ -27,7 +27,7 @@
 #define TAILLE_BUFF 1000
 
 /* Define pour le BOT */
-#define PROFONDEUR 2
+#define PROFONDEUR 1
 
 /* Entre 0 et 9 (0 == bord, 9 == 1 case du centre) */
 #define COUP_MAUVAIS 3

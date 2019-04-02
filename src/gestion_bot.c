@@ -87,8 +87,8 @@ void coup_afficher(Coup* coup) {
 static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
     if(!piece_hors_liste(coup_piece(coup)))
     {
-	int x = coup_coord_x(coup);
-	int y = coup_coord_y(coup);
+		int x = coup_coord_x(coup);
+		int y = coup_coord_y(coup);
 
         Carre* c = piece_liste_carre(coup_piece(coup));
 
@@ -99,6 +99,8 @@ static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
             c = carre_get_suiv(c);
         } while(c != piece_liste_carre(coup_piece(coup)));
     }
+
+	//afficher_plateau(pl);
 
 	return 0;
 }
@@ -252,6 +254,22 @@ int eval_nb_nouveaux_coins(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	int retour = 0;
 
+	/* MAJ de l'interface graphique */
+    Reserves* r = init_afficher_pieces_dispo_sdl(bot);
+    SDL_RenderClear(renderer);
+
+    afficher_plateau_sdl(pl);
+
+    afficher_pieces_dispo_sdl(r, bot, NULL);
+
+    afficher_scores_sdl(bot);
+
+    afficher_tour_sdl(bot);
+
+    SDL_RenderPresent(renderer);
+
+    free_afficher_pieces_dispo_sdl(&r);
+
 	Coup* c = bot_jouer_tour(pl, bot);
 
 	/* Si aucun Coup n'a été trouvé */
@@ -269,7 +287,7 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	coup_detruire(&c);
 
 	/* MAJ de l'interface graphique */
-    Reserves* r = init_afficher_pieces_dispo_sdl(bot);
+    r = init_afficher_pieces_dispo_sdl(bot);
     SDL_RenderClear(renderer);
 
     afficher_plateau_sdl(pl);
@@ -307,6 +325,9 @@ static void free_tab_coup(Coup*** tab, int taille)
 
 int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profondeur)
 {
+	if (joueur_a_abandonne(bot))
+		return -1;
+
 	int i, j, k, nb;
 
     srand(time(NULL));
@@ -352,9 +373,10 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
 						tab[compteur]->c = joueur_couleur(bot);
 						/*tab[compteur]->valeur_coup = 0;*/
 
-						if(!profondeur || tab[compteur]->piece_origine == tab[compteur]->piece_origine->suiv)
-							tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
-						else
+						//if(!profondeur || tab[compteur]->piece_origine == tab[compteur]->piece_origine->suiv)
+						tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
+
+						if (profondeur > 0 && (tab[compteur]->piece_origine != tab[compteur]->piece_origine->suiv))
 						{
 							/* Enlève la Piece actuelle de la liste temporairement */
 							tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
@@ -373,7 +395,8 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
 							/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
 							poser_piece_bot(pl2, tab[compteur]);
 
-							tab[compteur]->valeur_coup = adversaire_jouer(pl2, bot, joueur_suivant(bot), profondeur - 1);
+							tab[compteur]->valeur_coup += adversaire_jouer(pl2, bot, joueur_suivant(bot), profondeur);
+							//fprintf(stderr, "Profondeur: %d, nb_coup jouables: %d, valeur du coup: %d\n", profondeur, compteur, tab[compteur]->valeur_coup);
 
 							/* Remet la Piece dans la liste */
 							tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
@@ -397,6 +420,8 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
 		nb = meilleur_coup(tab, compteur);
 
 		val_coup = coup_valeur(tab[nb]);
+		//fprintf(stderr, "Recursion terminée\n\tProfondeur: %d, nb_coup jouables: %d, valeur du coup: %d\n", profondeur, compteur, val_coup);
+
     }
 
     free_tab_coup(&tab, compteur);
@@ -407,6 +432,13 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
 
 int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur)
 {
+
+	if (joueur_a_abandonne(joueur))
+		if(joueur_suivant(joueur) == bot)
+			return bot_jouer(pl, bot, profondeur - 1);
+		else
+			return adversaire_jouer(pl, bot, joueur_suivant(joueur), profondeur);
+
 	int i, j, k, nb;
 
     srand(time(NULL));
@@ -495,10 +527,12 @@ int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Jo
 		/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
 		poser_piece_bot(pl2, coup);
 
-		if((joueur = joueur_suivant(joueur)) == bot)
-			val_coup = bot_jouer(pl2, bot, profondeur);
+		if(joueur_suivant(joueur) == bot) {
+			//fprintf(stderr, "tour du bot\n");
+			val_coup = bot_jouer(pl2, bot, profondeur - 1) - coup_valeur(coup);
+		}
 		else
-			val_coup = adversaire_jouer(pl2, bot, joueur, profondeur);
+			val_coup = adversaire_jouer(pl2, bot, joueur_suivant(joueur), profondeur) - coup_valeur(coup);
 
 		/* Suppression du Coup qu'on a joué */
 		coup_detruire(&coup);
@@ -561,8 +595,25 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
                         tab[compteur]->y = j;
 
 						tab[compteur]->c = joueur_couleur(bot);
+
+								/* Recréé un plateau fictif pour émuler les coups */
+								Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+
+								int i, j;
+
+								/* Recopie du plateau */
+								for (i = 0; i < TAILLE_PLATEAU; i++)
+									for (j = 0; j < TAILLE_PLATEAU; j++)
+										pl2[i][j] = pl[i][j];
+
+								/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
+								poser_piece_bot(pl2, tab[compteur]);
+
 						/*tab[compteur]->valeur_coup = 0;*/
-                        tab[compteur]->valeur_coup = adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
+						tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
+
+						if (PROFONDEUR > 0)
+                        	tab[compteur]->valeur_coup += adversaire_jouer(pl2, bot, joueur_suivant(bot), PROFONDEUR);
 
 						/* Remet la Piece dans la liste */
 						tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
