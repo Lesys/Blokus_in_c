@@ -496,7 +496,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r;
+	int valeur_r=-1;
 
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
@@ -553,19 +553,20 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 			if(choix == 3)
 				return choix;
 
-                        while (j != init) {
-                            if (j->sockfd) {
-                                if(!joueur_a_abandonne(init)) {
-                                    envoyer_plateau(j->sockfd, pl);
-                                }
-                                else {
-                                    envoyer_abandon_joueur(j->sockfd, init);
-                                }
-                            }
-                            j = joueur_suivant(j);
-                        }
-                        j = joueur_suivant(j);
-
+			if(choix != -1){
+                       		 while (j != init) {
+                        		if (j->sockfd) {
+                                		if(!joueur_a_abandonne(init)) {
+                                    			envoyer_plateau(j->sockfd, pl);
+                                		}
+                               			else {
+                                  			envoyer_abandon_joueur(j->sockfd, init);
+                                		}
+                            		}
+                           		j = joueur_suivant(j);
+                       		}
+                        	j = joueur_suivant(j);
+			}
 			choix=fin_de_partie_sdl(&j);
 		} while(!(choix));
 
