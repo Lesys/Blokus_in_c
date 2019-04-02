@@ -43,6 +43,7 @@ int verification_position_sdl(Couleur pl[20][20], int x, int y, Piece* p)
     return 1;
 }
 
+/* Fonction retournant VRAI si la coordonnée est dans le plateau, FAUX sinon */
 static int coord_dans_plateau(int coord)
 {
     return (coord >= 0 && coord < TAILLE_PLATEAU);

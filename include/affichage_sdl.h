@@ -131,4 +131,6 @@ void afficher_saisie_pseudo_distant_sdl(char * str);
 
 int curs_hover_bouton(Bouton * b);
 
+void afficher_erreur_reseau();
+
 #endif
