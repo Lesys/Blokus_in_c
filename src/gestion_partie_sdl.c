@@ -47,8 +47,10 @@ int saisir_pseudo_joueur(Joueur** j){
 			if(event_saisie.type == SDL_QUIT)
 				return 3;
 			/*Si c'est la touche entrée, on passe au joueur suivant*/
-			else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) )
+			else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) ) {
+				jouer_son(BOUTON);
 				continuer = 0;
+			}
 			/*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
 			else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
 				if (strlen((*j)->pseudo) > 0)

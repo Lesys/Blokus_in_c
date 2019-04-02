@@ -573,8 +573,10 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             }
 		}
             else if(pseudo > 0 && event.type == SDL_KEYDOWN
-                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) ) {
+                jouer_son(BOUTON);
                 continuer = 0;
+            }
 
             else if(event.key.keysym.sym == SDLK_BACKSPACE
                     && event.type == SDL_KEYDOWN) {
