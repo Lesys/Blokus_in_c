@@ -209,12 +209,13 @@ int recup_type(unsigned char * buffer) {
 }
 
 /**
- * \fn void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]); 
+ * \fn void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece);
  * \brief Envoie l'état du plateau
  * \param sockfd Numéro du socket sur lequel envoyer
  * \param pl Plateau courant
+ * \param id_piece Id de la piece posée
  */
-void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
+void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece) {
     
     int type = 2;
     unsigned char buffer[500] = {0};
@@ -233,21 +234,26 @@ void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
             offset += sizeof(unsigned char);
         }
     }
+    
+    // Ecriture du type
+    memcpy(buffer + offset, &id_piece, sizeof(int));
+    offset += sizeof(int);
 
     // Envoi
     send(sockfd, buffer, offset, 0);
 }
 
 /**
- * \fn void recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
+ * \fn int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
  * \brief Recoit l'état du plateau
  * \param buffer Buffer à lire
  * \param pl Plateau local (sera modifié)
  */
-void recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
+int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
     
     int offset = sizeof(int);
     unsigned char tmp;
+    int id_piece;
 
     // Lecture des cases une à une
     for(int i = 0; i < TAILLE_PLATEAU; i++) {
@@ -257,6 +263,10 @@ void recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_
             pl[i][j] = tmp;
         }
     }
+    
+    memcpy(&id_piece, buffer + offset, sizeof(int));
+
+    return id_piece;
 }
 
 /**
