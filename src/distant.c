@@ -467,7 +467,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         afficher_saisie_adresse_sdl(adresse);
         SDL_RenderPresent(renderer);
     }
-free_bouton_sdl(&b_retour);
+
     // Connexion
     sockfd = connexion(adresse, PORT_DEFAUT);
 
@@ -481,7 +481,11 @@ free_bouton_sdl(&b_retour);
 
             if(event.type == SDL_QUIT)
                 return 3;
-
+	//Si il appuis sur un bouton
+		else if(event.type == SDL_MOUSEBUTTONDOWN){
+			if(curs_hover_bouton(b_retour))
+				return 2;
+		}
             else if(pseudo > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
                 continuer = 0;
@@ -496,7 +500,7 @@ free_bouton_sdl(&b_retour);
                 strcat(pseudo, event.text.text);
             }
         }
-
+	afficher_bouton_sdl(b_retour);
         afficher_saisie_pseudo_distant_sdl(pseudo);
         SDL_RenderPresent(renderer);
     }
@@ -532,7 +536,7 @@ free_bouton_sdl(&b_retour);
             *j = joueur_suivant(*j);
         } while (*j  != init);
     }
-
+	free_bouton_sdl(&b_retour);
     return sockfd;
 
 }
