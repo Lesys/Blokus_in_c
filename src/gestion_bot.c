@@ -136,7 +136,6 @@ int meilleur_coup(Coup** tab, int compteur) {
 int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
 	Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
-
 	int i, j;
 	int eval = 0;
 
@@ -212,7 +211,7 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	/* Regarde tous les Carre et leur position */
 	do {
 		/* Récupère les coordonnées du Carre sur le plateau */
-		x = coord_x + carre_get_x(c);https://dl.dropboxusercontent.com/u/27727822/ExploringBeginnerMistakes/BeginnerMistakes.blksgf
+		x = coord_x + carre_get_x(c);
 		y = coord_y + carre_get_y(c);
 /*		if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
 			mauvais++;
@@ -285,24 +284,9 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 
     free_afficher_pieces_dispo_sdl(&r);
 
-	sleep(1);
+	/* sleep(1); */
 
 	return retour;
-}
-
-int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profondeur)
-{
-    if(profondeur)
-    {
-
-    }
-
-	return 1;
-}
-
-int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur)
-{
-	return -1;
 }
 
 static void free_tab_coup(Coup*** tab, int taille)
@@ -311,7 +295,7 @@ static void free_tab_coup(Coup*** tab, int taille)
 
     if (*tab != NULL) {
         for(i = taille - 1; i >= 0; i--)
-	{
+		{
             coup_detruire(&((*tab)[i]));
         }
 
@@ -319,6 +303,212 @@ static void free_tab_coup(Coup*** tab, int taille)
     }
 
     *tab = NULL;
+}
+
+int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profondeur)
+{
+	int i, j, k, nb;
+
+    srand(time(NULL));
+
+    Piece * p = joueur_liste_piece(bot);
+    Piece * init = p;
+
+    Coup** tab = NULL;
+    int compteur = 0, tmp = 0;
+
+    /* Pour chaque position de la matrice */
+    for(i = 0; i < TAILLE_PLATEAU; i++)
+    {
+        for(j = 0; j < TAILLE_PLATEAU; j++)
+        {
+            /* Pour chaque pièces disponibles */
+            do
+            {
+                /* Pour chaque orientation possible */
+                for(k = 0; k < 4; k++)
+                {
+                    /* Si la pièce est posable */
+                    if(verifier_coordonnees(pl, p, i, j, bot))
+                    {
+                        /* On enregistre le coup puis on estime sa valeur */
+                        if (tab == NULL) {
+                            tab = malloc(sizeof(*tab));
+						}
+                        else
+                            tab = realloc(tab, sizeof(*tab) * (compteur + 1));
+
+
+                        tab[compteur] = malloc(sizeof(*tab[compteur]));
+
+                        tab[compteur]->piece_origine = p;
+
+                        tab[compteur]->piece_copie = piece_copie(p);
+
+						/* Affecte le Coup dans le tableau */
+                        tab[compteur]->x = i;
+                        tab[compteur]->y = j;
+
+						tab[compteur]->c = joueur_couleur(bot);
+						/*tab[compteur]->valeur_coup = 0;*/
+
+						if(!profondeur || tab[compteur]->piece_origine == tab[compteur]->piece_origine->suiv)
+							tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
+						else
+						{
+							/* Enlève la Piece actuelle de la liste temporairement */
+							tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
+							bot->liste_piece = piece_suivant(p);
+
+							/* Recréé un plateau fictif pour émuler les coups */
+							Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+
+							int i, j;
+
+							/* Recopie du plateau */
+							for (i = 0; i < TAILLE_PLATEAU; i++)
+								for (j = 0; j < TAILLE_PLATEAU; j++)
+									pl2[i][j] = pl[i][j];
+
+							/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
+							poser_piece_bot(pl2, tab[compteur]);
+
+							tab[compteur]->valeur_coup = adversaire_jouer(pl2, bot, joueur_suivant(bot), profondeur - 1);
+
+							/* Remet la Piece dans la liste */
+							tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
+							bot->liste_piece = p;
+						}
+
+						compteur++;
+                    }
+                    changer_orientation(p);
+                }
+
+                p = piece_suivant(p);
+
+            } while (p != init);
+        }
+    }
+
+	int val_coup = -1;
+
+    if (compteur && tab != NULL) {
+		nb = meilleur_coup(tab, compteur);
+
+		val_coup = coup_valeur(tab[nb]);
+    }
+
+    free_tab_coup(&tab, compteur);
+
+    /* On retourne le coup estimé comme étant le meilleur. NULL si aucun coup n'est possible */
+    return val_coup;
+}
+
+int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur)
+{
+	int i, j, k, nb;
+
+    srand(time(NULL));
+
+    Piece * p = joueur_liste_piece(joueur);
+    Piece * init = p;
+
+    Coup** tab = NULL;
+    int compteur = 0, tmp = 0;
+
+    /* Pour chaque position de la matrice */
+    for(i = 0; i < TAILLE_PLATEAU; i++)
+    {
+        for(j = 0; j < TAILLE_PLATEAU; j++)
+        {
+            /* Pour chaque pièces disponibles */
+            do
+            {
+                /* Pour chaque orientation possible */
+                for(k = 0; k < 4; k++)
+                {
+                    /* Si la pièce est posable */
+                    if(verifier_coordonnees(pl, p, i, j, joueur))
+                    {
+                        /* On enregistre le coup puis on estime sa valeur */
+                        if (tab == NULL) {
+                            tab = malloc(sizeof(*tab));
+						}
+                        else
+                            tab = realloc(tab, sizeof(*tab) * (compteur + 1));
+
+
+                        tab[compteur] = malloc(sizeof(*tab[compteur]));
+
+                        tab[compteur]->piece_origine = p;
+
+                        tab[compteur]->piece_copie = piece_copie(p);
+
+						/* Affecte le Coup dans le tableau */
+                        tab[compteur]->x = i;
+                        tab[compteur]->y = j;
+
+						tab[compteur]->c = joueur_couleur(joueur);
+						/*tab[compteur]->valeur_coup = 0;*/
+
+						/* Enlève la Piece actuelle de la liste temporairement */
+						tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
+						joueur->liste_piece = piece_suivant(p);
+
+						tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], joueur);
+
+						/* Remet la Piece dans la liste */
+						tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
+						joueur->liste_piece = p;
+
+						compteur++;
+                    }
+                    changer_orientation(p);
+                }
+
+                p = piece_suivant(p);
+
+            } while (p != init);
+        }
+    }
+
+	Coup* coup = NULL;
+
+	int val_coup = -1;
+
+    if (compteur && tab != NULL) {
+		nb = meilleur_coup(tab, compteur);
+
+		coup = coup_copie(tab[nb]);
+
+		/* Recréé un plateau fictif pour émuler les coups */
+		Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+
+		int i, j;
+
+		/* Recopie du plateau */
+		for (i = 0; i < TAILLE_PLATEAU; i++)
+			for (j = 0; j < TAILLE_PLATEAU; j++)
+				pl2[i][j] = pl[i][j];
+
+		/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
+		poser_piece_bot(pl2, coup);
+
+		if((joueur = joueur_suivant(joueur)) == bot)
+			val_coup = bot_jouer(pl2, bot, profondeur);
+		else
+			val_coup = adversaire_jouer(pl2, bot, joueur, profondeur);
+
+		/* Suppression du Coup qu'on a joué */
+		coup_detruire(&coup);
+    }
+
+    free_tab_coup(&tab, compteur);
+	//afficher_pieces_dispo(bot);
+
+    /* On retourne le coup estimé comme étant le meilleur. NULL si aucun coup n'est possible */
+    return val_coup;
 }
 
 /* Gestion du premier tour du bot */
@@ -351,7 +541,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
                         /* On enregistre le coup puis on estime sa valeur */
                         if (tab == NULL) {
                             tab = malloc(sizeof(*tab));
-			}
+						}
                         else
                             tab = realloc(tab, sizeof(*tab) * (compteur + 1));
 
@@ -362,25 +552,23 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
                         tab[compteur]->piece_copie = piece_copie(p);
 
-			/* Enlève la Piece actuelle de la liste temporairement */
-			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
-			bot->liste_piece = piece_suivant(p);
+						/* Enlève la Piece actuelle de la liste temporairement */
+						tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
+						bot->liste_piece = piece_suivant(p);
 
-			/* Affecte le Coup dans le tableau */
+						/* Affecte le Coup dans le tableau */
                         tab[compteur]->x = i;
                         tab[compteur]->y = j;
 
-			tab[compteur]->c = joueur_couleur(bot);
-/*			tab[compteur]->valeur_coup = 0;*/
-                        tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
+						tab[compteur]->c = joueur_couleur(bot);
+						/*tab[compteur]->valeur_coup = 0;*/
+                        tab[compteur]->valeur_coup = adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
 
-                        adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
+						/* Remet la Piece dans la liste */
+						tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
+						bot->liste_piece = p;
 
-			/* Remet la Piece dans la liste */
-			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
-			bot->liste_piece = p;
-
-			compteur++;
+						compteur++;
                     }
                     changer_orientation(p);
                 }
@@ -394,14 +582,14 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
     Coup* coup = NULL;
 
     if (compteur && tab != NULL) {
-	nb = meilleur_coup(tab, compteur);
+		nb = meilleur_coup(tab, compteur);
 
-/*        nb = rand() % compteur;*/
+		/*nb = rand() % compteur;*/
         coup = coup_copie(tab[nb]);
     }
 
     free_tab_coup(&tab, compteur);
-//	afficher_pieces_dispo(bot);
+	//afficher_pieces_dispo(bot);
 
     /* On retourne le coup estimé comme étant le meilleur. NULL si aucun coup n'est possible */
     return coup;

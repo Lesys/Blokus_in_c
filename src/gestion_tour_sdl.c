@@ -222,8 +222,10 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
                 if(verifier_coordonnees(pl, *p, x, y, j))
                 {
                     poser_piece_sdl(pl, *p, j, x, y);
+
+                    /* Récupère l'id de la pièce en négatif (pour jouer_manche_sdl) */
+                    etat = piece_id(*p) * -1;
                     *p = NULL;
-                    etat = 0;
                 }
                 else
                 {
@@ -245,7 +247,7 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
 
 int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
 {
-    int etat = -1;
+    int etat = 0;
 
     Piece* p = NULL;
 
@@ -253,7 +255,7 @@ int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
 
     Bouton* b = init_bouton_sdl(ABANDONNER);
 
-    while(etat == -1)
+    while(!etat)
     {
         SDL_RenderClear(renderer);
 

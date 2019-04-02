@@ -64,7 +64,7 @@ void carre_detruire(Carre**);
 struct piece {
 	Carre* liste_carre; /**< Premier carré de la liste */
 	Piece* suiv, *prec; /**< Piece* suivante et précédente de la liste */
-        int id;
+    int id;
 };
 
 /* Renvoie VRAI si la Piece est NULL, FAUX sinon */
@@ -80,6 +80,8 @@ Piece* piece_suivant(Piece*);
 
 /* Renvoie la Piece* précédente */
 Piece* piece_precedent(Piece*);
+
+int piece_id(Piece*);
 
 int piece_meme_orientation(Piece*, Piece*);
 

@@ -216,7 +216,7 @@ int recup_type(unsigned char * buffer) {
  * \param id_piece Id de la piece posée
  */
 void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece) {
-    
+
     int type = 2;
     unsigned char buffer[500] = {0};
     int offset = 0;
@@ -234,7 +234,7 @@ void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int
             offset += sizeof(unsigned char);
         }
     }
-    
+
     // Ecriture du type
     memcpy(buffer + offset, &id_piece, sizeof(int));
     offset += sizeof(int);
@@ -250,7 +250,7 @@ void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int
  * \param pl Plateau local (sera modifié)
  */
 int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
-    
+
     int offset = sizeof(int);
     unsigned char tmp;
     int id_piece;
@@ -263,7 +263,7 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
             pl[i][j] = tmp;
         }
     }
-    
+
     memcpy(&id_piece, buffer + offset, sizeof(int));
 
     return id_piece;
@@ -276,7 +276,7 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
  * \param j Liste des joueurs
  */
 void envoyer_liste_joueurs(int sockfd, Joueur * j) {
-    
+
     int type = 1;
     unsigned char buffer[TAILLE_PSEUDO*5] = {0};
     int offset = 0;
@@ -316,7 +316,7 @@ void envoyer_liste_joueurs(int sockfd, Joueur * j) {
  * \return Liste des joueurs local
  */
 Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
-    
+
     int offset = sizeof(int);
     int nb_joueurs =  0;
 
@@ -344,7 +344,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
  * \param j Joueur qui abandonne
  */
 void envoyer_abandon_joueur(int sockfd, Joueur * j) {
-    
+
     int type = 3;
     unsigned char buffer[TAILLE_PSEUDO*2] = {0};
     int offset = 0;
@@ -364,12 +364,12 @@ void envoyer_abandon_joueur(int sockfd, Joueur * j) {
 /**
  * \fn void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j);
  * \brief Recoit un message d'abandon d'un joueur et effectue les
- * changements dans la liste des joueurs 
+ * changements dans la liste des joueurs
  * \param buffer Buffer à lire
  * \param j Liste des joueurs
  */
 void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j) {
-    
+
     int offset = sizeof(int);
     char pseudo[TAILLE_PSEUDO];
 
@@ -425,13 +425,13 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
 }
 
 int initialisation_partie_distant_sdl(Joueur ** j) {
-    
+
 	SDL_Event event;
 	int continuer = 1;
     char adresse[TAILLE_PSEUDO] = {0};
     char pseudo[TAILLE_PSEUDO] = {0};
     int sockfd;
-    
+
     // Saisie adresse
     SDL_StartTextInput();
 
@@ -464,7 +464,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
     // Connexion
     sockfd = connexion(adresse, PORT_DEFAUT);
-    
+
 
     // Saisie du pseudo
     continuer = 1;
@@ -497,7 +497,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
     // Envoi du pseudo
     envoyer_pseudo(sockfd, pseudo);
-    
+
     SDL_StopTextInput();
 
     // Attente du début de la partie
@@ -533,7 +533,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
 // Renvoie 2 si ecran titres, 3 si croix
 int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote) {
-    
+
     int choix;
     Joueur * init;
 
