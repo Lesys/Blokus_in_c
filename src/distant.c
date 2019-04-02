@@ -543,11 +543,13 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
             if(j->sockfd == -1) {
                 init = j;
                 choix = jouer_tour_joueur_sdl(pl,&j);
-                if (joueur_a_abandonne(init)) {
-                    envoyer_abandon_joueur(hote, init);
-                }
-                else {
-                    envoyer_plateau(hote, pl, choix * -1);
+                if(choix != 4) {
+                    if (joueur_a_abandonne(init)) {
+                        envoyer_abandon_joueur(hote, init);
+                    }
+                    else {
+                        envoyer_plateau(hote, pl, choix * -1);
+                    }
                 }
             }
             else {
