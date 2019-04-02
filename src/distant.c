@@ -597,6 +597,12 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
     int r;
 
     do {
+        while(SDL_PollEvent(&event)){
+
+            if(event.type == SDL_QUIT)
+                return 3;
+        }
+        
         SDL_RenderClear(renderer);
         afficher_attente_debut_sdl();
         SDL_RenderPresent(renderer);
