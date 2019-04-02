@@ -1251,3 +1251,9 @@ void afficher_saisie_pseudo_distant_sdl(char * str) {
     afficher_texte("Entrez votre pseudo (Entree pour valider) :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
     afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
+
+void afficher_erreur_reseau() {
+
+    afficher_fond_config();
+    afficher_texte("Erreur de connexion ! (っ˘̩╭╮˘̩)っ", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+}
