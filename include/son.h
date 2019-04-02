@@ -9,6 +9,7 @@ typedef struct ressources_audio {
 	Mix_Chunk * abandon;
 	Mix_Chunk * bouton;
 	Mix_Chunk * bouton_retour;
+	Mix_Music * musique_fond;
 } Ressources_audio;
 
 typedef enum sons {
@@ -16,7 +17,8 @@ typedef enum sons {
 	CLOCHE,
 	ABANDON,
 	BOUTON,
-	BOUTON_RETOUR
+	BOUTON_RETOUR,
+	MUSIQUE_FOND
 } Sons;
 
 int init_son();

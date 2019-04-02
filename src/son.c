@@ -39,6 +39,7 @@ int init_son() {
     ressources_audio->abandon = Mix_LoadWAV("ressources/abandon.wav");
     ressources_audio->bouton = Mix_LoadWAV("ressources/bouton.wav");
     ressources_audio->bouton_retour = Mix_LoadWAV("ressources/bouton_retour.wav");
+    ressources_audio->musique_fond = Mix_LoadMUS("ressources/musique_fond.ogg");
 
     return 1;
 }
@@ -57,6 +58,7 @@ void free_son() {
         Mix_FreeChunk(ressources_audio->abandon);
         Mix_FreeChunk(ressources_audio->bouton);
         Mix_FreeChunk(ressources_audio->bouton_retour);
+        Mix_FreeMusic(ressources_audio->musique_fond);
     }
 
     Mix_CloseAudio();
@@ -85,6 +87,9 @@ void jouer_son(Sons son) {
             break;
         case BOUTON_RETOUR:
             Mix_PlayChannel(-1, ressources_audio->bouton_retour, 0);
+            break;
+        case MUSIQUE_FOND:
+            Mix_PlayMusic(ressources_audio->musique_fond, -1);
             break;
         default:
             printf("Type de son incorrect\n");
