@@ -505,13 +505,25 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		if (valeur_r == 2) { // Le joueur a jouer
 			id_piece = recevoir_plateau(buffer, pl);
 			if ( id_piece > 0) {
-				p = joueur_liste_piece(*j);
+                                Piece** p = &((*j)->liste_piece);
+                                Piece* pivot = *p;
 
-				while(id_piece > piece_id(p)){
-					p=piece_suivant(p);
+				while(id_piece > piece_id(*p)){
+					*p = piece_suivant(*p);
 				}
-				if( id_piece == piece_id(p)){
-					liste_piece_suppr_elem(&p);
+				if( id_piece == piece_id(*p)){
+                                        if (pivot == *p)
+                                                pivot = NULL;
+
+                                        if(joueur_nb_piece_restantes(*j) == 1 && piece_id(*p) == 1)
+                                            (*j)->score += 5;
+
+                                        liste_piece_suppr_elem(p);
+
+                                        while (pivot != NULL && (*p) != pivot)
+                                            *p = piece_suivant(*p);
+
+                                        (*j)->liste_piece = *p;
 				}
 			}
 

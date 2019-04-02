@@ -396,7 +396,10 @@ void affecter_piece(Reserves * r, Joueur * j, Piece * l, int x, int y) {
  */
 static
 void disposer_pieces(Reserves * r, Joueur *  joueur) {
-
+    
+    if(!joueur_liste_piece(joueur)) {
+        return;
+    }
     Piece * l = piece_precedent(joueur_liste_piece(joueur));
     Piece * init = l;
 
