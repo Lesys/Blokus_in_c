@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include <time.h>
 #include <SDL2/SDL.h>
@@ -132,7 +133,7 @@ int meilleur_coup(Coup** tab, int compteur) {
 	return tab_index[random];
 }
 
-int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
+int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
 	Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
 
@@ -148,7 +149,11 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 
 	/* Evalue le nombre de cases disponibles (== VIDE) autour de la nouvelle Piece posée */
 	eval += eval_nb_carres_poses(coup) * COEF_CARRES_POSES;
-	eval += eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE;
+
+	if (joueur_nb_piece_restantes(bot) > NB_PIECES - 4)
+		eval += eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE;
+	else
+		eval += (int)(eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE / 2);
 	/*eval += eval_cases_dispo(pl2, coup) * COEF_CASES_DISPO;
 	eval += eval_nb_nouveaux_coins(pl2, coup) * COEF_NOUVEAUX_COINS;
 	eval += eval_nb_coins_bloques(pl2, coup) * COEF_COINS_BLOQUES;
@@ -168,7 +173,7 @@ int eval_nb_carres_poses(Coup* coup) {
 int eval_emplacement_piece(Coup* coup) {
 	int coord_x = coup_coord_x(coup);
 	int coord_y = coup_coord_y(coup);
-	int mauvais = 0, moyen = 0, bon = 0; /* Regarde chaque Carre et l'évalue */
+	int mauvais = 0, moyen = 0, bon = 0, centre = 0; /* Regarde chaque Carre et l'évalue */
 	Carre* init = piece_liste_carre(coup_piece(coup));
 	Carre* c = init;
 	int x = 0, y = 0;
@@ -185,10 +190,12 @@ int eval_emplacement_piece(Coup* coup) {
 			moyen++;
 		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
 			bon++;
+		else
+			centre++;
 
 	} while ((c = carre_get_suiv(c)) != init);
 
-	return bon * COEF_COUP_BON + moyen * COEF_COUP_MOYEN + mauvais * COEF_COUP_MAUVAIS;
+	return (bon * COEF_COUP_BON + moyen * COEF_COUP_MOYEN + mauvais * COEF_COUP_MAUVAIS + centre * COEF_COUP_CENTRE);
 }
 
 /**
@@ -206,6 +213,32 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	do {
 		/* Récupère les coordonnées du Carre sur le plateau */
 		x = coord_x + carre_get_x(c);https://dl.dropboxusercontent.com/u/27727822/ExploringBeginnerMistakes/BeginnerMistakes.blksgf
+		y = coord_y + carre_get_y(c);
+/*		if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
+			mauvais++;
+		else if (x <= COUP_MOYEN || x >= TAILLE_PLATEAU - COUP_MOYEN || y <= COUP_MOYEN || y >= TAILLE_PLATEAU - COUP_MOYEN)
+			moyen++;
+		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
+			bon++;*/
+
+	} while ((c = carre_get_suiv(c)) != init);
+}
+
+/**
+	return L'ancien nombre de coins libres - le nouveau nombre de coins libres
+*/
+int eval_nb_nouveaux_coins(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, int ancien_nb_coup) {
+	int coord_x = coup_coord_x(coup);
+	int coord_y = coup_coord_y(coup);
+
+	Carre* init = piece_liste_carre(coup_piece(coup));
+	Carre* c = init;
+	int x = 0, y = 0;
+
+	/* Regarde tous les Carre et leur position */
+	do {
+		/* Récupère les coordonnées du Carre sur le plateau */
+		x = coord_x + carre_get_x(c);
 		y = coord_y + carre_get_y(c);
 /*		if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
 			mauvais++;
@@ -251,6 +284,8 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
     SDL_RenderPresent(renderer);
 
     free_afficher_pieces_dispo_sdl(&r);
+
+	sleep(1);
 
 	return retour;
 }
@@ -329,6 +364,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
 			/* Enlève la Piece actuelle de la liste temporairement */
 			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine->suiv;
+			bot->liste_piece = piece_suivant(p);
 
 			/* Affecte le Coup dans le tableau */
                         tab[compteur]->x = i;
@@ -336,12 +372,13 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
 			tab[compteur]->c = joueur_couleur(bot);
 /*			tab[compteur]->valeur_coup = 0;*/
-                        tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur]);
+                        tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
 
                         adversaire_jouer(pl, bot, joueur_suivant(bot), PROFONDEUR);
 
 			/* Remet la Piece dans la liste */
 			tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
+			bot->liste_piece = p;
 
 			compteur++;
                     }

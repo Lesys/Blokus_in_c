@@ -33,7 +33,7 @@ Coup* bot_jouer_tour (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*);
 int bot_jouer (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*, int); /* int: la profondeur de coup (==nb_coup en prévision) */
 int adversaire_jouer (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*, Joueur*, int); /* Premier Joueur: le bot qui doit jouer. Deuxième Joueur: L'adversaire pour lequel on projette le coup */
 
-int eval_coup_bot (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*);
+int eval_coup_bot (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*, Joueur*);
 int eval_nb_carres_poses(Coup*);
 int eval_emplacement_piece(Coup*);
 

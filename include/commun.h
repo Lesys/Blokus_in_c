@@ -34,6 +34,7 @@
 #define COUP_MOYEN 5
 #define COUP_BON 7
 
+#define COEF_COUP_CENTRE 4
 #define COEF_COUP_BON 3
 #define COEF_COUP_MOYEN 2
 #define COEF_COUP_MAUVAIS 1
