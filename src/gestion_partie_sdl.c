@@ -179,7 +179,7 @@ int saisir_type_joueur(Joueur** j){
 			if(event.type == SDL_QUIT)
 				return 3;
 			//Si il appuis sur un bouton
-			else if(event.type == SDL_MOUSEBUTTONDOWN){
+		else if(event.type == SDL_MOUSEBUTTONDOWN){
 				/*Bouton bot*/
 				if (curs_hover_bouton(b_bot)){
 					type_tmp=BOT;
@@ -234,9 +234,25 @@ int saisir_type_joueur(Joueur** j){
 
 
 int initialiser_joueur_distant(Joueur **j){
-
+	
+	SDL_Event event;	
 	SDL_RenderClear(renderer);
+	Bouton* b_retour = init_bouton_sdl(RETOUR);
+
+	//Attend un événement
+	while(SDL_PollEvent(&event)){
+		//Si il appuis sur la croix
+		if(event.type == SDL_QUIT)
+			return 3;
+		//Si il appuis sur un bouton
+		else if(event.type == SDL_MOUSEBUTTONDOWN){
+			if(curs_hover_bouton(b_retour))
+				return 4;
+		}
+	}
 	afficher_attente_connexion_sdl();
+	afficher_bouton_sdl(b_retour);
+
 	SDL_RenderPresent(renderer);
 	int sockfd = accepter_connexion(PORT_DEFAUT);
 	unsigned char buffer[TAILLE_BUFF];
@@ -245,10 +261,23 @@ int initialiser_joueur_distant(Joueur **j){
 	if(sockfd > 0){
 		do {
 			SDL_RenderClear(renderer);
+			//Attend un événement
+			while(SDL_PollEvent(&event)){
+				//Si il appuis sur la croix
+				if(event.type == SDL_QUIT)
+					return 3;
+				//Si il appuis sur un bouton
+				else if(event.type == SDL_MOUSEBUTTONDOWN){
+					if(curs_hover_bouton(b_retour))
+						return 4;
+				}
+			}
+			afficher_bouton_sdl(b_retour);
 			afficher_attente_pseudo_sdl();
 			SDL_RenderPresent(renderer);
 			r = recevoir_buffer(sockfd, buffer);
 		} while(r == 0);
+		free_bouton_sdl(&b_retour);
 		if (r < 0) {
 			return 3;
 		}

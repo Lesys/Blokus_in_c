@@ -456,7 +456,8 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
     char adresse[TAILLE_PSEUDO] = {0};
     char pseudo[TAILLE_PSEUDO] = {0};
     int sockfd;
-
+	Bouton* b_retour = init_bouton_sdl(RETOUR);
+	
     // Saisie adresse
     SDL_StartTextInput();
 
@@ -468,6 +469,11 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             if(event.type == SDL_QUIT)
                 return 3;
 
+		//Si il appuis sur un bouton
+		else if(event.type == SDL_MOUSEBUTTONDOWN){
+			if(curs_hover_bouton(b_retour))
+				return 2;
+		}
             else if(adresse > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
                 continuer = 0;
@@ -482,7 +488,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
                 strcat(adresse, event.text.text);
             }
         }
-
+	afficher_bouton_sdl(b_retour);
         afficher_saisie_adresse_sdl(adresse);
         SDL_RenderPresent(renderer);
     }
@@ -500,7 +506,11 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
             if(event.type == SDL_QUIT)
                 return 3;
-
+	//Si il appuis sur un bouton
+		else if(event.type == SDL_MOUSEBUTTONDOWN){
+			if(curs_hover_bouton(b_retour))
+				return 2;
+		}
             else if(pseudo > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
                 continuer = 0;
@@ -515,7 +525,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
                 strcat(pseudo, event.text.text);
             }
         }
-
+	afficher_bouton_sdl(b_retour);
         afficher_saisie_pseudo_distant_sdl(pseudo);
         SDL_RenderPresent(renderer);
     }
@@ -551,7 +561,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             *j = joueur_suivant(*j);
         } while (*j  != init);
     }
-
+	free_bouton_sdl(&b_retour);
     return sockfd;
 
 }
