@@ -13,7 +13,7 @@
 SDL_Window * window;
 SDL_Renderer * renderer;
 
-int sdl_init() {
+int sdl_init(int fullscreen) {
 	if (SDL_Init(SDL_INIT_EVERYTHING)) {
 		printf("Erreur initialisation SDL\n");
 		return 0;
@@ -28,7 +28,14 @@ int sdl_init() {
 		printf("Erreur initialisation SDL_mixer\n");
 		return 0;
 	}
-	window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
+
+	if (fullscreen) {
+		window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, -1, -1, SDL_WINDOW_FULLSCREEN);
+	}
+	else {
+		window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
+	}
+
 	if (!window) {
 		printf("%s", SDL_GetError());
 		return 0;
@@ -50,7 +57,7 @@ int sdl_init() {
 	}
 
 	SDL_SetRenderDrawColor(renderer, 54, 57, 63, 255);
-	init_affichage_sdl();
+	init_affichage_sdl(fullscreen);
 
 	// Initialisation sockets windows
 	#ifdef WINDOWS

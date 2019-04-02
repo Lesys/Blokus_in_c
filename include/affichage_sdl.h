@@ -81,7 +81,7 @@ typedef struct bouton {
 } Bouton;
 
 
-int init_affichage_sdl(); // Appelé par sdl_init() chargement des sprites dans le struct sprite qui sera en variable globale
+int init_affichage_sdl(int fullscreen); // Appelé par sdl_init() chargement des sprites dans le struct sprite qui sera en variable globale
 
 void free_affichage_sdl();
 

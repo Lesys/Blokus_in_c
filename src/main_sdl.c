@@ -2,9 +2,9 @@
 #include "../include/gestion_partie_sdl.h"
 #include "../include/sdl.h"
 
-int main_sdl(){
+int main_sdl(int fullscreen){
 
-	sdl_init();
+	sdl_init(fullscreen);
 
 	jouer_partie_sdl();
 

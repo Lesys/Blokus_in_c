@@ -60,21 +60,23 @@ Sprite * get_sprite(Couleur couleur) {
  * fonctions de affichage_sdl.c
  * \return 1 si tout est ok, 0 sinon
  */
-int init_affichage_sdl() {
+int init_affichage_sdl(int fullscreen) {
 
-    /* Récupération taille écran dans le cas d'un plein écran
-       SDL_DisplayMode dm;
-       if (SDL_GetDesktopDisplayMode(0, &dm)) {
-       printf("Impossible d'obtenir les dimensions de l'écran : %s", SDL_GetError());
-       return 0;
-       }
+    if (fullscreen) {
+        // Récupération taille écran dans le cas d'un plein écran
+        SDL_DisplayMode dm;
+        if (SDL_GetDesktopDisplayMode(0, &dm)) {
+           printf("Impossible d'obtenir les dimensions de l'écran : %s", SDL_GetError());
+           return 0;
+        }
 
-       largeur_ecran = dm.w;
-       hauteur_ecran = dm.h;
-       */
-
-    largeur_ecran = L_FENETRE;
-    hauteur_ecran = H_FENETRE;
+        largeur_ecran = dm.w;
+        hauteur_ecran = dm.h;
+    }
+    else {
+        largeur_ecran = L_FENETRE;
+        hauteur_ecran = H_FENETRE;
+    }
 
     // Définition de la taille d'un carré
     // Cette taille sera utilisé comme "unité de mesure"
@@ -102,7 +104,7 @@ int init_affichage_sdl() {
     ressources->bouton_petit = init_sprite("ressources/bouton.png", taille_carre*2, taille_carre*6);
     ressources->bouton_petit_hover = init_sprite("ressources/bouton_hover.png", taille_carre*2, taille_carre*6);
     ressources->fond_resultats = init_sprite("ressources/fond_resultats.png", taille_carre*20, taille_carre*20);
-    ressources->fond_titres = init_sprite("ressources/fond_titres.png", hauteur_ecran, taille_carre*96);
+    ressources->fond_titres = init_sprite("ressources/fond_titres.png", hauteur_ecran, hauteur_ecran*2.37);
     ressources->fond_config = init_sprite("ressources/fond_config.png", taille_carre*16, taille_carre*43);
     ressources->fond_saisie = init_sprite("ressources/fond_saisie.png", taille_carre*2, taille_carre*16);
     ressources->tapis_rouge = init_sprite("ressources/tapis_rouge.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
