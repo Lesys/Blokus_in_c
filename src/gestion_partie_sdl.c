@@ -58,8 +58,10 @@ int saisir_pseudo_joueur(Joueur** j){
 			else if(event_saisie.type == SDL_TEXTINPUT && strlen((*j)->pseudo) < TAILLE_PSEUDO) {
 				strcat((*j)->pseudo, event_saisie.text.text);
 			}
-			else if(event_saisie.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour))
-					return 4;
+			else if(event_saisie.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour)) {
+				jouer_son(BOUTON_RETOUR);
+				return 4;
+			}
 
 		}
 		afficher_bouton_sdl(b_retour);
@@ -112,19 +114,27 @@ int saisir_nb_joueur(){
 			//Si il appuis sur un bouton
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
 				/*Bouton 2 joueur*/
-				if (curs_hover_bouton(b_nb_deux))
+				if (curs_hover_bouton(b_nb_deux)) {
+					jouer_son(BOUTON);
 					nb_joueur=2;
+				}
 
 				/*Bouton 3 joueur*/
-				else if (curs_hover_bouton(b_nb_trois))
+				else if (curs_hover_bouton(b_nb_trois)) {
+					jouer_son(BOUTON);
 					nb_joueur=3;
+				}
 
 				/*Bouton 4 joueur*/
-				else if (curs_hover_bouton(b_nb_quatre))
+				else if (curs_hover_bouton(b_nb_quatre)) {
+					jouer_son(BOUTON);
 					nb_joueur=4;
+				}
 
-				else if(curs_hover_bouton(b_retour))
+				else if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
 					nb_joueur= 5;
+				}
 
 			}
 		}
@@ -183,12 +193,14 @@ int saisir_type_joueur(Joueur** j){
 		else if(event.type == SDL_MOUSEBUTTONDOWN){
 				/*Bouton bot*/
 				if (curs_hover_bouton(b_bot)){
+					jouer_son(BOUTON);
 					type_tmp=BOT;
 					//Si on appuis sur un bouton, alors on arrete la boucle*/
 					continuer=0;
 				}
 				/*Bouton local*/
 				else if (curs_hover_bouton(b_j_local)){
+					jouer_son(BOUTON);
 					type_tmp=LOCAL;
 					//Si on appuis sur un bouton, alors on arrete la boucle*/
 					continuer=0;
@@ -196,12 +208,15 @@ int saisir_type_joueur(Joueur** j){
 
 				/*Bouton distant*/
 				else if (curs_hover_bouton(b_j_distant)){
+					jouer_son(BOUTON);
 					type_tmp=DISTANT;
 					//Si on appuis sur un bouton, alors on arrete la boucle*/
 					continuer=0;
 				}
-				else if(curs_hover_bouton(b_retour))
+				else if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
 					return 4;
+				}
 
 			}
 		}
@@ -256,6 +271,7 @@ int initialiser_joueur_distant(Joueur **j){
 			//Si il appuis sur un bouton
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
 				if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
 					fermer_connexion(sockfd_connexion);
 					return 4;
 				}
@@ -429,11 +445,15 @@ int fin_de_partie_sdl(Joueur** j){
 				return 3;
 			/*En attendant qu'il appuis sur le bouton*/
                 	else if(event_fin.type == SDL_MOUSEBUTTONDOWN){
-                        	if (curs_hover_bouton(b_continuer))
-                                	choix= 1;
+                        	if (curs_hover_bouton(b_continuer)) {
+                        		jouer_son(BOUTON);
+                                choix= 1;
+                        	}
 
-                        	else if (curs_hover_bouton(b_quitter))
-                                	choix= 2;
+                        	else if (curs_hover_bouton(b_quitter)) {
+                        		jouer_son(BOUTON_RETOUR);
+                                choix= 2;
+                        	}
 
 			        }
 				if( choix > 0){
@@ -715,19 +735,25 @@ int type_partie(){
 			if(event.type == SDL_QUIT)
 				val_retour = 3;
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
-				if(curs_hover_bouton(b_creer))
+				if(curs_hover_bouton(b_creer)) {
+					jouer_son(BOUTON);
 					val_retour= 1;
-				else if(curs_hover_bouton(b_rejoindre))
+				}
+				else if(curs_hover_bouton(b_rejoindre)) {
+					jouer_son(BOUTON);
 					val_retour= 2;
+				}
 
-				else if(curs_hover_bouton(b_retour))
+				else if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
 					val_retour= 4;
+				}
 			}
 		}
 	/* Affiche le menu type partie */
 		afficher_titres_sdl();
 	 	afficher_bouton_sdl(b_creer);
-	        afficher_bouton_sdl(b_rejoindre);
+	    afficher_bouton_sdl(b_rejoindre);
 		afficher_bouton_sdl(b_retour);
 		SDL_RenderPresent(renderer);
 	}
@@ -752,10 +778,14 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 			if(event.type == SDL_QUIT)
 				retour = 3;
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
-				if(curs_hover_bouton(b_jouer))
+				if(curs_hover_bouton(b_jouer)) {
+					jouer_son(BOUTON);
 					retour= 1;
-				else if(curs_hover_bouton(b_quitter_jeu))
+				}
+				else if(curs_hover_bouton(b_quitter_jeu)) {
+					jouer_son(BOUTON_RETOUR);
 					retour= 3;
+				}
 			}
 		}
 		/* Appuie du bouton JOUER */
@@ -809,7 +839,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 		/* Affiche le menu */
 		afficher_titres_sdl();
 	 	afficher_bouton_sdl(b_jouer);
-	        afficher_bouton_sdl(b_quitter_jeu);
+	    afficher_bouton_sdl(b_quitter_jeu);
 		SDL_RenderPresent(renderer);
 	}
 

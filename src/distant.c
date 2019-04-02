@@ -523,8 +523,10 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
 		//Si il appuis sur un bouton
 		else if(event.type == SDL_MOUSEBUTTONDOWN){
-			if(curs_hover_bouton(b_retour))
+			if(curs_hover_bouton(b_retour)) {
+                jouer_son(BOUTON_RETOUR);
 				return 2;
+            }
 		}
             else if(adresse > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
@@ -565,6 +567,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 	//Si il appuis sur un bouton
 		else if(event.type == SDL_MOUSEBUTTONDOWN){
 			if(curs_hover_bouton(b_retour)) {
+                jouer_son(BOUTON_RETOUR);
                 fermer_connexion(sockfd);
 				return 2;
             }
