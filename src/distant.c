@@ -547,7 +547,7 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                     envoyer_abandon_joueur(hote, init);
                 }
                 else {
-                    envoyer_plateau(hote, pl);
+                    envoyer_plateau(hote, pl, choix * -1);
                 }
             }
             else {
