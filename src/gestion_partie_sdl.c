@@ -545,8 +545,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
                         if (valeur_r == 0) {
                             valeur_r = recevoir_buffer((*j)->sockfd, buffer);
                             if (valeur_r == -1) {
-                            	joueur_abandonne(*j);
-                            	*j=joueur_suivant(*j);
+                            	(*j)->type = BOT;
                             	return -1;
                             }
                         }
