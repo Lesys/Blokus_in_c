@@ -279,7 +279,7 @@ int initialiser_joueur_distant(Joueur **j){
 		} while(r == 0);
 		free_bouton_sdl(&b_retour);
 		if (r < 0) {
-			return 3;
+			return 2;
 		}
 		else {
 			(*j)->sockfd=sockfd;
@@ -336,6 +336,9 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 				case DISTANT:
 					retour=initialiser_joueur_distant(j);
 					if(retour == 3)
+						return 3;
+					else if (retour == 2)
+						erreur_reseau();
 						return 3;
 					break;
 					default:return 3;

@@ -68,7 +68,7 @@ int connexion(char * adresse, int port) {
     hostinfo = gethostbyname(adresse); /* on récupère les informations de l'hôte auquel on veut se connecter */
     if (hostinfo == NULL) /* l'hôte n'existe pas */
     {
-        fprintf(stderr, "Erreur résolution hote\n");
+        fprintf(stderr, "Erreur resolution hote\n");
         return 0;
     }
 
@@ -526,13 +526,17 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
                 strcat(adresse, event.text.text);
             }
         }
-	afficher_bouton_sdl(b_retour);
+        afficher_bouton_sdl(b_retour);
         afficher_saisie_adresse_sdl(adresse);
         SDL_RenderPresent(renderer);
     }
 
     // Connexion
     sockfd = connexion(adresse, PORT_DEFAUT);
+
+    if (sockfd == 0) {
+        return erreur_reseau();
+    }
 
 
     // Saisie du pseudo
@@ -546,8 +550,10 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
                 return 3;
 	//Si il appuis sur un bouton
 		else if(event.type == SDL_MOUSEBUTTONDOWN){
-			if(curs_hover_bouton(b_retour))
+			if(curs_hover_bouton(b_retour)) {
+                fermer_connexion(sockfd);
 				return 2;
+            }
 		}
             else if(pseudo > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
@@ -563,7 +569,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
                 strcat(pseudo, event.text.text);
             }
         }
-	afficher_bouton_sdl(b_retour);
+        afficher_bouton_sdl(b_retour);
         afficher_saisie_pseudo_distant_sdl(pseudo);
         SDL_RenderPresent(renderer);
     }
