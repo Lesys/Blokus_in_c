@@ -67,9 +67,9 @@ typedef enum type_bouton {
 	TYPE_JOUEUR_LOCAL,
 	TYPE_JOUEUR_DISTANT,
 	TYPE_JOUEUR_BOT,
-        CREER_PARTIE,
-        REJOINDRE_PARTIE,
-        RETOUR
+    CREER_PARTIE,
+    REJOINDRE_PARTIE,
+    RETOUR
 } Type_bouton;
 
 typedef struct bouton {

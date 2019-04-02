@@ -680,7 +680,7 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
 
     int choix;
     Joueur * init;
-    int r;
+    int r = 0;
 
     do{
         initialisation_manche(pl,&j);

@@ -420,6 +420,7 @@ void disposer_pieces(Reserves * r, Joueur *  joueur) {
         case ROUGE:
             largeur = LARG_T_BR;
             longueur = LONG_T_BR;
+            break;
         default:
             return;
             break;
