@@ -172,6 +172,20 @@ void fermer_connexion(int sockfd) {
     closesocket(sockfd);
 }
 
+void fermer_connexions_distantes(Joueur * j) {
+
+    Joueur * init = j;
+
+    do {
+        if (j->sockfd) {
+            fermer_connexion(j->sockfd);
+            j->sockfd = 0;
+            printf("Fermeture %s\n", j->pseudo);
+        }
+        j = joueur_suivant(j);
+    } while (j !=  init);
+}
+
 int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
     int nb_lus = 0;
 
@@ -443,6 +457,7 @@ int erreur_reseau() {
 
         SDL_RenderClear(renderer);
         afficher_erreur_reseau();
+        afficher_bouton_sdl(b_retour);
         SDL_RenderPresent(renderer);
     }
 

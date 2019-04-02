@@ -15,6 +15,7 @@ typedef enum type_message {
 int connexion(char * adresse, int port);
 int accepter_connexion(int port);
 void fermer_connexion(int sockfd);
+void fermer_connexions_distantes(Joueur * j);
 int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]);
 int recup_type(unsigned char * buffer);
 void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece);

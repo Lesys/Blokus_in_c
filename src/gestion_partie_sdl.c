@@ -57,7 +57,7 @@ int saisir_pseudo_joueur(Joueur** j){
 			else if(event_saisie.type == SDL_TEXTINPUT && strlen((*j)->pseudo) < TAILLE_PSEUDO) {
 				strcat((*j)->pseudo, event_saisie.text.text);
 			}
-			else if(curs_hover_bouton(b_retour))
+			else if(event_saisie.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour))
 					return 4;
 
 		}
@@ -530,7 +530,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
                             if (valeur_r == -1) {
                             	joueur_abandonne(*j);
                             	*j=joueur_suivant(*j);
-                            	return 1;
+                            	return -1;
                             }
                         }
 		}
@@ -636,8 +636,10 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 				choix=jouer_tour_joueur_sdl(pl,&j);
                         }
 
-			if(choix == 3)
+			if(choix == 3) {
+				fermer_connexions_distantes(j);
 				return choix;
+			}
 			//Si le joueur n'a pas déjà abandonné
 			if(choix != 4){
                     while (j != init) {
