@@ -454,7 +454,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		*j=joueur_suivant(*j);
 	}
 	else{
-
+		valeur_r = 0;
 		while(valeur_r == 0){
 			SDL_RenderClear(renderer);
 	    		while(SDL_PollEvent(&event)) {
@@ -496,7 +496,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r=-1;
+	int valeur_r = -1;
 
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
