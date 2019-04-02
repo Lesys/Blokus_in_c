@@ -419,7 +419,7 @@ int fin_de_partie_sdl(Joueur** j){
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r;
+	int valeur_r = -1;
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
 		*j=joueur_suivant(*j);
@@ -443,7 +443,7 @@ int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r = 0;
+	int valeur_r = -1;
 	Piece* p = NULL;
 	unsigned char buffer[TAILLE_BUFF];
     Reserves* r = init_afficher_pieces_dispo_sdl((*j));
