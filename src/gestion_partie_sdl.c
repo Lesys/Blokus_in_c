@@ -511,7 +511,6 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 					liste_piece_suppr_elem(&p);
 				}
 			}
-			liste_piece_suppr_elem(p);
 
 			valeur_r = 0; /* Le joueru a réussi à poser sa Piece */
 		}
