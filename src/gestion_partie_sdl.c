@@ -233,7 +233,6 @@ int saisir_type_joueur(Joueur** j){
 
 
 int initialiser_joueur_distant(Joueur **j){
-	/*Code en cour*/
 	SDL_RenderClear(renderer);
 	afficher_attente_connexion_sdl();
 	SDL_RenderPresent(renderer);
@@ -401,8 +400,33 @@ int fin_de_partie_sdl(Joueur** j){
 	return choix;
 }
 
+//Verifie a la fin de la partie si tous les joueurs veullent continuez la partie ou quittez
+int verification_continue(Joueur* j, int choix){
+	Joueur* pivot=j;
+	pivot=joueur_suivant(pivot);
+	int valeur_r;
+        SDL_Event event_fin;
 
+	while(j != pivot){
+		SDL_RenderClear(renderer);
+		/*On attend la touche du joueur*/
+        	while(SDL_PollEvent(&event_fin)){
+			//Si il appuis sur la croix
+			if(event_fin.type == SDL_QUIT)
+				return 3;
+		}
+		//reçois le resultat de l'autre
+		afficher_attente_continue_sdl();
+		SDL_RenderPresent(renderer);
+		valeur_r = 1;//?
+		if(choix != valeur_r || choix != 1){
+			return valeur_r;
+		}
+		pivot=joueur_suivant(pivot);
 
+	}
+	return choix;
+}
 
 
 /**
@@ -419,7 +443,7 @@ int fin_de_partie_sdl(Joueur** j){
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r = -1;
+	int valeur_r = 4;
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
 		*j=joueur_suivant(*j);
@@ -443,8 +467,9 @@ int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r = -1;
+	int valeur_r = 4;
 	Piece* p = NULL;
+	int id_piece;
 	unsigned char buffer[TAILLE_BUFF];
     Reserves* r = init_afficher_pieces_dispo_sdl((*j));
 	SDL_Event event;
@@ -476,7 +501,17 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		valeur_r = recup_type(buffer);
 
 		if (valeur_r == 2) { // Le joueur a jouer
-			recevoir_plateau(buffer, pl);
+			id_piece = recevoir_plateau(buffer, pl);
+			if ( id_piece > 0) {
+				p = joueur_liste_piece(*j);
+				while(id_piece <= piece_id(p))
+					p=piece_suivant(p);
+				if( id_piece == piece_id(p)){
+					liste_piece_suppr_elem(&p);
+				}
+			}
+			liste_piece_suppr_elem(p);
+
 			valeur_r = 0; /* Le joueru a réussi à poser sa Piece */
 		}
 		else if(valeur_r == 3){//Le joueur a abandoné
@@ -496,7 +531,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r = -1;
+	int valeur_r = 4;
 
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
@@ -552,12 +587,12 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 			if(choix == 3)
 				return choix;
-
-			if(choix != -1){
+			//Si le joueur n'a pas déjà abandonné
+			if(choix != 4){
                        		 while (j != init) {
                         		if (j->sockfd) {
                                 		if(!joueur_a_abandonne(init)) {
-                                    			envoyer_plateau(j->sockfd, pl);
+                                    			envoyer_plateau(j->sockfd, pl,(choix * -1));
                                 		}
                                			else {
                                   			envoyer_abandon_joueur(j->sockfd, init);
