@@ -592,16 +592,18 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
             }
 
             if (choix == -1) {
+                fermer_connexion(hote);
                 return erreur_reseau();
             }
 
             if(choix == 3) {
+                fermer_connexion(hote);
                 return choix;
             }
 
             choix=fin_de_partie_sdl(&j);
         } while(!(choix));
     } while(choix == 1 );
-
+    fermer_connexion(hote);
     return choix;
 }
