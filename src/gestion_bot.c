@@ -205,7 +205,7 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	/* Regarde tous les Carre et leur position */
 	do {
 		/* Récupère les coordonnées du Carre sur le plateau */
-		x = coord_x + carre_get_x(c);
+		x = coord_x + carre_get_x(c);https://dl.dropboxusercontent.com/u/27727822/ExploringBeginnerMistakes/BeginnerMistakes.blksgf
 		y = coord_y + carre_get_y(c);
 /*		if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
 			mauvais++;
