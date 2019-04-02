@@ -234,7 +234,7 @@ int saisir_type_joueur(Joueur** j){
 
 
 int initialiser_joueur_distant(Joueur **j){
-	
+
 	SDL_RenderClear(renderer);
 	afficher_attente_connexion_sdl();
 	SDL_RenderPresent(renderer);
@@ -498,6 +498,10 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
                         if (valeur_r == 0) {
                             valeur_r = recevoir_buffer((*j)->sockfd, buffer);
+                            if (valeur_r == -1) {
+                            	joueur_abandonne(*j);
+                            	return 1;
+                            }
                         }
 		}
 
@@ -640,10 +644,11 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 */
 
 int type_partie(){
+
 	int val_retour=-1;
 	SDL_Event event;
 	Bouton* b_creer = init_bouton_sdl(CREER_PARTIE);
-        Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
+    Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
   	Bouton* b_retour = init_bouton_sdl(RETOUR);
 	while(val_retour < 0){
 		/* Ecouter les EVENT */

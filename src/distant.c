@@ -424,6 +424,31 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
     memcpy(pseudo, buffer + offset, TAILLE_PSEUDO);
 }
 
+int erreur_reseau() {
+
+    int r = 1;
+    SDL_Event event;
+    Bouton* b_retour = init_bouton_sdl(RETOUR);
+
+    while (r == 1) {
+
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                r = 3;
+            }
+            else if (event.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour)) {
+                r = 2;
+            }
+        }
+
+        SDL_RenderClear(renderer);
+        afficher_erreur_reseau();
+        SDL_RenderPresent(renderer);
+    }
+
+    return r;
+}
+
 int initialisation_partie_distant_sdl(Joueur ** j) {
 
 	SDL_Event event;
@@ -556,10 +581,14 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                 choix = jouer_tour_joueur_distant_sdl(pl,&j);
             }
 
+            if (choix == -1) {
+                return erreur_reseau();
+            }
+
             if(choix == 3) {
                 return choix;
             }
-            
+
             choix=fin_de_partie_sdl(&j);
         } while(!(choix));
     } while(choix == 1 );
