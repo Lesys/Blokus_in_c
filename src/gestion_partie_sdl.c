@@ -571,11 +571,12 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 
 int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 	int choix;
-	initialisation_manche(pl,&j);
         Joueur * init;
 	do{
 
 		do{
+			initialisation_manche(pl,&j);
+
                         init = j;
 
                         if(j->type == BOT) {
@@ -610,7 +611,6 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 
-		initialisation_manche(pl,&j);
 
 
 	} while(choix == 1 );
