@@ -11,6 +11,7 @@
 #include "../include/distant.h"
 #include "../include/commun.h"
 #include "../include/joueur.h"
+#include "../include/carre.h"
 #include "../include/gestion_tour_sdl.h"
 #include "../include/gestion_partie_sdl.h"
 #include "../include/gestion_partie.h"
