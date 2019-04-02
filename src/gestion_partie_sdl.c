@@ -401,7 +401,7 @@ int fin_de_partie_sdl(Joueur** j){
 }
 
 //Verifie a la fin de la partie si tous les joueurs veullent continuez la partie ou quittez
-int verification_continue(Joueur* j, int choix){
+/*int verification_continue(Joueur* j, int choix){
 	Joueur* pivot=j;
 	pivot=joueur_suivant(pivot);
 	int valeur_r;
@@ -409,14 +409,14 @@ int verification_continue(Joueur* j, int choix){
 
 	while(j != pivot){
 		SDL_RenderClear(renderer);
-		/*On attend la touche du joueur*/
+		//On attend la touche du joueur
         	while(SDL_PollEvent(&event_fin)){
 			//Si il appuis sur la croix
 			if(event_fin.type == SDL_QUIT)
 				return 3;
 		}
 		//reçois le resultat de l'autre
-		afficher_attente_continue_sdl();
+		//afficher_attente_continue_sdl();
 		SDL_RenderPresent(renderer);
 		valeur_r = 1;//?
 		if(choix != valeur_r || choix != 1){
@@ -425,9 +425,10 @@ int verification_continue(Joueur* j, int choix){
 		pivot=joueur_suivant(pivot);
 
 	}
+
 	return choix;
 }
-
+*/
 
 /**
 	*\fn int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
