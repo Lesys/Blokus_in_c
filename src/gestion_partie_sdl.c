@@ -507,7 +507,8 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 			if ( id_piece > 0) {
                                 printf("id piece : %d\n", id_piece);
 				p = joueur_liste_piece(*j);
-				while(id_piece < piece_id(p)){
+
+				while(id_piece > piece_id(p)){
 					p=piece_suivant(p);
 				}
 				if( id_piece == piece_id(p)){
