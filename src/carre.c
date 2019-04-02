@@ -218,6 +218,13 @@ Piece* piece_precedent(Piece* p) {
 	return p->prec;
 }
 
+int piece_id(Piece * p) {
+	if (piece_hors_liste(p))
+		return 0;
+
+	return p->id;
+}
+
 /* Création d'une liste de Piece */
 /**
 	\fn Piece* piece_liste_creation();
@@ -230,107 +237,128 @@ Piece* piece_liste_creation () {
 	Piece* first = p;
 
 	p->liste_carre = piece_petit_carre(); /* Récupère l'adresse de la liste de carre */
+        p->id = 1;
 /*	carre_afficher((*p)->liste_carre);*/
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv; /* Change le pointeur */
 
 	p->liste_carre = piece_petite_barre();
+        p->id = 2;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_petit_coin();
+        p->id = 3;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_petite_moy_barre();
+        p->id = 4;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_carre();
+        p->id = 5;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_petit_t();
+        p->id = 6;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_moy_grande_barre();
+        p->id = 7;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_petit_l();
+        p->id = 8;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_petit_s();
+        p->id = 9;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_grand_l();
+        p->id = 10;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_grand_t();
+        p->id = 11;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_equerre();
+        p->id = 12;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_long_s();
+        p->id = 13;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_grand_z();
+        p->id = 14;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_grande_barre();
+        p->id = 15;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_pouce();
+        p->id = 16;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_escalier();
+        p->id = 17;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_petit_u();
+        p->id = 18;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_autre_1();
+        p->id = 19;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_croix();
+        p->id = 20;
 	p->suiv = malloc(sizeof(Piece));
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 	p = p->suiv;
 
 	p->liste_carre = piece_autre_2();
+        p->id = 21;
 	p->suiv = first;
 	p->suiv->prec = p; /* Le précédent de la Piece suivante est cette Piece */
 
