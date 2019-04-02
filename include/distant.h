@@ -18,13 +18,13 @@ void fermer_connexion(int sockfd);
 void fermer_connexions_distantes(Joueur * j);
 int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]);
 int recup_type(unsigned char * buffer);
-void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece);
+int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece);
 int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
-void envoyer_liste_joueurs(int sockfd, Joueur * j);
+int envoyer_liste_joueurs(int sockfd, Joueur * j);
 Joueur * recevoir_liste_joueurs(unsigned char * buffer);
-void envoyer_abandon_joueur(int sockfd, Joueur * j);
+int envoyer_abandon_joueur(int sockfd, Joueur * j);
 void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j);
-void envoyer_pseudo(int sockfd, char * pseudo);
+int envoyer_pseudo(int sockfd, char * pseudo);
 void recevoir_pseudo(unsigned char * buffer, char * pseudo);
 
 int erreur_reseau();

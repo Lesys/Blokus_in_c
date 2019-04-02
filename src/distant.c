@@ -180,7 +180,6 @@ void fermer_connexions_distantes(Joueur * j) {
         if (j->sockfd) {
             fermer_connexion(j->sockfd);
             j->sockfd = 0;
-            printf("Fermeture %s\n", j->pseudo);
         }
         j = joueur_suivant(j);
     } while (j !=  init);
@@ -229,10 +228,11 @@ int recup_type(unsigned char * buffer) {
  * \param pl Plateau courant
  * \param id_piece Id de la piece posée
  */
-void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece) {
+int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece) {
 
     int type = PLATEAU;
     unsigned char buffer[500] = {0};
+    unsigned char c;
     int offset = 0;
     unsigned char tmp;
 
@@ -253,8 +253,13 @@ void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int
     memcpy(buffer + offset, &id_piece, sizeof(int));
     offset += sizeof(int);
 
+    // Vérification socket encore ouvert
+    if (recv(sockfd, &c, 1, 0) == 0) {
+        return -1;
+    }
+
     // Envoi
-    send(sockfd, buffer, offset, 0);
+    return send(sockfd, buffer, offset, 0);
 }
 
 /**
@@ -289,10 +294,11 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Liste des joueurs
  */
-void envoyer_liste_joueurs(int sockfd, Joueur * j) {
+int envoyer_liste_joueurs(int sockfd, Joueur * j) {
 
     int type = LISTE_JOUEURS;
     unsigned char buffer[TAILLE_PSEUDO*5] = {0};
+    unsigned char c;
     int offset = 0;
 
     // Ecriture du type
@@ -319,8 +325,13 @@ void envoyer_liste_joueurs(int sockfd, Joueur * j) {
         j = joueur_suivant(j);
     } while(j != init);
 
+    // Vérification socket encore ouvert
+    if (recv(sockfd, &c, 1, 0) == 0) {
+        return -1;
+    }
+
     // Envoi
-    send(sockfd, buffer, offset, 0);
+    return send(sockfd, buffer, offset, 0);
 }
 
 /**
@@ -357,10 +368,11 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Joueur qui abandonne
  */
-void envoyer_abandon_joueur(int sockfd, Joueur * j) {
+int envoyer_abandon_joueur(int sockfd, Joueur * j) {
 
     int type = ABANDON_JOUEUR;
     unsigned char buffer[TAILLE_PSEUDO*2] = {0};
+    unsigned char c;
     int offset = 0;
 
     // Ecriture du type
@@ -371,8 +383,13 @@ void envoyer_abandon_joueur(int sockfd, Joueur * j) {
     memcpy(buffer + offset, joueur_pseudo(j), TAILLE_PSEUDO);
     offset += TAILLE_PSEUDO;
 
+    // Vérification socket encore ouvert
+    if (recv(sockfd, &c, 1, 0) == 0) {
+        return -1;
+    }
+
     // Envoi
-    send(sockfd, buffer, offset, 0);
+    return send(sockfd, buffer, offset, 0);
 }
 
 /**
@@ -407,10 +424,11 @@ void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j) {
  * \param sockfd Numéro du socket à qui envoyer
  * \param pseudo Pseudo choisi
  */
-void envoyer_pseudo(int sockfd, char * pseudo) {
+int  envoyer_pseudo(int sockfd, char * pseudo) {
 
     int type = PSEUDO;
     unsigned char buffer[TAILLE_PSEUDO*2] = {0};
+    unsigned char c;
     int offset = 0;
 
     // Ecriture du type
@@ -421,8 +439,13 @@ void envoyer_pseudo(int sockfd, char * pseudo) {
     memcpy(buffer + offset, pseudo, TAILLE_PSEUDO);
     offset += TAILLE_PSEUDO;
 
+    // Vérification socket encore ouvert
+    if (recv(sockfd, &c, 1, 0) == 0) {
+        return -1;
+    }
+
     // Envoi
-    send(sockfd, buffer, offset, 0);
+    return send(sockfd, buffer, offset, 0);
 }
 
 /**
@@ -586,6 +609,7 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
 
     int choix;
     Joueur * init;
+    int r;
 
     do{
         initialisation_manche(pl,&j);
@@ -595,11 +619,15 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                 choix = jouer_tour_joueur_sdl(pl,&j);
                 if(choix != 4) {
                     if (joueur_a_abandonne(init)) {
-                        envoyer_abandon_joueur(hote, init);
+                        r = envoyer_abandon_joueur(hote, init);
                     }
                     else {
-                        envoyer_plateau(hote, pl, choix * -1);
+                        r = envoyer_plateau(hote, pl, choix * -1);
                     }
+                }
+                if (r == -1) {
+                    fermer_connexion(hote);
+                    return erreur_reseau();
                 }
             }
             else {

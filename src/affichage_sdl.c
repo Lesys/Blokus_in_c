@@ -1255,5 +1255,5 @@ void afficher_saisie_pseudo_distant_sdl(char * str) {
 void afficher_erreur_reseau() {
 
     afficher_fond_config();
-    afficher_texte("Erreur de connexion ! :^)", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+    afficher_texte("Erreur de connexion ! ¯\\_(° . °)_/¯", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }

@@ -624,17 +624,17 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 		do{
 
-                        init = j;
+            init = j;
 
-                        if(j->type == BOT) {
+            if(j->type == BOT) {
 				choix=jouer_tour_bot_sdl(pl,&j);
-                        }
+            }
 			else if(j->type == DISTANT) {
 				choix=jouer_tour_joueur_distant_sdl(pl,&j);
-                        }
+            }
 			else {
 				choix=jouer_tour_joueur_sdl(pl,&j);
-                        }
+            }
 
 			if(choix == 3) {
 				fermer_connexions_distantes(j);
