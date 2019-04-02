@@ -235,26 +235,39 @@ int saisir_type_joueur(Joueur** j){
 
 int initialiser_joueur_distant(Joueur **j){
 
-	SDL_Event event;	
-	SDL_RenderClear(renderer);
+	SDL_Event event;
+	int sockfd = -1;
+	int sockfd_connexion = creer_socket_connexion(PORT_DEFAUT);
+
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
 
-	//Attend un événement
-	while(SDL_PollEvent(&event)){
-		//Si il appuis sur la croix
-		if(event.type == SDL_QUIT)
-			return 3;
-		//Si il appuis sur un bouton
-		else if(event.type == SDL_MOUSEBUTTONDOWN){
-			if(curs_hover_bouton(b_retour))
-				return 4;
-		}
-	}
-	afficher_attente_connexion_sdl();
-	afficher_bouton_sdl(b_retour);
+	while (sockfd == -1) {
 
-	SDL_RenderPresent(renderer);
-	int sockfd = accepter_connexion(PORT_DEFAUT);
+		SDL_RenderClear(renderer);
+
+		//Attend un événement
+		while(SDL_PollEvent(&event)){
+			//Si il appuis sur la croix
+			if(event.type == SDL_QUIT) {
+				fermer_connexion(sockfd_connexion);
+				return 3;
+			}
+			//Si il appuis sur un bouton
+			else if(event.type == SDL_MOUSEBUTTONDOWN){
+				if(curs_hover_bouton(b_retour)) {
+					fermer_connexion(sockfd_connexion);
+					return 4;
+				}
+			}
+		}
+
+		afficher_attente_connexion_sdl();
+		afficher_bouton_sdl(b_retour);
+		SDL_RenderPresent(renderer);
+
+		sockfd = accepter_connexion(sockfd_connexion);
+	}
+	
 	unsigned char buffer[TAILLE_BUFF];
 	int r;
 
@@ -337,9 +350,10 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 					retour=initialiser_joueur_distant(j);
 					if(retour == 3)
 						return 3;
-					else if (retour == 2)
+					else if (retour == 2) {
 						erreur_reseau();
 						return 3;
+					}
 					break;
 					default:return 3;
 			}

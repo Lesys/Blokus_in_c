@@ -95,13 +95,7 @@ int connexion(char * adresse, int port) {
     return sockfd;
 }
 
-/**
- * \fn int accepter_connexion(int port);
- * \brief Accepte une connexion d'un joueur distant
- * \param port Port sur lequel écouter
- * \return Numéro du socket si connexion, 0 sinon
- */
-int accepter_connexion(int port) {
+int creer_socket_connexion(int port) {
 
     SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if(sockfd == INVALID_SOCKET)
@@ -134,6 +128,27 @@ int accepter_connexion(int port) {
         return 0;
     }
 
+    // Mise du socket en non bloquant
+    #ifndef WINDOWS
+    int flags = fcntl(sockfd, F_GETFL);
+    fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    #endif
+    #ifdef WINDOWS
+    unsigned long mode = 1;
+    ioctlsocket(sockfd, FIONBIO, &mode);
+    #endif
+
+    return sockfd;
+}
+
+/**
+ * \fn int accepter_connexion(int port);
+ * \brief Accepte une connexion d'un joueur distant
+ * \param port Port sur lequel écouter
+ * \return Numéro du socket si connexion, 0 sinon
+ */
+int accepter_connexion(int sockfd) {
+
     SOCKADDR_IN csin = { 0 };
     SOCKET newsockfd;
 
@@ -141,22 +156,20 @@ int accepter_connexion(int port) {
 
     newsockfd = accept(sockfd, (SOCKADDR *)&csin, &sinsize);
 
-    closesocket(sockfd);
-
-    if(newsockfd == INVALID_SOCKET)
-    {
-        fprintf(stderr, "Erreur accept()\n");
-        return 0;
+    if (newsockfd == -1) {
+        return -1;
     }
+
+    closesocket(sockfd);
 
     // Mise du socket en non bloquant
     #ifndef WINDOWS
-    int flags = fcntl(newsockfd, F_GETFL);
-    fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
+    int flags = fcntl(sockfd, F_GETFL);
+    fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
     #endif
     #ifdef WINDOWS
     unsigned long mode = 1;
-    ioctlsocket(newsockfd, FIONBIO, &mode);
+    ioctlsocket(sockfd, FIONBIO, &mode);
     #endif
 
 

@@ -13,7 +13,8 @@ typedef enum type_message {
 } Type_message;
 
 int connexion(char * adresse, int port);
-int accepter_connexion(int port);
+int creer_socket_connexion(int port);
+int accepter_connexion(int sockfd);
 void fermer_connexion(int sockfd);
 void fermer_connexions_distantes(Joueur * j);
 int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]);
