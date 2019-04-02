@@ -507,14 +507,15 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 			if ( id_piece > 0) {
                                 printf("id piece : %d\n", id_piece);
 				p = joueur_liste_piece(*j);
-				while(id_piece < piece_id(p))
+				while(id_piece < piece_id(p)){
 					p=piece_suivant(p);
+				}
 				if( id_piece == piece_id(p)){
 					liste_piece_suppr_elem(&p);
 				}
 			}
 
-			valeur_r = 0; /* Le joueru a réussi à poser sa Piece */
+			valeur_r = id_piece * -1; /* Le joueur a réussi à poser sa Piece */
 		}
 		else if(valeur_r == 3){//Le joueur a abandoné
 			joueur_abandonne(*j);
