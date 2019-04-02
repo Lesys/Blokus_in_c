@@ -196,7 +196,7 @@ void poser_piece_sdl(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
 
 int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reserves* r, Piece** p, Bouton* b)
 {
-    int etat = -1;
+    int etat = 0;
 
     SDL_Event event;
 
