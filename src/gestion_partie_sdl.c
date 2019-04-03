@@ -108,7 +108,7 @@ int saisir_nb_joueur(){
 	Bouton* b_nb_quatre=init_bouton_sdl(NB_JOUEURS_4);
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
 
-	/*Tant que l'evenenement n'est pas fini*/
+	//Tant que l'evenenement n'est pas fini
 	while(continuer == 1){
 		SDL_RenderClear(renderer);
 		//Attend un événement
@@ -118,19 +118,19 @@ int saisir_nb_joueur(){
 				continuer = -1;
 			//Si il appuis sur un bouton
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
-				/*Bouton 2 joueur*/
+				//Bouton 2 joueur
 				if (curs_hover_bouton(b_nb_deux)) {
 					jouer_son(BOUTON);
 					nb_joueur=2;
 				}
 
-				/*Bouton 3 joueur*/
+				//Bouton 3 joueur
 				else if (curs_hover_bouton(b_nb_trois)) {
 					jouer_son(BOUTON);
 					nb_joueur=3;
 				}
 
-				/*Bouton 4 joueur*/
+				//Bouton 4 joueur
 				else if (curs_hover_bouton(b_nb_quatre)) {
 					jouer_son(BOUTON);
 					nb_joueur=4;
@@ -147,7 +147,7 @@ int saisir_nb_joueur(){
 		if( nb_joueur > 0){
 			continuer=0;
 		}
-		/*Partie Affichage*/
+		//Partie Affichage
 		afficher_nb_joueurs_sdl();
 		afficher_bouton_sdl(b_nb_deux);
 		afficher_bouton_sdl(b_nb_trois);
@@ -651,7 +651,40 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 // 1 si tout est ok, 2 si deconnexion, 3 si croix
 int attente_nouvelle_partie(Joueur * j) {
 	// Attends que tout les joueurs distants est envoyés le message pret
-	// Puis envoyer pret à tout les joueurs distants
+	Joueur* pivot=j;
+	SDL_Event event;
+	unsigned char buffer[TAILLE_BUFF];
+	int nb_recois = 0;
+	int type;
+	do{
+		while(SDL_PollEvent(&event)){
+			if(event.type == SDL_QUIT)
+				return 3;
+		}
+	SDL_RenderClear(renderer);
+        afficher_attente_debut_sdl();
+        SDL_RenderPresent(renderer);
+	nb_recois= recevoir_buffer(j->sockfd,buffer);
+	} (nb_recois == 0);
+	if( nb_recois < 0)
+		return 3;
+	type=recup_type(buffer);
+	while(type == PRET)
+		type=recup_type(buffer);
+	//si tous le monde est Pret,on envoie pret à tout les joueurs distants
+	if(type == PRET){
+		do{
+			envoyer_pret(pivot->sockfd);
+			pivot=joueur_suivant(pivot);
+		} while(pivot != j);
+	}
+	//Sinon on ferme la connexion
+	else{
+		do{
+			fermer_connexion(pivot->sockfd);
+			pivot=joueur_suivant(pivot);
+		} while(pivot != j);
+	}
 }
 
 
