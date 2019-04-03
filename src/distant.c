@@ -697,6 +697,22 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
 }
 
+// 1 si tout est ok, 2 si deconnexion, 3 si croix
+int attente_nouvelle_partie_distant(int hote) {
+    // Envoyer_pret() à l'hote
+    // Créer un buffer -> unsigned char buffer[TAILLE_BUFF];
+
+    // tant que pas de réponse ou erreur connexion
+        // Afficher le message d'attente avec afficher_attente_nouvelle_partie()
+        // Gestion des évènements (retour 3 si on appuie sur la croix)
+
+        // Récupération d'un message dans le buffer avec int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF])
+        // si la fonction renvoie -1 -> erreur de connexion on retourne 2
+
+        // Sinon on utilises la fonction int recup_type(unsigned char * buffer) qui renvoie le type de message
+        // Si le type de message = PRET on retourne 1
+}
+
 /**
  * \fn int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote)
  * \brief Joue une manche en tant que joueur distant
@@ -754,6 +770,11 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
             }
 
             choix=fin_de_partie_sdl(&j);
+
+            if (choix == 1) {
+                choix = attente_nouvelle_partie_distant(hote);
+            }
+
         } while(!(choix));
     } while(choix == 1 );
     fermer_connexion(hote);

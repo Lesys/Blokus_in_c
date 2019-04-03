@@ -15,7 +15,7 @@ typedef struct ressources {
 	Sprite * carre_jaune;
 	Sprite * carre_bleu;
 	Sprite * carre_vert;
-	Sprite * orange;
+	Sprite * selection;
 	TTF_Font * police_m;
 	TTF_Font * police_p;
 	Sprite * fond_score;
@@ -139,5 +139,7 @@ void afficher_saisie_pseudo_distant_sdl(char * str);
 int curs_hover_bouton(Bouton * b);
 
 void afficher_erreur_reseau();
+
+void afficher_attente_nouvelle_partie();
 
 #endif
