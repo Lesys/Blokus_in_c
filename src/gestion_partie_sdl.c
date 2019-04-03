@@ -665,12 +665,13 @@ int attente_nouvelle_partie(Joueur * j) {
         afficher_attente_debut_sdl();
         SDL_RenderPresent(renderer);
 	nb_recois= recevoir_buffer(j->sockfd,buffer);
-	} (nb_recois == 0);
+	}while( nb_recois == 0);
 	if( nb_recois < 0)
 		return 3;
 	type=recup_type(buffer);
-	while(type == PRET)
+	while(type == PRET){
 		type=recup_type(buffer);
+	}
 	//si tous le monde est Pret,on envoie pret à tout les joueurs distants
 	if(type == PRET){
 		do{
