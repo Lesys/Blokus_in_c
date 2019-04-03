@@ -507,6 +507,7 @@ int envoyer_pret(int sockfd) {
 
     int type = PRET;
     unsigned char buffer[sizeof(int)] = {0};
+    unsigned char c;
 
     // Ecriture du type
     memcpy(buffer, &type, sizeof(int));
