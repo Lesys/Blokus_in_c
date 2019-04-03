@@ -508,6 +508,8 @@ int erreur_reseau() {
     SDL_Event event;
     Bouton* b_retour = init_bouton_sdl(RETOUR);
 
+    jouer_son(CLOCHE);
+
     while (r == 1) {
 
         while (SDL_PollEvent(&event)) {
@@ -516,6 +518,7 @@ int erreur_reseau() {
             }
             else if (event.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour)) {
                 r = 2;
+                jouer_son(BOUTON_RETOUR);
             }
         }
 
@@ -562,8 +565,10 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             }
 		}
             else if(adresse > 0 && event.type == SDL_KEYDOWN
-                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) )
+                    && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER)) {
+                jouer_son(BOUTON);
                 continuer = 0;
+            }
 
             else if(event.key.keysym.sym == SDLK_BACKSPACE
                     && event.type == SDL_KEYDOWN) {

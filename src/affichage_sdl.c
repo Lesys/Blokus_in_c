@@ -1000,16 +1000,16 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             bouton->y_bas = hauteur_ecran/2 + taille_carre*6;
             break;
         case SON:
-            bouton->x_gauche = 0;
-            bouton->x_droite = taille_carre*3;
-            bouton->y_haut = 0;
-            bouton->y_bas = taille_carre*3;
+            bouton->x_gauche = taille_carre;
+            bouton->x_droite = taille_carre*4;
+            bouton->y_haut = taille_carre;
+            bouton->y_bas = taille_carre*4;
             break;
         case EFFET:
-            bouton->x_gauche = taille_carre*3;
-            bouton->x_droite = taille_carre*6;
-            bouton->y_haut = 0;
-            bouton->y_bas = taille_carre*3;
+            bouton->x_gauche = taille_carre*5;
+            bouton->x_droite = taille_carre*8;
+            bouton->y_haut = taille_carre;
+            bouton->y_bas = taille_carre*4;
             break;
 
         default:
