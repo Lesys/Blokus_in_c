@@ -30,6 +30,7 @@ int init_son() {
     }
 
     if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1) {
+        printf("Erreur Mix_OpenAudio : %s", Mix_GetError());
         free(ressources_audio);
         return 0;
     }

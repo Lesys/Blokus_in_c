@@ -14,8 +14,8 @@ SDL_Window * window;
 SDL_Renderer * renderer;
 
 int sdl_init(int fullscreen) {
-	if (SDL_Init(SDL_INIT_EVERYTHING)) {
-		printf("Erreur initialisation SDL\n");
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+		printf("Erreur initialisation SDL: %s\n", SDL_GetError());
 		return 0;
 	}
 	
