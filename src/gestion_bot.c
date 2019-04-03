@@ -129,7 +129,7 @@ int meilleur_coup(Coup** tab, int compteur) {
 
 	/* S'il y a plus d'un meilleur coup (== compteur_tab n'est pas à 0) */
 	if (compteur_tab) {
-		fprintf(stderr, "On a trouvé %d meilleurs coups\n", compteur_tab + 1);
+//		fprintf(stderr, "On a trouvé %d meilleurs coups\n", compteur_tab + 1);
 		srand(time(NULL));
 		random = rand() % compteur_tab;
 	}
@@ -190,13 +190,13 @@ int eval_emplacement_piece(Coup* coup) {
 		y = coord_y + carre_get_y(c);
 
 
-		if (x <= COUP_BORD || x >= TAILLE_PLATEAU - COUP_BORD || y <= COUP_BORD || y >= TAILLE_PLATEAU - COUP_BORD)
+		if (x <= COUP_BORD || x >= TAILLE_PLATEAU - 1 - COUP_BORD || y <= COUP_BORD || y >= TAILLE_PLATEAU - 1 - COUP_BORD)
 			bord++;
-		else if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
+		else if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - 1 - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - 1 - COUP_MAUVAIS)
 			mauvais++;
-		else if (x <= COUP_MOYEN || x >= TAILLE_PLATEAU - COUP_MOYEN || y <= COUP_MOYEN || y >= TAILLE_PLATEAU - COUP_MOYEN)
+		else if (x <= COUP_MOYEN || x >= TAILLE_PLATEAU - 1 - COUP_MOYEN || y <= COUP_MOYEN || y >= TAILLE_PLATEAU - 1 - COUP_MOYEN)
 			moyen++;
-		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
+		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - 1 - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - 1 - COUP_BON)
 			bon++;
 		else
 			centre++;
@@ -334,6 +334,8 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	while (!piece_meme_orientation(coup_piece(c), coup_piece_origine(c)))
 		piece_pivoter(1, piece_liste_carre(coup_piece_origine(c)));
 
+	 sleep(TEMPS_ATTENTE_BOT);
+
 	/* Pose la Piece et la supprime de la liste du Joueur */
 	poser_piece_sdl(pl, coup_piece_origine(c), bot, coup_coord_x(c), coup_coord_y(c));
 
@@ -356,7 +358,6 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 
     free_afficher_pieces_dispo_sdl(&r);
 
-	 sleep(TEMPS_ATTENTE_BOT);
 
 	return retour;
 }
@@ -684,11 +685,12 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
     Coup* coup = NULL;
 
     if (compteur && tab != NULL) {
+//fprintf(stderr, "%s\n", couleur_tostring(joueur_couleur(bot)));
 		nb = meilleur_coup(tab, compteur);
 
 		/*nb = rand() % compteur;*/
         coup = coup_copie(tab[nb]);
-		fprintf(stderr, "Valeur du meilleur coup: %d\n", coup_valeur(coup));
+//		fprintf(stderr, "Valeur du meilleur coup: %d\n", coup_valeur(coup));
     }
 
     free_tab_coup(&tab, compteur);
