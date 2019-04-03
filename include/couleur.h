@@ -7,7 +7,7 @@ typedef enum couleur {
     ROUGE,
     JAUNE,
     VERT,
-    ORANGE
+    SELECTION
 } Couleur;
 
 /* Renvoie la couleur en chaine de caractère */

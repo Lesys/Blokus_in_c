@@ -9,7 +9,8 @@ typedef enum type_message {
 	LISTE_JOUEURS = 1,
 	PLATEAU,
 	ABANDON_JOUEUR,
-	PSEUDO
+	PSEUDO,
+	PRET
 } Type_message;
 
 int connexion(char * adresse, int port);
@@ -27,6 +28,7 @@ int envoyer_abandon_joueur(int sockfd, Joueur * j);
 void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j);
 int envoyer_pseudo(int sockfd, char * pseudo);
 void recevoir_pseudo(unsigned char * buffer, char * pseudo);
+int envoyer_pret(int sockfd);
 
 int erreur_reseau();
 

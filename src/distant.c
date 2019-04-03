@@ -254,7 +254,7 @@ int recup_type(unsigned char * buffer) {
 }
 
 /**
- * \fn void envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece);
+ * \fn int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece);
  * \brief Envoie l'état du plateau
  * \param sockfd Numéro du socket sur lequel envoyer
  * \param pl Plateau courant
@@ -322,11 +322,11 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
 }
 
 /**
- * \fn void envoyer_liste_joueurs(int sockfd, Joueur * j);
+ * \fn int envoyer_liste_joueurs(int sockfd, Joueur * j);
  * \brief Envoie la liste des joueurs au joueur distant
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Liste des joueurs
- * \param Nombre d'octets lus, -1 si erreur
+ * \param Nombre d'octets envoyés, -1 si erreur
  */
 int envoyer_liste_joueurs(int sockfd, Joueur * j) {
 
@@ -397,11 +397,11 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
 }
 
 /**
- * \fn void envoyer_abandon_joueur(int sockfd, Joueur * j);
+ * \fn int envoyer_abandon_joueur(int sockfd, Joueur * j);
  * \brief Envoi un message annoncant l'abandon d'un joueur
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Joueur qui abandonne
- * \param Nombre d'octets lus, -1 si erreur
+ * \param Nombre d'octets envoyés, -1 si erreur
  */
 int envoyer_abandon_joueur(int sockfd, Joueur * j) {
 
@@ -454,11 +454,11 @@ void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j) {
 }
 
 /**
- * \fn void envoyer_pseudo(int sockfd, char * pseudo);
+ * \fn int envoyer_pseudo(int sockfd, char * pseudo);
  * \brief Envoie le pseudo choisi à l'hote
  * \param sockfd Numéro du socket à qui envoyer
  * \param pseudo Pseudo choisi
- * \param Nombre d'octets lus, -1 si erreur
+ * \param Nombre d'octets envoyés, -1 si erreur
  */
 int envoyer_pseudo(int sockfd, char * pseudo) {
 
@@ -495,6 +495,29 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
     int offset = sizeof(int);
     // Récuperation du pseudo
     memcpy(pseudo, buffer + offset, TAILLE_PSEUDO);
+}
+
+/**
+ * \fn void envoyer_pret(int sockfd);
+ * \brief Envoie un message disant que l'on est pret
+ * \param sockfd Numéro du socket à qui envoyer
+ * \param Nombre d'octets envoyés, -1 si erreur
+ */
+int envoyer_pret(int sockfd) {
+
+    int type = PRET;
+    unsigned char buffer[sizeof(int)] = {0};
+
+    // Ecriture du type
+    memcpy(buffer, &type, sizeof(int));
+
+    // Vérification socket encore ouvert
+    if (recv(sockfd, &c, 1, 0) == 0) {
+        return -1;
+    }
+
+    // Envoi
+    return send(sockfd, buffer, sizeof(int), 0);
 }
 
 /**
