@@ -657,22 +657,23 @@ int attente_nouvelle_partie(Joueur * j) {
 	int nb_recois = 0;
 	int type;
 	do{
-		while(SDL_PollEvent(&event)){
-			if(event.type == SDL_QUIT)
-				return 3;
-		}
-	SDL_RenderClear(renderer);
-        afficher_attente_debut_sdl();
-        SDL_RenderPresent(renderer);
-	nb_recois= recevoir_buffer(j->sockfd,buffer);
-	}while( nb_recois == 0);
-	if( nb_recois < 0)
-		return 3;
-	type=recup_type(buffer);
-	while(type == PRET){
+		do{
+			while(SDL_PollEvent(&event)){
+				if(event.type == SDL_QUIT)
+					return 3;
+			}
+		SDL_RenderClear(renderer);
+	        afficher_attente_debut_sdl();
+	        SDL_RenderPresent(renderer);
+		nb_recois= recevoir_buffer(pivot->sockfd,buffer);
+		}while( nb_recois == 0);
+		if( nb_recois < 0)
+			return 3;
 		type=recup_type(buffer);
-	}
-	//si tous le monde est Pret,on envoie pret à tout les joueurs distants
+		pivot=joueur_suivant(pivot);
+	} while(type == PRET && pivot != j);
+
+	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
 	if(type == PRET){
 		do{
 			envoyer_pret(pivot->sockfd);
