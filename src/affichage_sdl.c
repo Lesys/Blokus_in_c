@@ -50,6 +50,9 @@ Sprite * get_sprite(Couleur couleur) {
         case VERT:
             return ressources->carre_vert;
             break;
+        case ORANGE:
+            return ressources->orange;
+            break;
         default:
             return ressources->carre_vide;
     }
@@ -98,6 +101,7 @@ int init_affichage_sdl(int fullscreen) {
     ressources->carre_jaune = init_sprite("ressources/carre_jaune.png", taille_carre, taille_carre);
     ressources->carre_bleu = init_sprite("ressources/carre_bleu.png", taille_carre, taille_carre);
     ressources->carre_vert = init_sprite("ressources/carre_vert.png", taille_carre, taille_carre);
+    ressources->orange = init_sprite("ressources/orange.png", taille_carre, taille_carre);
     ressources->police_m = TTF_OpenFont("ressources/police.ttf", taille_carre*1.5);
     ressources->police_p = TTF_OpenFont("ressources/police.ttf", taille_carre);
     ressources->fond_score = init_sprite("ressources/fond_score.png", taille_carre*8, taille_carre*16);
@@ -153,6 +157,7 @@ void free_affichage_sdl() {
         free_sprite(&ressources->carre_jaune);
         free_sprite(&ressources->carre_bleu);
         free_sprite(&ressources->carre_vert);
+        free_sprite(&ressources->orange);
         TTF_CloseFont(ressources->police_m);
         TTF_CloseFont(ressources->police_p);
         free_sprite(&ressources->fond_score);

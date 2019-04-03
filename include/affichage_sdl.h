@@ -15,6 +15,7 @@ typedef struct ressources {
 	Sprite * carre_jaune;
 	Sprite * carre_bleu;
 	Sprite * carre_vert;
+	Sprite * orange;
 	TTF_Font * police_m;
 	TTF_Font * police_p;
 	Sprite * fond_score;
