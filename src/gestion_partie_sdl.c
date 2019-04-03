@@ -686,9 +686,9 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 			}
 			//Si le joueur n'a pas déjà abandonné
 			if(choix != 4){
-					// Sons
-					if(joueur_a_abandonne(init)) {
-                        jouer_son(ABANDON);
+				// Sons
+				if(joueur_a_abandonne(init)) {
+                        		jouer_son(ABANDON);
                     }
                     else {
                         jouer_son(POSE_PIECE);
@@ -709,6 +709,10 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
                     j = joueur_suivant(j);
 			}
 			choix=fin_de_partie_sdl(&j);
+			if(choix == 1){
+					choix=1;//appelle fonction
+			}
+
 		} while(!(choix));
 
 
