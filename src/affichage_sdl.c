@@ -20,6 +20,8 @@
 
 // Variables globales externes
 extern SDL_Renderer * renderer;
+extern int son;
+extern int effet;
 
 // Variables globales de affichage_sdl
 Ressources * ressources;
@@ -113,6 +115,10 @@ int init_affichage_sdl(int fullscreen) {
     ressources->tapis_jaune = init_sprite("ressources/tapis_jaune.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
     ressources->tapis_vert = init_sprite("ressources/tapis_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
     ressources->fond_plateau = init_sprite("ressources/fond_plateau.png", taille_carre*22, taille_carre*22);
+    ressources->son = init_sprite("ressources/son.png", taille_carre*3, taille_carre*3);
+    ressources->son_selec = init_sprite("ressources/son_selec.png", taille_carre*3, taille_carre*3);
+    ressources->effet = init_sprite("ressources/effet.png", taille_carre*3, taille_carre*3);
+    ressources->effet_selec = init_sprite("ressources/effet_selec.png", taille_carre*3, taille_carre*3);
 
     ressources->blanc.r = 190;
     ressources->blanc.g = 190;
@@ -164,6 +170,10 @@ void free_affichage_sdl() {
         free_sprite(&ressources->tapis_jaune);
         free_sprite(&ressources->tapis_vert);
         free_sprite(&ressources->fond_plateau);
+        free_sprite(&ressources->son);
+        free_sprite(&ressources->son_selec);
+        free_sprite(&ressources->effet);
+        free_sprite(&ressources->effet_selec);
         free(ressources);
     }
 }
@@ -989,6 +999,19 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             bouton->y_haut = hauteur_ecran/2  + taille_carre*2;
             bouton->y_bas = hauteur_ecran/2 + taille_carre*6;
             break;
+        case SON:
+            bouton->x_gauche = 0;
+            bouton->x_droite = taille_carre*3;
+            bouton->y_haut = 0;
+            bouton->y_bas = taille_carre*3;
+            break;
+        case EFFET:
+            bouton->x_gauche = taille_carre*3;
+            bouton->x_droite = taille_carre*6;
+            bouton->y_haut = 0;
+            bouton->y_bas = taille_carre*3;
+            break;
+
         default:
             break;
     }
@@ -1061,6 +1084,22 @@ void afficher_bouton_sdl(Bouton * b) {
             break;
         case RETOUR:
             aff_b("Retour", b->x_gauche, b->y_haut);
+            break;
+        case SON:
+            if (son) {
+                afficher_sprite(ressources->son_selec, b->x_gauche, b->y_haut);
+            }
+            else {
+               afficher_sprite(ressources->son, b->x_gauche, b->y_haut); 
+            }
+            break;
+        case EFFET:
+            if (effet) {
+                afficher_sprite(ressources->effet_selec, b->x_gauche, b->y_haut);
+            }
+            else {
+                afficher_sprite(ressources->effet, b->x_gauche, b->y_haut); 
+            }
             break;
         default:
             break;

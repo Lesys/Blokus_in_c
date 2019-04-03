@@ -32,6 +32,10 @@ typedef struct ressources {
 	Sprite * tapis_jaune;
 	Sprite * tapis_bleu;
 	Sprite * fond_plateau;
+	Sprite * son;
+	Sprite * son_selec;
+	Sprite * effet;
+	Sprite * effet_selec;
 	SDL_Color blanc;
 	SDL_Color jaune;
 	SDL_Color vert;
@@ -69,7 +73,9 @@ typedef enum type_bouton {
 	TYPE_JOUEUR_BOT,
     CREER_PARTIE,
     REJOINDRE_PARTIE,
-    RETOUR
+    RETOUR,
+    SON,
+    EFFET
 } Type_bouton;
 
 typedef struct bouton {

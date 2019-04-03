@@ -12,6 +12,8 @@
 
 // Variables globales de son
 Ressources_audio * ressources_audio;
+extern int son;
+extern int effet;
 
 /**
  * \fn int init_son()
@@ -66,31 +68,32 @@ void free_son() {
 }
 
 /**
- * \fn void jouer_son(Sons son)
+ * \fn void jouer_son(Sons s)
  * \brief Joue un son
  * \details Les différents sont trouvables dans l'énumération Sons
- * \param son Son à jouer
+ * \param s Son à jouer
  */
-void jouer_son(Sons son) {
+void jouer_son(Sons s) {
 
-    switch (son) {
+    switch (s) {
         case POSE_PIECE:
-            Mix_PlayChannel(-1, ressources_audio->pose_piece, 0);
+            if (effet) Mix_PlayChannel(-1, ressources_audio->pose_piece, 0);
             break;
         case CLOCHE:
-            Mix_PlayChannel(-1, ressources_audio->cloche, 0);
+            if (effet) Mix_PlayChannel(-1, ressources_audio->cloche, 0);
             break;
         case ABANDON:
-            Mix_PlayChannel(-1, ressources_audio->abandon, 0);
+            if (effet) Mix_PlayChannel(-1, ressources_audio->abandon, 0);
             break;
         case BOUTON:
-            Mix_PlayChannel(-1, ressources_audio->bouton, 0);
+            if (effet) Mix_PlayChannel(-1, ressources_audio->bouton, 0);
             break;
         case BOUTON_RETOUR:
-            Mix_PlayChannel(-1, ressources_audio->bouton_retour, 0);
+            if (effet) Mix_PlayChannel(-1, ressources_audio->bouton_retour, 0);
             break;
         case MUSIQUE_FOND:
-            Mix_PlayMusic(ressources_audio->musique_fond, -1);
+            if (son) Mix_PlayMusic(ressources_audio->musique_fond, -1);
+            else Mix_HaltMusic();
             break;
         default:
             printf("Type de son incorrect\n");

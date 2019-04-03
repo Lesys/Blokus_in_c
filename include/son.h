@@ -25,6 +25,6 @@ int init_son();
 
 void free_son();
 
-void jouer_son(Sons son);
+void jouer_son(Sons s);
 
 #endif

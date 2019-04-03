@@ -20,6 +20,8 @@
 #include "../include/son.h"
 
 extern SDL_Renderer* renderer;
+int son;
+int effet;
 
 /**
 	*\fn void saisir_pseudo(Joueur **j)
@@ -780,6 +782,11 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	SDL_Event event;
 	Bouton* b_jouer = init_bouton_sdl(JOUER);
 	Bouton* b_quitter_jeu = init_bouton_sdl(QUITTER_JEU);
+	Bouton* b_son = init_bouton_sdl(SON);
+	son = 0;
+	Bouton* b_effet = init_bouton_sdl(EFFET);
+	effet = 1;
+
 	while (retour == 2){
 
 		/* Menu */
@@ -797,6 +804,14 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				else if(curs_hover_bouton(b_quitter_jeu)) {
 					jouer_son(BOUTON_RETOUR);
 					retour= 3;
+				}
+				else if(curs_hover_bouton(b_son)) {
+					son = (son+1)%2;
+					jouer_son(MUSIQUE_FOND);
+				}
+				else if(curs_hover_bouton(b_effet)) {
+					effet = (effet+1)%2;
+					jouer_son(BOUTON);
 				}
 			}
 		}
@@ -848,7 +863,9 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 		/* Affiche le menu */
 		afficher_titres_sdl();
 	 	afficher_bouton_sdl(b_jouer);
-	    	afficher_bouton_sdl(b_quitter_jeu);
+	    afficher_bouton_sdl(b_quitter_jeu);
+	    afficher_bouton_sdl(b_son);
+	    afficher_bouton_sdl(b_effet);
 		SDL_RenderPresent(renderer);
 	}
 
