@@ -279,12 +279,54 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	return nb;
 }
 
+static int nb_coins_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int x, int y) {
+	int i = x, j = y;
+	int nb = 0;
+
+	/* Diagonale haut gauche + libre en haut et à gauche */
+	if (coord_dans_plateau(i - 1) && coord_dans_plateau(j - 1) && pl[i - 1][j - 1] == VIDE && pl[i][j - 1] == VIDE && pl[i - 1][j] == VIDE) /* Si les coordonnées sont dans le plateau ET que la case est vide */
+		nb++;
+	/* Diagonale haut droit */
+	if (coord_dans_plateau(i + 1) && coord_dans_plateau(j - 1) && pl[i + 1][j - 1] == VIDE && pl[i][j - 1] == VIDE && pl[i + 1][j] == VIDE) /* Si les coordonnées sont dans le plateau ET que la case est vide */
+		nb++;
+	/* Diagonale bas gauche */
+	if (coord_dans_plateau(i - 1) && coord_dans_plateau(j + 1) && pl[i - 1][j + 1] == VIDE && pl[i][j + 1] == VIDE && pl[i - 1][j] == VIDE) /* Si les coordonnées sont dans le plateau ET que la case est vide */
+		nb++;
+	/* Diagonale bas droit */
+	if (coord_dans_plateau(i + 1) && coord_dans_plateau(j + 1) && pl[i + 1][j + 1] == VIDE) /* Si les coordonnées sont dans le plateau ET que la case est vide */
+		nb++;
+
+
+/* TODO Faire en sorte que toutes les nouvelles diagonales soient vérifiées pour qu'on puisse poser au moins un Carre dessus (vérifier qu'il n'y a pas de Couleur adjacante du Joueur) */
+
+        /* Vérifie qu'il n'y a aucun Carre adjacant aux Carre que le Joueur pose */
+        if((coord_dans_plateau(i - 1) && coord_dans_plateau(y + carre_get_y(c)) && pl[x + carre_get_x(c) - 1][y + carre_get_y(c)] == col) || /* Au dessus */
+                (coord_dans_plateau(x + carre_get_x(c) + 1) && coord_dans_plateau(y + carre_get_y(c)) && pl[x + carre_get_x(c) + 1][y + carre_get_y(c)] == col) || /* En dessous */
+                (coord_dans_plateau(x + carre_get_x(c)) && coord_dans_plateau(y + carre_get_y(c) - 1) && pl[x + carre_get_x(c)][y + carre_get_y(c) - 1] == col) || /* A gauche */
+                (coord_dans_plateau(x + carre_get_x(c)) && coord_dans_plateau(y + carre_get_y(c) + 1) && pl[x + carre_get_x(c)][y + carre_get_y(c) + 1] == col)) /* A droite */
+        {
+            return 0;
+        }
+
+        /* Vérifie qu'il y a au moins un Carre que le Joueur pose qui touche diagonalement un Carre déjà posé de même Couleur */
+        if((coord_dans_plateau(x + carre_get_x(c) - 1) && coord_dans_plateau(y + carre_get_y(c) - 1) && pl[x + carre_get_x(c) - 1][y + carre_get_y(c) - 1] == col) || /* Diagonale Haut - Gauche */
+                (coord_dans_plateau(x + carre_get_x(c) + 1) && coord_dans_plateau(y + carre_get_y(c) - 1) && pl[x + carre_get_x(c) + 1][y + carre_get_y(c) - 1] == col) || /* Diagonale Bas - Gauche */
+                (coord_dans_plateau(x + carre_get_x(c) - 1) && coord_dans_plateau(y + carre_get_y(c) + 1) && pl[x + carre_get_x(c) - 1][y + carre_get_y(c) + 1] == col) || /* Diagonale Haut - Droit */
+                (coord_dans_plateau(x + carre_get_x(c) + 1) && coord_dans_plateau(y + carre_get_y(c) + 1) && pl[x + carre_get_x(c) + 1][y + carre_get_y(c) + 1] == col)) /* Diagonale Bas - Droit */
+        {
+            angle = 1;
+        }
+
+	return nb;
+}
+
 /**
 	return L'ancien nombre de coins libres - le nouveau nombre de coins libres
 */
 int eval_nb_nouveaux_coins(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, int ancien_nb_coup) {
 	int coord_x = coup_coord_x(coup);
 	int coord_y = coup_coord_y(coup);
+	int nb = 0;
 
 	Carre* init = piece_liste_carre(coup_piece(coup));
 	Carre* c = init;
@@ -295,12 +337,9 @@ int eval_nb_nouveaux_coins(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 		/* Récupère les coordonnées du Carre sur le plateau */
 		x = coord_x + carre_get_x(c);
 		y = coord_y + carre_get_y(c);
-/*		if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
-			mauvais++;
-		else if (x <= COUP_MOYEN || x >= TAILLE_PLATEAU - COUP_MOYEN || y <= COUP_MOYEN || y >= TAILLE_PLATEAU - COUP_MOYEN)
-			moyen++;
-		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
-			bon++;*/
+
+		/* Calcul combien il y a de coins disponibles autour de chaque Carre */
+		nb += nb_coins_dispo(pl, x, y);
 
 	} while ((c = carre_get_suiv(c)) != init);
 }
