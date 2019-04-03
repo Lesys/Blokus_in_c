@@ -656,29 +656,40 @@ int attente_nouvelle_partie(Joueur * j) {
 	unsigned char buffer[TAILLE_BUFF];
 	int nb_recois = 0;
 	int type;
+	int retour = 1;
+	
 	do{
-		do{
-			while(SDL_PollEvent(&event)){
-				if(event.type == SDL_QUIT)
-					return 3;
-			}
-		SDL_RenderClear(renderer);
-	        afficher_attente_debut_sdl();
-	        SDL_RenderPresent(renderer);
-		nb_recois= recevoir_buffer(pivot->sockfd,buffer);
-		}while( nb_recois == 0);
-		if( nb_recois < 0)
-			return 3;
-		type=recup_type(buffer);
+		if(pivot->type == DISTANT){
+			do{
+				while(SDL_PollEvent(&event)){
+					if(event.type == SDL_QUIT)
+						return 3;
+				}
+			SDL_RenderClear(renderer);
+		        afficher_attente_debut_sdl();
+		        SDL_RenderPresent(renderer);
+			nb_recois= recevoir_buffer(pivot->sockfd,buffer);
+
+			}while( nb_recois == 0);
+
+			if( nb_recois < 0)
+				retour = 3;
+			else
+				type=recup_type(buffer);
+		}
+		else
+			type = PRET;
 		pivot=joueur_suivant(pivot);
-	} while(type == PRET && pivot != j);
+	} while(type == PRET && pivot != j && retour != 3);
 
 	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
 	if(type == PRET){
 		do{
-			envoyer_pret(pivot->sockfd);
+			if(pivot->type == DISTANT)
+				envoyer_pret(pivot->sockfd);
 			pivot=joueur_suivant(pivot);
 		} while(pivot != j);
+		retour = 1;
 	}
 	//Sinon on ferme la connexion
 	else{
@@ -686,7 +697,9 @@ int attente_nouvelle_partie(Joueur * j) {
 			fermer_connexion(pivot->sockfd);
 			pivot=joueur_suivant(pivot);
 		} while(pivot != j);
+		retour = 2;
 	}
+	return retour;
 }
 
 
@@ -709,17 +722,17 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 		do{
 
-            init = j;
+	            init = j;
 
-            if(j->type == BOT) {
+			if(j->type == BOT) {
 				choix=jouer_tour_bot_sdl(pl,&j);
-            }
+			}
 			else if(j->type == DISTANT) {
 				choix=jouer_tour_joueur_distant_sdl(pl,&j);
-            }
+			}
 			else {
 				choix=jouer_tour_joueur_sdl(pl,&j);
-            }
+			}
 
 			if(choix == 3) {
 				fermer_connexions_distantes(j);
