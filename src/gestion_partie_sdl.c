@@ -648,6 +648,12 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 	return valeur_r;
 }
 
+// 1 si tout est ok, 2 si deconnexion, 3 si croix
+int attente_nouvelle_partie(Joueur * j) {
+	// Attends que tout les joueurs distants est envoyés le message pret
+	// Puis envoyer pret à tout les joueurs distants
+}
+
 
 /**
 	*\fn int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
@@ -709,9 +715,10 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
                     j = joueur_suivant(j);
 			}
 			choix=fin_de_partie_sdl(&j);
-			if(choix == 1){
-					choix=1;//appelle fonction
-			}
+			//Si le joueur veut continuer, alors on regarde si tous les joueurs veulent continuez de jouer
+			if (choix == 1) {
+		                choix = attente_nouvelle_partie_distant(j);
+            		}
 
 		} while(!(choix));
 
