@@ -320,7 +320,6 @@ int initialiser_joueur_distant(Joueur **j){
 		} while(r == 0 && continuer == 0);
 		if(continuer == 0){
 			if (r < 0) {
-				fprintf(stderr,"Probleme de connexion");
 				continuer = 4;
 			}
 			else {
@@ -331,7 +330,7 @@ int initialiser_joueur_distant(Joueur **j){
 		}
 	}
 	else {
-		fprintf(stderr,"Problème de connexion");
+		continuer = 4;
 	}
 	free_bouton_sdl(&b_retour);
 	return continuer;
@@ -361,11 +360,12 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	Joueur* j_pivot = *j;
 	/*Tant que tous les joueurs n'ont pas de pseudo*/
 	do{
-		while(retour == 4){
+		while(retour == 4) {
 			retour=saisir_type_joueur(j);
-			if(retour)
+			if(retour) {
+				fermer_connexions_distantes(*j);
 				return retour;
-
+			}
 
 			switch((*j)->type){
 				case BOT: sprintf((*j)->pseudo,"Bot %s",couleur_tostring((*j)->couleur));break;
@@ -381,12 +381,14 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 					if(retour == 3)
 						return 3;
 					else if (retour == 4) {
+						fermer_connexions_distantes(*j);
 						erreur_reseau();
 						return 4;
 					}
-                                        else if (retour == 2) {
-                                            return 4;
-                                        }
+                    else if (retour == 2) {
+                    	fermer_connexions_distantes(*j);
+                        return 4;
+                    }
 					break;
 				default:return 3;
 			}
@@ -562,7 +564,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 			SDL_RenderClear(renderer);
 	    		while(SDL_PollEvent(&event)) {
       				if(event.type == SDL_QUIT){
-           				valeur_r= 2;
+           				return 3;
         			}
 			}
 			afficher_plateau_sdl(pl);
@@ -575,12 +577,13 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
                             valeur_r = recevoir_buffer((*j)->sockfd, buffer);
                             if (valeur_r == -1) {
                             	(*j)->type = BOT;
-                            	return -1;
+                            	return 5;
                             }
                         }
 		}
 
-		valeur_r = recup_type(buffer);
+		if (valeur_r > 0)
+			valeur_r = recup_type(buffer);
 
 		if (valeur_r == PLATEAU) { // Le joueur a jouer
 			id_piece = recevoir_plateau(buffer, pl);
@@ -619,6 +622,9 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		*j=joueur_suivant(*j);
 
 	}
+
+	free_afficher_pieces_dispo_sdl(&r);
+
 	return valeur_r;
 }
 
@@ -744,7 +750,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 				return choix;
 			}
 			//Si le joueur n'a pas déjà abandonné
-			if(choix != 4){
+			if(choix != 4 && choix != 5){
 				// Sons
 				if(joueur_a_abandonne(init)) {
                         		jouer_son(ABANDON);

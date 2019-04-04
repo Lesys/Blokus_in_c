@@ -677,7 +677,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         r = recevoir_buffer(sockfd, buffer);
     } while (r == 0);
     if (r < 0) {
-        return 3;
+        return erreur_reseau();
     }
     else {
         *j = recevoir_liste_joueurs(buffer);
@@ -763,7 +763,6 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                     else {
                         jouer_son(POSE_PIECE);
                         r = envoyer_plateau(hote, pl, choix * -1);
-                        printf("%d\n", r);
                     }
                 }
                 if (r == -1) {
@@ -784,6 +783,7 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
           
 
             if(choix == 3) {
+                printf("Fermeture");
                 fermer_connexion(hote);
                 return choix;
             }
