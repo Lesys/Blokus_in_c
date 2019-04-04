@@ -221,8 +221,6 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 			moyen++;
 		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
 			bon++;*/
-CONFLIT (contenu) : Conflit de fusion dans src/gestion_bot.c
-
 	} while ((c = carre_get_suiv(c)) != init);
 }
 
@@ -297,7 +295,7 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 
     afficher_scores_sdl(bot);
 
-    afficher_tour_sdl(bot);if
+    afficher_tour_sdl(bot);
 
     SDL_RenderPresent(renderer);
 

@@ -43,7 +43,6 @@ int verification_position_sdl(Couleur pl[20][20], int x, int y, Piece* p)
     return 1;
 }
 
-/* Fonction retournant VRAI si la coordonnée est dans le plateau, FAUX sinon */
 static int coord_dans_plateau(int coord)
 {
     return (coord >= 0 && coord < TAILLE_PLATEAU);
@@ -174,7 +173,6 @@ void poser_piece_sdl(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
             c = carre_get_suiv(c);
         } while(c != piece_liste_carre(pi));
 
-
         while ((*p) != pi)
         {
             *p = piece_suivant(*p);
@@ -214,6 +212,8 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
             {
                 etat = 1;
             }
+
+
         }
         else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT && *p)
         {
@@ -244,10 +244,22 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
         }
     }
 
-    int x, y;
-    if(curs_hover_plateau(pl, &x, &y))
-
     return etat;
+}
+
+static void colorer_selection(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Piece* p, int x, int y)
+{
+    Carre* c = piece_liste_carre(p);
+    Carre* c2 = c;
+
+    do
+    {
+        if(coord_dans_plateau(x + carre_get_x(c2)) && coord_dans_plateau(y + carre_get_y(c2)) && pl[x + carre_get_x(c2)][y + carre_get_y(c2)] == VIDE)
+            pl[x + carre_get_x(c2)][y + carre_get_y(c2)] = SELECTION;
+
+        c2 = carre_get_suiv(c2);
+
+    } while(c != c2);
 }
 
 int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
@@ -266,7 +278,26 @@ int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
 
         etat = selection_piece(pl, j, r, &p, b);
 
-        afficher_plateau_sdl(pl);
+        int x, y;
+
+        if(curs_hover_plateau(pl, &x, &y) && p != NULL)
+        {
+            Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+
+        	int k, l;
+
+        	/* Recopie du plateau */
+        	for (k = 0; k < TAILLE_PLATEAU; k++)
+        		for (l = 0; l < TAILLE_PLATEAU; l++)
+        			pl2[k][l] = pl[k][l];
+
+            colorer_selection(pl2, p, x, y);
+
+            afficher_plateau_sdl(pl2);
+        }
+        else
+            afficher_plateau_sdl(pl);
+
         afficher_pieces_dispo_sdl(r, j, p);
         afficher_scores_sdl(j);
         afficher_tour_sdl(j);
