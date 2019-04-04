@@ -171,12 +171,12 @@ int accepter_connexion(int sockfd) {
 
     // Mise du socket en non bloquant
     #ifndef WINDOWS
-    int flags = fcntl(sockfd, F_GETFL);
-    fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    int flags = fcntl(newsockfd, F_GETFL);
+    fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
     #endif
     #ifdef WINDOWS
     unsigned long mode = 1;
-    ioctlsocket(sockfd, FIONBIO, &mode);
+    ioctlsocket(newsockfd, FIONBIO, &mode);
     #endif
 
 
@@ -629,10 +629,10 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 	//Si il appuis sur un bouton
 		else if(event.type == SDL_MOUSEBUTTONDOWN){
 			if(curs_hover_bouton(b_retour)) {
-                jouer_son(BOUTON_RETOUR);
-                fermer_connexion(sockfd);
+                            jouer_son(BOUTON_RETOUR);
+                            fermer_connexion(sockfd);
 				return 2;
-            }
+                        }
 		}
             else if(pseudo > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) ) {
@@ -656,13 +656,13 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
     }
 
     // Envoi du pseudo
-    envoyer_pseudo(sockfd, pseudo);
+    printf("Envoi pseudo -> %s -> %d, r = %d\n", pseudo, sockfd, envoyer_pseudo(sockfd, pseudo));
 
     SDL_StopTextInput();
 
     // Attente du début de la partie
     unsigned char buffer[TAILLE_BUFF];
-    int r;
+    int r = 0;
 
     do {
         while(SDL_PollEvent(&event)){
