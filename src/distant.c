@@ -282,7 +282,7 @@ int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int 
         }
     }
 
-    // Ecriture du type
+    // Ecriture de l'id piece
     memcpy(buffer + offset, &id_piece, sizeof(int));
     offset += sizeof(int);
 
@@ -763,6 +763,7 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                     else {
                         jouer_son(POSE_PIECE);
                         r = envoyer_plateau(hote, pl, choix * -1);
+                        printf("%d\n", r);
                     }
                 }
                 if (r == -1) {
@@ -780,10 +781,7 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                 }
             }
 
-            if (choix == -1) {
-                fermer_connexion(hote);
-                return erreur_reseau();
-            }
+          
 
             if(choix == 3) {
                 fermer_connexion(hote);
