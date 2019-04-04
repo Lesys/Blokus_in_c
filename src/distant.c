@@ -656,7 +656,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
     }
 
     // Envoi du pseudo
-    printf("Envoi pseudo -> %s -> %d, r = %d\n", pseudo, sockfd, envoyer_pseudo(sockfd, pseudo));
+    envoyer_pseudo(sockfd, pseudo);
 
     SDL_StopTextInput();
 
