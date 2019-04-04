@@ -341,7 +341,7 @@ int eval_nb_nouveaux_coins(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 		y = coord_y + carre_get_y(c);
 
 		/* Calcul combien il y a de coins disponibles autour de chaque Carre */
-		nb += nb_coins_dispo(pl, x, y);
+		//nb += nb_coins_dispo(pl, x, y);
 
 	} while ((c = carre_get_suiv(c)) != init);
 }
