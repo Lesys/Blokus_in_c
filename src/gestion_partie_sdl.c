@@ -399,7 +399,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 
 	do{
 		if((*j)->sockfd)
-			envoyer_liste_joueurs((*j)->sockfd, j_pivot);
+			envoyer_liste_joueurs((*j)->sockfd, (*j));
 		*j=joueur_suivant(*j);
 	} while(*j != j_pivot);
 	return 0;

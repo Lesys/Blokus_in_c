@@ -325,7 +325,7 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
  * \fn int envoyer_liste_joueurs(int sockfd, Joueur * j);
  * \brief Envoie la liste des joueurs au joueur distant
  * \param sockfd Numéro du socket à qui envoyer
- * \param j Liste des joueurs
+ * \param j Liste des joueurs (positionné sur le joueur à qui l'on envoie)
  * \param Nombre d'octets envoyés, -1 si erreur
  */
 int envoyer_liste_joueurs(int sockfd, Joueur * j) {
@@ -333,7 +333,11 @@ int envoyer_liste_joueurs(int sockfd, Joueur * j) {
     int type = LISTE_JOUEURS;
     unsigned char buffer[TAILLE_PSEUDO*5] = {0};
     unsigned char c;
+    Couleur couleur = joueur_couleur(j);
     int offset = 0;
+
+    // On commence par le joueur bleu (premier joueur)
+    while (joueur_couleur(j) != BLEU) j = joueur_suivant(j);
 
     // Ecriture du type
     memcpy(buffer + offset, &type, sizeof(int));
@@ -359,6 +363,10 @@ int envoyer_liste_joueurs(int sockfd, Joueur * j) {
         j = joueur_suivant(j);
     } while(j != init);
 
+    // Ecriture de la couleur du joueur
+    memcpy(buffer + offset, &couleur, sizeof(int));
+    offset += sizeof(int);
+
     // Vérification socket encore ouvert
     if (recv(sockfd, &c, 1, 0) == 0) {
         return -1;
@@ -378,6 +386,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
 
     int offset = sizeof(int);
     int nb_joueurs =  0;
+    Couleur couleur;
 
     // Récupération du nombre de joueurs
     memcpy(&nb_joueurs, buffer + offset, sizeof(int));
@@ -385,6 +394,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
 
     // Création de la liste des joueurs
     Joueur * j = joueur_liste_creation(nb_joueurs);
+    Joueur * jc = j;
 
     // Récupération des pseudos
     for (int i = 0; i < nb_joueurs; i++) {
@@ -392,6 +402,11 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
         offset += TAILLE_PSEUDO;
         j = joueur_suivant(j);
     }
+
+    // Récupération de la couleur et mise du sockfd à -1 du joueur local
+    memcpy(&couleur, buffer + offset, sizeof(int));
+    while (joueur_couleur(jc) != couleur) jc = joueur_suivant(jc);
+    jc->sockfd = -1;
 
     return j;
 }
@@ -683,10 +698,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         *j = recevoir_liste_joueurs(buffer);
         Joueur * init = *j;
         do {
-            if (strcmp(joueur_pseudo(*j), pseudo)  == 0) {
-                (*j)->sockfd = -1;
-            }
-            else {
+            if ((*j)->sockfd != -1) {
                 (*j)->sockfd = sockfd;
             }
             *j = joueur_suivant(*j);
