@@ -24,6 +24,7 @@ extern int effet;
  */
 int init_son() {
 
+    #ifndef SANS_SON
     // Initialisation du struc ressources_audio
     ressources_audio = malloc(sizeof(Ressources_audio));
     if (!ressources_audio) {
@@ -44,6 +45,7 @@ int init_son() {
     ressources_audio->bouton_retour = Mix_LoadWAV("ressources/bouton_retour.wav");
     ressources_audio->musique_fond = Mix_LoadMUS("ressources/musique_fond.ogg");
 
+    #endif
     return 1;
 }
 
@@ -55,6 +57,7 @@ int init_son() {
  */
 void free_son() {
 
+    #ifndef SANS_SON
     if (ressources_audio) {
         Mix_FreeChunk(ressources_audio->pose_piece);
         Mix_FreeChunk(ressources_audio->cloche);
@@ -65,6 +68,7 @@ void free_son() {
     }
 
     Mix_CloseAudio();
+    #endif
 }
 
 /**
@@ -75,6 +79,7 @@ void free_son() {
  */
 void jouer_son(Sons s) {
 
+    #ifndef SANS_SON
     switch (s) {
         case POSE_PIECE:
             if (effet) Mix_PlayChannel(-1, ressources_audio->pose_piece, 0);
@@ -99,4 +104,5 @@ void jouer_son(Sons s) {
             printf("Type de son incorrect\n");
             break;
     }
+    #endif
 }
