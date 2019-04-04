@@ -266,7 +266,8 @@ int initialiser_joueur_distant(Joueur **j){
 	int continuer = 0;
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
 
-	while (sockfd == -1 && continuer == 0) {
+	while (sockfd == -1){
+// && continuer == 0) {
 
 		SDL_RenderClear(renderer);
 
@@ -275,14 +276,16 @@ int initialiser_joueur_distant(Joueur **j){
 			//Si il appuis sur la croix
 			if(event.type == SDL_QUIT) {
 				fermer_connexion(sockfd_connexion);
-				continuer = 3;
+				return 3;
+				//continuer = 3;
 			}
 			//Si il appuis sur un bouton
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
 				if(curs_hover_bouton(b_retour)) {
 					jouer_son(BOUTON_RETOUR);
 					fermer_connexion(sockfd_connexion);
-					continuer = 4;
+					return 4;
+					//continuer = 4;
 				}
 			}
 		}
@@ -298,47 +301,54 @@ int initialiser_joueur_distant(Joueur **j){
 	int r = 0;
 
 	if(sockfd > 0){
-
+		printf("%d : VALEUR SOCKFD\n");
 		do {
 			SDL_RenderClear(renderer);
 			//Attend un événement
 			while(SDL_PollEvent(&event)){
 				//Si il appuis sur la croix
 				if(event.type == SDL_QUIT)
-					continuer = 3;
+					//continuer = 3;
+					return 3;
 				//Si il appuis sur un bouton
 				else if(event.type == SDL_MOUSEBUTTONDOWN){
 					if(curs_hover_bouton(b_retour))
-						continuer = 4;
+						return 4;
+						//continuer = 4;
 				}
 			}
 			afficher_bouton_sdl(b_retour);
 			afficher_attente_pseudo_sdl();
 			SDL_RenderPresent(renderer);
+			//printf("%d: VALEUR r, %d VALEUR CONTINUER\n",r,continuer);
 			r = recevoir_buffer(sockfd, buffer);
-			printf("%d: VALEUR r, %d VALEUR CONTINUER\n",r,continuer);
-			printf("%d:CONDITION BOUCLE \n",r == 0 && continuer == 0);
-		} while(r == 0);
-		if(r){
-			printf("Valeur r %d \n",r);
+			//printf("%d: VALEUR r, %d VALEUR CONTINUER\n",r,continuer);
+			//printf("%d:CONDITION BOUCLE \n",r == 0 && continuer == 0);
+		} while(r == 0 );
+//&& continuer == 0);
+		//if(!continuer){
+		//	printf("Valeur r %d \n",r);
 			if (r < 0) {
 				fprintf(stderr,"Probleme de connexion");
-				continuer = 4;
+				//continuer = 2;
+				return 2;
 			}
 			else {
 				(*j)->sockfd=sockfd;
-				printf("Avant recevoir valeur\n");
+				//printf("Avant recevoir valeur\n");
 				recevoir_pseudo(buffer,(*j)->pseudo);
-				printf("Apres recevoir valeur\n");
+				//printf("Apres recevoir valeur\n");
            			(*j)->type = DISTANT;
 			}
-		}
+		//}
 	}
 	else {
 		fprintf(stderr,"Problème de connexion");
+		return 1;
 	}
 	free_bouton_sdl(&b_retour);
-	return continuer;
+	//return continuer;
+	return 0;
 }
 
 /**
