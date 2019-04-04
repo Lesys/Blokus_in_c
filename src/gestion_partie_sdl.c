@@ -3,7 +3,6 @@
 	*\brief Regroupent toutes les fonctions gestion_partie_sdl.c
 	*\details Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles.
 	*\author JODEAU Alexandre
-
 */
 #include <string.h>
 #include <stdio.h>
@@ -421,7 +420,6 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	\return Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu):
 		*1 - Recommence une manche. <br>
 		*2 - Retourne au titre. <br>
-
 */
 
 
@@ -489,7 +487,6 @@ int fin_de_partie_sdl(Joueur** j){
 	pivot=joueur_suivant(pivot);
 	int valeur_r;
         SDL_Event event_fin;
-
 	while(j != pivot){
 		SDL_RenderClear(renderer);
 		//On attend la touche du joueur
@@ -506,9 +503,7 @@ int fin_de_partie_sdl(Joueur** j){
 			return valeur_r;
 		}
 		pivot=joueur_suivant(pivot);
-
 	}
-
 	return choix;
 }
 */
@@ -522,7 +517,6 @@ int fin_de_partie_sdl(Joueur** j){
 	  renvoie le resultat de la fonction gestion_tour_sdl<br>
 	*1 = Abandon du Joueur
 	*2 = Quitte le jeu ( Appuis sur la croix)
-
 */
 
 /*Appel toute les fonctions pour réalisé un tour*/

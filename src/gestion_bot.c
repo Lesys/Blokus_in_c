@@ -7,6 +7,7 @@
 #include "../include/affichage_sdl.h"
 #include "../include/affichage.h"
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -160,7 +161,7 @@ static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* jo
                 {
                     /* Si la pièce est posable */
                     if(verifier_coordonnees(pl, p, i, j, joueur))
-			compteur++;
+						compteur++;
 
                     changer_orientation(p);
                 }
@@ -188,7 +189,7 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 			pl2[i][j] = pl[i][j];
 
 	/* Calcul de tous les coins disponibles pour le Joueur actuel et les autres avant la pose de la Piece */
-	nb_coin_bot = nb_coups_dispo(pl2, bot);
+//	nb_coin_bot = nb_coups_dispo(pl2, bot);
 
 	poser_piece_bot(pl2, coup);
 
@@ -204,13 +205,14 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 //	eval += eval_cases_dispo(pl2, bot, nb_coin_bot) * COEF_CASES_DISPO;
 	Joueur* tmp = bot;
 
-	while ((tmp = joueur_suivant(tmp)) != bot)
-		nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
+		while ((tmp = joueur_suivant(tmp)) != bot) {
+			nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
 
-		eval += eval_nb_coups_bloques(pl2, bot, nb_coin_adversaire) * COEF_COINS_BLOQUES;
+			eval += eval_nb_coups_bloques(pl2, bot, coup) * COEF_COINS_BLOQUES;
+		}
 	}
 
-	eval += eval_nb_nouveaux_coups(pl2, bot, nb_coin_bot) * COEF_NOUVEAUX_COINS;
+//	eval += eval_nb_nouveaux_coups(pl2, bot, nb_coin_bot) * COEF_NOUVEAUX_COINS;
 
 	return eval;
 
@@ -286,17 +288,69 @@ int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j
 	return nb - nb_ancien_coup;
 }
 
-int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int nb_ancien_coup) {
+int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Coup* coup) {
+
 	int nb = 0;
 
 	Joueur* j = bot;
 
-	/* Calcul le nombre de nouveaux coups pour les adversaires */
-	while ((j = joueur_suivant(j)) != bot)
-		nb += nb_coups_dispo(pl, j);
+	Piece* p = coup_piece(coup);
 
-	/* Retourne la différence de coup (positive ou négative) par rapport à l'état précédent */
-	return (nb - nb_ancien_coup) * -1; /* -1 car normalement, la différence est négative */
+	Carre* c = piece_liste_carre(p);
+	Carre* c2 = c;
+
+	do
+	{
+		c = carre_get_suiv(c);
+
+		if(coup_coord_x(coup) + carre_get_x(c) < 19 && coup_coord_y(coup) + carre_get_y(c) < 19)
+		{
+			if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) + 1] != VIDE && pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) + 1] != coup_couleur(coup))
+			{
+				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) + 1];
+
+				if(pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul && pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul)
+					nb++;
+			}
+		}
+
+		if(coup_coord_x(coup) + carre_get_x(c) > 0 && coup_coord_y(coup) + carre_get_y(c) < 19)
+		{
+			if(pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) + 1] != VIDE && pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) + 1] != coup_couleur(coup))
+			{
+				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) + 1];
+
+				if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul)
+					nb++;
+			}
+		}
+
+		if(coup_coord_x(coup) + carre_get_x(c) < 19 && coup_coord_y(coup) + carre_get_y(c) > 0)
+		{
+			if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) - 1] != VIDE && pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) - 1] != coup_couleur(coup))
+			{
+				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) - 1];
+
+				if(pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul && pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul)
+					nb++;
+			}
+		}
+
+		if(coup_coord_x(coup) + carre_get_x(c) > 0 && coup_coord_y(coup) + carre_get_y(c) > 0)
+		{
+			if(pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) - 1] != VIDE && pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) - 1] != coup_couleur(coup))
+			{
+				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) - 1];
+
+				if(pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul)
+					nb++;
+			}
+		}
+
+	} while(c != c2);
+
+	/* Retourne le nombre de cases bloquées */
+	return nb;
 }
 
 int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
