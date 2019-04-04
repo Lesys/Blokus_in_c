@@ -242,6 +242,10 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
             changer_orientation(*p);
         }
     }
+
+    int x, y;
+    if(curs_hover_plateau(pl, &x, &y))
+
     return etat;
 }
 

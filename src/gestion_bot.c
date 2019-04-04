@@ -302,7 +302,7 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 
     free_afficher_pieces_dispo_sdl(&r);
 
-	/* sleep(1); */
+	sleep(1);
 
 	return retour;
 }
