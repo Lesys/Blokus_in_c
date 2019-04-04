@@ -656,7 +656,8 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 }
 
 // 1 si tout est ok, 2 si deconnexion, 3 si croix
-static int attente_nouvelle_partie(Joueur * j) {
+static
+int attente_nouvelle_partie(Joueur * j) {
 	// Attends que tout les joueurs distants est envoyés le message pret
 	Joueur* pivot=j;
 	SDL_Event event;
@@ -688,6 +689,8 @@ static int attente_nouvelle_partie(Joueur * j) {
 			type = PRET;
 		pivot=joueur_suivant(pivot);
 	} while(type == PRET && pivot != j);
+
+        pivot = j;
 
 	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
 	if(type == PRET){
@@ -783,6 +786,8 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 	} while(choix == 1 );
+        
+        fermer_connexions_distantes(j);
 
 	return choix;
 }
