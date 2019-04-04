@@ -699,18 +699,39 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
 // 1 si tout est ok, 2 si deconnexion, 3 si croix
 int attente_nouvelle_partie_distant(int hote) {
-    // Envoyer_pret() à l'hote
-    // Créer un buffer -> unsigned char buffer[TAILLE_BUFF];
-
-    // tant que pas de réponse ou erreur connexion
-        // Afficher le message d'attente avec afficher_attente_nouvelle_partie()
+	envoyer_pret(hote); // Envoyer_pret() à l'hote
+    	int nb_recois = 0;
+	int type;
+	unsigned char buffer[TAILLE_BUFF];
+	SDL_Event event;	// Afficher le message d'attente avec afficher_attente_nouvelle_partie()
         // Gestion des évènements (retour 3 si on appuie sur la croix)
 
-        // Récupération d'un message dans le buffer avec int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF])
-        // si la fonction renvoie -1 -> erreur de connexion on retourne 2
+	while(nb_recois == 0){
+		while(SDL_PollEvent(&event)){
+			if(event.type == SDL_QUIT)
+				return 3;
+		}
+	        SDL_RenderClear(renderer);
+		afficher_attente_debut_sdl();
+		SDL_RenderPresent(renderer);
+		nb_recois= recevoir_buffer(hote,buffer);
+	}
+	// Récupération d'un message dans le buffer avec int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF])
+	// si la fonction renvoie -1 -> erreur de connexion on retourne 2
+
+        if(nb_recois == -1){
+		return 2;
+	}
 
         // Sinon on utilises la fonction int recup_type(unsigned char * buffer) qui renvoie le type de message
         // Si le type de message = PRET on retourne 1
+	else{
+		type = recup_type(buffer);
+		if(type == PRET)
+			return 1;
+		else
+			return 2;
+	}
 }
 
 /**

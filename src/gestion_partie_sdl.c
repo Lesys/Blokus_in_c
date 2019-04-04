@@ -293,11 +293,12 @@ int initialiser_joueur_distant(Joueur **j){
 
 		sockfd = accepter_connexion(sockfd_connexion);
 	}
-
+	//La OK
 	unsigned char buffer[TAILLE_BUFF];
-	int r;
+	int r = 0;
 
 	if(sockfd > 0){
+
 		do {
 			SDL_RenderClear(renderer);
 			//Attend un événement
@@ -315,15 +316,20 @@ int initialiser_joueur_distant(Joueur **j){
 			afficher_attente_pseudo_sdl();
 			SDL_RenderPresent(renderer);
 			r = recevoir_buffer(sockfd, buffer);
-		} while(r == 0 && continuer == 0);
-		free_bouton_sdl(&b_retour);
-		if(!continuer){
+			printf("%d: VALEUR r, %d VALEUR CONTINUER\n",r,continuer);
+			printf("%d:CONDITION BOUCLE \n",r == 0 && continuer == 0);
+		} while(r == 0);
+		if(r){
+			printf("Valeur r %d \n",r);
 			if (r < 0) {
-				continuer = 2;
+				fprintf(stderr,"Probleme de connexion");
+				continuer = 4;
 			}
 			else {
 				(*j)->sockfd=sockfd;
+				printf("Avant recevoir valeur\n");
 				recevoir_pseudo(buffer,(*j)->pseudo);
+				printf("Apres recevoir valeur\n");
            			(*j)->type = DISTANT;
 			}
 		}
@@ -331,6 +337,7 @@ int initialiser_joueur_distant(Joueur **j){
 	else {
 		fprintf(stderr,"Problème de connexion");
 	}
+	free_bouton_sdl(&b_retour);
 	return continuer;
 }
 
@@ -382,7 +389,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 						return 3;
 					}
 					break;
-					default:return 3;
+				default:return 3;
 			}
 		}
 		retour=4;
@@ -649,7 +656,7 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 }
 
 // 1 si tout est ok, 2 si deconnexion, 3 si croix
-int attente_nouvelle_partie(Joueur * j) {
+static int attente_nouvelle_partie(Joueur * j) {
 	// Attends que tout les joueurs distants est envoyés le message pret
 	Joueur* pivot=j;
 	SDL_Event event;
@@ -680,15 +687,16 @@ int attente_nouvelle_partie(Joueur * j) {
 		else
 			type = PRET;
 		pivot=joueur_suivant(pivot);
-	} while(type == PRET && pivot != j && retour != 3);
+	} while(type == PRET && pivot != j);
 
 	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
 	if(type == PRET){
-		do{
-			if(pivot->type == DISTANT)
+		if(pivot->type == DISTANT){
+			do{
 				envoyer_pret(pivot->sockfd);
-			pivot=joueur_suivant(pivot);
-		} while(pivot != j);
+				pivot=joueur_suivant(pivot);
+			} while(pivot != j);
+		}
 		retour = 1;
 	}
 	//Sinon on ferme la connexion
@@ -765,7 +773,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 			choix=fin_de_partie_sdl(&j);
 			//Si le joueur veut continuer, alors on regarde si tous les joueurs veulent continuez de jouer
 			if (choix == 1) {
-		                choix = attente_nouvelle_partie_distant(j);
+			       choix = attente_nouvelle_partie(j);
             		}
 
 		} while(!(choix));
