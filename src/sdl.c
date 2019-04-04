@@ -8,14 +8,34 @@
 
 #include "../include/affichage_sdl.h"
 #include "../include/commun.h"
+#include "../include/son.h"
 
 SDL_Window * window;
 SDL_Renderer * renderer;
 
-int sdl_init() {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	TTF_Init();
-	window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
+int sdl_init(int fullscreen) {
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
+		printf("Erreur initialisation SDL: %s\n", SDL_GetError());
+		return 0;
+	}
+	
+	if (TTF_Init()) {
+		printf("Erreur initialisation SDL_ttf\n");
+		return 0;
+	}
+
+	if (!init_son()) {
+		printf("Erreur initialisation SDL_mixer\n");
+		return 0;
+	}
+
+	if (fullscreen) {
+		window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, -1, -1, SDL_WINDOW_FULLSCREEN);
+	}
+	else {
+		window = SDL_CreateWindow("Blokus in C", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
+	}
+
 	if (!window) {
 		printf("%s", SDL_GetError());
 		return 0;
@@ -37,7 +57,7 @@ int sdl_init() {
 	}
 
 	SDL_SetRenderDrawColor(renderer, 54, 57, 63, 255);
-	init_affichage_sdl();
+	init_affichage_sdl(fullscreen);
 
 	// Initialisation sockets windows
 	#ifdef WINDOWS
@@ -45,11 +65,14 @@ int sdl_init() {
 	WSAStartup(MAKEWORD(2, 2), &wsa);
 	#endif
 
+	return 1;
+
 }
 
-int sdl_close() {
+void sdl_close() {
 
 	IMG_Quit();
+	free_son();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

@@ -15,6 +15,7 @@ typedef struct ressources {
 	Sprite * carre_jaune;
 	Sprite * carre_bleu;
 	Sprite * carre_vert;
+	Sprite * selection;
 	TTF_Font * police_m;
 	TTF_Font * police_p;
 	Sprite * fond_score;
@@ -32,6 +33,10 @@ typedef struct ressources {
 	Sprite * tapis_jaune;
 	Sprite * tapis_bleu;
 	Sprite * fond_plateau;
+	Sprite * son;
+	Sprite * son_selec;
+	Sprite * effet;
+	Sprite * effet_selec;
 	SDL_Color blanc;
 	SDL_Color jaune;
 	SDL_Color vert;
@@ -67,9 +72,11 @@ typedef enum type_bouton {
 	TYPE_JOUEUR_LOCAL,
 	TYPE_JOUEUR_DISTANT,
 	TYPE_JOUEUR_BOT,
-        CREER_PARTIE,
-        REJOINDRE_PARTIE,
-        RETOUR
+    CREER_PARTIE,
+    REJOINDRE_PARTIE,
+    RETOUR,
+    SON,
+    EFFET
 } Type_bouton;
 
 typedef struct bouton {
@@ -81,7 +88,7 @@ typedef struct bouton {
 } Bouton;
 
 
-int init_affichage_sdl(); // Appelé par sdl_init() chargement des sprites dans le struct sprite qui sera en variable globale
+int init_affichage_sdl(int fullscreen); // Appelé par sdl_init() chargement des sprites dans le struct sprite qui sera en variable globale
 
 void free_affichage_sdl();
 
@@ -130,5 +137,9 @@ void afficher_saisie_adresse_sdl(char * str);
 void afficher_saisie_pseudo_distant_sdl(char * str);
 
 int curs_hover_bouton(Bouton * b);
+
+void afficher_erreur_reseau();
+
+void afficher_attente_nouvelle_partie();
 
 #endif

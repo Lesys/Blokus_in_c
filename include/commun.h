@@ -30,19 +30,25 @@
 #define PROFONDEUR 0
 
 /* Entre 0 et 9 (0 == bord, 9 == 1 case du centre) */
+#define COUP_BORD 1
 #define COUP_MAUVAIS 3
 #define COUP_MOYEN 5
 #define COUP_BON 7
 
-#define COEF_COUP_CENTRE 4
-#define COEF_COUP_BON 3
-#define COEF_COUP_MOYEN 2
-#define COEF_COUP_MAUVAIS 1
+#define COEF_COUP_CENTRE 5
+#define COEF_COUP_BON 4
+#define COEF_COUP_MOYEN 3
+#define COEF_COUP_MAUVAIS 2
+#define COEF_COUP_BORD 1
 
-#define COEF_CARRES_POSES 1
+#define COEF_CARRES_POSES 3
 #define COEF_EMPLACEMENT_PIECE 1
-#define COEF_CASES_DISPO 2
-#define COEF_NOUVEAUX_COINS 2
+#define COEF_CASES_DISPO 0.15
+#define COEF_NOUVEAUX_COINS 4
 #define COEF_COINS_BLOQUES 3
+
+#define RAYON_CASE_DISPO 4
+
+#define TEMPS_ATTENTE_BOT 1
 
 #endif

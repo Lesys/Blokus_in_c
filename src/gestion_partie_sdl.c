@@ -17,8 +17,11 @@
 #include "../include/gestion_partie.h"
 #include "../include/gestion_bot.h"
 #include "../include/affichage_sdl.h"
+#include "../include/son.h"
 
 extern SDL_Renderer* renderer;
+int son;
+int effet;
 
 /**
 	*\fn void saisir_pseudo(Joueur **j)
@@ -37,17 +40,19 @@ int saisir_pseudo_joueur(Joueur** j){
 	SDL_StartTextInput();
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
 	/*Boucle d'évenement*/
-	while(continuer){
+	while(continuer == 1){
 
 		SDL_RenderClear(renderer);
 		/*Attend l'appuis d'une touche*/
 		while(SDL_PollEvent(&event_saisie)){
 			/*Si c'est la croix, on arrete*/
 			if(event_saisie.type == SDL_QUIT)
-				return 3;
+				continuer= 3;
 			/*Si c'est la touche entrée, on passe au joueur suivant*/
-			else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) )
+			else if(strlen((*j)->pseudo) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) ) {
+				jouer_son(BOUTON);
 				continuer = 0;
+			}
 			/*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
 			else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
 				if (strlen((*j)->pseudo) > 0)
@@ -57,8 +62,10 @@ int saisir_pseudo_joueur(Joueur** j){
 			else if(event_saisie.type == SDL_TEXTINPUT && strlen((*j)->pseudo) < TAILLE_PSEUDO) {
 				strcat((*j)->pseudo, event_saisie.text.text);
 			}
-			else if(curs_hover_bouton(b_retour))
-					return 4;
+			else if(event_saisie.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour)) {
+				jouer_son(BOUTON_RETOUR);
+				continuer=4;
+			}
 
 		}
 		afficher_bouton_sdl(b_retour);
@@ -66,18 +73,19 @@ int saisir_pseudo_joueur(Joueur** j){
 		SDL_RenderPresent(renderer);
 		}
 	SDL_StopTextInput();
-	/* Si le pseudo n'est pas trop grand */
-	if (strlen((*j)->pseudo) < TAILLE_PSEUDO) {
-        /* Réalloue la bonne taille pour le pseudo */
-	        (*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
-		(*j)->pseudo[strlen((*j)->pseudo)]='\0';
+	if(!continuer){
+		/* Si le pseudo n'est pas trop grand */
+		if (strlen((*j)->pseudo) < TAILLE_PSEUDO) {
+			/* Réalloue la bonne taille pour le pseudo */
+			(*j)->pseudo = realloc((*j)->pseudo, sizeof(char) * (strlen((*j)->pseudo) + 1));
+			(*j)->pseudo[strlen((*j)->pseudo)]='\0';
+		}
+		else /* S'il est trop grand: troncature */
+			(*j)->pseudo[TAILLE_PSEUDO]='\0';
 	}
-	else /* S'il est trop grand: troncature */
-		(*j)->pseudo[TAILLE_PSEUDO]='\0';
-
 	free_bouton_sdl(&b_retour);
 
-	return 0;
+	return continuer;
 }
 
 /**
@@ -100,30 +108,38 @@ int saisir_nb_joueur(){
 	Bouton* b_nb_quatre=init_bouton_sdl(NB_JOUEURS_4);
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
 
-	/*Tant que l'evenenement n'est pas fini*/
+	//Tant que l'evenenement n'est pas fini
 	while(continuer == 1){
 		SDL_RenderClear(renderer);
 		//Attend un événement
 		while(SDL_PollEvent(&event)){
 			//Si il appuis sur la croix
 			if(event.type == SDL_QUIT)
-				return -1;
+				continuer = -1;
 			//Si il appuis sur un bouton
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
-				/*Bouton 2 joueur*/
-				if (curs_hover_bouton(b_nb_deux))
+				//Bouton 2 joueur
+				if (curs_hover_bouton(b_nb_deux)) {
+					jouer_son(BOUTON);
 					nb_joueur=2;
+				}
 
-				/*Bouton 3 joueur*/
-				else if (curs_hover_bouton(b_nb_trois))
+				//Bouton 3 joueur
+				else if (curs_hover_bouton(b_nb_trois)) {
+					jouer_son(BOUTON);
 					nb_joueur=3;
+				}
 
-				/*Bouton 4 joueur*/
-				else if (curs_hover_bouton(b_nb_quatre))
+				//Bouton 4 joueur
+				else if (curs_hover_bouton(b_nb_quatre)) {
+					jouer_son(BOUTON);
 					nb_joueur=4;
+				}
 
-				else if(curs_hover_bouton(b_retour))
-					nb_joueur= 5;
+				else if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
+					continuer= 5;
+				}
 
 			}
 		}
@@ -131,7 +147,7 @@ int saisir_nb_joueur(){
 		if( nb_joueur > 0){
 			continuer=0;
 		}
-		/*Partie Affichage*/
+		//Partie Affichage
 		afficher_nb_joueurs_sdl();
 		afficher_bouton_sdl(b_nb_deux);
 		afficher_bouton_sdl(b_nb_trois);
@@ -144,7 +160,10 @@ int saisir_nb_joueur(){
 	free_bouton_sdl(&b_nb_trois);
 	free_bouton_sdl(&b_nb_quatre);
 	free_bouton_sdl(&b_retour);
-	return nb_joueur;
+	if(nb_joueur == -1)
+		return continuer;
+	else
+		return nb_joueur;
 }
 
 /**
@@ -177,17 +196,19 @@ int saisir_type_joueur(Joueur** j){
 		while(SDL_PollEvent(&event)){
 			//Si il appuis sur la croix
 			if(event.type == SDL_QUIT)
-				return 3;
+				continuer = 3;
 			//Si il appuis sur un bouton
-			else if(event.type == SDL_MOUSEBUTTONDOWN){
+		else if(event.type == SDL_MOUSEBUTTONDOWN){
 				/*Bouton bot*/
 				if (curs_hover_bouton(b_bot)){
+					jouer_son(BOUTON);
 					type_tmp=BOT;
 					//Si on appuis sur un bouton, alors on arrete la boucle*/
 					continuer=0;
 				}
 				/*Bouton local*/
 				else if (curs_hover_bouton(b_j_local)){
+					jouer_son(BOUTON);
 					type_tmp=LOCAL;
 					//Si on appuis sur un bouton, alors on arrete la boucle*/
 					continuer=0;
@@ -195,12 +216,15 @@ int saisir_type_joueur(Joueur** j){
 
 				/*Bouton distant*/
 				else if (curs_hover_bouton(b_j_distant)){
+					jouer_son(BOUTON);
 					type_tmp=DISTANT;
 					//Si on appuis sur un bouton, alors on arrete la boucle*/
 					continuer=0;
 				}
-				else if(curs_hover_bouton(b_retour))
-					return 4;
+				else if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
+					continuer = 4;
+				}
 
 			}
 		}
@@ -218,8 +242,9 @@ int saisir_type_joueur(Joueur** j){
 	free_bouton_sdl(&b_j_local);
 	free_bouton_sdl(&b_j_distant);
 	free_bouton_sdl(&b_retour);
-	(*j)->type=type_tmp;
-	return 0;
+	if(continuer == 0)
+		(*j)->type=type_tmp;
+	return continuer;
 }
 
 /**
@@ -234,34 +259,79 @@ int saisir_type_joueur(Joueur** j){
 
 
 int initialiser_joueur_distant(Joueur **j){
-	SDL_RenderClear(renderer);
-	afficher_attente_connexion_sdl();
-	SDL_RenderPresent(renderer);
-	int sockfd = accepter_connexion(PORT_DEFAUT);
+
+	SDL_Event event;
+	int sockfd = -1;
+	int sockfd_connexion = creer_socket_connexion(PORT_DEFAUT);
+	int continuer = 0;
+	Bouton* b_retour = init_bouton_sdl(RETOUR);
+
+	while (sockfd == -1 && continuer == 0) {
+
+		SDL_RenderClear(renderer);
+
+		//Attend un événement
+		while(SDL_PollEvent(&event)){
+			//Si il appuis sur la croix
+			if(event.type == SDL_QUIT) {
+				fermer_connexion(sockfd_connexion);
+				continuer = 3;
+			}
+			//Si il appuis sur un bouton
+			else if(event.type == SDL_MOUSEBUTTONDOWN){
+				if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
+					fermer_connexion(sockfd_connexion);
+					continuer = 4;
+				}
+			}
+		}
+
+		afficher_attente_connexion_sdl();
+		afficher_bouton_sdl(b_retour);
+		SDL_RenderPresent(renderer);
+
+		sockfd = accepter_connexion(sockfd_connexion);
+	}
+
 	unsigned char buffer[TAILLE_BUFF];
 	int r;
 
 	if(sockfd > 0){
 		do {
 			SDL_RenderClear(renderer);
+			//Attend un événement
+			while(SDL_PollEvent(&event)){
+				//Si il appuis sur la croix
+				if(event.type == SDL_QUIT)
+					continuer = 3;
+				//Si il appuis sur un bouton
+				else if(event.type == SDL_MOUSEBUTTONDOWN){
+					if(curs_hover_bouton(b_retour))
+						continuer = 4;
+				}
+			}
+			afficher_bouton_sdl(b_retour);
 			afficher_attente_pseudo_sdl();
 			SDL_RenderPresent(renderer);
 			r = recevoir_buffer(sockfd, buffer);
-		} while(r == 0);
-		if (r < 0) {
-			return 3;
-		}
-		else {
-			(*j)->sockfd=sockfd;
-			recevoir_pseudo(buffer,(*j)->pseudo);
-                        (*j)->type = DISTANT;
+		} while(r == 0 && continuer == 0);
+		free_bouton_sdl(&b_retour);
+		if(!continuer){
+			if (r < 0) {
+				continuer = 2;
+			}
+			else {
+				(*j)->sockfd=sockfd;
+				recevoir_pseudo(buffer,(*j)->pseudo);
+           			(*j)->type = DISTANT;
+			}
 		}
 	}
-	else{
+	else {
 		fprintf(stderr,"Problème de connexion");
-		return 1;
 	}
-	return 0;
+	return continuer;
 }
 
 /**
@@ -307,6 +377,10 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 					retour=initialiser_joueur_distant(j);
 					if(retour == 3)
 						return 3;
+					else if (retour == 2) {
+						erreur_reseau();
+						return 3;
+					}
 					break;
 					default:return 3;
 			}
@@ -355,8 +429,7 @@ int fin_de_partie_sdl(Joueur** j){
 	if(!(joueur_abandon(*j)))
 		return 0;
 
-	int choix=0;
-	int continuer=1;
+	int continuer= -1;
 
 	/*Creation des boutons + evenement */
         SDL_Event event_fin;
@@ -371,25 +444,26 @@ int fin_de_partie_sdl(Joueur** j){
 	afficher_scores_sdl(*j);
 
 	/*On demande a l'utilisateur les choix de fin de partie */
-	while(continuer){
+	while(continuer == -1){
 
 		SDL_RenderClear(renderer);
 		/*On attend la touche du joueur*/
         	while(SDL_PollEvent(&event_fin)){
 			//Si il appuis sur la croix
 			if(event_fin.type == SDL_QUIT)
-				return 3;
+				continuer = 3;
 			/*En attendant qu'il appuis sur le bouton*/
                 	else if(event_fin.type == SDL_MOUSEBUTTONDOWN){
-                        	if (curs_hover_bouton(b_continuer))
-                                	choix= 1;
+                        	if (curs_hover_bouton(b_continuer)) {
+                        		jouer_son(BOUTON);
+                                	continuer = 1;
+                        	}
 
-                        	else if (curs_hover_bouton(b_quitter))
-                                	choix= 2;
+                        	else if (curs_hover_bouton(b_quitter)) {
+                        		jouer_son(BOUTON_RETOUR);
+                               		continuer = 2;
+                        	}
 
-			        }
-				if( choix > 0){
-			        	continuer=0;
 			        }
 		}
 		afficher_resultats_sdl(*j);
@@ -397,8 +471,9 @@ int fin_de_partie_sdl(Joueur** j){
 		afficher_bouton_sdl(b_quitter);
 	        SDL_RenderPresent(renderer);
 	}
-
-	return choix;
+	free_bouton_sdl(&b_continuer);
+	free_bouton_sdl(&b_quitter);
+	return continuer;
 }
 
 //Verifie a la fin de la partie si tous les joueurs veullent continuez la partie ou quittez
@@ -497,12 +572,16 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
                         if (valeur_r == 0) {
                             valeur_r = recevoir_buffer((*j)->sockfd, buffer);
+                            if (valeur_r == -1) {
+                            	(*j)->type = BOT;
+                            	return -1;
+                            }
                         }
 		}
 
 		valeur_r = recup_type(buffer);
 
-		if (valeur_r == 2) { // Le joueur a jouer
+		if (valeur_r == PLATEAU) { // Le joueur a jouer
 			id_piece = recevoir_plateau(buffer, pl);
 			if ( id_piece > 0) {
                                 Piece** p = &((*j)->liste_piece);
@@ -529,7 +608,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 			valeur_r = id_piece * -1; /* Le joueur a réussi à poser sa Piece */
 		}
-		else if(valeur_r == 3){//Le joueur a abandoné
+		else if(valeur_r == ABANDON_JOUEUR){//Le joueur a abandoné
 			joueur_abandonne(*j);
 			valeur_r = 1; /* Le joueur a abandonné */
 		}
@@ -569,6 +648,60 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 	return valeur_r;
 }
 
+// 1 si tout est ok, 2 si deconnexion, 3 si croix
+int attente_nouvelle_partie(Joueur * j) {
+	// Attends que tout les joueurs distants est envoyés le message pret
+	Joueur* pivot=j;
+	SDL_Event event;
+	unsigned char buffer[TAILLE_BUFF];
+	int nb_recois = 0;
+	int type;
+	int retour = 1;
+	
+	do{
+		if(pivot->type == DISTANT){
+			do{
+				while(SDL_PollEvent(&event)){
+					if(event.type == SDL_QUIT)
+						return 3;
+				}
+			SDL_RenderClear(renderer);
+		        afficher_attente_debut_sdl();
+		        SDL_RenderPresent(renderer);
+			nb_recois= recevoir_buffer(pivot->sockfd,buffer);
+
+			}while( nb_recois == 0);
+
+			if( nb_recois < 0)
+				retour = 3;
+			else
+				type=recup_type(buffer);
+		}
+		else
+			type = PRET;
+		pivot=joueur_suivant(pivot);
+	} while(type == PRET && pivot != j && retour != 3);
+
+	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
+	if(type == PRET){
+		do{
+			if(pivot->type == DISTANT)
+				envoyer_pret(pivot->sockfd);
+			pivot=joueur_suivant(pivot);
+		} while(pivot != j);
+		retour = 1;
+	}
+	//Sinon on ferme la connexion
+	else{
+		do{
+			fermer_connexion(pivot->sockfd);
+			pivot=joueur_suivant(pivot);
+		} while(pivot != j);
+		retour = 2;
+	}
+	return retour;
+}
+
 
 /**
 	*\fn int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
@@ -589,23 +722,34 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 		do{
 
-                        init = j;
+	            init = j;
 
-                        if(j->type == BOT) {
+			if(j->type == BOT) {
 				choix=jouer_tour_bot_sdl(pl,&j);
-                        }
+			}
 			else if(j->type == DISTANT) {
 				choix=jouer_tour_joueur_distant_sdl(pl,&j);
-                        }
+			}
 			else {
 				choix=jouer_tour_joueur_sdl(pl,&j);
-                        }
+			}
 
-			if(choix == 3)
+			if(choix == 3) {
+				fermer_connexions_distantes(j);
 				return choix;
+			}
 			//Si le joueur n'a pas déjà abandonné
 			if(choix != 4){
-                       		 while (j != init) {
+				// Sons
+				if(joueur_a_abandonne(init)) {
+                        		jouer_son(ABANDON);
+                    }
+                    else {
+                        jouer_son(POSE_PIECE);
+                    }
+
+					// Envoi aux joueurs distants
+                    while (j != init) {
                         		if (j->sockfd) {
                                 		if(!joueur_a_abandonne(init)) {
                                     			envoyer_plateau(j->sockfd, pl,(choix * -1));
@@ -613,12 +757,17 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
                                			else {
                                   			envoyer_abandon_joueur(j->sockfd, init);
                                 		}
-                            		}
+                            	}
                            		j = joueur_suivant(j);
-                       		}
-                        	j = joueur_suivant(j);
+                    }
+                    j = joueur_suivant(j);
 			}
 			choix=fin_de_partie_sdl(&j);
+			//Si le joueur veut continuer, alors on regarde si tous les joueurs veulent continuez de jouer
+			if (choix == 1) {
+		                choix = attente_nouvelle_partie_distant(j);
+            		}
+
 		} while(!(choix));
 
 
@@ -639,10 +788,11 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 */
 
 int type_partie(){
+
 	int val_retour=-1;
 	SDL_Event event;
 	Bouton* b_creer = init_bouton_sdl(CREER_PARTIE);
-        Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
+    Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
   	Bouton* b_retour = init_bouton_sdl(RETOUR);
 	while(val_retour < 0){
 		/* Ecouter les EVENT */
@@ -651,26 +801,39 @@ int type_partie(){
 			if(event.type == SDL_QUIT)
 				val_retour = 3;
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
-				if(curs_hover_bouton(b_creer))
+				if(curs_hover_bouton(b_creer)) {
+					jouer_son(BOUTON);
 					val_retour= 1;
-				else if(curs_hover_bouton(b_rejoindre))
+				}
+				else if(curs_hover_bouton(b_rejoindre)) {
+					jouer_son(BOUTON);
 					val_retour= 2;
+				}
 
-				else if(curs_hover_bouton(b_retour))
+				else if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
 					val_retour= 4;
+				}
 			}
 		}
 	/* Affiche le menu type partie */
 		afficher_titres_sdl();
 	 	afficher_bouton_sdl(b_creer);
-	        afficher_bouton_sdl(b_rejoindre);
+		afficher_bouton_sdl(b_rejoindre);
 		afficher_bouton_sdl(b_retour);
 		SDL_RenderPresent(renderer);
 	}
+ 	free_bouton_sdl(&b_creer);
+	free_bouton_sdl(&b_rejoindre);
+	free_bouton_sdl(&b_retour);
+
 	return val_retour;
 }
 
 int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
+
+	jouer_son(MUSIQUE_FOND);
+
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
 	int retour = 2;
@@ -678,6 +841,11 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	SDL_Event event;
 	Bouton* b_jouer = init_bouton_sdl(JOUER);
 	Bouton* b_quitter_jeu = init_bouton_sdl(QUITTER_JEU);
+	Bouton* b_son = init_bouton_sdl(SON);
+	son = 0;
+	Bouton* b_effet = init_bouton_sdl(EFFET);
+	effet = 1;
+
 	while (retour == 2){
 
 		/* Menu */
@@ -688,10 +856,22 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 			if(event.type == SDL_QUIT)
 				retour = 3;
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
-				if(curs_hover_bouton(b_jouer))
+				if(curs_hover_bouton(b_jouer)) {
+					jouer_son(BOUTON);
 					retour= 1;
-				else if(curs_hover_bouton(b_quitter_jeu))
+				}
+				else if(curs_hover_bouton(b_quitter_jeu)) {
+					jouer_son(BOUTON_RETOUR);
 					retour= 3;
+				}
+				else if(curs_hover_bouton(b_son)) {
+					son = (son+1)%2;
+					jouer_son(MUSIQUE_FOND);
+				}
+				else if(curs_hover_bouton(b_effet)) {
+					effet = (effet+1)%2;
+					jouer_son(BOUTON);
+				}
 			}
 		}
 		/* Appuie du bouton JOUER */
@@ -715,37 +895,36 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 
 				else if(val_partie == 4)
 					retour = 2;
+				//Si il appuis  sur la croix
 				else
-					return val_partie;
+					retour = val_partie;
 
 			}
 			if(retour == 4)
 				retour =2;
-			if (retour == 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
-				if(j) joueur_liste_detruire(&j);
 
-				return retour;
-			}
-			else{
+			else if (retour != 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
 				if(val_partie == 1)
 					retour = jouer_manche_sdl(pl,j);
 				else if(val_partie == 2)
 					retour = jouer_manche_distant_sdl(pl, j, retour);
-				joueur_liste_detruire(&j);
+			/*?*/	joueur_liste_detruire(&j);
 
-				if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
-					return retour;
+				//if (retour == 3) /* Si les Joueurs (à la fin de la partie) ne veulent plus refaire de parties */
+				//	return retour;
 			}
 		}
 		/* else if Appuie sur le bouton REGLE // TODO*/
-		else if (retour == 3) { /*Appuie sur le bouton Quitter || Appuie sur la croix*/
-			return retour;
-		}
+		//else if (retour == 3) { /*Appuie sur le bouton Quitter || Appuie sur la croix*/
+		//	return retour;
+		//}
 
 		/* Affiche le menu */
 		afficher_titres_sdl();
 	 	afficher_bouton_sdl(b_jouer);
-	        afficher_bouton_sdl(b_quitter_jeu);
+	    afficher_bouton_sdl(b_quitter_jeu);
+	    afficher_bouton_sdl(b_son);
+	    afficher_bouton_sdl(b_effet);
 		SDL_RenderPresent(renderer);
 	}
 

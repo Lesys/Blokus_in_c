@@ -20,6 +20,8 @@
 
 // Variables globales externes
 extern SDL_Renderer * renderer;
+extern int son;
+extern int effet;
 
 // Variables globales de affichage_sdl
 Ressources * ressources;
@@ -48,6 +50,9 @@ Sprite * get_sprite(Couleur couleur) {
         case VERT:
             return ressources->carre_vert;
             break;
+        case SELECTION:
+            return ressources->selection;
+            break;
         default:
             return ressources->carre_vide;
     }
@@ -58,23 +63,19 @@ Sprite * get_sprite(Couleur couleur) {
  * \brief Initialise le module affichage_sdl
  * \details Fonction à appeler avant tout appel a des
  * fonctions de affichage_sdl.c
+ * \param fullscreen Plein ecran ou non
  * \return 1 si tout est ok, 0 sinon
  */
-int init_affichage_sdl() {
+int init_affichage_sdl(int fullscreen) {
 
-    /* Récupération taille écran dans le cas d'un plein écran
-       SDL_DisplayMode dm;
-       if (SDL_GetDesktopDisplayMode(0, &dm)) {
-       printf("Impossible d'obtenir les dimensions de l'écran : %s", SDL_GetError());
-       return 0;
-       }
-
-       largeur_ecran = dm.w;
-       hauteur_ecran = dm.h;
-       */
-
-    largeur_ecran = L_FENETRE;
-    hauteur_ecran = H_FENETRE;
+    if (fullscreen) {
+        // Récupération taille écran dans le cas d'un plein écran
+        SDL_GetRendererOutputSize(renderer, &largeur_ecran, &hauteur_ecran);
+    }
+    else {
+        largeur_ecran = L_FENETRE;
+        hauteur_ecran = H_FENETRE;
+    }
 
     // Définition de la taille d'un carré
     // Cette taille sera utilisé comme "unité de mesure"
@@ -93,6 +94,7 @@ int init_affichage_sdl() {
     ressources->carre_jaune = init_sprite("ressources/carre_jaune.png", taille_carre, taille_carre);
     ressources->carre_bleu = init_sprite("ressources/carre_bleu.png", taille_carre, taille_carre);
     ressources->carre_vert = init_sprite("ressources/carre_vert.png", taille_carre, taille_carre);
+    ressources->selection = init_sprite("ressources/selection.png", taille_carre, taille_carre);
     ressources->police_m = TTF_OpenFont("ressources/police.ttf", taille_carre*1.5);
     ressources->police_p = TTF_OpenFont("ressources/police.ttf", taille_carre);
     ressources->fond_score = init_sprite("ressources/fond_score.png", taille_carre*8, taille_carre*16);
@@ -102,7 +104,7 @@ int init_affichage_sdl() {
     ressources->bouton_petit = init_sprite("ressources/bouton.png", taille_carre*2, taille_carre*6);
     ressources->bouton_petit_hover = init_sprite("ressources/bouton_hover.png", taille_carre*2, taille_carre*6);
     ressources->fond_resultats = init_sprite("ressources/fond_resultats.png", taille_carre*20, taille_carre*20);
-    ressources->fond_titres = init_sprite("ressources/fond_titres.png", hauteur_ecran, taille_carre*96);
+    ressources->fond_titres = init_sprite("ressources/fond_titres.png", hauteur_ecran, hauteur_ecran*2.37);
     ressources->fond_config = init_sprite("ressources/fond_config.png", taille_carre*16, taille_carre*43);
     ressources->fond_saisie = init_sprite("ressources/fond_saisie.png", taille_carre*2, taille_carre*16);
     ressources->tapis_rouge = init_sprite("ressources/tapis_rouge.png", taille_carre*LONG_T_BR, taille_carre*LARG_T_BR);
@@ -110,6 +112,10 @@ int init_affichage_sdl() {
     ressources->tapis_jaune = init_sprite("ressources/tapis_jaune.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
     ressources->tapis_vert = init_sprite("ressources/tapis_vert.png", taille_carre*LONG_T_VJ, taille_carre*LARG_T_VJ);
     ressources->fond_plateau = init_sprite("ressources/fond_plateau.png", taille_carre*22, taille_carre*22);
+    ressources->son = init_sprite("ressources/son.png", taille_carre*3, taille_carre*3);
+    ressources->son_selec = init_sprite("ressources/son_selec.png", taille_carre*3, taille_carre*3);
+    ressources->effet = init_sprite("ressources/effet.png", taille_carre*3, taille_carre*3);
+    ressources->effet_selec = init_sprite("ressources/effet_selec.png", taille_carre*3, taille_carre*3);
 
     ressources->blanc.r = 190;
     ressources->blanc.g = 190;
@@ -144,6 +150,7 @@ void free_affichage_sdl() {
         free_sprite(&ressources->carre_jaune);
         free_sprite(&ressources->carre_bleu);
         free_sprite(&ressources->carre_vert);
+        free_sprite(&ressources->selection);
         TTF_CloseFont(ressources->police_m);
         TTF_CloseFont(ressources->police_p);
         free_sprite(&ressources->fond_score);
@@ -161,6 +168,10 @@ void free_affichage_sdl() {
         free_sprite(&ressources->tapis_jaune);
         free_sprite(&ressources->tapis_vert);
         free_sprite(&ressources->fond_plateau);
+        free_sprite(&ressources->son);
+        free_sprite(&ressources->son_selec);
+        free_sprite(&ressources->effet);
+        free_sprite(&ressources->effet_selec);
         free(ressources);
     }
 }
@@ -188,7 +199,7 @@ void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
  * \param pl Plateau de jeu
  * \param x Paramètre formel pour retour coordonnée x
  * \param y Paramètre formel pour retour coordonnée y
- * \return Un pointeur sur la pièce si la souris est au dessus d'une de la bonne couleur, NULL sinon
+ * \return 1 si au dessus plateau, 0 sinon
  */
 int curs_hover_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int *x, int *y) {
     int x_mouse, y_mouse;
@@ -251,7 +262,7 @@ void afficher_piece_sdl(Carre * c, Couleur couleur, int x, int y) {
  * \param x Coordonnée en x de la pièce
  * \param y Coordonnée en y de la pièce
  * \param largeur Largeur de la matrice
- * \param longueur Longueur du tableau
+ * \param longueur Longueur de la matrice
  * \return 1 si valide, 0 sinon
  */
 static
@@ -417,7 +428,9 @@ void disposer_pieces(Reserves * r, Joueur *  joueur) {
         case ROUGE:
             largeur = LARG_T_BR;
             longueur = LONG_T_BR;
+            break;
         default:
+            return;
             break;
     }
 
@@ -622,7 +635,7 @@ void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p) {
     Joueur * init = j;
     // Variable utilisée pour récupérer la couleur de la pièces
     // à afficher aux coordonnées de la souris
-    Couleur couleur_p;
+    Couleur couleur_p = -1;
 
     // Pour tout les joueurs
     do {
@@ -845,7 +858,7 @@ void afficher_tour_sdl(Joueur * j) {
 
 /**
  * \fn int curs_hover_bouton(Bouton * b)
- * \brief Permet de savoir si le curseur est au desus d'un bouton
+ * \brief Permet de savoir si le curseur est au dessus d'un bouton
  * \param b Bouton que l'on veut tester
  * \return 1 si la souris est au dessus, 0 sinon
  */
@@ -860,7 +873,7 @@ int curs_hover_bouton(Bouton * b) {
 /**
  * \fn static void afficher_bouton(char * str, int x, int y)
  * \brief Affiche un bouton de taille standard aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -874,7 +887,7 @@ void afficher_bouton(char * str, int x, int y) {
 /**
  * \fn static void afficher_bouton_petit(char * str, int x, int y)
  * \brief Affiche un petit bouton aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -889,7 +902,7 @@ void afficher_bouton_petit(char * str, int x, int y) {
 /**
  * \fn static void afficher_bouton_hover(char * str, int x, int y)
  * \brief Affiche un bouton de taille standard avec sa texture "hover" aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -903,7 +916,7 @@ void afficher_bouton_hover(char * str, int x, int y) {
 /**
  * \fn static void afficher_bouton_petit_hover(char * str, int x, int y)
  * \brief Affiche un petit bouton avec sa texture "hover" aux coordonnées données
- * \param str texte à afficher à l'intérieur du bouton
+ * \param str Texte à afficher à l'intérieur du bouton
  * \param x Coordonnée en x
  * \param y Coordonnée en y
  */
@@ -984,6 +997,19 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             bouton->y_haut = hauteur_ecran/2  + taille_carre*2;
             bouton->y_bas = hauteur_ecran/2 + taille_carre*6;
             break;
+        case SON:
+            bouton->x_gauche = taille_carre;
+            bouton->x_droite = taille_carre*4;
+            bouton->y_haut = taille_carre;
+            bouton->y_bas = taille_carre*4;
+            break;
+        case EFFET:
+            bouton->x_gauche = taille_carre*5;
+            bouton->x_droite = taille_carre*8;
+            bouton->y_haut = taille_carre;
+            bouton->y_bas = taille_carre*4;
+            break;
+
         default:
             break;
     }
@@ -1056,6 +1082,22 @@ void afficher_bouton_sdl(Bouton * b) {
             break;
         case RETOUR:
             aff_b("Retour", b->x_gauche, b->y_haut);
+            break;
+        case SON:
+            if (son) {
+                afficher_sprite(ressources->son_selec, b->x_gauche, b->y_haut);
+            }
+            else {
+               afficher_sprite(ressources->son, b->x_gauche, b->y_haut); 
+            }
+            break;
+        case EFFET:
+            if (effet) {
+                afficher_sprite(ressources->effet_selec, b->x_gauche, b->y_haut);
+            }
+            else {
+                afficher_sprite(ressources->effet, b->x_gauche, b->y_haut); 
+            }
             break;
         default:
             break;
@@ -1196,10 +1238,10 @@ void afficher_type_joueur_sdl(Joueur * j) {
 }
 
 /**
- * \fn void afficher_saisie_pseudo_sdl(char * str)
+ * \fn void afficher_saisie_pseudo_sdl(Joueur * j)
  * \brief Affiche le fond et le texte demandant la saisie du
  * pseudo ainsi que le pseudo en cours de saisie
- * \param str Pseudo en cours de saisie
+ * \param j Joueur dont on saisie le pseudo
  */
 void afficher_saisie_pseudo_sdl(Joueur * j) {
 
@@ -1212,30 +1254,51 @@ void afficher_saisie_pseudo_sdl(Joueur * j) {
     afficher_texte(joueur_pseudo(j), ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
 
+/**
+ * \fn void afficher_choix_type_partie_sdl()
+ * \brief Affiche le choix du type de partie
+ */
 void afficher_choix_type_partie_sdl() {
 
     afficher_fond_config();
     afficher_texte("Choissisez le type de partie :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
 }
 
+/**
+ * \fn void afficher_attente_connexion_sdl()
+ * \brief Affiche un message d'attente de connexion
+ */
 void afficher_attente_connexion_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente de la connexion d'un joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
+/**
+ * \fn void afficher_attente_debut_sdl()
+ * \brief Affiche un message d'attente du début de la partie
+ */
 void afficher_attente_debut_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente du début de la partie ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
+/**
+ * \fn void afficher_attente_pseudo_sdl()
+ * \brief Affiche un message d'attente de la saisie du pseudo par un joueur distant
+ */
 void afficher_attente_pseudo_sdl() {
 
     afficher_fond_config();
     afficher_texte("En attente de la saisie du pseudo par le joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
+/**
+ * \fn void afficher_saisie_adresse_sdl(char * str)
+ * \brief Affiche un message demandant la saisie de l'adresse ainsi que l'adresse en cours de saisie
+ * \param str Adresse en cours de saisie
+ */
 void afficher_saisie_adresse_sdl(char * str) {
 
     afficher_fond_config();
@@ -1244,10 +1307,35 @@ void afficher_saisie_adresse_sdl(char * str) {
     afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
 }
 
+/**
+ * \fn void afficher_saisie_pseudo_distant_sdl(char * str)
+ * \brief Affiche un message demandant la saisie du pseudo ainsi que le pseudo en cours de saisie (pour distant)
+ * \param str Pseudo en cours de saisie
+ */
 void afficher_saisie_pseudo_distant_sdl(char * str) {
 
     afficher_fond_config();
     afficher_sprite(ressources->fond_saisie, largeur_ecran/2 - taille_carre*8, hauteur_ecran/2 + taille_carre*2);
     afficher_texte("Entrez votre pseudo (Entree pour valider) :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
     afficher_texte(str, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
+}
+
+/**
+ * \fn void afficher_erreur_reseau()
+ * \brief Affiche un message d'erreur de connexion
+ */
+void afficher_erreur_reseau() {
+
+    afficher_fond_config();
+    afficher_texte("Erreur de connexion ! ¯\\_(° . °)_/¯", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+}
+
+/**
+ * \fn void afficher_attente_nouvelle_partie()
+ * \brief Affiche un écran d'attente de début de partie
+ */
+void afficher_attente_nouvelle_partie() {
+
+    afficher_fond_config();
+    afficher_texte("En attente du début de la partie ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
