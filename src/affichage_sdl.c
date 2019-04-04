@@ -70,14 +70,7 @@ int init_affichage_sdl(int fullscreen) {
 
     if (fullscreen) {
         // Récupération taille écran dans le cas d'un plein écran
-        SDL_DisplayMode dm;
-        if (SDL_GetDesktopDisplayMode(0, &dm)) {
-           printf("Impossible d'obtenir les dimensions de l'écran : %s", SDL_GetError());
-           return 0;
-        }
-
-        largeur_ecran = dm.w;
-        hauteur_ecran = dm.h;
+        SDL_GetRendererOutputSize(renderer, &largeur_ecran, &hauteur_ecran);
     }
     else {
         largeur_ecran = L_FENETRE;

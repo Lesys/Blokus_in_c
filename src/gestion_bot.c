@@ -136,6 +136,46 @@ int meilleur_coup(Coup** tab, int compteur) {
 	return tab_index[random];
 }
 
+static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur) {
+	/* Si le Joueur a abandonné, il n'a théoriquement plus de coin dispo */
+	if (joueur_a_abandonne(joueur))
+		return 0;
+
+	int i, j, k, nb;
+
+    Piece * p = joueur_liste_piece(joueur);
+    Piece * init = p;
+
+    int compteur = 0;
+
+    /* Pour chaque position de la matrice */
+    for(i = 0; i < TAILLE_PLATEAU; i++)
+    {
+        for(j = 0; j < TAILLE_PLATEAU; j++)
+        {
+            /* Pour chaque pièces disponibles */
+            do
+            {
+                /* Pour chaque orientation possible */
+                for(k = 0; k < 4; k++)
+                {
+                    /* Si la pièce est posable */
+                    if(verifier_coordonnees(pl, p, i, j, joueur))
+			compteur++;
+
+                    changer_orientation(p);
+                }
+
+                p = piece_suivant(p);
+
+            } while (p != init);
+        }
+    }
+
+	/* On retourne le nombre de Coup qu'il peut jouer */
+    return compteur;
+}
+
 int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
 	Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
@@ -148,14 +188,8 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 		for (j = 0; j < TAILLE_PLATEAU; j++)
 			pl2[i][j] = pl[i][j];
 
-	/* Calcul de tous les coisn disponibles pour le Joueur actuel et les autres avant la pose de la Piece */
-
-	nb_coin_bot = eval_cases_dispo(pl2, bot);
-
-	Joueur* tmp;
-
-	while ((tmp = joueur_suivant(bot)) != bot)
-		nb_coin_adversaire += eval_cases_dispo(pl2, tmp);
+	/* Calcul de tous les coins disponibles pour le Joueur actuel et les autres avant la pose de la Piece */
+	nb_coin_bot = nb_coups_dispo(pl2, bot);
 
 	poser_piece_bot(pl2, coup);
 
@@ -166,13 +200,20 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 	if (joueur_nb_piece_restantes(bot) > NB_PIECES - 4)
 		/* Envoie une valeur correspondante à l'emplacement des cases sur lesquelles les Carre seront posés */
 		eval += eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE;
-	else
+	else {
 		eval += eval_emplacement_piece(coup) * COEF_EMPLACEMENT_PIECE / 4;
 
 	/* Evalue le nombre de cases disponibles (== VIDE) autour de la nouvelle Piece posée */
 //	eval += eval_cases_dispo(pl2, bot, nb_coin_bot) * COEF_CASES_DISPO;
+	Joueur* tmp = bot;
+
+	while ((tmp = joueur_suivant(tmp)) != bot)
+		nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
+
+		eval += eval_nb_coups_bloques(pl2, bot, nb_coin_adversaire) * COEF_COINS_BLOQUES;
+	}
+
 	eval += eval_nb_nouveaux_coups(pl2, bot, nb_coin_bot) * COEF_NOUVEAUX_COINS;
-	eval += eval_nb_coups_bloques(pl2, bot, nb_coin_adversaire) * COEF_COINS_BLOQUES;
 
 	return (int)eval;
 
@@ -287,46 +328,6 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 
 //fprintf(stderr, "Nb cases dispo: %d\n", nb);
 	return nb;
-}
-
-static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur) {
-	/* Si le Joueur a abandonné, il n'a théoriquement plus de coin dispo */
-	if (joueur_a_abandonne(joueur))
-		return 0;
-
-	int i, j, k, nb;
-
-    Piece * p = joueur_liste_piece(joueur);
-    Piece * init = p;
-
-    int compteur = 0;
-
-    /* Pour chaque position de la matrice */
-    for(i = 0; i < TAILLE_PLATEAU; i++)
-    {
-        for(j = 0; j < TAILLE_PLATEAU; j++)
-        {
-            /* Pour chaque pièces disponibles */
-            do
-            {
-                /* Pour chaque orientation possible */
-                for(k = 0; k < 4; k++)
-                {
-                    /* Si la pièce est posable */
-                    if(verifier_coordonnees(pl, p, i, j, joueur))
-			compteur++;
-
-                    changer_orientation(p);
-                }
-
-                p = piece_suivant(p);
-
-            } while (p != init);
-        }
-    }
-
-	/* On retourne le nombre de Coup qu'il peut jouer */
-    return compteur;
 }
 
 /**
