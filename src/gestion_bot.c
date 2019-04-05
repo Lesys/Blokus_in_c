@@ -107,6 +107,10 @@ static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 }
 
 int meilleur_coup(Coup** tab, int compteur) {
+	/* S'il n'y a qu'un seul coup possible */
+	if (compteur == 1)
+		return tab[0];
+
 	int index_max = 0; /* L'index dans le tableau du meilleur Coup */
 	int i = 0;
 	int compteur_tab = 0; /* Le nombre de "meilleur coup" */
@@ -136,7 +140,12 @@ int meilleur_coup(Coup** tab, int compteur) {
 	return tab_index[random];
 }
 
-static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur) {
+static int coord_dans_plateau(int coord)
+{
+    return (coord >= 0 && coord < TAILLE_PLATEAU);
+}
+
+static int nb_coups_dispo_2(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur) {
 	/* Si le Joueur a abandonné, il n'a théoriquement plus de coin dispo */
 	if (joueur_a_abandonne(joueur))
 		return 0;
@@ -176,6 +185,89 @@ static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* jo
     return compteur;
 }
 
+static int verif_coin_libre(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int x, int y, Couleur col) {
+	/* Vérifie qu'il n'y a aucun Carre adjacant aux Carre que le Joueur pose */
+	return ((coord_dans_plateau(x - 1) && coord_dans_plateau(y) && pl[x - 1][y] != col) && /* A gauche */
+		(coord_dans_plateau(x + 1) && coord_dans_plateau(y) && pl[x + 1][y] != col) && /* A droite */
+		(coord_dans_plateau(x) && coord_dans_plateau(y - 1) && pl[x][y - 1] != col) && /* En haut */
+		(coord_dans_plateau(x) && coord_dans_plateau(y + 1) && pl[x][y + 1] != col)); /* En bas */
+}
+
+static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* joueur) {
+	Couleur couleur = joueur_couleur(joueur);
+
+	Carre* c = piece_liste_carre(coup_piece(coup));
+	Carre* init = c;
+	int coord_x = coup_coord_x(coup), coord_y = coup_coord_y(coup);
+	int x, y;
+	int nb = 0;
+
+	/* Pour tous les Carre de la Piece */
+	do {
+		x = coord_x + carre_get_x(c);
+		y = coord_y + carre_get_y(c);
+
+		/* Vérifie pour TOUTES les diagonales de CHAQUE Carre, si le coin est libre pour nous */
+		if ((coord_dans_plateau(x - 1) && coord_dans_plateau(y - 1) && pl[x - 1][y  - 1] == VIDE)) /* Diagonale Bas - Gauche */
+			if (verif_coin_libre(pl, x - 1, y - 1, couleur))
+				nb++;
+
+		if ((coord_dans_plateau(x + 1) && coord_dans_plateau(y - 1) && pl[x + 1][y - 1] == VIDE)) /* Diagonale Bas - Droit */
+			if (verif_coin_libre(pl, x + 1, y - 1, couleur))
+				nb++;
+
+		if ((coord_dans_plateau(x - 1) && coord_dans_plateau(y + 1) && pl[x - 1][y + 1] == VIDE)) /* Diagonale Haut - Gauche */
+			if (verif_coin_libre(pl, x - 1, y + 1, couleur))
+				nb++;
+
+		if ((coord_dans_plateau(x + 1) && coord_dans_plateau(y + 1) && pl[x + 1][y + 1] == VIDE)) /* Diagonale Haut - Droit */
+			if (verif_coin_libre(pl, x + 1, y + 1, couleur))
+				nb++;
+
+	} while ((c = carre_get_suiv(c)) != init);
+coup_afficher(coup);
+fprintf(stderr, "Joueur %s: %d coins dispo\n", couleur_tostring(joueur_couleur(joueur)), nb);
+
+	return nb;
+
+
+
+/*
+	int i, j, k, nb;
+
+    Piece * p = joueur_liste_piece(joueur);
+    Piece * init = p;
+
+    int compteur = 0;
+*/
+    /* Pour chaque position de la matrice */
+/*    for(i = 0; i < TAILLE_PLATEAU; i++)
+    {
+        for(j = 0; j < TAILLE_PLATEAU; j++)
+        {
+*/            /* Pour chaque pièces disponibles */
+/*            do
+            {
+*/                /* Pour chaque orientation possible */
+/*                for(k = 0; k < 4; k++)
+                {
+                    /* Si la pièce est posable */
+/*                    if(verifier_coordonnees(pl, p, i, j, joueur))
+			compteur++;
+
+                    changer_orientation(p);
+                }
+
+                p = piece_suivant(p);
+
+            } while (p != init);
+        }
+    }
+*/
+	/* On retourne le nombre de Coup qu'il peut jouer */
+//    return compteur;
+}
+
 int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
 	Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
@@ -189,7 +281,7 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 			pl2[i][j] = pl[i][j];
 
 	/* Calcul de tous les coins disponibles pour le Joueur actuel et les autres avant la pose de la Piece */
-//	nb_coin_bot = nb_coups_dispo(pl2, bot);
+//	nb_coin_bot = nb_coups_dispo(pl2, coup, bot);
 
 	poser_piece_bot(pl2, coup);
 
@@ -203,16 +295,18 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 
 	/* Evalue le nombre de cases disponibles (== VIDE) autour de la nouvelle Piece posée */
 //	eval += eval_cases_dispo(pl2, bot, nb_coin_bot) * COEF_CASES_DISPO;
-	Joueur* tmp = bot;
+		Joueur* tmp = bot;
+
+//fprintf(stderr, "Joueur %s: %d coins dispo\n", couleur_tostring(joueur_couleur(bot)), nb);
 
 		while ((tmp = joueur_suivant(tmp)) != bot) {
-			nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
+	//		nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
 
-			eval += eval_nb_coups_bloques(pl2, bot, coup) * COEF_COINS_BLOQUES;
+			eval += eval_nb_coups_bloques(pl2, coup, bot) * COEF_COINS_BLOQUES;
 		}
 	}
-
 //	eval += eval_nb_nouveaux_coups(pl2, bot, nb_coin_bot) * COEF_NOUVEAUX_COINS;
+	eval += eval_nb_nouveaux_coups(pl2, coup, bot) * COEF_NOUVEAUX_COINS;
 
 	return eval;
 
@@ -276,20 +370,21 @@ int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
 			bon++;*/
 	} while ((c = carre_get_suiv(c)) != init);
+
+	return 0;
 }
 
 /**
 	return L'ancien nombre de coins libres - le nouveau nombre de coins libres
 */
-int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur, int nb_ancien_coup) {
+int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* joueur) {
 	/* Calcul combien il y a de coins disponibles autour de chaque Carre */
-	int nb = nb_coups_dispo(pl, joueur);
+	int nb = nb_coups_dispo(pl, coup, joueur);
 
-	return nb - nb_ancien_coup;
+	return nb;
 }
 
-int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Coup* coup) {
-
+int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
 	int nb = 0;
 
 	Joueur* j = bot;
@@ -534,11 +629,12 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
 
 int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur)
 {
-	if (joueur_a_abandonne(joueur))
+	if (joueur_a_abandonne(joueur)) {
 		if(joueur_suivant(joueur) == bot)
 			return bot_jouer(pl, bot, profondeur - 1);
 		else
 			return adversaire_jouer(pl, bot, joueur_suivant(joueur), profondeur);
+	}
 
 	int i, j, k, nb;
 
