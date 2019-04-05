@@ -7,7 +7,6 @@
 #include "../include/affichage_sdl.h"
 #include "../include/affichage.h"
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -235,8 +234,6 @@ int cmp = 1;
 }
 //fprintf(stderr, "compteur: %d\n", cmp++);
 	} while ((c = carre_get_suiv(c)) != init);
-//fprintf(stderr, "Joueur %s: %d coins dispo\n", couleur_tostring(joueur_couleur(joueur)), nb);
-//coup_afficher(coup);
 
 	return nb;
 }
@@ -272,17 +269,20 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 
 //fprintf(stderr, "Joueur %s: %d coins dispo\n", couleur_tostring(joueur_couleur(bot)), nb);
 
-/*		while ((tmp = joueur_suivant(tmp)) != bot) {
-			eval += eval_nb_coups_bloques(pl2, coup, bot) * COEF_COINS_BLOQUES;
+		while ((tmp = joueur_suivant(tmp)) != bot) {
+	//		nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
+
+			eval += eval_nb_coups_bloques(pl2, coup) * COEF_COINS_BLOQUES;
 		}
-*/		eval += eval_nb_nouveaux_coups(pl2, coup, bot) * COEF_NOUVEAUX_COINS;
+
+		eval += eval_nb_nouveaux_coups(pl2, coup, bot) * COEF_NOUVEAUX_COINS;
 	}
 //	eval += eval_nb_nouveaux_coups(pl2, bot, nb_coin_bot) * COEF_NOUVEAUX_COINS;
 
-	/* Si la Piece est le petit carré, prend un malus */
+	/* Si la Piece est le petit carré, prend un malus (car on veut le garder pour la fin) */
 	if (piece_id(coup_piece(coup)) == 1) {
-		fprintf(stderr, "Petit carré posé\n");
-		eval /= 2;
+		//fprintf(stderr, "Petit carré posé\n");
+		eval = eval / 10;
 	}
 
 	return eval;
@@ -361,10 +361,8 @@ int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 	return nb;
 }
 
-int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
+int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	int nb = 0;
-
-	Joueur* j = bot;
 
 	Piece* p = coup_piece(coup);
 
@@ -381,7 +379,8 @@ int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 			{
 				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) + 1];
 
-				if(pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul && pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul)
+				if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul &&
+				pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul)
 					nb++;
 			}
 		}
@@ -392,7 +391,8 @@ int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 			{
 				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) + 1];
 
-				if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul)
+				if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul &&
+				pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul)
 					nb++;
 			}
 		}
@@ -403,7 +403,8 @@ int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 			{
 				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c) - 1];
 
-				if(pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul && pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul)
+				if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul &&
+				pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul)
 					nb++;
 			}
 		}
@@ -414,7 +415,8 @@ int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 			{
 				Couleur coul = pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c) - 1];
 
-				if(pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul)
+				if(pl[coup_coord_x(coup) + carre_get_x(c) + 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) + 1] != coul &&
+				pl[coup_coord_x(coup) + carre_get_x(c) - 1][coup_coord_y(coup) + carre_get_y(c)] != coul && pl[coup_coord_x(coup) + carre_get_x(c)][coup_coord_y(coup) + carre_get_y(c) - 1] != coul)
 					nb++;
 			}
 		}
@@ -454,6 +456,28 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	while (!piece_meme_orientation(coup_piece(c), coup_piece_origine(c)))
 		piece_pivoter(1, piece_liste_carre(coup_piece_origine(c)));
 
+/*Carre* carre = piece_liste_carre(coup_piece_origine(c));
+Carre* carre2 = carre;
+do
+{
+	carre_afficher(carre2);
+
+	carre_get_suiv(carre2);
+
+} while(carre2 != carre);
+
+fprintf(stderr, "\nValeur du coup : %d\n", coup_valeur(c));
+
+Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+
+int i, j;
+
+for (i = 0; i < TAILLE_PLATEAU; i++)
+	for (j = 0; j < TAILLE_PLATEAU; j++)
+		pl2[i][j] = pl[i][j];
+
+fprintf(stderr, "score blocage : %d\n", eval_nb_coups_bloques_test(pl2, c));*/
+
 	/* Pose la Piece et la supprime de la liste du Joueur */
 	poser_piece_sdl(pl, coup_piece_origine(c), bot, coup_coord_x(c), coup_coord_y(c));
 
@@ -476,7 +500,7 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 
     free_afficher_pieces_dispo_sdl(&r);
 
-	sleep(1);
+	sleep(TEMPS_ATTENTE_BOT);
 
 	return retour;
 }
@@ -770,18 +794,18 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
 						tab[compteur]->c = joueur_couleur(bot);
 
-								/* Recréé un plateau fictif pour émuler les coups */
-								Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+						/* Recréé un plateau fictif pour émuler les coups */
+						Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
-								int i, j;
+						int i, j;
 
-								/* Recopie du plateau */
-								for (i = 0; i < TAILLE_PLATEAU; i++)
-									for (j = 0; j < TAILLE_PLATEAU; j++)
-										pl2[i][j] = pl[i][j];
+						/* Recopie du plateau */
+						for (i = 0; i < TAILLE_PLATEAU; i++)
+							for (j = 0; j < TAILLE_PLATEAU; j++)
+								pl2[i][j] = pl[i][j];
 
-								/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
-								poser_piece_bot(pl2, tab[compteur]);
+						/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
+						poser_piece_bot(pl2, tab[compteur]);
 
 						/*tab[compteur]->valeur_coup = 0;*/
 						tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
@@ -793,8 +817,8 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 							tab[compteur]->valeur_coup += adversaire_jouer(pl2, bot, joueur_suivant(bot), 2 - joueur_nb_piece_restantes(bot) / 2);
 
 
-//						coup_afficher(tab[compteur]);
-//						fprintf(stderr, "Valeur du coup: %d\n", coup_valeur(tab[compteur]));
+						//coup_afficher(tab[compteur]);
+						//fprintf(stderr, "Valeur du coup: %d\n", coup_valeur(tab[compteur]));
 						/* Remet la Piece dans la liste */
 						tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
 						bot->liste_piece = p;

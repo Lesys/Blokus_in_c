@@ -4,21 +4,27 @@
 #include <SDL2/SDL_mixer.h>
 
 typedef struct ressources_audio {
-	Mix_Chunk * pose_piece;
-	Mix_Chunk * cloche;
-	Mix_Chunk * abandon;
-	Mix_Chunk * bouton;
-	Mix_Chunk * bouton_retour;
-	Mix_Music * musique_fond;
+    /** \brief Son pose pièce */
+    Mix_Chunk * pose_piece;
+    /** \brief Son cloche */
+    Mix_Chunk * cloche;
+    /** \brief Son d'abandon */
+    Mix_Chunk * abandon;
+    /** \brief Son bouton */
+    Mix_Chunk * bouton;
+    /** \brief Son bouton retour */
+    Mix_Chunk * bouton_retour;
+    /** \brief Musique de fond */
+    Mix_Music * musique_fond;
 } Ressources_audio;
 
 typedef enum sons {
-	POSE_PIECE,
-	CLOCHE,
-	ABANDON,
-	BOUTON,
-	BOUTON_RETOUR,
-	MUSIQUE_FOND
+    POSE_PIECE,
+    CLOCHE,
+    ABANDON,
+    BOUTON,
+    BOUTON_RETOUR,
+    MUSIQUE_FOND
 } Sons;
 
 int init_son();

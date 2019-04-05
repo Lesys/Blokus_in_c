@@ -1,10 +1,24 @@
 var searchData=
 [
-  ['recevoir_5fabandon_5fjoueur',['recevoir_abandon_joueur',['../distant_8c.html#a5055c3172eee5061edc819523609ec39',1,'distant.c']]],
-  ['recevoir_5fliste_5fjoueurs',['recevoir_liste_joueurs',['../distant_8c.html#a964acd81714270828b5daea75aab73f0',1,'distant.c']]],
-  ['recevoir_5fplateau',['recevoir_plateau',['../distant_8c.html#a6fbd636a3883eafc64482fb51736c46d',1,'distant.c']]],
-  ['recevoir_5fpseudo',['recevoir_pseudo',['../distant_8c.html#a08b5a0b1c3b8be6e92235455605dd001',1,'distant.c']]],
-  ['recup_5ftype',['recup_type',['../distant_8c.html#ac8981669edeedb5e7afa24381fa72c29',1,'distant.c']]],
-  ['reserves',['reserves',['../structreserves.html',1,'']]],
-  ['ressources',['ressources',['../structressources.html',1,'']]]
+  ['piece',['piece',['../structpiece.html',1,'']]],
+  ['piece_5fliste_5fcarre',['piece_liste_carre',['../carre_8c.html#ad2737e12ca881a1d070f8a2885d266e1',1,'carre.c']]],
+  ['piece_5fliste_5fcreation',['piece_liste_creation',['../carre_8c.html#a205c4dc3c4ea2b46ad2198a9032a0771',1,'carre.c']]],
+  ['piece_5fnb_5fcarre',['piece_nb_carre',['../carre_8c.html#a62a3df17d80cee25ea27ce5f2d6f4427',1,'carre.c']]],
+  ['piece_5fpivoter',['piece_pivoter',['../carre_8c.html#a3bf1c1c431237cc8353bea53ce34888c',1,'carre.c']]],
+  ['piece_5fprecedent',['piece_precedent',['../carre_8c.html#a5a9d4170b6392e768505a510df50fd6b',1,'carre.c']]],
+  ['piece_5fsuivant',['piece_suivant',['../carre_8c.html#aab9d9a7003a706e5afa85521cdfb4016',1,'carre.c']]],
+  ['police_5fm',['police_m',['../structressources.html#afd960a82aa085423de5f9b431068eb43',1,'ressources']]],
+  ['police_5fp',['police_p',['../structressources.html#a583c20cd52f209e809adf5d966b48e91',1,'ressources']]],
+  ['pos_5fbleu_5fx',['pos_bleu_x',['../structreserves.html#a43d6ec6f983f689ddbfce7aacc83340a',1,'reserves']]],
+  ['pos_5fbleu_5fy',['pos_bleu_y',['../structreserves.html#a4df6bb1bf1f33bed4561319f6a578aa2',1,'reserves']]],
+  ['pos_5fjaune_5fx',['pos_jaune_x',['../structreserves.html#af0c7c7ad11acaf57aef298ce555b5716',1,'reserves']]],
+  ['pos_5fjaune_5fy',['pos_jaune_y',['../structreserves.html#ab834593dad82cc543f84a7c8a897d053',1,'reserves']]],
+  ['pos_5frouge_5fx',['pos_rouge_x',['../structreserves.html#a917838ab706c22787b6292fbd1eea6bb',1,'reserves']]],
+  ['pos_5frouge_5fy',['pos_rouge_y',['../structreserves.html#af241b1b75e2347a2d306935485dd493e',1,'reserves']]],
+  ['pos_5fvert_5fx',['pos_vert_x',['../structreserves.html#a11f4acf994a0d2312399194855dd6121',1,'reserves']]],
+  ['pos_5fvert_5fy',['pos_vert_y',['../structreserves.html#a1f8b0129a1c20395a7b5d302913f2996',1,'reserves']]],
+  ['pose_5fpiece',['pose_piece',['../structressources__audio.html#a5b6cfa529bc0b8d0f346b4a1535cff23',1,'ressources_audio']]],
+  ['poser_5fpiece',['poser_piece',['../gestion__tour_8c.html#a00358da662fcf8a76b416e5fcaa1f94f',1,'gestion_tour.c']]],
+  ['prec',['prec',['../structpiece.html#a91811cbe13acb5a84029afd8ab8d9b38',1,'piece::prec()'],['../structjoueur.html#a160f732197c2542736174f6698e4e25e',1,'joueur::prec()']]],
+  ['pseudo',['pseudo',['../structjoueur.html#a99413f433f9baf71bd6b9570bb2f02aa',1,'joueur']]]
 ];

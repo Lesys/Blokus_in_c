@@ -3,9 +3,12 @@
 #include <SDL2/SDL.h>
 
 typedef struct sprite {
-	SDL_Texture * texture;
-	int largeur;
-	int longueur;
+    /** \brief Texture du sprite */
+    SDL_Texture * texture;
+    /** \brief Largeur du sprite */
+    int largeur;
+    /** \brief Longueur du sprite */
+    int longueur;
 } Sprite;
 
 Sprite * init_sprite(char * filename, int largeur, int longueur);

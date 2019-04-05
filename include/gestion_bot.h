@@ -37,7 +37,7 @@ int eval_coup_bot (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*, Joueur*);
 int eval_nb_carres_poses(Coup*);
 int eval_emplacement_piece(Coup*);
 int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*);
-int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*, Joueur*);
+int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*);
 int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup*, Joueur*);
 
 #endif
