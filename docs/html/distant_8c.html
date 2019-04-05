@@ -97,6 +97,8 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
 <a href="#func-members">Fonctions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -113,6 +115,8 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;strings.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;arpa/inet.h&gt;</code><br />
 <code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &lt;sys/socket.h&gt;</code><br />
@@ -123,61 +127,123 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 <code>#include &quot;../include/commun.h&quot;</code><br />
 <code>#include &quot;../include/joueur.h&quot;</code><br />
 <code>#include &quot;../include/affichage_sdl.h&quot;</code><br />
+<code>#include &quot;../include/gestion_partie.h&quot;</code><br />
+<code>#include &quot;../include/gestion_partie_sdl.h&quot;</code><br />
+<code>#include &quot;../include/son.h&quot;</code><br />
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a26769957ec1a2beaf223f33b66ee64ab"><td class="memItemLeft" align="right" valign="top"><a id="a26769957ec1a2beaf223f33b66ee64ab"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a26769957ec1a2beaf223f33b66ee64ab">INVALID_SOCKET</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memdesc:a26769957ec1a2beaf223f33b66ee64ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
+<tr class="separator:a26769957ec1a2beaf223f33b66ee64ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a633b0396ff93d336a088412a190a5072"><td class="memItemLeft" align="right" valign="top"><a id="a633b0396ff93d336a088412a190a5072"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a633b0396ff93d336a088412a190a5072">SOCKET_ERROR</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="memdesc:a633b0396ff93d336a088412a190a5072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
+<tr class="separator:a633b0396ff93d336a088412a190a5072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a3eb971b466278ada4f7f87399a537c"><td class="memItemLeft" align="right" valign="top"><a id="a5a3eb971b466278ada4f7f87399a537c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a5a3eb971b466278ada4f7f87399a537c">closesocket</a>(s)&#160;&#160;&#160;close(s)</td></tr>
+<tr class="memdesc:a5a3eb971b466278ada4f7f87399a537c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
+<tr class="separator:a5a3eb971b466278ada4f7f87399a537c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d04a8261523c8f3473946257c12ce5b"><td class="memItemLeft" align="right" valign="top"><a id="a4d04a8261523c8f3473946257c12ce5b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a4d04a8261523c8f3473946257c12ce5b">h_addr</a>&#160;&#160;&#160;h_addr_list[0]</td></tr>
+<tr class="memdesc:a4d04a8261523c8f3473946257c12ce5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
+<tr class="separator:a4d04a8261523c8f3473946257c12ce5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:a8dc8083897335125630f1af5dafd5831"><td class="memItemLeft" align="right" valign="top"><a id="a8dc8083897335125630f1af5dafd5831"></a>
+typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a8dc8083897335125630f1af5dafd5831">SOCKET</a></td></tr>
+<tr class="memdesc:a8dc8083897335125630f1af5dafd5831"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
+<tr class="separator:a8dc8083897335125630f1af5dafd5831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29046dc0232f0e5c70adbc25090d77b8"><td class="memItemLeft" align="right" valign="top"><a id="a29046dc0232f0e5c70adbc25090d77b8"></a>
+typedef struct sockaddr_in&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a29046dc0232f0e5c70adbc25090d77b8">SOCKADDR_IN</a></td></tr>
+<tr class="memdesc:a29046dc0232f0e5c70adbc25090d77b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
+<tr class="separator:a29046dc0232f0e5c70adbc25090d77b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae334b73cedf7204187dce3f817576009"><td class="memItemLeft" align="right" valign="top"><a id="ae334b73cedf7204187dce3f817576009"></a>
+typedef struct sockaddr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ae334b73cedf7204187dce3f817576009">SOCKADDR</a></td></tr>
+<tr class="memdesc:ae334b73cedf7204187dce3f817576009"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
+<tr class="separator:ae334b73cedf7204187dce3f817576009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328d951616d1a7f289fef8e6b23a926b"><td class="memItemLeft" align="right" valign="top"><a id="a328d951616d1a7f289fef8e6b23a926b"></a>
+typedef struct in_addr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a328d951616d1a7f289fef8e6b23a926b">IN_ADDR</a></td></tr>
+<tr class="memdesc:a328d951616d1a7f289fef8e6b23a926b"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
+<tr class="separator:a328d951616d1a7f289fef8e6b23a926b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:aa91adb8f875d01089b22cae039fd3010"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#aa91adb8f875d01089b22cae039fd3010">connexion</a> (char *adresse, int port)</td></tr>
 <tr class="memdesc:aa91adb8f875d01089b22cae039fd3010"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effectue une connexion à un hote distant.  <a href="#aa91adb8f875d01089b22cae039fd3010">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aa91adb8f875d01089b22cae039fd3010"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa958b943307bd48ec0a15007392f96b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#aaa958b943307bd48ec0a15007392f96b">accepter_connexion</a> (int port)</td></tr>
-<tr class="memdesc:aaa958b943307bd48ec0a15007392f96b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accepte une connexion d'un joueur distant.  <a href="#aaa958b943307bd48ec0a15007392f96b">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aaa958b943307bd48ec0a15007392f96b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d501b993ada0f376daa181f50510b7b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a8d501b993ada0f376daa181f50510b7b">creer_socket_connexion</a> (int port)</td></tr>
+<tr class="memdesc:a8d501b993ada0f376daa181f50510b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Créé un socket le met sur écoute.  <a href="#a8d501b993ada0f376daa181f50510b7b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a8d501b993ada0f376daa181f50510b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacad3d467de6ab2f888fe71a65ecbfb2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#aacad3d467de6ab2f888fe71a65ecbfb2">accepter_connexion</a> (int sockfd)</td></tr>
+<tr class="memdesc:aacad3d467de6ab2f888fe71a65ecbfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accepte une connexion d'un joueur distant sur un socket d'écoute.  <a href="#aacad3d467de6ab2f888fe71a65ecbfb2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aacad3d467de6ab2f888fe71a65ecbfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0f679f703c33d5f2666b7ff97b5a11c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ab0f679f703c33d5f2666b7ff97b5a11c">fermer_connexion</a> (int sockfd)</td></tr>
 <tr class="memdesc:ab0f679f703c33d5f2666b7ff97b5a11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ferme une connexion distante.  <a href="#ab0f679f703c33d5f2666b7ff97b5a11c">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab0f679f703c33d5f2666b7ff97b5a11c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a856c2277fa7628ef75bc1e5861c5fd26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a856c2277fa7628ef75bc1e5861c5fd26">fermer_connexions_distantes</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a856c2277fa7628ef75bc1e5861c5fd26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ferme les connexions à tout les joueurs distants.  <a href="#a856c2277fa7628ef75bc1e5861c5fd26">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a856c2277fa7628ef75bc1e5861c5fd26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab74c4e6a9a792cfa17d4de3bb94b624d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ab74c4e6a9a792cfa17d4de3bb94b624d">recevoir_buffer</a> (int sockfd, unsigned char buffer[TAILLE_BUFF])</td></tr>
+<tr class="memdesc:ab74c4e6a9a792cfa17d4de3bb94b624d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit un buffer.  <a href="#ab74c4e6a9a792cfa17d4de3bb94b624d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab74c4e6a9a792cfa17d4de3bb94b624d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8981669edeedb5e7afa24381fa72c29"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ac8981669edeedb5e7afa24381fa72c29">recup_type</a> (unsigned char *buffer)</td></tr>
 <tr class="memdesc:ac8981669edeedb5e7afa24381fa72c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupère le type de communication contenue dans le buffer.  <a href="#ac8981669edeedb5e7afa24381fa72c29">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac8981669edeedb5e7afa24381fa72c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad18a8f5f33f00bbaa8a90936da158a00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ad18a8f5f33f00bbaa8a90936da158a00">envoyer_plateau</a> (int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
-<tr class="memdesc:ad18a8f5f33f00bbaa8a90936da158a00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie l'état du plateau.  <a href="#ad18a8f5f33f00bbaa8a90936da158a00">Plus de détails...</a><br /></td></tr>
-<tr class="separator:ad18a8f5f33f00bbaa8a90936da158a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fbd636a3883eafc64482fb51736c46d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a6fbd636a3883eafc64482fb51736c46d">recevoir_plateau</a> (unsigned char *buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
-<tr class="memdesc:a6fbd636a3883eafc64482fb51736c46d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit l'état du plateau.  <a href="#a6fbd636a3883eafc64482fb51736c46d">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a6fbd636a3883eafc64482fb51736c46d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abca6be37e0da5642415cd14f6b1485cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#abca6be37e0da5642415cd14f6b1485cd">envoyer_liste_joueurs</a> (int sockfd, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
-<tr class="memdesc:abca6be37e0da5642415cd14f6b1485cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie la liste des joueurs au joueur distant.  <a href="#abca6be37e0da5642415cd14f6b1485cd">Plus de détails...</a><br /></td></tr>
-<tr class="separator:abca6be37e0da5642415cd14f6b1485cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45df57ef4495c2623cedd951dd0c1ff0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a45df57ef4495c2623cedd951dd0c1ff0">envoyer_plateau</a> (int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece)</td></tr>
+<tr class="memdesc:a45df57ef4495c2623cedd951dd0c1ff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie l'état du plateau.  <a href="#a45df57ef4495c2623cedd951dd0c1ff0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a45df57ef4495c2623cedd951dd0c1ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a445fa473811425d3a67425628b0f23a9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a445fa473811425d3a67425628b0f23a9">recevoir_plateau</a> (unsigned char *buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])</td></tr>
+<tr class="memdesc:a445fa473811425d3a67425628b0f23a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit l'état du plateau.  <a href="#a445fa473811425d3a67425628b0f23a9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a445fa473811425d3a67425628b0f23a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fce99356545b2405276662be6f43397"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a5fce99356545b2405276662be6f43397">envoyer_liste_joueurs</a> (int sockfd, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a5fce99356545b2405276662be6f43397"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie la liste des joueurs au joueur distant.  <a href="#a5fce99356545b2405276662be6f43397">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5fce99356545b2405276662be6f43397"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a964acd81714270828b5daea75aab73f0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a964acd81714270828b5daea75aab73f0">recevoir_liste_joueurs</a> (unsigned char *buffer)</td></tr>
 <tr class="memdesc:a964acd81714270828b5daea75aab73f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">recoit la liste des joueurs et en créer une local  <a href="#a964acd81714270828b5daea75aab73f0">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a964acd81714270828b5daea75aab73f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa47ea55c91e11f1b401876ca14815462"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#aa47ea55c91e11f1b401876ca14815462">envoyer_abandon_joueur</a> (int sockfd, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
-<tr class="memdesc:aa47ea55c91e11f1b401876ca14815462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoi un message annoncant l'abandon d'un joueur.  <a href="#aa47ea55c91e11f1b401876ca14815462">Plus de détails...</a><br /></td></tr>
-<tr class="separator:aa47ea55c91e11f1b401876ca14815462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00fc4ce5d2292a268fd2b7349b36f65a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a00fc4ce5d2292a268fd2b7349b36f65a">envoyer_abandon_joueur</a> (int sockfd, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:a00fc4ce5d2292a268fd2b7349b36f65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoi un message annoncant l'abandon d'un joueur.  <a href="#a00fc4ce5d2292a268fd2b7349b36f65a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a00fc4ce5d2292a268fd2b7349b36f65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5055c3172eee5061edc819523609ec39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a5055c3172eee5061edc819523609ec39">recevoir_abandon_joueur</a> (unsigned char *buffer, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:a5055c3172eee5061edc819523609ec39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit un message d'abandon d'un joueur et effectue les changements dans la liste des joueurs.  <a href="#a5055c3172eee5061edc819523609ec39">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5055c3172eee5061edc819523609ec39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada838a2d0b7afe9caa7b085f2a92da77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ada838a2d0b7afe9caa7b085f2a92da77">envoyer_pseudo</a> (int sockfd, char *pseudo)</td></tr>
-<tr class="memdesc:ada838a2d0b7afe9caa7b085f2a92da77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie le pseudo choisi à l'hote.  <a href="#ada838a2d0b7afe9caa7b085f2a92da77">Plus de détails...</a><br /></td></tr>
-<tr class="separator:ada838a2d0b7afe9caa7b085f2a92da77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a249f969c32892a22364787d85f4e39aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a249f969c32892a22364787d85f4e39aa">envoyer_pseudo</a> (int sockfd, char *pseudo)</td></tr>
+<tr class="memdesc:a249f969c32892a22364787d85f4e39aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie le pseudo choisi à l'hote.  <a href="#a249f969c32892a22364787d85f4e39aa">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a249f969c32892a22364787d85f4e39aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08b5a0b1c3b8be6e92235455605dd001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a08b5a0b1c3b8be6e92235455605dd001">recevoir_pseudo</a> (unsigned char *buffer, char *pseudo)</td></tr>
 <tr class="memdesc:a08b5a0b1c3b8be6e92235455605dd001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recoit un pseudo d'un joueur distant et le place dans pseudo.  <a href="#a08b5a0b1c3b8be6e92235455605dd001">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a08b5a0b1c3b8be6e92235455605dd001"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a66821bb11425511c990520e3499cef"><td class="memItemLeft" align="right" valign="top"><a id="a1a66821bb11425511c990520e3499cef"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>initialisation_partie_distant_sdl</b> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:a41133fce963a33b1723288a9282dc138"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a41133fce963a33b1723288a9282dc138">envoyer_pret</a> (int sockfd)</td></tr>
+<tr class="memdesc:a41133fce963a33b1723288a9282dc138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Envoie un message disant que l'on est pret.  <a href="#a41133fce963a33b1723288a9282dc138">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a41133fce963a33b1723288a9282dc138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ee1a26b79d843436a20afedb5e74ade"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a3ee1a26b79d843436a20afedb5e74ade">erreur_reseau</a> ()</td></tr>
+<tr class="memdesc:a3ee1a26b79d843436a20afedb5e74ade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un message d'erreur réseau avec un bouton retour.  <a href="#a3ee1a26b79d843436a20afedb5e74ade">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3ee1a26b79d843436a20afedb5e74ade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a66821bb11425511c990520e3499cef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a1a66821bb11425511c990520e3499cef">initialisation_partie_distant_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memdesc:a1a66821bb11425511c990520e3499cef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise la connexion avec un hote et attends le début de la partie.  <a href="#a1a66821bb11425511c990520e3499cef">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1a66821bb11425511c990520e3499cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3981cceed89f0e01920cdf9833d9e40f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a3981cceed89f0e01920cdf9833d9e40f">attente_nouvelle_partie_distant</a> (int hote)</td></tr>
+<tr class="memdesc:a3981cceed89f0e01920cdf9833d9e40f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attends le début d'une nouvelle partie pour un joueur distant.  <a href="#a3981cceed89f0e01920cdf9833d9e40f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3981cceed89f0e01920cdf9833d9e40f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a685700946da3b1f5cb06c1d78c11abe0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a685700946da3b1f5cb06c1d78c11abe0">jouer_manche_distant_sdl</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> *j, int hote)</td></tr>
+<tr class="memdesc:a685700946da3b1f5cb06c1d78c11abe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joue une manche en tant que joueur distant.  <a href="#a685700946da3b1f5cb06c1d78c11abe0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a685700946da3b1f5cb06c1d78c11abe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top"><a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
-SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b></td></tr>
+<tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top">SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a966da7a60c4ea3ba301e26ccc5efe452">renderer</a></td></tr>
+<tr class="memdesc:a966da7a60c4ea3ba301e26ccc5efe452"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité  <a href="#a966da7a60c4ea3ba301e26ccc5efe452">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p class="">Fonctions pour le jeu multijoueur. </p>
 <p class="">Fonction qui gèrent les connexions des joueurs distants ainsi que la logique du jeu pour ces joueurs </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre et BASTIDE Robin </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="aaa958b943307bd48ec0a15007392f96b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa958b943307bd48ec0a15007392f96b">&#9670;&nbsp;</a></span>accepter_connexion()</h2>
+<a id="aacad3d467de6ab2f888fe71a65ecbfb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacad3d467de6ab2f888fe71a65ecbfb2">&#9670;&nbsp;</a></span>accepter_connexion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,20 +252,47 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
           <td class="memname">int accepter_connexion </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>port</em></td><td>)</td>
+          <td class="paramname"><em>sockfd</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Accepte une connexion d'un joueur distant. </p>
+<p>Accepte une connexion d'un joueur distant sur un socket d'écoute. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">port</td><td>Port sur lequel écouter </td></tr>
+    <tr><td class="paramname">sockfd</td><td>Socket sur lequel écouter </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>Numéro du socket si connexion, 0 sinon </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Numéro du socket si connexion, -1 sinon </dd></dl>
+
+</div>
+</div>
+<a id="a3981cceed89f0e01920cdf9833d9e40f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3981cceed89f0e01920cdf9833d9e40f">&#9670;&nbsp;</a></span>attente_nouvelle_partie_distant()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int attente_nouvelle_partie_distant </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hote</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attends le début d'une nouvelle partie pour un joueur distant. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hote</td><td>Hote de la partie </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>1 quand début nouvelle partie, 2 si hote déconnecté, 3 si croix </dd></dl>
 
 </div>
 </div>
@@ -241,14 +334,41 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
 
 </div>
 </div>
-<a id="aa47ea55c91e11f1b401876ca14815462"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa47ea55c91e11f1b401876ca14815462">&#9670;&nbsp;</a></span>envoyer_abandon_joueur()</h2>
+<a id="a8d501b993ada0f376daa181f50510b7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d501b993ada0f376daa181f50510b7b">&#9670;&nbsp;</a></span>creer_socket_connexion()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void envoyer_abandon_joueur </td>
+          <td class="memname">int creer_socket_connexion </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Créé un socket le met sur écoute. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>Port sur lequel créer le socket </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Numéro du socket si réussi, 0 sinon </dd></dl>
+
+</div>
+</div>
+<a id="a00fc4ce5d2292a268fd2b7349b36f65a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00fc4ce5d2292a268fd2b7349b36f65a">&#9670;&nbsp;</a></span>envoyer_abandon_joueur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int envoyer_abandon_joueur </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sockfd</em>, </td>
@@ -275,17 +395,18 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Nombre d'octets lus, -1 si erreur </dd></dl>
 
 </div>
 </div>
-<a id="abca6be37e0da5642415cd14f6b1485cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abca6be37e0da5642415cd14f6b1485cd">&#9670;&nbsp;</a></span>envoyer_liste_joueurs()</h2>
+<a id="a5fce99356545b2405276662be6f43397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fce99356545b2405276662be6f43397">&#9670;&nbsp;</a></span>envoyer_liste_joueurs()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void envoyer_liste_joueurs </td>
+          <td class="memname">int envoyer_liste_joueurs </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sockfd</em>, </td>
@@ -308,21 +429,22 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">sockfd</td><td>Numéro du socket à qui envoyer </td></tr>
-    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+    <tr><td class="paramname">j</td><td>Liste des joueurs (positionné sur le joueur à qui l'on envoie) </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Nombre d'octets lus, -1 si erreur </dd></dl>
 
 </div>
 </div>
-<a id="ad18a8f5f33f00bbaa8a90936da158a00"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad18a8f5f33f00bbaa8a90936da158a00">&#9670;&nbsp;</a></span>envoyer_plateau()</h2>
+<a id="a45df57ef4495c2623cedd951dd0c1ff0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45df57ef4495c2623cedd951dd0c1ff0">&#9670;&nbsp;</a></span>envoyer_plateau()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void envoyer_plateau </td>
+          <td class="memname">int envoyer_plateau </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sockfd</em>, </td>
@@ -331,7 +453,13 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Couleur&#160;</td>
-          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU]&#160;</td>
+          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id_piece</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -346,20 +474,49 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
   <table class="params">
     <tr><td class="paramname">sockfd</td><td>Numéro du socket sur lequel envoyer </td></tr>
     <tr><td class="paramname">pl</td><td>Plateau courant </td></tr>
+    <tr><td class="paramname">id_piece</td><td>Id de la piece posée </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Nombre d'octets lus, -1 si erreur </dd></dl>
 
 </div>
 </div>
-<a id="ada838a2d0b7afe9caa7b085f2a92da77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada838a2d0b7afe9caa7b085f2a92da77">&#9670;&nbsp;</a></span>envoyer_pseudo()</h2>
+<a id="a41133fce963a33b1723288a9282dc138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41133fce963a33b1723288a9282dc138">&#9670;&nbsp;</a></span>envoyer_pret()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void envoyer_pseudo </td>
+          <td class="memname">int envoyer_pret </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Envoie un message disant que l'on est pret. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sockfd</td><td>Numéro du socket à qui envoyer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Nombre d'octets lus, -1 si erreur </dd></dl>
+
+</div>
+</div>
+<a id="a249f969c32892a22364787d85f4e39aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a249f969c32892a22364787d85f4e39aa">&#9670;&nbsp;</a></span>envoyer_pseudo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int envoyer_pseudo </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>sockfd</em>, </td>
@@ -386,6 +543,27 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Nombre d'octets lus, -1 si erreur </dd></dl>
+
+</div>
+</div>
+<a id="a3ee1a26b79d843436a20afedb5e74ade"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ee1a26b79d843436a20afedb5e74ade">&#9670;&nbsp;</a></span>erreur_reseau()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int erreur_reseau </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche un message d'erreur réseau avec un bouton retour. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>2 si appui sur le bouton retour, 3 si appui sur la croix </dd></dl>
 
 </div>
 </div>
@@ -412,6 +590,104 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a856c2277fa7628ef75bc1e5861c5fd26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a856c2277fa7628ef75bc1e5861c5fd26">&#9670;&nbsp;</a></span>fermer_connexions_distantes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fermer_connexions_distantes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ferme les connexions à tout les joueurs distants. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1a66821bb11425511c990520e3499cef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a66821bb11425511c990520e3499cef">&#9670;&nbsp;</a></span>initialisation_partie_distant_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int initialisation_partie_distant_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> **&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise la connexion avec un hote et attends le début de la partie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>numéro de socket de l'hote si ok, 2 si appui sur le bouton retour, 3 si appui sur la croix </dd></dl>
+
+</div>
+</div>
+<a id="a685700946da3b1f5cb06c1d78c11abe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a685700946da3b1f5cb06c1d78c11abe0">&#9670;&nbsp;</a></span>jouer_manche_distant_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int jouer_manche_distant_sdl </td>
+          <td>(</td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hote</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Joue une manche en tant que joueur distant. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pl</td><td>Plateau courant </td></tr>
+    <tr><td class="paramname">j</td><td>Liste des joueurs </td></tr>
+    <tr><td class="paramname">hote</td><td>Numéro de socket de l'hote </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>2 si retour ecran titre, 3 si fermeture directe </dd></dl>
 
 </div>
 </div>
@@ -452,6 +728,44 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
 
 </div>
 </div>
+<a id="ab74c4e6a9a792cfa17d4de3bb94b624d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab74c4e6a9a792cfa17d4de3bb94b624d">&#9670;&nbsp;</a></span>recevoir_buffer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int recevoir_buffer </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>buffer</em>[TAILLE_BUFF]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Recoit un buffer. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sockfd</td><td>Socket depuis lequel lire </td></tr>
+    <tr><td class="paramname">buffer</td><td>Buffer dans lequel écrire </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Nombre d'octets lus, -1 si erreur </dd></dl>
+
+</div>
+</div>
 <a id="a964acd81714270828b5daea75aab73f0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a964acd81714270828b5daea75aab73f0">&#9670;&nbsp;</a></span>recevoir_liste_joueurs()</h2>
 
@@ -479,14 +793,14 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
 
 </div>
 </div>
-<a id="a6fbd636a3883eafc64482fb51736c46d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fbd636a3883eafc64482fb51736c46d">&#9670;&nbsp;</a></span>recevoir_plateau()</h2>
+<a id="a445fa473811425d3a67425628b0f23a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a445fa473811425d3a67425628b0f23a9">&#9670;&nbsp;</a></span>recevoir_plateau()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void recevoir_plateau </td>
+          <td class="memname">int recevoir_plateau </td>
           <td>(</td>
           <td class="paramtype">unsigned char *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
@@ -576,7 +890,25 @@ SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>0-Erreur, 1-Liste joueurs, 2-Etat plateau, 3-Abandon joueur, 4-Pseudo </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Le type (voir enum) </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des variables</h2>
+<a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a966da7a60c4ea3ba301e26ccc5efe452">&#9670;&nbsp;</a></span>renderer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SDL_Renderer* renderer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>typedef pour compatibilité </p>
+<p class="">typedef pour compatibilité </p>
 
 </div>
 </div>
