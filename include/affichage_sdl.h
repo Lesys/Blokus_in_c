@@ -22,6 +22,8 @@ typedef struct ressources {
     Sprite * carre_vert;
     /** \brief Texture carré sélection */
     Sprite * selection;
+    /** \brief Texture carré sélection erreur */
+    Sprite * selection_erreur;
     /** \brief Police de taille moyenne */
     TTF_Font * police_m;
     /** \brief Police de petite taille */
