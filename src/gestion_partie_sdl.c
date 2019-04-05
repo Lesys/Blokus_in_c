@@ -23,11 +23,12 @@ int son;
 int effet;
 
 /**
-	*\fn void saisir_pseudo(Joueur **j)
+	*\fn int saisir_pseudo(Joueur **j)
 	*\details Initialise le pseudo du joueur
-	* Si la liste existe, on la supprime puis on en crée une autre.
+	*\Demande la saisie du pseudo du joueur et l'ajoute dans son pseudo en réallouant sa taille a la fin
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
 	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
+		Retourne 4 si il appuis sur le bouton retour <br>
 		Retourne 0 si l'affectation a bien fonctionné
 */
 
@@ -88,13 +89,11 @@ int saisir_pseudo_joueur(Joueur** j){
 }
 
 /**
-	*\fn void initialisation_partie_sdl(Joueur **j)
-	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
-	<br>Initialise le pseudo des joueurs
-	* Si la liste existe, on la supprime puis on en crée une autre.
-	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
-	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
-		Retourne 0 si l'affectation a bien fonctionné
+	*\fn int saisir_nb_joueur()
+	*\details Affiche l'affichage et attends que le joueur appuis sur un bouton qui demande le nombre de joueur et le renvoie.
+	*\return Retourne -1 si le joueur appuis sur la croix de l'aficheur<br>
+		Retourne entre 1 et 4, le nombre de joueur jouable<br>
+		Retourne 5 si il appuis sur retour
 */
 int saisir_nb_joueur(){
 /********PARTIE SAISI NB DES JOUEURS*********/
@@ -166,12 +165,11 @@ int saisir_nb_joueur(){
 }
 
 /**
-	*\fn void initialisation_partie_sdl(Joueur **j)
-	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
-	<br>Initialise le pseudo des joueurs
-	* Si la liste existe, on la supprime puis on en crée une autre.
+	*\fn int saisir_type_joueur(Joueur** j){
+	*\details Affiche un écran avec  3 bouton ( LOCAL, DISTANT, BOT) et l'affecte au joueur
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
 	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
+		Retourne 4 si il appuis sur retour <br>
 		Retourne 0 si l'affectation a bien fonctionné
 */
 
@@ -248,12 +246,15 @@ int saisir_type_joueur(Joueur** j){
 
 /**
 	*\fn void initialisation_joueur_distant(Joueur **j)
-	*\details Initialise une partie <br> Crée une liste de n Joueur [2-4].
-	<br>Initialise le pseudo des joueurs
+	*\details Initialise un joueur distant, creer la connexion entre les deux et recuperent le sockfd. <br>
+	*Attend que le joueur distant lui envoie le pseudo , si il le reçois, le programme l'affecte au pseudo et le rajoute en type distant,<br>
+	sinon il ferme la connexion
 	* Si la liste existe, on la supprime puis on en crée une autre.
-	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
-	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
-		Retourne 0 si l'affectation a bien fonctionné
+	*\param j Pointeur sur un Joueur pour affecter le joueur à la liste de Joueur.
+	*\return Retourne 2 si il appuis sur le bouton retour.<br>
+		Retourne 3 si le joueur appuis sur la croix de l'aficheur.<br>
+		Retourne 4 si il a un problème avec le buffer.<br>
+		Retourne 0 si l'affectation a bien fonctionné.
 */
 
 
@@ -342,8 +343,10 @@ int initialiser_joueur_distant(Joueur **j){
 	<br>Initialise le pseudo des joueurs
 	* Si la liste existe, on la supprime puis on en crée une autre.
 	*\param j Pointeur sur un Joueur pour créer la liste de Joueur.
-	*\return Retourne 3 si le joueur appuis sur la croix de l'aficheur<br>
-		Retourne 0 si l'affectation a bien fonctionné
+	*\return Retourne 2 si le bouton retour a appuyer.<br>
+		Retourne 3 si le joueur appuis sur la croix.<br>
+		Retourne 4 si il a un problème reseau.<br>
+		Retourne 0 si l'affectation a bien fonctionné.
 */
 int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel des fonctions pour crées les joueurs, le plateau*/
 
@@ -412,7 +415,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	*\fn int fin_de_partie_sdl(Joueur** j)
 	*\brief Vérifie si c'est vraiment la fin de la partie,modifie les scores  et réalise les choix à faire.
 	*\details Si le Joueur à une liste_vide, on le fait abandonner.
-	*Une fois que tous les Joueurs ont abandoné,mets à jour le score ,affiche les résultats et demande a l'utilisateur un choix:<br>
+	*Une fois que tous les Joueurs ont abandoné,mets à jour le score ,affiche les résultats dans la sdl et demande a l'utilisateur un choix:<br>
 	*-Recommencez une manche.
 	<br>
 	*-Recommencez une partie.
@@ -483,47 +486,20 @@ int fin_de_partie_sdl(Joueur** j){
 	return continuer;
 }
 
-//Verifie a la fin de la partie si tous les joueurs veullent continuez la partie ou quittez
-/*int verification_continue(Joueur* j, int choix){
-	Joueur* pivot=j;
-	pivot=joueur_suivant(pivot);
-	int valeur_r;
-        SDL_Event event_fin;
-	while(j != pivot){
-		SDL_RenderClear(renderer);
-		//On attend la touche du joueur
-        	while(SDL_PollEvent(&event_fin)){
-			//Si il appuis sur la croix
-			if(event_fin.type == SDL_QUIT)
-				return 3;
-		}
-		//reçois le resultat de l'autre
-		//afficher_attente_continue_sdl();
-		SDL_RenderPresent(renderer);
-		valeur_r = 1;//?
-		if(choix != valeur_r || choix != 1){
-			return valeur_r;
-		}
-		pivot=joueur_suivant(pivot);
-	}
-	return choix;
-}
-*/
-
 /**
-	*\fn int jouer_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
-	*\details Réalise le fonctionnement d'un tour en appellant les fonctions de gestion_tour .
+	*\fn int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
+	*\details Réalise le fonctionnement d'un tour d'un bot en appellant la fonction gestion_tour_bot .
 	*\param pl Plateau de jeu pour posez les Piece.
-	*\param j Joueur qui joue actuellement.
-	*\return 3 si la croix a été saisie <br>
-	  renvoie le resultat de la fonction gestion_tour_sdl<br>
-	*1 = Abandon du Joueur
-	*2 = Quitte le jeu ( Appuis sur la croix)
+	*\param j Joueur de type bot qui joue actuellement.
+	*\return renvoie le resultat de la fonction gestion_tour_sdl<br>
+	*0 = Le Bot a joué
+	*1 = Abandon du Bot
+
 */
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
-	int valeur_r = 4;
+	int valeur_r = 0;
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
 		*j=joueur_suivant(*j);
@@ -537,13 +513,23 @@ int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 //			printf("Vous avez abandonné\n");
 			joueur_abandonne(*j);
 		}
-		else if(valeur_r == 2){
-			return 3;//Quitte le jeu
-		}
 		*j=joueur_suivant(*j);
 	}
 	return valeur_r;
 }
+
+/**
+	*\fn int jouer_tour_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
+	*\details Réalise le fonctionnement d'un tour pour le joueur de type distant en appellant les fonctions de distant.c.
+	*\param pl Plateau de jeu pour posez les Piece.
+	*\param j Joueur de type distant qui joue actuellement.
+	*\ renvoie le resultat de la fonction recup_type.<br>
+	*1 = Abandon du Joueur
+	*2 = Quitte le jeu ( Appuis sur la croix)
+	*5 = Si le joueur distant a quittez, alors le bot le remplace
+	Renvoie l'id de la Piece
+*/
+
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
@@ -577,7 +563,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
                             valeur_r = recevoir_buffer((*j)->sockfd, buffer);
                             if (valeur_r == -1) {
                             	(*j)->type = BOT;
-                            	return 5;
+                            	return 5;//Si le joueur distant ce déconnecte
                             }
                         }
 		}
@@ -629,6 +615,16 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 }
 
 
+/**
+	*\fn int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
+	*\details Réalise le fonctionnement d'un tour pour un joueur local en appellant les fonctions de gestion_tour .
+	*\param pl Plateau de jeu pour posez les Piece.
+	*\param j Joueur qui joue actuellement.
+	*\return  renvoie le resultat de la fonction gestion_tour_sdl<br>
+	*1 = Abandon du Joueur
+	*3 = Quitte le jeu ( Appuis sur la croix)
+	Renvoie l'id de la Piece
+*/
 
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
@@ -794,10 +790,14 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 /**
-	*\fn int jouer_partie_sdl()
-	*\brief Réalise l'appelle de fonction pour jouer une partie.
-	*\details Crée une liste de joueur et un plateau de jeu.
-	*\puis appelle initalisation_partie et debut_manche.
+	*\fn int type_partie()
+	*\brief Affiche le type de la partie ( CREER, REJOINDRE, RETOUR).
+	*\details Renvoie la valeur correspondante a la partie voulu
+	*\return
+		Renvoie 1 si c'est le bouton créer.<br>
+		Renvoie 2 si c'est le bouton rejoindre.<br>
+		Renvoie 3 si c'est le bouton quitter.<br>
+		Renvoie 4 si c'est le bouton retour.
 */
 
 int type_partie(){
@@ -842,6 +842,12 @@ int type_partie(){
 
 	return val_retour;
 }
+/**
+	*\fn int jouer_partie_sdl()
+	*\brief Affiche le bouton JOUER QUITTER et appelle les fonctions en fonction du bouton appuyer retours boutons de la sdl.
+	*\return
+		Renvoie 3 si il veut quittez le jeu.
+*/
 
 int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 
