@@ -206,7 +206,7 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 	Joueur* tmp = bot;
 
 		while ((tmp = joueur_suivant(tmp)) != bot) {
-			nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
+			//nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
 
 			eval += eval_nb_coups_bloques(pl2, bot, coup) * COEF_COINS_BLOQUES;
 		}
@@ -664,6 +664,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
     {
         for(j = 0; j < TAILLE_PLATEAU; j++)
         {
+			fprintf(stderr,"i : %d, j : %d\n", i, j);
             /* Pour chaque pièces disponibles */
             do
             {
@@ -697,18 +698,18 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 
 						tab[compteur]->c = joueur_couleur(bot);
 
-								/* Recréé un plateau fictif pour émuler les coups */
-								Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
+						/* Recréé un plateau fictif pour émuler les coups */
+						Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
-								int i, j;
+						int i, j;
 
-								/* Recopie du plateau */
-								for (i = 0; i < TAILLE_PLATEAU; i++)
-									for (j = 0; j < TAILLE_PLATEAU; j++)
-										pl2[i][j] = pl[i][j];
+						/* Recopie du plateau */
+						for (i = 0; i < TAILLE_PLATEAU; i++)
+							for (j = 0; j < TAILLE_PLATEAU; j++)
+								pl2[i][j] = pl[i][j];
 
-								/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
-								poser_piece_bot(pl2, tab[compteur]);
+						/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
+						poser_piece_bot(pl2, tab[compteur]);
 
 						/*tab[compteur]->valeur_coup = 0;*/
 						tab[compteur]->valeur_coup = eval_coup_bot(pl, tab[compteur], bot);
