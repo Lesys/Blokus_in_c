@@ -24,26 +24,26 @@ extern SDL_Renderer * renderer;
 static
 SDL_Texture* init_texture(char * filename) {
 
-	// Chargement de l'image dans une surface
-	SDL_Surface * image = IMG_Load(filename);
- 	if (!image) {
+    // Chargement de l'image dans une surface
+    SDL_Surface * image = IMG_Load(filename);
+    if (!image) {
 
- 		printf("Impossible de charger %s : %s\n", filename, IMG_GetError());
- 		return NULL;
+        printf("Impossible de charger %s : %s\n", filename, IMG_GetError());
+        return NULL;
 
- 	}
+    }
 
- 	// Création de la texture depuis la surface
+    // Création de la texture depuis la surface
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, image);
     if (!texture) {
 
- 		printf("Impossible de créer une texture à partir du fichier %s : %s\n", filename, SDL_GetError());
- 		return NULL;
+        printf("Impossible de créer une texture à partir du fichier %s : %s\n", filename, SDL_GetError());
+        return NULL;
 
- 	}
- 	
- 	// Désallocation de la surface
- 	SDL_FreeSurface(image);
+    }
+
+    // Désallocation de la surface
+    SDL_FreeSurface(image);
 
     return texture;
 }
@@ -58,27 +58,27 @@ SDL_Texture* init_texture(char * filename) {
  */
 Sprite * init_sprite(char * filename, int longueur, int largeur) {
 
-	// Allocation de la structure
-	Sprite * sprite = malloc(sizeof(Sprite));
-	if (!sprite) {
-		printf("malloc a échoué dans init_sprite()\n");
-		return NULL;
-	}
-	else {
-		// Création est mise en place de la texture
-		sprite->texture = init_texture(filename);
-		if (!sprite->texture) {
-			free(sprite);
-			return NULL;
-		}
-		else {
-			// Mise en place de la largeur et longueur
-			sprite->largeur = largeur;
-			sprite->longueur = longueur;
+    // Allocation de la structure
+    Sprite * sprite = malloc(sizeof(Sprite));
+    if (!sprite) {
+        printf("malloc a échoué dans init_sprite()\n");
+        return NULL;
+    }
+    else {
+        // Création est mise en place de la texture
+        sprite->texture = init_texture(filename);
+        if (!sprite->texture) {
+            free(sprite);
+            return NULL;
+        }
+        else {
+            // Mise en place de la largeur et longueur
+            sprite->largeur = largeur;
+            sprite->longueur = longueur;
 
-			return sprite;
-		}
-	}
+            return sprite;
+        }
+    }
 }
 
 /**
@@ -88,11 +88,11 @@ Sprite * init_sprite(char * filename, int longueur, int largeur) {
  */
 void free_sprite(Sprite ** sprite) {
 
-	if (*sprite) {
-		SDL_DestroyTexture((*sprite)->texture);
-		free(*sprite);
-		*sprite = NULL;
-	}
+    if (*sprite) {
+        SDL_DestroyTexture((*sprite)->texture);
+        free(*sprite);
+        *sprite = NULL;
+    }
 }
 
 /**
@@ -104,13 +104,13 @@ void free_sprite(Sprite ** sprite) {
  */
 void afficher_sprite(Sprite * sprite, int x, int y) {
 
-	// Création du rectangle de destination
-	SDL_Rect dstrect;
-	dstrect.x = x;
+    // Création du rectangle de destination
+    SDL_Rect dstrect;
+    dstrect.x = x;
     dstrect.y = y;
     dstrect.w = sprite->largeur;
     dstrect.h = sprite->longueur;
 
     // Affichage
-	SDL_RenderCopy(renderer, sprite->texture, NULL, &dstrect);
+    SDL_RenderCopy(renderer, sprite->texture, NULL, &dstrect);
 }

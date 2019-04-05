@@ -9,5 +9,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "gestion_tour.c", "gestion__tour_8c.html", "gestion__tour_8c" ],
     [ "gestion_tour_sdl.c", "gestion__tour__sdl_8c.html", "gestion__tour__sdl_8c" ],
     [ "joueur.c", "joueur_8c.html", "joueur_8c" ],
+    [ "son.c", "son_8c.html", "son_8c" ],
     [ "sprite.c", "sprite_8c.html", "sprite_8c" ]
 ];

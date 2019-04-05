@@ -47,20 +47,20 @@ int main(int arc, char * argv[]) {
     SDL_RenderClear(renderer);
 
     /*afficher_plateau_sdl(plateau);
-    afficher_pieces_dispo_sdl(r, lj, NULL);
-    afficher_scores_sdl(lj);
-    afficher_tour_sdl(lj);
-    afficher_bouton_sdl(b_abandonner);
-    afficher_resultats_sdl(lj);
-    afficher_bouton_sdl(b_continuer);
-    afficher_bouton_sdl(b_quitter_partie);
-    */
+      afficher_pieces_dispo_sdl(r, lj, NULL);
+      afficher_scores_sdl(lj);
+      afficher_tour_sdl(lj);
+      afficher_bouton_sdl(b_abandonner);
+      afficher_resultats_sdl(lj);
+      afficher_bouton_sdl(b_continuer);
+      afficher_bouton_sdl(b_quitter_partie);
+      */
 
     /*
-    afficher_titres_sdl();
-    afficher_bouton_sdl(b_jouer);
-    afficher_bouton_sdl(b_quitter_jeu);
-    */
+       afficher_titres_sdl();
+       afficher_bouton_sdl(b_jouer);
+       afficher_bouton_sdl(b_quitter_jeu);
+       */
 
 
     afficher_nb_joueurs_sdl();
@@ -69,11 +69,11 @@ int main(int arc, char * argv[]) {
     afficher_bouton_sdl(b_nb_joueurs_4);
 
     /*
-    afficher_type_joueur_sdl();
-    afficher_bouton_sdl(b_type_joueur_local);
-    afficher_bouton_sdl(b_type_joueur_distant);
-    afficher_bouton_sdl(b_type_joueur_bot);
-    */
+       afficher_type_joueur_sdl();
+       afficher_bouton_sdl(b_type_joueur_local);
+       afficher_bouton_sdl(b_type_joueur_distant);
+       afficher_bouton_sdl(b_type_joueur_bot);
+       */
 
     //afficher_saisie_pseudo_sdl("Pseudotaillemax");
 

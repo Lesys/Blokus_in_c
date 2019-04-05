@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blokus in C:  Fichier source de include/son.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('son_8h_source.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">son.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SON_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SON_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;SDL2/SDL_mixer.h&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="structressources__audio.html">    6</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structressources__audio.html">ressources_audio</a> {</div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="structressources__audio.html#a5b6cfa529bc0b8d0f346b4a1535cff23">    8</a></span>&#160;    Mix_Chunk * <a class="code" href="structressources__audio.html#a5b6cfa529bc0b8d0f346b4a1535cff23">pose_piece</a>;</div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="structressources__audio.html#a791363df724f2303108f7b72a694aa81">   10</a></span>&#160;    Mix_Chunk * <a class="code" href="structressources__audio.html#a791363df724f2303108f7b72a694aa81">cloche</a>;</div><div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="structressources__audio.html#a629b77141d724acc3f23c602a99a4da8">   12</a></span>&#160;    Mix_Chunk * <a class="code" href="structressources__audio.html#a629b77141d724acc3f23c602a99a4da8">abandon</a>;</div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="structressources__audio.html#ae44019817923db19c117a18ea36d42e7">   14</a></span>&#160;    Mix_Chunk * <a class="code" href="structressources__audio.html#ae44019817923db19c117a18ea36d42e7">bouton</a>;</div><div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="structressources__audio.html#a0e33b652a13a2f6726739fa89f32ea67">   16</a></span>&#160;    Mix_Chunk * <a class="code" href="structressources__audio.html#a0e33b652a13a2f6726739fa89f32ea67">bouton_retour</a>;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structressources__audio.html#a8a2a9063f42c9c67760a7aeb07a61fbb">   18</a></span>&#160;    Mix_Music * <a class="code" href="structressources__audio.html#a8a2a9063f42c9c67760a7aeb07a61fbb">musique_fond</a>;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;} <a class="code" href="structressources__audio.html">Ressources_audio</a>;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> sons {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    POSE_PIECE,</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    CLOCHE,</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    ABANDON,</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    BOUTON,</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    BOUTON_RETOUR,</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    MUSIQUE_FOND</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} Sons;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">int</span> <a class="code" href="son_8c.html#a601d3a5fa4c3c2130b479d0754eb4148">init_son</a>();</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> <a class="code" href="son_8c.html#ac1fe3e076a7e342349f1a78749d0afe3">free_son</a>();</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="son_8c.html#a92d53f5e5d3cf37f86d481850df42494">jouer_son</a>(Sons s);</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="structressources__audio_html_a8a2a9063f42c9c67760a7aeb07a61fbb"><div class="ttname"><a href="structressources__audio.html#a8a2a9063f42c9c67760a7aeb07a61fbb">ressources_audio::musique_fond</a></div><div class="ttdeci">Mix_Music * musique_fond</div><div class="ttdoc">Musique de fond.</div><div class="ttdef"><b>Definition:</b> son.h:18</div></div>
+<div class="ttc" id="son_8c_html_ac1fe3e076a7e342349f1a78749d0afe3"><div class="ttname"><a href="son_8c.html#ac1fe3e076a7e342349f1a78749d0afe3">free_son</a></div><div class="ttdeci">void free_son()</div><div class="ttdoc">Quitte le module son.</div><div class="ttdef"><b>Definition:</b> son.c:61</div></div>
+<div class="ttc" id="son_8c_html_a601d3a5fa4c3c2130b479d0754eb4148"><div class="ttname"><a href="son_8c.html#a601d3a5fa4c3c2130b479d0754eb4148">init_son</a></div><div class="ttdeci">int init_son()</div><div class="ttdoc">Initialise le module son.</div><div class="ttdef"><b>Definition:</b> son.c:28</div></div>
+<div class="ttc" id="structressources__audio_html_a629b77141d724acc3f23c602a99a4da8"><div class="ttname"><a href="structressources__audio.html#a629b77141d724acc3f23c602a99a4da8">ressources_audio::abandon</a></div><div class="ttdeci">Mix_Chunk * abandon</div><div class="ttdoc">Son d&amp;#39;abandon.</div><div class="ttdef"><b>Definition:</b> son.h:12</div></div>
+<div class="ttc" id="structressources__audio_html_a791363df724f2303108f7b72a694aa81"><div class="ttname"><a href="structressources__audio.html#a791363df724f2303108f7b72a694aa81">ressources_audio::cloche</a></div><div class="ttdeci">Mix_Chunk * cloche</div><div class="ttdoc">Son cloche.</div><div class="ttdef"><b>Definition:</b> son.h:10</div></div>
+<div class="ttc" id="structressources__audio_html_a0e33b652a13a2f6726739fa89f32ea67"><div class="ttname"><a href="structressources__audio.html#a0e33b652a13a2f6726739fa89f32ea67">ressources_audio::bouton_retour</a></div><div class="ttdeci">Mix_Chunk * bouton_retour</div><div class="ttdoc">Son bouton retour.</div><div class="ttdef"><b>Definition:</b> son.h:16</div></div>
+<div class="ttc" id="son_8c_html_a92d53f5e5d3cf37f86d481850df42494"><div class="ttname"><a href="son_8c.html#a92d53f5e5d3cf37f86d481850df42494">jouer_son</a></div><div class="ttdeci">void jouer_son(Sons s)</div><div class="ttdoc">Joue un son.</div><div class="ttdef"><b>Definition:</b> son.c:83</div></div>
+<div class="ttc" id="structressources__audio_html_ae44019817923db19c117a18ea36d42e7"><div class="ttname"><a href="structressources__audio.html#ae44019817923db19c117a18ea36d42e7">ressources_audio::bouton</a></div><div class="ttdeci">Mix_Chunk * bouton</div><div class="ttdoc">Son bouton.</div><div class="ttdef"><b>Definition:</b> son.h:14</div></div>
+<div class="ttc" id="structressources__audio_html_a5b6cfa529bc0b8d0f346b4a1535cff23"><div class="ttname"><a href="structressources__audio.html#a5b6cfa529bc0b8d0f346b4a1535cff23">ressources_audio::pose_piece</a></div><div class="ttdeci">Mix_Chunk * pose_piece</div><div class="ttdoc">Son pose pièce.</div><div class="ttdef"><b>Definition:</b> son.h:8</div></div>
+<div class="ttc" id="structressources__audio_html"><div class="ttname"><a href="structressources__audio.html">ressources_audio</a></div><div class="ttdef"><b>Definition:</b> son.h:6</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>son.h</b></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+  </ul>
+</div>
+</body>
+</html>

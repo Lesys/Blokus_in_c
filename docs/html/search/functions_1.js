@@ -10,6 +10,7 @@ var searchData=
   ['carre_5freinit_5ftab',['carre_reinit_tab',['../carre_8c.html#a9d95666bc7f00ec172bbde917d54feea',1,'carre.c']]],
   ['choisir_5fcoordonnee',['choisir_coordonnee',['../gestion__tour_8c.html#afb19cecbb94f50afd5e76761d001103e',1,'gestion_tour.c']]],
   ['connexion',['connexion',['../distant_8c.html#aa91adb8f875d01089b22cae039fd3010',1,'distant.c']]],
+  ['creer_5fsocket_5fconnexion',['creer_socket_connexion',['../distant_8c.html#a8d501b993ada0f376daa181f50510b7b',1,'distant.c']]],
   ['curs_5fhover_5fbouton',['curs_hover_bouton',['../affichage__sdl_8c.html#abd58e21bc5b1983a489a704c2e1a8b3b',1,'affichage_sdl.c']]],
   ['curs_5fhover_5fpiece',['curs_hover_piece',['../affichage__sdl_8c.html#abefdf6e33bb8c02ceb9657cc5a598c0a',1,'affichage_sdl.c']]],
   ['curs_5fhover_5fplateau',['curs_hover_plateau',['../affichage__sdl_8c.html#a5e16200f9aca262dd443b04c4a6d796c',1,'affichage_sdl.c']]]

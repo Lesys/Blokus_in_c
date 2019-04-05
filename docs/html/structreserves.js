@@ -11,6 +11,5 @@ var structreserves =
     [ "pos_vert_x", "structreserves.html#a11f4acf994a0d2312399194855dd6121", null ],
     [ "pos_vert_y", "structreserves.html#a1f8b0129a1c20395a7b5d302913f2996", null ],
     [ "rouge", "structreserves.html#ae93aef74ef54951be324f8154d510079", null ],
-    [ "taille_carre", "structreserves.html#ab9a711d056d5c773fb15a45d35331468", null ],
     [ "vert", "structreserves.html#adee0bb1d46f48f7d46bf78f7ff173c5d", null ]
 ];
