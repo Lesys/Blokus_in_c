@@ -170,7 +170,7 @@ int accepter_connexion(int sockfd) {
 
     int sinsize = sizeof csin;
 
-    newsockfd = accept(sockfd, (SOCKADDR *)&csin, &sinsize);
+    newsockfd = accept(sockfd, (SOCKADDR *)&csin, (socklen_t * restrict) &sinsize);
 
     if (newsockfd == -1) {
         return -1;
