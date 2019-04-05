@@ -109,7 +109,7 @@ static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 int meilleur_coup(Coup** tab, int compteur) {
 	/* S'il n'y a qu'un seul coup possible */
 	if (compteur == 1)
-		return tab[0];
+		return 0;
 
 	int index_max = 0; /* L'index dans le tableau du meilleur Coup */
 	int i = 0;
@@ -187,10 +187,13 @@ static int nb_coups_dispo_2(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* 
 
 static int verif_coin_libre(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int x, int y, Couleur col) {
 	/* Vérifie qu'il n'y a aucun Carre adjacant aux Carre que le Joueur pose */
-	return ((coord_dans_plateau(x - 1) && coord_dans_plateau(y) && pl[x - 1][y] != col) && /* A gauche */
-		(coord_dans_plateau(x + 1) && coord_dans_plateau(y) && pl[x + 1][y] != col) && /* A droite */
-		(coord_dans_plateau(x) && coord_dans_plateau(y - 1) && pl[x][y - 1] != col) && /* En haut */
-		(coord_dans_plateau(x) && coord_dans_plateau(y + 1) && pl[x][y + 1] != col)); /* En bas */
+	if ((coord_dans_plateau(x - 1) && coord_dans_plateau(y) && pl[x - 1][y] == col) || /* A gauche */
+		(coord_dans_plateau(x + 1) && coord_dans_plateau(y) && pl[x + 1][y] == col) || /* A droite */
+		(coord_dans_plateau(x) && coord_dans_plateau(y - 1) && pl[x][y - 1] == col) || /* En haut */
+		(coord_dans_plateau(x) && coord_dans_plateau(y + 1) && pl[x][y + 1] == col)) /* En bas */
+		return 0;
+	else
+		return 1;
 }
 
 static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* joueur) {
@@ -201,7 +204,7 @@ static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 	int coord_x = coup_coord_x(coup), coord_y = coup_coord_y(coup);
 	int x, y;
 	int nb = 0;
-
+int cmp = 1;
 	/* Pour tous les Carre de la Piece */
 	do {
 		x = coord_x + carre_get_x(c);
@@ -209,63 +212,33 @@ static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 
 		/* Vérifie pour TOUTES les diagonales de CHAQUE Carre, si le coin est libre pour nous */
 		if ((coord_dans_plateau(x - 1) && coord_dans_plateau(y - 1) && pl[x - 1][y  - 1] == VIDE)) /* Diagonale Bas - Gauche */
-			if (verif_coin_libre(pl, x - 1, y - 1, couleur))
+			if (verif_coin_libre(pl, x - 1, y - 1, couleur)) {
+//				fprintf(stderr, "Coin libre en %d %d - Diag bas gauche\n", x - 1, y - 1);
 				nb++;
+			}
 
 		if ((coord_dans_plateau(x + 1) && coord_dans_plateau(y - 1) && pl[x + 1][y - 1] == VIDE)) /* Diagonale Bas - Droit */
-			if (verif_coin_libre(pl, x + 1, y - 1, couleur))
-				nb++;
+			if (verif_coin_libre(pl, x + 1, y - 1, couleur)) {
+//				fprintf(stderr, "Coin liber en %d %d - Diag bas droit\n", x + 1, y - 1);
 
+				nb++;
+}
 		if ((coord_dans_plateau(x - 1) && coord_dans_plateau(y + 1) && pl[x - 1][y + 1] == VIDE)) /* Diagonale Haut - Gauche */
-			if (verif_coin_libre(pl, x - 1, y + 1, couleur))
+			if (verif_coin_libre(pl, x - 1, y + 1, couleur)) {
+//				fprintf(stderr, "Coin liber en %d %d - Diag haut gauche\n", x - 1, y + 1);
 				nb++;
-
+}
 		if ((coord_dans_plateau(x + 1) && coord_dans_plateau(y + 1) && pl[x + 1][y + 1] == VIDE)) /* Diagonale Haut - Droit */
-			if (verif_coin_libre(pl, x + 1, y + 1, couleur))
+			if (verif_coin_libre(pl, x + 1, y + 1, couleur)){
+//				fprintf(stderr, "Coin liber en %d %d - Diag haut droit\n", x + 1, y + 1);
 				nb++;
-
+}
+//fprintf(stderr, "compteur: %d\n", cmp++);
 	} while ((c = carre_get_suiv(c)) != init);
-coup_afficher(coup);
-fprintf(stderr, "Joueur %s: %d coins dispo\n", couleur_tostring(joueur_couleur(joueur)), nb);
+//fprintf(stderr, "Joueur %s: %d coins dispo\n", couleur_tostring(joueur_couleur(joueur)), nb);
+//coup_afficher(coup);
 
 	return nb;
-
-
-
-/*
-	int i, j, k, nb;
-
-    Piece * p = joueur_liste_piece(joueur);
-    Piece * init = p;
-
-    int compteur = 0;
-*/
-    /* Pour chaque position de la matrice */
-/*    for(i = 0; i < TAILLE_PLATEAU; i++)
-    {
-        for(j = 0; j < TAILLE_PLATEAU; j++)
-        {
-*/            /* Pour chaque pièces disponibles */
-/*            do
-            {
-*/                /* Pour chaque orientation possible */
-/*                for(k = 0; k < 4; k++)
-                {
-                    /* Si la pièce est posable */
-/*                    if(verifier_coordonnees(pl, p, i, j, joueur))
-			compteur++;
-
-                    changer_orientation(p);
-                }
-
-                p = piece_suivant(p);
-
-            } while (p != init);
-        }
-    }
-*/
-	/* On retourne le nombre de Coup qu'il peut jouer */
-//    return compteur;
 }
 
 int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
@@ -299,14 +272,18 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 
 //fprintf(stderr, "Joueur %s: %d coins dispo\n", couleur_tostring(joueur_couleur(bot)), nb);
 
-		while ((tmp = joueur_suivant(tmp)) != bot) {
-	//		nb_coin_adversaire += nb_coups_dispo(pl2, tmp);
-
+/*		while ((tmp = joueur_suivant(tmp)) != bot) {
 			eval += eval_nb_coups_bloques(pl2, coup, bot) * COEF_COINS_BLOQUES;
 		}
+*/		eval += eval_nb_nouveaux_coups(pl2, coup, bot) * COEF_NOUVEAUX_COINS;
 	}
 //	eval += eval_nb_nouveaux_coups(pl2, bot, nb_coin_bot) * COEF_NOUVEAUX_COINS;
-	eval += eval_nb_nouveaux_coups(pl2, coup, bot) * COEF_NOUVEAUX_COINS;
+
+	/* Si la Piece est le petit carré, prend un malus */
+	if (piece_id(coup_piece(coup)) == 1) {
+		fprintf(stderr, "Petit carré posé\n");
+		eval /= 2;
+	}
 
 	return eval;
 
@@ -533,7 +510,7 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
     Piece * init = p;
 
     Coup** tab = NULL;
-    int compteur = 0, tmp = 0;
+    int compteur = 0;
 
     /* Pour chaque position de la matrice */
     for(i = 0; i < TAILLE_PLATEAU; i++)
@@ -644,7 +621,7 @@ int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Jo
     Piece * init = p;
 
     Coup** tab = NULL;
-    int compteur = 0, tmp = 0;
+    int compteur = 0;
 
     /* Pour chaque position de la matrice */
     for(i = 0; i < TAILLE_PLATEAU; i++)
@@ -753,7 +730,7 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
     Piece * init = p;
 
     Coup** tab = NULL;
-    int compteur = 0, tmp = 0;
+    int compteur = 0;
 
     /* Pour chaque position de la matrice */
     for(i = 0; i < TAILLE_PLATEAU; i++)
@@ -812,6 +789,12 @@ Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 						if (PROFONDEUR > 0)
                         	tab[compteur]->valeur_coup += adversaire_jouer(pl2, bot, joueur_suivant(bot), PROFONDEUR);
 
+						if (joueur_nb_piece_restantes(bot) <= 5 && PROFONDEUR == 0)
+							tab[compteur]->valeur_coup += adversaire_jouer(pl2, bot, joueur_suivant(bot), 2 - joueur_nb_piece_restantes(bot) / 2);
+
+
+//						coup_afficher(tab[compteur]);
+//						fprintf(stderr, "Valeur du coup: %d\n", coup_valeur(tab[compteur]));
 						/* Remet la Piece dans la liste */
 						tab[compteur]->piece_origine->prec->suiv = tab[compteur]->piece_origine;
 						bot->liste_piece = p;
