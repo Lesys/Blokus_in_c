@@ -1,10 +1,19 @@
 var searchData=
 [
   ['fermer_5fconnexion',['fermer_connexion',['../distant_8c.html#ab0f679f703c33d5f2666b7ff97b5a11c',1,'distant.c']]],
+  ['fermer_5fconnexions_5fdistantes',['fermer_connexions_distantes',['../distant_8c.html#a856c2277fa7628ef75bc1e5861c5fd26',1,'distant.c']]],
   ['fin_5fde_5fpartie',['fin_de_partie',['../gestion__partie_8c.html#a07f1bd5c237bd32a3a9c3ad362727858',1,'gestion_partie.c']]],
   ['fin_5fde_5fpartie_5fsdl',['fin_de_partie_sdl',['../gestion__partie__sdl_8c.html#ae2124fe33170ea2c37eee0b6856fe43d',1,'gestion_partie_sdl.c']]],
+  ['fond_5fconfig',['fond_config',['../structressources.html#a8ec289f2a0ba06093075f668319a1925',1,'ressources']]],
+  ['fond_5fplateau',['fond_plateau',['../structressources.html#aa2b9e4a7d41f634f2652b0d23114579e',1,'ressources']]],
+  ['fond_5fresultats',['fond_resultats',['../structressources.html#a6b4c6c623fc1c48f71ee9763bf7eefba',1,'ressources']]],
+  ['fond_5fsaisie',['fond_saisie',['../structressources.html#ae7d0c6ca998bd24383ecf6318f678e8d',1,'ressources']]],
+  ['fond_5fscore',['fond_score',['../structressources.html#a6149bffe18badcbe7fd5f0469eff9703',1,'ressources']]],
+  ['fond_5ftitres',['fond_titres',['../structressources.html#ac0cff1a41bb28fc1a096a22bdb568720',1,'ressources']]],
+  ['fond_5ftour',['fond_tour',['../structressources.html#a3443028d734b1b2038abd054caa38d6b',1,'ressources']]],
   ['free_5faffichage_5fsdl',['free_affichage_sdl',['../affichage__sdl_8c.html#ab1b48364e4b76c493331529edd9482e3',1,'affichage_sdl.c']]],
   ['free_5fafficher_5fpieces_5fdispo_5fsdl',['free_afficher_pieces_dispo_sdl',['../affichage__sdl_8c.html#a312c3d3364794215da22ddb9a7397812',1,'affichage_sdl.c']]],
   ['free_5fbouton_5fsdl',['free_bouton_sdl',['../affichage__sdl_8c.html#a9f32ce1a6b11de6f6b6df239bf99d621',1,'affichage_sdl.c']]],
+  ['free_5fson',['free_son',['../son_8c.html#ac1fe3e076a7e342349f1a78749d0afe3',1,'son.c']]],
   ['free_5fsprite',['free_sprite',['../sprite_8c.html#aebf410753d95917b34a29c94a316d08c',1,'sprite.c']]]
 ];

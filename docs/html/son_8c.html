@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Blokus in C: Référence du fichier src/son.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(initResizable);
+/* @license-end */</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Blokus in C
+   </div>
+   <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Recherche" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('son_8c.html','');});
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier son.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fonctions pour jouer des sons avec SDL_Mixer.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;SDL2/SDL_mixer.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;../include/son.h&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a601d3a5fa4c3c2130b479d0754eb4148"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="son_8c.html#a601d3a5fa4c3c2130b479d0754eb4148">init_son</a> ()</td></tr>
+<tr class="memdesc:a601d3a5fa4c3c2130b479d0754eb4148"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise le module son.  <a href="#a601d3a5fa4c3c2130b479d0754eb4148">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a601d3a5fa4c3c2130b479d0754eb4148"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1fe3e076a7e342349f1a78749d0afe3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="son_8c.html#ac1fe3e076a7e342349f1a78749d0afe3">free_son</a> ()</td></tr>
+<tr class="memdesc:ac1fe3e076a7e342349f1a78749d0afe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quitte le module son.  <a href="#ac1fe3e076a7e342349f1a78749d0afe3">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac1fe3e076a7e342349f1a78749d0afe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d53f5e5d3cf37f86d481850df42494"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="son_8c.html#a92d53f5e5d3cf37f86d481850df42494">jouer_son</a> (Sons s)</td></tr>
+<tr class="memdesc:a92d53f5e5d3cf37f86d481850df42494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Joue un son.  <a href="#a92d53f5e5d3cf37f86d481850df42494">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a92d53f5e5d3cf37f86d481850df42494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:adb49cad7494ee58c3e32b0b66123e5e3"><td class="memItemLeft" align="right" valign="top"><a id="adb49cad7494ee58c3e32b0b66123e5e3"></a>
+<a class="el" href="structressources__audio.html">Ressources_audio</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="son_8c.html#adb49cad7494ee58c3e32b0b66123e5e3">ressources_audio</a></td></tr>
+<tr class="memdesc:adb49cad7494ee58c3e32b0b66123e5e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointeur sur le struct contenant les ressources audio. <br /></td></tr>
+<tr class="separator:adb49cad7494ee58c3e32b0b66123e5e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="memItemLeft" align="right" valign="top"><a id="a60ecdbc1f6d5033e9fadf9942c97b0a2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="son_8c.html#a60ecdbc1f6d5033e9fadf9942c97b0a2">son</a></td></tr>
+<tr class="memdesc:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Son activé ou non. <br /></td></tr>
+<tr class="separator:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7134a097269358c544de30c31767f658"><td class="memItemLeft" align="right" valign="top"><a id="a7134a097269358c544de30c31767f658"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="son_8c.html#a7134a097269358c544de30c31767f658">effet</a></td></tr>
+<tr class="memdesc:a7134a097269358c544de30c31767f658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effet activés ou non. <br /></td></tr>
+<tr class="separator:a7134a097269358c544de30c31767f658"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p class="">Fonctions pour jouer des sons avec SDL_Mixer. </p>
+<dl class="section author"><dt>Auteur</dt><dd>BASTIDE Robin </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="ac1fe3e076a7e342349f1a78749d0afe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1fe3e076a7e342349f1a78749d0afe3">&#9670;&nbsp;</a></span>free_son()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void free_son </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Quitte le module son. </p>
+<p class="">Fonction à appeler après le dernier appel aux fonctions du fichier <a class="el" href="son_8c.html" title="Fonctions pour jouer des sons avec SDL_Mixer.">son.c</a> </p>
+
+</div>
+</div>
+<a id="a601d3a5fa4c3c2130b479d0754eb4148"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a601d3a5fa4c3c2130b479d0754eb4148">&#9670;&nbsp;</a></span>init_son()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int init_son </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialise le module son. </p>
+<p class="">Fonction à appeler avant tout appel a des fonctions de <a class="el" href="son_8c.html" title="Fonctions pour jouer des sons avec SDL_Mixer.">son.c</a> </p><dl class="section return"><dt>Renvoie</dt><dd>1 si tout est ok, 0 sinon </dd></dl>
+
+</div>
+</div>
+<a id="a92d53f5e5d3cf37f86d481850df42494"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92d53f5e5d3cf37f86d481850df42494">&#9670;&nbsp;</a></span>jouer_son()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void jouer_son </td>
+          <td>(</td>
+          <td class="paramtype">Sons&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Joue un son. </p>
+<p class="">Les différents sont trouvables dans l'énumération Sons </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Son à jouer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="son_8c.html">son.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -6,11 +6,11 @@
 #include "../include/joueur.h"
 
 typedef enum type_message {
-	LISTE_JOUEURS = 1,
-	PLATEAU,
-	ABANDON_JOUEUR,
-	PSEUDO,
-	PRET
+    LISTE_JOUEURS = 1,
+    PLATEAU,
+    ABANDON_JOUEUR,
+    PSEUDO,
+    PRET
 } Type_message;
 
 int connexion(char * adresse, int port);

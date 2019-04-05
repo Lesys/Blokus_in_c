@@ -21,14 +21,23 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+/** \brief Define pour compatibilité */
 #define INVALID_SOCKET -1
+/** \brief Define pour compatibilité */
 #define SOCKET_ERROR -1
+/** \brief Define pour compatibilité */
 #define closesocket(s) close(s)
+/** \brief Define pour compatibilité */
 #define h_addr h_addr_list[0]
+/** \brief typedef pour compatibilité */
 typedef int SOCKET;
+/** \brief typedef pour compatibilité */
 typedef struct sockaddr_in SOCKADDR_IN;
+/** \brief typedef pour compatibilité */
 typedef struct sockaddr SOCKADDR;
+/** \brief typedef pour compatibilité */
 typedef struct in_addr IN_ADDR;
+/** \brief typedef pour compatibilité */
 #endif
 #ifdef WINDOWS
 #include <winsock2.h>
@@ -84,14 +93,14 @@ int connexion(char * adresse, int port) {
     }
 
     // Mise du socket en non bloquant
-    #ifndef WINDOWS
+#ifndef WINDOWS
     int flags = fcntl(sockfd, F_GETFL);
     fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
-    #endif
-    #ifdef WINDOWS
+#endif
+#ifdef WINDOWS
     unsigned long mode = 1;
     ioctlsocket(sockfd, FIONBIO, &mode);
-    #endif
+#endif
 
     return sockfd;
 }
@@ -136,14 +145,14 @@ int creer_socket_connexion(int port) {
     }
 
     // Mise du socket en non bloquant
-    #ifndef WINDOWS
+#ifndef WINDOWS
     int flags = fcntl(sockfd, F_GETFL);
     fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
-    #endif
-    #ifdef WINDOWS
+#endif
+#ifdef WINDOWS
     unsigned long mode = 1;
     ioctlsocket(sockfd, FIONBIO, &mode);
-    #endif
+#endif
 
     return sockfd;
 }
@@ -161,7 +170,7 @@ int accepter_connexion(int sockfd) {
 
     int sinsize = sizeof csin;
 
-    newsockfd = accept(sockfd, (SOCKADDR *)&csin, &sinsize);
+    newsockfd = accept(sockfd, (SOCKADDR *)&csin, (socklen_t * restrict) &sinsize);
 
     if (newsockfd == -1) {
         return -1;
@@ -170,14 +179,14 @@ int accepter_connexion(int sockfd) {
     closesocket(sockfd);
 
     // Mise du socket en non bloquant
-    #ifndef WINDOWS
+#ifndef WINDOWS
     int flags = fcntl(newsockfd, F_GETFL);
     fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
-    #endif
-    #ifdef WINDOWS
+#endif
+#ifdef WINDOWS
     unsigned long mode = 1;
     ioctlsocket(newsockfd, FIONBIO, &mode);
-    #endif
+#endif
 
 
     return newsockfd;
@@ -215,9 +224,10 @@ void fermer_connexions_distantes(Joueur * j) {
  * \brief Recoit un buffer
  * \param sockfd Socket depuis lequel lire
  * \param buffer Buffer dans lequel écrire
- * \param Nombre d'octets lus, -1 si erreur
+ * \return Nombre d'octets lus, -1 si erreur
  */
 int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
+
     int nb_lus = 0;
 
     while (nb_lus < TAILLE_BUFF) {
@@ -259,7 +269,7 @@ int recup_type(unsigned char * buffer) {
  * \param sockfd Numéro du socket sur lequel envoyer
  * \param pl Plateau courant
  * \param id_piece Id de la piece posée
- * \param Nombre d'octets envoyés, -1 si erreur 
+ * \return Nombre d'octets lus, -1 si erreur
  */
 int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int id_piece) {
 
@@ -326,7 +336,7 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
  * \brief Envoie la liste des joueurs au joueur distant
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Liste des joueurs (positionné sur le joueur à qui l'on envoie)
- * \param Nombre d'octets envoyés, -1 si erreur
+ * \return Nombre d'octets lus, -1 si erreur
  */
 int envoyer_liste_joueurs(int sockfd, Joueur * j) {
 
@@ -416,7 +426,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
  * \brief Envoi un message annoncant l'abandon d'un joueur
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Joueur qui abandonne
- * \param Nombre d'octets envoyés, -1 si erreur
+ * \return Nombre d'octets lus, -1 si erreur
  */
 int envoyer_abandon_joueur(int sockfd, Joueur * j) {
 
@@ -473,7 +483,7 @@ void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j) {
  * \brief Envoie le pseudo choisi à l'hote
  * \param sockfd Numéro du socket à qui envoyer
  * \param pseudo Pseudo choisi
- * \param Nombre d'octets envoyés, -1 si erreur
+ * \return Nombre d'octets lus, -1 si erreur
  */
 int envoyer_pseudo(int sockfd, char * pseudo) {
 
@@ -516,7 +526,7 @@ void recevoir_pseudo(unsigned char * buffer, char * pseudo) {
  * \fn void envoyer_pret(int sockfd);
  * \brief Envoie un message disant que l'on est pret
  * \param sockfd Numéro du socket à qui envoyer
- * \param Nombre d'octets envoyés, -1 si erreur
+ * \return Nombre d'octets lus, -1 si erreur
  */
 int envoyer_pret(int sockfd) {
 
@@ -578,13 +588,13 @@ int erreur_reseau() {
  */
 int initialisation_partie_distant_sdl(Joueur ** j) {
 
-	SDL_Event event;
-	int continuer = 1;
+    SDL_Event event;
+    int continuer = 1;
     char adresse[TAILLE_PSEUDO] = {0};
     char pseudo[TAILLE_PSEUDO] = {0};
     int sockfd;
-	Bouton* b_retour = init_bouton_sdl(RETOUR);
-	
+    Bouton* b_retour = init_bouton_sdl(RETOUR);
+
     // Saisie adresse
     SDL_StartTextInput();
 
@@ -596,13 +606,13 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             if(event.type == SDL_QUIT)
                 return 3;
 
-		//Si il appuis sur un bouton
-		else if(event.type == SDL_MOUSEBUTTONDOWN){
-			if(curs_hover_bouton(b_retour)) {
-                jouer_son(BOUTON_RETOUR);
-				return 2;
+            //Si il appuis sur un bouton
+            else if(event.type == SDL_MOUSEBUTTONDOWN){
+                if(curs_hover_bouton(b_retour)) {
+                    jouer_son(BOUTON_RETOUR);
+                    return 2;
+                }
             }
-		}
             else if(adresse > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER)) {
                 jouer_son(BOUTON);
@@ -641,14 +651,14 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
             if(event.type == SDL_QUIT)
                 return 3;
-	//Si il appuis sur un bouton
-		else if(event.type == SDL_MOUSEBUTTONDOWN){
-			if(curs_hover_bouton(b_retour)) {
-                            jouer_son(BOUTON_RETOUR);
-                            fermer_connexion(sockfd);
-				return 2;
-                        }
-		}
+            //Si il appuis sur un bouton
+            else if(event.type == SDL_MOUSEBUTTONDOWN){
+                if(curs_hover_bouton(b_retour)) {
+                    jouer_son(BOUTON_RETOUR);
+                    fermer_connexion(sockfd);
+                    return 2;
+                }
+            }
             else if(pseudo > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) ) {
                 jouer_son(BOUTON);
@@ -704,46 +714,51 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
             *j = joueur_suivant(*j);
         } while (*j  != init);
     }
-	free_bouton_sdl(&b_retour);
+    free_bouton_sdl(&b_retour);
     return sockfd;
 
 }
 
-// 1 si tout est ok, 2 si deconnexion, 3 si croix
+/**
+ * \fn int attente_nouvelle_partie_distant(int hote);
+ * \brief Attends le début d'une nouvelle partie pour un joueur distant
+ * \param hote Hote de la partie
+ * \return 1 quand début nouvelle partie, 2 si hote déconnecté, 3 si croix
+ */
 int attente_nouvelle_partie_distant(int hote) {
-	envoyer_pret(hote); // Envoyer_pret() à l'hote
-    	int nb_recois = 0;
-	int type;
-	unsigned char buffer[TAILLE_BUFF];
-	SDL_Event event;	// Afficher le message d'attente avec afficher_attente_nouvelle_partie()
-        // Gestion des évènements (retour 3 si on appuie sur la croix)
+    envoyer_pret(hote); // Envoyer_pret() à l'hote
+    int nb_recois = 0;
+    int type;
+    unsigned char buffer[TAILLE_BUFF];
+    SDL_Event event;	// Afficher le message d'attente avec afficher_attente_nouvelle_partie()
+    // Gestion des évènements (retour 3 si on appuie sur la croix)
 
-	while(nb_recois == 0){
-		while(SDL_PollEvent(&event)){
-			if(event.type == SDL_QUIT)
-				return 3;
-		}
-	        SDL_RenderClear(renderer);
-		afficher_attente_debut_sdl();
-		SDL_RenderPresent(renderer);
-		nb_recois= recevoir_buffer(hote,buffer);
-	}
-	// Récupération d'un message dans le buffer avec int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF])
-	// si la fonction renvoie -1 -> erreur de connexion on retourne 2
+    while(nb_recois == 0){
+        while(SDL_PollEvent(&event)){
+            if(event.type == SDL_QUIT)
+                return 3;
+        }
+        SDL_RenderClear(renderer);
+        afficher_attente_debut_sdl();
+        SDL_RenderPresent(renderer);
+        nb_recois= recevoir_buffer(hote,buffer);
+    }
+    // Récupération d'un message dans le buffer avec int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF])
+    // si la fonction renvoie -1 -> erreur de connexion on retourne 2
 
-        if(nb_recois == -1){
-		return 2;
-	}
+    if(nb_recois == -1){
+        return 2;
+    }
 
-        // Sinon on utilises la fonction int recup_type(unsigned char * buffer) qui renvoie le type de message
-        // Si le type de message = PRET on retourne 1
-	else{
-		type = recup_type(buffer);
-		if(type == PRET)
-			return 1;
-		else
-			return 2;
-	}
+    // Sinon on utilises la fonction int recup_type(unsigned char * buffer) qui renvoie le type de message
+    // Si le type de message = PRET on retourne 1
+    else{
+        type = recup_type(buffer);
+        if(type == PRET)
+            return 1;
+        else
+            return 2;
+    }
 }
 
 /**
@@ -792,10 +807,9 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                 }
             }
 
-          
+
 
             if(choix == 3) {
-                printf("Fermeture");
                 fermer_connexion(hote);
                 return choix;
             }

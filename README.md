@@ -2,6 +2,18 @@
 
 [Documentation du projet](https://lesys.github.io/Blokus_in_c/)
 
+## Compilation du projet
+
+Compilation de la SDL :  
+    - Dépendances: libfreetype6 libasound2-dev libpulse-dev libvorbis-dev  
+    - Lancer make dans Blokus_in_c/lib/SDL  
+Compilation des programmes de test:  
+    - make test  
+Compilation du projet :  
+    - make  
+Compilation de la documentation :  
+    - doxygen  
+
 ## Version 1 (console)
 
 [Fichier conception V1 (console)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet)

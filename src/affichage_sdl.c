@@ -19,14 +19,21 @@
 #include "../include/joueur.h"
 
 // Variables globales externes
+/** \brief Renderer global */
 extern SDL_Renderer * renderer;
+/** \brief Son activé ou non */
 extern int son;
+/** \brief Effet activés ou non */
 extern int effet;
 
 // Variables globales de affichage_sdl
+/** \brief Pointeur sur le struct contenant les ressources */
 Ressources * ressources;
+/** \brief Taille d'un carré */
 int taille_carre;
+/** \brief Largeur de l'écran */
 int largeur_ecran;
+/** \brief Hauteur de l'écran */
 int hauteur_ecran;
 
 /**
@@ -53,13 +60,16 @@ Sprite * get_sprite(Couleur couleur) {
         case SELECTION:
             return ressources->selection;
             break;
+        case SELECTION_ERREUR:
+            return ressources->selection_erreur;
+            break;
         default:
             return ressources->carre_vide;
     }
 }
 
 /**
- * \fn int init_affichage_sdl()
+ * \fn int init_affichage_sdl(int fullscreen)
  * \brief Initialise le module affichage_sdl
  * \details Fonction à appeler avant tout appel a des
  * fonctions de affichage_sdl.c
@@ -95,6 +105,7 @@ int init_affichage_sdl(int fullscreen) {
     ressources->carre_bleu = init_sprite("ressources/carre_bleu.png", taille_carre, taille_carre);
     ressources->carre_vert = init_sprite("ressources/carre_vert.png", taille_carre, taille_carre);
     ressources->selection = init_sprite("ressources/selection.png", taille_carre, taille_carre);
+    ressources->selection_erreur = init_sprite("ressources/selection_erreur.png", taille_carre, taille_carre);
     ressources->police_m = TTF_OpenFont("ressources/police.ttf", taille_carre*1.5);
     ressources->police_p = TTF_OpenFont("ressources/police.ttf", taille_carre);
     ressources->fond_score = init_sprite("ressources/fond_score.png", taille_carre*8, taille_carre*16);
@@ -151,6 +162,7 @@ void free_affichage_sdl() {
         free_sprite(&ressources->carre_bleu);
         free_sprite(&ressources->carre_vert);
         free_sprite(&ressources->selection);
+        free_sprite(&ressources->selection_erreur);
         TTF_CloseFont(ressources->police_m);
         TTF_CloseFont(ressources->police_p);
         free_sprite(&ressources->fond_score);
@@ -202,6 +214,7 @@ void afficher_plateau_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
  * \return 1 si au dessus plateau, 0 sinon
  */
 int curs_hover_plateau(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int *x, int *y) {
+
     int x_mouse, y_mouse;
 
     // Récupération des coordonnées de la souris
@@ -407,7 +420,7 @@ void affecter_piece(Reserves * r, Joueur * j, Piece * l, int x, int y) {
  */
 static
 void disposer_pieces(Reserves * r, Joueur *  joueur) {
-    
+
     if(!joueur_liste_piece(joueur)) {
         return;
     }
@@ -582,10 +595,6 @@ Reserves * init_afficher_pieces_dispo_sdl(Joueur * j) {
     // Allocation des réserves
     Reserves * r = calloc(1, sizeof(Reserves));
 
-    // Tailles d'un carré pour calcul de positions
-    // en dehors de affichage_sdl.c
-    r->taille_carre = taille_carre;
-
     // Calcul des positions bas/gauche des réserves
     r->pos_vert_x = largeur_ecran/2 - LARG_T_VJ/2 * taille_carre;
     r->pos_vert_y = hauteur_ecran/2 - 12 * taille_carre;
@@ -684,6 +693,7 @@ void afficher_pieces_dispo_sdl(Reserves * r, Joueur * j, Piece * p) {
  * \param r Réserves de pièces
  */
 void free_afficher_pieces_dispo_sdl(Reserves ** r) {
+
     free(*r);
     *r = NULL;
 }
@@ -1088,7 +1098,7 @@ void afficher_bouton_sdl(Bouton * b) {
                 afficher_sprite(ressources->son_selec, b->x_gauche, b->y_haut);
             }
             else {
-               afficher_sprite(ressources->son, b->x_gauche, b->y_haut); 
+                afficher_sprite(ressources->son, b->x_gauche, b->y_haut); 
             }
             break;
         case EFFET:
@@ -1226,8 +1236,9 @@ void afficher_nb_joueurs_sdl() {
 }
 
 /**
- * \fn void afficher_type_joueur_sdl()
+ * \fn void afficher_type_joueur_sdl(Joueur * j)
  * \brief Affiche le fond et le texte demandant le type de joueur
+ * \param j Joueur que l'on va saisir
  */
 void afficher_type_joueur_sdl(Joueur * j) {
 

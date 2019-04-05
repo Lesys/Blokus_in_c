@@ -119,9 +119,9 @@ $(document).ready(function(){initNavTree('affichage__sdl_8c.html','');});
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:ac202f574b5c1457d77c88a8fd0b671f2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ac202f574b5c1457d77c88a8fd0b671f2">init_affichage_sdl</a> ()</td></tr>
-<tr class="memdesc:ac202f574b5c1457d77c88a8fd0b671f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise le module affichage_sdl.  <a href="#ac202f574b5c1457d77c88a8fd0b671f2">Plus de détails...</a><br /></td></tr>
-<tr class="separator:ac202f574b5c1457d77c88a8fd0b671f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a864dd471fccb9111437e5fa8a725023a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a864dd471fccb9111437e5fa8a725023a">init_affichage_sdl</a> (int fullscreen)</td></tr>
+<tr class="memdesc:a864dd471fccb9111437e5fa8a725023a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialise le module affichage_sdl.  <a href="#a864dd471fccb9111437e5fa8a725023a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a864dd471fccb9111437e5fa8a725023a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1b48364e4b76c493331529edd9482e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ab1b48364e4b76c493331529edd9482e3">free_affichage_sdl</a> ()</td></tr>
 <tr class="memdesc:ab1b48364e4b76c493331529edd9482e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Quitte le module affichage_sdl.  <a href="#ab1b48364e4b76c493331529edd9482e3">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab1b48364e4b76c493331529edd9482e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,7 +150,7 @@ Fonctions</h2></td></tr>
 <tr class="memdesc:a6baa2e79a509c2f10d8114d08170ac1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche une indication sur qui doit jouer en haut à droite de l'écran.  <a href="#a6baa2e79a509c2f10d8114d08170ac1c">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a6baa2e79a509c2f10d8114d08170ac1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd58e21bc5b1983a489a704c2e1a8b3b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#abd58e21bc5b1983a489a704c2e1a8b3b">curs_hover_bouton</a> (<a class="el" href="structbouton.html">Bouton</a> *b)</td></tr>
-<tr class="memdesc:abd58e21bc5b1983a489a704c2e1a8b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de savoir si le curseur est au desus d'un bouton.  <a href="#abd58e21bc5b1983a489a704c2e1a8b3b">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:abd58e21bc5b1983a489a704c2e1a8b3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de savoir si le curseur est au dessus d'un bouton.  <a href="#abd58e21bc5b1983a489a704c2e1a8b3b">Plus de détails...</a><br /></td></tr>
 <tr class="separator:abd58e21bc5b1983a489a704c2e1a8b3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abaf1e2a7bfac82d6570e250e87ab458e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbouton.html">Bouton</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#abaf1e2a7bfac82d6570e250e87ab458e">init_bouton_sdl</a> (Type_bouton b)</td></tr>
 <tr class="memdesc:abaf1e2a7bfac82d6570e250e87ab458e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Création d'un bouton.  <a href="#abaf1e2a7bfac82d6570e250e87ab458e">Plus de détails...</a><br /></td></tr>
@@ -172,44 +172,72 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affi
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#af1ac204f2e1c358f82687f6aa71d9217">afficher_nb_joueurs_sdl</a> ()</td></tr>
 <tr class="memdesc:af1ac204f2e1c358f82687f6aa71d9217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le fond et le texte demandant le nombre de joueurs. <br /></td></tr>
 <tr class="separator:af1ac204f2e1c358f82687f6aa71d9217"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac76420f63df221b5f8ab1416e4752c6b"><td class="memItemLeft" align="right" valign="top"><a id="ac76420f63df221b5f8ab1416e4752c6b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_type_joueur_sdl</b> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:ac76420f63df221b5f8ab1416e4752c6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ac76420f63df221b5f8ab1416e4752c6b">afficher_type_joueur_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:ac76420f63df221b5f8ab1416e4752c6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le fond et le texte demandant le type de joueur.  <a href="#ac76420f63df221b5f8ab1416e4752c6b">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac76420f63df221b5f8ab1416e4752c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf4ef7f46accd970810a6f205329a65c"><td class="memItemLeft" align="right" valign="top"><a id="adf4ef7f46accd970810a6f205329a65c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_saisie_pseudo_sdl</b> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memitem:adf4ef7f46accd970810a6f205329a65c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#adf4ef7f46accd970810a6f205329a65c">afficher_saisie_pseudo_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
+<tr class="memdesc:adf4ef7f46accd970810a6f205329a65c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le fond et le texte demandant la saisie du pseudo ainsi que le pseudo en cours de saisie.  <a href="#adf4ef7f46accd970810a6f205329a65c">Plus de détails...</a><br /></td></tr>
 <tr class="separator:adf4ef7f46accd970810a6f205329a65c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8017554ea41a0270ad43a932eae8ce0"><td class="memItemLeft" align="right" valign="top"><a id="ab8017554ea41a0270ad43a932eae8ce0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_choix_type_partie_sdl</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#ab8017554ea41a0270ad43a932eae8ce0">afficher_choix_type_partie_sdl</a> ()</td></tr>
+<tr class="memdesc:ab8017554ea41a0270ad43a932eae8ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le choix du type de partie. <br /></td></tr>
 <tr class="separator:ab8017554ea41a0270ad43a932eae8ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5872113eb854b17e19f1f9ebe70b2c43"><td class="memItemLeft" align="right" valign="top"><a id="a5872113eb854b17e19f1f9ebe70b2c43"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_attente_connexion_sdl</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a5872113eb854b17e19f1f9ebe70b2c43">afficher_attente_connexion_sdl</a> ()</td></tr>
+<tr class="memdesc:a5872113eb854b17e19f1f9ebe70b2c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un message d'attente de connexion. <br /></td></tr>
 <tr class="separator:a5872113eb854b17e19f1f9ebe70b2c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5d960c7047b40dccec3fd6a15461b19"><td class="memItemLeft" align="right" valign="top"><a id="aa5d960c7047b40dccec3fd6a15461b19"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#aa5d960c7047b40dccec3fd6a15461b19">afficher_attente_debut_sdl</a> ()</td></tr>
+<tr class="memdesc:aa5d960c7047b40dccec3fd6a15461b19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un message d'attente du début de la partie. <br /></td></tr>
+<tr class="separator:aa5d960c7047b40dccec3fd6a15461b19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93c5d35612b6e37ac94d49816daae0e6"><td class="memItemLeft" align="right" valign="top"><a id="a93c5d35612b6e37ac94d49816daae0e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_attente_pseudo_sdl</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a93c5d35612b6e37ac94d49816daae0e6">afficher_attente_pseudo_sdl</a> ()</td></tr>
+<tr class="memdesc:a93c5d35612b6e37ac94d49816daae0e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un message d'attente de la saisie du pseudo par un joueur distant. <br /></td></tr>
 <tr class="separator:a93c5d35612b6e37ac94d49816daae0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c74628be0ca8f12978e25aa550c5131"><td class="memItemLeft" align="right" valign="top"><a id="a0c74628be0ca8f12978e25aa550c5131"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_saisie_adresse_sdl</b> (char *str)</td></tr>
+<tr class="memitem:a0c74628be0ca8f12978e25aa550c5131"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a0c74628be0ca8f12978e25aa550c5131">afficher_saisie_adresse_sdl</a> (char *str)</td></tr>
+<tr class="memdesc:a0c74628be0ca8f12978e25aa550c5131"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un message demandant la saisie de l'adresse ainsi que l'adresse en cours de saisie.  <a href="#a0c74628be0ca8f12978e25aa550c5131">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a0c74628be0ca8f12978e25aa550c5131"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50a075e9d767e0bed13c77fbb7b9b379"><td class="memItemLeft" align="right" valign="top"><a id="a50a075e9d767e0bed13c77fbb7b9b379"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>afficher_saisie_pseudo_distant_sdl</b> (char *str)</td></tr>
+<tr class="memitem:a50a075e9d767e0bed13c77fbb7b9b379"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a50a075e9d767e0bed13c77fbb7b9b379">afficher_saisie_pseudo_distant_sdl</a> (char *str)</td></tr>
+<tr class="memdesc:a50a075e9d767e0bed13c77fbb7b9b379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un message demandant la saisie du pseudo ainsi que le pseudo en cours de saisie (pour distant)  <a href="#a50a075e9d767e0bed13c77fbb7b9b379">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a50a075e9d767e0bed13c77fbb7b9b379"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15d9afbc7e2057ca305aa2260376f67f"><td class="memItemLeft" align="right" valign="top"><a id="a15d9afbc7e2057ca305aa2260376f67f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a15d9afbc7e2057ca305aa2260376f67f">afficher_erreur_reseau</a> ()</td></tr>
+<tr class="memdesc:a15d9afbc7e2057ca305aa2260376f67f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un message d'erreur de connexion. <br /></td></tr>
+<tr class="separator:a15d9afbc7e2057ca305aa2260376f67f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d639a7b05ea3a4fd8b2eebbaf669bd2"><td class="memItemLeft" align="right" valign="top"><a id="a8d639a7b05ea3a4fd8b2eebbaf669bd2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a8d639a7b05ea3a4fd8b2eebbaf669bd2">afficher_attente_nouvelle_partie</a> ()</td></tr>
+<tr class="memdesc:a8d639a7b05ea3a4fd8b2eebbaf669bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche un écran d'attente de début de partie. <br /></td></tr>
+<tr class="separator:a8d639a7b05ea3a4fd8b2eebbaf669bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top"><a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
-SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><b>renderer</b></td></tr>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a966da7a60c4ea3ba301e26ccc5efe452">renderer</a></td></tr>
+<tr class="memdesc:a966da7a60c4ea3ba301e26ccc5efe452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renderer global. <br /></td></tr>
 <tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="memItemLeft" align="right" valign="top"><a id="a60ecdbc1f6d5033e9fadf9942c97b0a2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a60ecdbc1f6d5033e9fadf9942c97b0a2">son</a></td></tr>
+<tr class="memdesc:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Son activé ou non. <br /></td></tr>
+<tr class="separator:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7134a097269358c544de30c31767f658"><td class="memItemLeft" align="right" valign="top"><a id="a7134a097269358c544de30c31767f658"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a7134a097269358c544de30c31767f658">effet</a></td></tr>
+<tr class="memdesc:a7134a097269358c544de30c31767f658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effet activés ou non. <br /></td></tr>
+<tr class="separator:a7134a097269358c544de30c31767f658"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbd55f65098835a23efefb99206d24d2"><td class="memItemLeft" align="right" valign="top"><a id="afbd55f65098835a23efefb99206d24d2"></a>
-<a class="el" href="structressources.html">Ressources</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>ressources</b></td></tr>
+<a class="el" href="structressources.html">Ressources</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#afbd55f65098835a23efefb99206d24d2">ressources</a></td></tr>
+<tr class="memdesc:afbd55f65098835a23efefb99206d24d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointeur sur le struct contenant les ressources. <br /></td></tr>
 <tr class="separator:afbd55f65098835a23efefb99206d24d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abad666d1cc6a25a053819be9f01ca2a9"><td class="memItemLeft" align="right" valign="top"><a id="abad666d1cc6a25a053819be9f01ca2a9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>taille_carre</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#abad666d1cc6a25a053819be9f01ca2a9">taille_carre</a></td></tr>
+<tr class="memdesc:abad666d1cc6a25a053819be9f01ca2a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Taille d'un carré <br /></td></tr>
 <tr class="separator:abad666d1cc6a25a053819be9f01ca2a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5023ec3139e11fad01582dfa79a33c29"><td class="memItemLeft" align="right" valign="top"><a id="a5023ec3139e11fad01582dfa79a33c29"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>largeur_ecran</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#a5023ec3139e11fad01582dfa79a33c29">largeur_ecran</a></td></tr>
+<tr class="memdesc:a5023ec3139e11fad01582dfa79a33c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Largeur de l'écran. <br /></td></tr>
 <tr class="separator:a5023ec3139e11fad01582dfa79a33c29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca3d24765652ccd0a813d2a84d0bb90a"><td class="memItemLeft" align="right" valign="top"><a id="aca3d24765652ccd0a813d2a84d0bb90a"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage__sdl_8c.html#aca3d24765652ccd0a813d2a84d0bb90a">hauteur_ecran</a></td></tr>
+<tr class="memdesc:aca3d24765652ccd0a813d2a84d0bb90a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hauteur de l'écran. <br /></td></tr>
 <tr class="separator:aca3d24765652ccd0a813d2a84d0bb90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
@@ -338,6 +366,84 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td>
 
 </div>
 </div>
+<a id="a0c74628be0ca8f12978e25aa550c5131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c74628be0ca8f12978e25aa550c5131">&#9670;&nbsp;</a></span>afficher_saisie_adresse_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_saisie_adresse_sdl </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche un message demandant la saisie de l'adresse ainsi que l'adresse en cours de saisie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Adresse en cours de saisie </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a50a075e9d767e0bed13c77fbb7b9b379"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50a075e9d767e0bed13c77fbb7b9b379">&#9670;&nbsp;</a></span>afficher_saisie_pseudo_distant_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_saisie_pseudo_distant_sdl </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche un message demandant la saisie du pseudo ainsi que le pseudo en cours de saisie (pour distant) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Pseudo en cours de saisie </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adf4ef7f46accd970810a6f205329a65c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf4ef7f46accd970810a6f205329a65c">&#9670;&nbsp;</a></span>afficher_saisie_pseudo_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_saisie_pseudo_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le fond et le texte demandant la saisie du pseudo ainsi que le pseudo en cours de saisie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Joueur dont on saisie le pseudo </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac9e930c0dff5f60c5ea14734533adea5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac9e930c0dff5f60c5ea14734533adea5">&#9670;&nbsp;</a></span>afficher_scores_sdl()</h2>
 
@@ -390,6 +496,32 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td>
 
 </div>
 </div>
+<a id="ac76420f63df221b5f8ab1416e4752c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac76420f63df221b5f8ab1416e4752c6b">&#9670;&nbsp;</a></span>afficher_type_joueur_sdl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficher_type_joueur_sdl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le fond et le texte demandant le type de joueur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Joueur que l'on va saisir </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abd58e21bc5b1983a489a704c2e1a8b3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd58e21bc5b1983a489a704c2e1a8b3b">&#9670;&nbsp;</a></span>curs_hover_bouton()</h2>
 
@@ -406,7 +538,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td>
       </table>
 </div><div class="memdoc">
 
-<p>Permet de savoir si le curseur est au desus d'un bouton. </p>
+<p>Permet de savoir si le curseur est au dessus d'un bouton. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">b</td><td>Bouton que l'on veut tester </td></tr>
@@ -496,7 +628,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>Un pointeur sur la pièce si la souris est au dessus d'une de la bonne couleur, NULL sinon </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>1 si au dessus plateau, 0 sinon </dd></dl>
 
 </div>
 </div>
@@ -572,8 +704,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td>
 
 </div>
 </div>
-<a id="ac202f574b5c1457d77c88a8fd0b671f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac202f574b5c1457d77c88a8fd0b671f2">&#9670;&nbsp;</a></span>init_affichage_sdl()</h2>
+<a id="a864dd471fccb9111437e5fa8a725023a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a864dd471fccb9111437e5fa8a725023a">&#9670;&nbsp;</a></span>init_affichage_sdl()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -581,14 +713,21 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>hauteur_ecran</b></td>
         <tr>
           <td class="memname">int init_affichage_sdl </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fullscreen</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Initialise le module affichage_sdl. </p>
-<p class="">Fonction à appeler avant tout appel a des fonctions de <a class="el" href="affichage__sdl_8c.html" title="Fonctions d&#39;affichages en SDL.">affichage_sdl.c</a> </p><dl class="section return"><dt>Renvoie</dt><dd>1 si tout est ok, 0 sinon </dd></dl>
+<p class="">Fonction à appeler avant tout appel a des fonctions de <a class="el" href="affichage__sdl_8c.html" title="Fonctions d&#39;affichages en SDL.">affichage_sdl.c</a> </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fullscreen</td><td>Plein ecran ou non </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>1 si tout est ok, 0 sinon </dd></dl>
 
 </div>
 </div>

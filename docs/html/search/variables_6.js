@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x',['x',['../structcarre.html#a8ac00f1b0d1e18b971e6c57fa400f2ce',1,'carre']]]
+  ['jaune',['jaune',['../structressources.html#a530ffde43fb5dc3a1cd6cf43811eb445',1,'ressources::jaune()'],['../structreserves.html#a44eadfd59a006738fd4d9cd3f424b959',1,'reserves::jaune()']]]
 ];

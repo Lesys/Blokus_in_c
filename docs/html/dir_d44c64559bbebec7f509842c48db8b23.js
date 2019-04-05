@@ -16,5 +16,6 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "main_terminal.h", "main__terminal_8h_source.html", null ],
     [ "piece.h", "piece_8h_source.html", null ],
     [ "sdl.h", "sdl_8h_source.html", null ],
+    [ "son.h", "son_8h_source.html", null ],
     [ "sprite.h", "sprite_8h_source.html", null ]
 ];
