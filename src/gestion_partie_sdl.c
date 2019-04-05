@@ -441,7 +441,7 @@ int fin_de_partie_sdl(Joueur** j){
 		return 0;
 
 	int continuer= -1;
-sleep(10);
+
 	/*Creation des boutons + evenement */
         SDL_Event event_fin;
         Bouton* b_continuer=init_bouton_sdl(CONTINUER);

@@ -249,13 +249,27 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
 
 static void colorer_selection(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Piece* p, int x, int y)
 {
+    int obstruction = 0;
+
     Carre* c = piece_liste_carre(p);
     Carre* c2 = c;
 
     do
     {
+        if(coord_dans_plateau(x + carre_get_x(c2)) && coord_dans_plateau(y + carre_get_y(c2)) && pl[x + carre_get_x(c2)][y + carre_get_y(c2)] != VIDE)
+            obstruction = 1;
+
+        c2 = carre_get_suiv(c2);
+
+    } while(c != c2);
+
+    do
+    {
         if(coord_dans_plateau(x + carre_get_x(c2)) && coord_dans_plateau(y + carre_get_y(c2)) && pl[x + carre_get_x(c2)][y + carre_get_y(c2)] == VIDE)
-            pl[x + carre_get_x(c2)][y + carre_get_y(c2)] = SELECTION;
+            if(obstruction)
+                pl[x + carre_get_x(c2)][y + carre_get_y(c2)] = SELECTION_ERREUR;
+            else
+                pl[x + carre_get_x(c2)][y + carre_get_y(c2)] = SELECTION;
 
         c2 = carre_get_suiv(c2);
 
