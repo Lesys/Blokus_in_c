@@ -58,9 +58,9 @@ void initialisation_partie(Joueur** j ){ /*Initialisation de la partie, appel de
 /**
 	*\fn void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
 	*\brief Initialise une manche.
-	*\details Permets de réinitialisé le plateau de jeu et une liste de piece d'un Joueur.
+	*\details Permet de réinitialiser le plateau de jeu et une liste de pièce d'un Joueur.
 	*\param pl Plateau de jeu à vider.
-	*\param j Pointeur sur une liste de joueur afin de reinitialiser la liste de piece de chaque Joueur.
+	*\param j Pointeur sur une liste de Joueur afin de réinitialiser la liste de pièce de chaque Joueur.
 */
 
 /* Permets de réinitialisé le plateau de jeu et une liste de piece d'un Joueur.*/
@@ -85,10 +85,10 @@ void initialisation_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j
 
 /**
 	*\fn void maj_scores(Joueur** j)
-	*\details Permets de mettre à jour les scores à la fin de la partie: <br>
-	* +15 si le Joueur à poser toute ces Pieces. <br>
-	* -1  pour chaque carre d'une Piece.
-	*\param j Prends une liste de Joueur.
+	*\details Permet de mettre à jour les scores à la fin de la partie: <br>
+	* +15 si le Joueur a posé toutes ses Pieces. <br>
+	* -1  pour chaque Carre d'une Piece.
+	*\param j Prend une liste de Joueur.
 */
 
 /*Permets de mettre à jour les scores à la fin de la partie:*/
@@ -124,8 +124,8 @@ void maj_scores(Joueur** j) {
 /**
 	*\fn int joueur_abandon(Joueur* j)
 	*\brief Vérifie si tous les joueurs ont abandonné.
-	*\param j Reçois la liste des joueurs et vérifie la valeur d'abandon de chaque Joueur.
-	\return renvoie 1 si tous les joueurs ont abandonné, 0 sinon.
+	*\param j Reçoit la liste des joueurs et vérifie la valeur d'abandon de chaque Joueur.
+	\return Renvoie 1 si tous les joueurs ont abandonné, sinon 0.
 
 */
 
@@ -149,16 +149,16 @@ int joueur_abandon(Joueur* j){
 
 /**
 	*\fn int fin_de_partie(Joueur** j)
-	*\brief Vérifie si c'est vraiment la fin de la partie,modifie les scores  et réalise les choix à faire.
+	*\brief Vérifie si c'est vraiment la fin de la partie , modifie les scores  et réalise les choix à faire.
 	*\details Si le Joueur à une liste_vide, on le fait abandonner.
-	*Une fois que tous les Joueurs ont abandoné,mets à jour le score ,affiche les résultats et demande a l'utilisateur un choix:<br>
+	*Une fois que tous les Joueurs ont abandoné , mets à jour le score , affiche les résultats et demande a l'utilisateur un choix:<br>
 	*-Recommencez une manche.
 	<br>
 	*-Recommencez une partie.
 	<br>
 	*-Quittez le programme.
 	*\param j Liste de tous les Joueurs pour vérifier s'ils ont tous abandonné.
-	\return Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu):
+	\return Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu): <br>
 		*1 - Recommence une manche. <br>
 		*2 - Recommence une partie. <br>
 		*3 - Quitte le programme.
@@ -166,7 +166,7 @@ int joueur_abandon(Joueur* j){
 */
 
 
-/* Affiche les résultats,mets à jour le score ,propose les options de fin de partie et renvoie le résultat correspondant */
+/* Affiche les résultats , mets à jour le score, propose les options de fin de partie et renvoie le résultat correspondant */
 /*Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu):
 		*1 - Recommence une manche.
 		*2 - Recommence une partie.
@@ -239,7 +239,7 @@ Joueur* tour_suivant(Joueur* j){
 /**
 	*\fn void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j)
 	*\details Réalise le fonctionnement d'un tour en appellant les fonctions de gestion_tour .
-	*\param pl Plateau de jeu pour posez les Piece.
+	*\param pl Plateau de jeu pour poser les Piece.
 	*\param j Joueur qui joue actuellement.
 */
 
@@ -303,9 +303,9 @@ void jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 /**
 	*\fn int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j)
 	*\brief Réalise le fonctionnement d'une manche.
-	*\param pl Plateau de jeu .
+	*\param pl Plateau de jeu.
 	*\param j La liste de Joueur qui joue durant la manche.
-	*\return Renvoie le choix des joueurs: <br>
+	*\return Renvoie le choix des joueurs : <br>
 		*2 - Recommence une partie. <br>
 		*3 - Quitte le programme.
 */
@@ -339,9 +339,9 @@ int jouer_manche(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 /**
 	*\fn void jouer_partie()
-	*\brief Réalise l'appelle de fonction pour jouer une partie.
-	*\details Crée une liste de joueur et un plateau de jeu.
-	*\puis appelle initalisation_partie et debut_manche.
+	*\brief Réalise l'appel de fonction pour jouer une partie.
+	*\details Crée une liste de Joueur et un plateau de jeu.
+	*\Appelle initialisation_partie et debut_manche.
 */
 
 
