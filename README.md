@@ -4,15 +4,15 @@
 
 ## Compilation du projet
 
-Compilation de la SDL :
-    - Dépendances: libfreetype6 libasound2-dev libpulse-dev libvorbis-dev
-    - Lancer make dans Blokus_in_c/lib/SDL
-Compilation des programmes de test:
-    - make test
-Compilation du projet :
-    - make
-Compilation de la documentation :
-    - doxygen
+Compilation de la SDL :  
+    - Dépendances: libfreetype6 libasound2-dev libpulse-dev libvorbis-dev  
+    - Lancer make dans Blokus_in_c/lib/SDL  
+Compilation des programmes de test:  
+    - make test  
+Compilation du projet :  
+    - make  
+Compilation de la documentation :  
+    - doxygen  
 
 ## Version 1 (console)
 
