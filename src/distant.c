@@ -171,12 +171,12 @@ int accepter_connexion(int sockfd) {
 
     // Mise du socket en non bloquant
     #ifndef WINDOWS
-    int flags = fcntl(sockfd, F_GETFL);
-    fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    int flags = fcntl(newsockfd, F_GETFL);
+    fcntl(newsockfd, F_SETFL, flags | O_NONBLOCK);
     #endif
     #ifdef WINDOWS
     unsigned long mode = 1;
-    ioctlsocket(sockfd, FIONBIO, &mode);
+    ioctlsocket(newsockfd, FIONBIO, &mode);
     #endif
 
 
@@ -282,7 +282,7 @@ int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int 
         }
     }
 
-    // Ecriture du type
+    // Ecriture de l'id piece
     memcpy(buffer + offset, &id_piece, sizeof(int));
     offset += sizeof(int);
 
@@ -325,7 +325,7 @@ int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_P
  * \fn int envoyer_liste_joueurs(int sockfd, Joueur * j);
  * \brief Envoie la liste des joueurs au joueur distant
  * \param sockfd Numéro du socket à qui envoyer
- * \param j Liste des joueurs
+ * \param j Liste des joueurs (positionné sur le joueur à qui l'on envoie)
  * \param Nombre d'octets envoyés, -1 si erreur
  */
 int envoyer_liste_joueurs(int sockfd, Joueur * j) {
@@ -333,7 +333,11 @@ int envoyer_liste_joueurs(int sockfd, Joueur * j) {
     int type = LISTE_JOUEURS;
     unsigned char buffer[TAILLE_PSEUDO*5] = {0};
     unsigned char c;
+    Couleur couleur = joueur_couleur(j);
     int offset = 0;
+
+    // On commence par le joueur bleu (premier joueur)
+    while (joueur_couleur(j) != BLEU) j = joueur_suivant(j);
 
     // Ecriture du type
     memcpy(buffer + offset, &type, sizeof(int));
@@ -359,6 +363,10 @@ int envoyer_liste_joueurs(int sockfd, Joueur * j) {
         j = joueur_suivant(j);
     } while(j != init);
 
+    // Ecriture de la couleur du joueur
+    memcpy(buffer + offset, &couleur, sizeof(int));
+    offset += sizeof(int);
+
     // Vérification socket encore ouvert
     if (recv(sockfd, &c, 1, 0) == 0) {
         return -1;
@@ -378,6 +386,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
 
     int offset = sizeof(int);
     int nb_joueurs =  0;
+    Couleur couleur;
 
     // Récupération du nombre de joueurs
     memcpy(&nb_joueurs, buffer + offset, sizeof(int));
@@ -385,6 +394,7 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
 
     // Création de la liste des joueurs
     Joueur * j = joueur_liste_creation(nb_joueurs);
+    Joueur * jc = j;
 
     // Récupération des pseudos
     for (int i = 0; i < nb_joueurs; i++) {
@@ -392,6 +402,11 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
         offset += TAILLE_PSEUDO;
         j = joueur_suivant(j);
     }
+
+    // Récupération de la couleur et mise du sockfd à -1 du joueur local
+    memcpy(&couleur, buffer + offset, sizeof(int));
+    while (joueur_couleur(jc) != couleur) jc = joueur_suivant(jc);
+    jc->sockfd = -1;
 
     return j;
 }
@@ -629,10 +644,10 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 	//Si il appuis sur un bouton
 		else if(event.type == SDL_MOUSEBUTTONDOWN){
 			if(curs_hover_bouton(b_retour)) {
-                jouer_son(BOUTON_RETOUR);
-                fermer_connexion(sockfd);
+                            jouer_son(BOUTON_RETOUR);
+                            fermer_connexion(sockfd);
 				return 2;
-            }
+                        }
 		}
             else if(pseudo > 0 && event.type == SDL_KEYDOWN
                     && (event.key.keysym.sym == SDLK_RETURN || event.key.keysym.sym == SDLK_KP_ENTER) ) {
@@ -662,7 +677,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
 
     // Attente du début de la partie
     unsigned char buffer[TAILLE_BUFF];
-    int r;
+    int r = 0;
 
     do {
         while(SDL_PollEvent(&event)){
@@ -677,16 +692,13 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         r = recevoir_buffer(sockfd, buffer);
     } while (r == 0);
     if (r < 0) {
-        return 3;
+        return erreur_reseau();
     }
     else {
         *j = recevoir_liste_joueurs(buffer);
         Joueur * init = *j;
         do {
-            if (strcmp(joueur_pseudo(*j), pseudo)  == 0) {
-                (*j)->sockfd = -1;
-            }
-            else {
+            if ((*j)->sockfd != -1) {
                 (*j)->sockfd = sockfd;
             }
             *j = joueur_suivant(*j);
@@ -780,12 +792,10 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                 }
             }
 
-            if (choix == -1) {
-                fermer_connexion(hote);
-                return erreur_reseau();
-            }
+          
 
             if(choix == 3) {
+                printf("Fermeture");
                 fermer_connexion(hote);
                 return choix;
             }

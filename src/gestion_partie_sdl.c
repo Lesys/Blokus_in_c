@@ -3,7 +3,6 @@
 	*\brief Regroupent toutes les fonctions gestion_partie_sdl.c
 	*\details Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles.
 	*\author JODEAU Alexandre
-
 */
 #include <string.h>
 #include <stdio.h>
@@ -282,7 +281,7 @@ int initialiser_joueur_distant(Joueur **j){
 				if(curs_hover_bouton(b_retour)) {
 					jouer_son(BOUTON_RETOUR);
 					fermer_connexion(sockfd_connexion);
-					continuer = 4;
+					continuer = 2;
 				}
 			}
 		}
@@ -299,6 +298,8 @@ int initialiser_joueur_distant(Joueur **j){
 
 	if(sockfd > 0){
 
+                continuer = 0;
+
 		do {
 			SDL_RenderClear(renderer);
 			//Attend un événement
@@ -309,33 +310,27 @@ int initialiser_joueur_distant(Joueur **j){
 				//Si il appuis sur un bouton
 				else if(event.type == SDL_MOUSEBUTTONDOWN){
 					if(curs_hover_bouton(b_retour))
-						continuer = 4;
+						continuer = 2;
 				}
 			}
 			afficher_bouton_sdl(b_retour);
 			afficher_attente_pseudo_sdl();
 			SDL_RenderPresent(renderer);
 			r = recevoir_buffer(sockfd, buffer);
-			printf("%d: VALEUR r, %d VALEUR CONTINUER\n",r,continuer);
-			printf("%d:CONDITION BOUCLE \n",r == 0 && continuer == 0);
-		} while(r == 0);
-		if(r){
-			printf("Valeur r %d \n",r);
+		} while(r == 0 && continuer == 0);
+		if(continuer == 0){
 			if (r < 0) {
-				fprintf(stderr,"Probleme de connexion");
 				continuer = 4;
 			}
 			else {
 				(*j)->sockfd=sockfd;
-				printf("Avant recevoir valeur\n");
 				recevoir_pseudo(buffer,(*j)->pseudo);
-				printf("Apres recevoir valeur\n");
            			(*j)->type = DISTANT;
 			}
 		}
 	}
 	else {
-		fprintf(stderr,"Problème de connexion");
+		continuer = 4;
 	}
 	free_bouton_sdl(&b_retour);
 	return continuer;
@@ -365,11 +360,12 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	Joueur* j_pivot = *j;
 	/*Tant que tous les joueurs n'ont pas de pseudo*/
 	do{
-		while(retour == 4){
+		while(retour == 4) {
 			retour=saisir_type_joueur(j);
-			if(retour)
+			if(retour) {
+				fermer_connexions_distantes(*j);
 				return retour;
-
+			}
 
 			switch((*j)->type){
 				case BOT: sprintf((*j)->pseudo,"Bot %s",couleur_tostring((*j)->couleur));break;
@@ -384,10 +380,15 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 					retour=initialiser_joueur_distant(j);
 					if(retour == 3)
 						return 3;
-					else if (retour == 2) {
+					else if (retour == 4) {
+						fermer_connexions_distantes(*j);
 						erreur_reseau();
-						return 3;
+						return 4;
 					}
+                    else if (retour == 2) {
+                    	fermer_connexions_distantes(*j);
+                        return 4;
+                    }
 					break;
 				default:return 3;
 			}
@@ -398,7 +399,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 
 	do{
 		if((*j)->sockfd)
-			envoyer_liste_joueurs((*j)->sockfd, j_pivot);
+			envoyer_liste_joueurs((*j)->sockfd, (*j));
 		*j=joueur_suivant(*j);
 	} while(*j != j_pivot);
 	return 0;
@@ -421,7 +422,6 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	\return Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu):
 		*1 - Recommence une manche. <br>
 		*2 - Retourne au titre. <br>
-
 */
 
 
@@ -489,7 +489,6 @@ int fin_de_partie_sdl(Joueur** j){
 	pivot=joueur_suivant(pivot);
 	int valeur_r;
         SDL_Event event_fin;
-
 	while(j != pivot){
 		SDL_RenderClear(renderer);
 		//On attend la touche du joueur
@@ -506,9 +505,7 @@ int fin_de_partie_sdl(Joueur** j){
 			return valeur_r;
 		}
 		pivot=joueur_suivant(pivot);
-
 	}
-
 	return choix;
 }
 */
@@ -522,7 +519,6 @@ int fin_de_partie_sdl(Joueur** j){
 	  renvoie le resultat de la fonction gestion_tour_sdl<br>
 	*1 = Abandon du Joueur
 	*2 = Quitte le jeu ( Appuis sur la croix)
-
 */
 
 /*Appel toute les fonctions pour réalisé un tour*/
@@ -568,7 +564,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 			SDL_RenderClear(renderer);
 	    		while(SDL_PollEvent(&event)) {
       				if(event.type == SDL_QUIT){
-           				valeur_r= 2;
+           				return 3;
         			}
 			}
 			afficher_plateau_sdl(pl);
@@ -581,12 +577,13 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
                             valeur_r = recevoir_buffer((*j)->sockfd, buffer);
                             if (valeur_r == -1) {
                             	(*j)->type = BOT;
-                            	return -1;
+                            	return 5;
                             }
                         }
 		}
 
-		valeur_r = recup_type(buffer);
+		if (valeur_r > 0)
+			valeur_r = recup_type(buffer);
 
 		if (valeur_r == PLATEAU) { // Le joueur a jouer
 			id_piece = recevoir_plateau(buffer, pl);
@@ -625,6 +622,9 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 		*j=joueur_suivant(*j);
 
 	}
+
+	free_afficher_pieces_dispo_sdl(&r);
+
 	return valeur_r;
 }
 
@@ -656,7 +656,8 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 }
 
 // 1 si tout est ok, 2 si deconnexion, 3 si croix
-static int attente_nouvelle_partie(Joueur * j) {
+static
+int attente_nouvelle_partie(Joueur * j) {
 	// Attends que tout les joueurs distants est envoyés le message pret
 	Joueur* pivot=j;
 	SDL_Event event;
@@ -688,6 +689,8 @@ static int attente_nouvelle_partie(Joueur * j) {
 			type = PRET;
 		pivot=joueur_suivant(pivot);
 	} while(type == PRET && pivot != j);
+
+        pivot = j;
 
 	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
 	if(type == PRET){
@@ -747,7 +750,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 				return choix;
 			}
 			//Si le joueur n'a pas déjà abandonné
-			if(choix != 4){
+			if(choix != 4 && choix != 5){
 				// Sons
 				if(joueur_a_abandonne(init)) {
                         		jouer_son(ABANDON);
@@ -783,6 +786,8 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 
 	} while(choix == 1 );
+        
+        fermer_connexions_distantes(j);
 
 	return choix;
 }
