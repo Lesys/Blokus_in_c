@@ -198,6 +198,7 @@ int accepter_connexion(int sockfd) {
  * \param sockfd Numéro du socket à fermer
  */
 void fermer_connexion(int sockfd) {
+    shutdown(sockfd, 2);
     closesocket(sockfd);
 }
 
@@ -236,7 +237,12 @@ int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF]) {
         if (n > 0) {
             nb_lus++;
         }
+        #ifdef WINDOWS
+        else if (WSAGetLastError() == WSAEWOULDBLOCK) {
+        #endif
+        #ifndef WINDOWS
         else if (n < 0) {
+        #endif
             return nb_lus;
         }
         else {
@@ -741,7 +747,7 @@ int attente_nouvelle_partie_distant(int hote) {
         SDL_RenderClear(renderer);
         afficher_attente_debut_sdl();
         SDL_RenderPresent(renderer);
-        nb_recois= recevoir_buffer(hote,buffer);
+        nb_recois = recevoir_buffer(hote,buffer);
     }
     // Récupération d'un message dans le buffer avec int recevoir_buffer(int sockfd, unsigned char buffer[TAILLE_BUFF])
     // si la fonction renvoie -1 -> erreur de connexion on retourne 2

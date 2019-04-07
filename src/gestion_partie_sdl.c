@@ -664,6 +664,7 @@ int attente_nouvelle_partie(Joueur * j) {
 	int retour = 1;
 
 	do{
+		type = 0;
 		if(pivot->type == DISTANT){
 			do{
 				while(SDL_PollEvent(&event)){
@@ -687,7 +688,7 @@ int attente_nouvelle_partie(Joueur * j) {
 		pivot=joueur_suivant(pivot);
 	} while(type == PRET && pivot != j);
 
-        pivot = j;
+    pivot = j;
 
 	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
 	if(type == PRET){
@@ -774,7 +775,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 			//Si le joueur veut continuer, alors on regarde si tous les joueurs veulent continuez de jouer
 			if (choix == 1) {
 			       choix = attente_nouvelle_partie(j);
-            		}
+            }
 
 		} while(!(choix));
 
@@ -784,7 +785,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
 
 	} while(choix == 1 );
 
-        fermer_connexions_distantes(j);
+    fermer_connexions_distantes(j);
 
 	return choix;
 }
