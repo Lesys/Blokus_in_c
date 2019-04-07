@@ -452,6 +452,8 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	if (c == NULL)
 		return 1;
 
+	retour = -piece_id(coup_piece_origine(c));
+
 	/* Permet de tourner la Piece originale dans la même direction que la copie pour la poser */
 	while (!piece_meme_orientation(coup_piece(c), coup_piece_origine(c)))
 		piece_pivoter(1, piece_liste_carre(coup_piece_origine(c)));
