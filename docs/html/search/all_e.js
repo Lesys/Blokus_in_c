@@ -1,7 +1,10 @@
 var searchData=
 [
+  ['saisir_5fnb_5fjoueur',['saisir_nb_joueur',['../gestion__partie__sdl_8c.html#a20a81a81742510cc5ab26f48ea6e537c',1,'gestion_partie_sdl.c']]],
+  ['saisir_5ftype_5fjoueur',['saisir_type_joueur',['../gestion__partie__sdl_8c.html#a706a8de7224263551de7e8c8ec5855b8',1,'gestion_partie_sdl.c']]],
   ['score',['score',['../structjoueur.html#ac5fb44caca18ccd66cdc0796d7b4a3db',1,'joueur']]],
   ['selection',['selection',['../structressources.html#afd3e92353f436360b48822975972f03a',1,'ressources']]],
+  ['selection_5ferreur',['selection_erreur',['../structressources.html#a01ca66750cede0be36a832eb80ce0039',1,'ressources']]],
   ['sockaddr',['SOCKADDR',['../distant_8c.html#ae334b73cedf7204187dce3f817576009',1,'distant.c']]],
   ['sockaddr_5fin',['SOCKADDR_IN',['../distant_8c.html#a29046dc0232f0e5c70adbc25090d77b8',1,'distant.c']]],
   ['socket',['SOCKET',['../distant_8c.html#a8dc8083897335125630f1af5dafd5831',1,'distant.c']]],

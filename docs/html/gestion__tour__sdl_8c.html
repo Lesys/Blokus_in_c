@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence du fichier src/gestion_tour_sdl.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('gestion__tour__sdl_8c.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('gestion__tour__sdl_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Définitions de type</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -117,22 +108,22 @@ $(document).ready(function(){initNavTree('gestion__tour__sdl_8c.html','');});
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a94a4ddb8c6ed247eb6b743e9a540e90a"><td class="memItemLeft" align="right" valign="top"><a id="a94a4ddb8c6ed247eb6b743e9a540e90a"></a>
+<tr class="memitem:a94a4ddb8c6ed247eb6b743e9a540e90a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94a4ddb8c6ed247eb6b743e9a540e90a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>changer_orientation</b> (<a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
 <tr class="separator:a94a4ddb8c6ed247eb6b743e9a540e90a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8370843361f20d2ea010249a2d6e4dce"><td class="memItemLeft" align="right" valign="top"><a id="a8370843361f20d2ea010249a2d6e4dce"></a>
+<tr class="memitem:a8370843361f20d2ea010249a2d6e4dce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8370843361f20d2ea010249a2d6e4dce"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>verification_position_sdl</b> (Couleur pl[20][20], int x, int y, <a class="el" href="structpiece.html">Piece</a> *p)</td></tr>
 <tr class="separator:a8370843361f20d2ea010249a2d6e4dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cf555f89c7fbf7fe75cd759897e5177"><td class="memItemLeft" align="right" valign="top"><a id="a5cf555f89c7fbf7fe75cd759897e5177"></a>
+<tr class="memitem:a5cf555f89c7fbf7fe75cd759897e5177"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5cf555f89c7fbf7fe75cd759897e5177"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>verifier_coordonnees</b> (Couleur pl[20][20], <a class="el" href="structpiece.html">Piece</a> *pi, int x, int y, <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="separator:a5cf555f89c7fbf7fe75cd759897e5177"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf7772abf10f22e16442383a49e175fc"><td class="memItemLeft" align="right" valign="top"><a id="abf7772abf10f22e16442383a49e175fc"></a>
+<tr class="memitem:abf7772abf10f22e16442383a49e175fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf7772abf10f22e16442383a49e175fc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>poser_piece_sdl</b> (Couleur pl[20][20], <a class="el" href="structpiece.html">Piece</a> *pi, <a class="el" href="structjoueur.html">Joueur</a> *j, int x, int y)</td></tr>
 <tr class="separator:abf7772abf10f22e16442383a49e175fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ee3ce492cf2f42e6c5b8f716fbe7b9d"><td class="memItemLeft" align="right" valign="top"><a id="a8ee3ce492cf2f42e6c5b8f716fbe7b9d"></a>
+<tr class="memitem:a8ee3ce492cf2f42e6c5b8f716fbe7b9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ee3ce492cf2f42e6c5b8f716fbe7b9d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>selection_piece</b> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> *j, <a class="el" href="structreserves.html">Reserves</a> *r, <a class="el" href="structpiece.html">Piece</a> **p, <a class="el" href="structbouton.html">Bouton</a> *b)</td></tr>
 <tr class="separator:a8ee3ce492cf2f42e6c5b8f716fbe7b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a878c81f596fc63f1f7fe119f87263b6d"><td class="memItemLeft" align="right" valign="top"><a id="a878c81f596fc63f1f7fe119f87263b6d"></a>
+<tr class="memitem:a878c81f596fc63f1f7fe119f87263b6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a878c81f596fc63f1f7fe119f87263b6d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>gestion_tour_sdl</b> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="separator:a878c81f596fc63f1f7fe119f87263b6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -143,14 +134,12 @@ Variables</h2></td></tr>
 <tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Fichier de fonctions permettant de gérer le tour d'un joueur. </p>
-<p class="">Contient les fonctions demandant la pièce à jouer, son orientation et ses coordonnées au joueur ainsi que les fonctions de vérification de position et de couleur et de pose de celle-ci </p><dl class="section author"><dt>Auteur</dt><dd>RIGUIDEL Hugo </dd></dl>
+<div class="textblock"><p>Fichier de fonctions permettant de gérer le tour d'un joueur. </p>
+<p>Contient les fonctions demandant la pièce à jouer, son orientation et ses coordonnées au joueur ainsi que les fonctions de vérification de position et de couleur et de pose de celle-ci </p><dl class="section author"><dt>Auteur</dt><dd>RIGUIDEL Hugo </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>18/03/2019 </dd></dl>
 </div><h2 class="groupheader">Documentation des variables</h2>
-<a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a966da7a60c4ea3ba301e26ccc5efe452">&#9670;&nbsp;</a></span>renderer</h2>
-
+<a class="anchor" id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -161,7 +150,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Renderer global. </p>
-<p class="">typedef pour compatibilité </p>
+<p>typedef pour compatibilité </p>
 
 </div>
 </div>
@@ -173,7 +162,7 @@ Variables</h2></td></tr>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="gestion__tour__sdl_8c.html">gestion_tour_sdl.c</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

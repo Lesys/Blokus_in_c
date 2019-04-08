@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['verif_5fnb_5fjoueur',['verif_nb_joueur',['../joueur_8c.html#ae0256bdf5ee38cd7a8a380eb592b1d1b',1,'joueur.c']]],
-  ['verification_5fcouleur',['verification_couleur',['../gestion__tour_8c.html#a07a516f9e79e060f91b4b81c0a08bbf8',1,'gestion_tour.c']]],
-  ['verification_5fposition',['verification_position',['../gestion__tour_8c.html#ae61941a1e0d286755ef50967d185044d',1,'gestion_tour.c']]]
+  ['tour_5fsuivant',['tour_suivant',['../gestion__partie_8c.html#aba3a3c4d624f1da955013970bf973218',1,'gestion_partie.c']]],
+  ['type_5fpartie',['type_partie',['../gestion__partie__sdl_8c.html#ade61b24f48a789b8d5105898acf0fef3',1,'gestion_partie_sdl.c']]]
 ];

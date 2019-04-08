@@ -7,6 +7,8 @@ var searchData=
   ['jouer_5fpartie_5fsdl',['jouer_partie_sdl',['../gestion__partie__sdl_8c.html#a72c28677b4723f873b5ce17d960e6769',1,'gestion_partie_sdl.c']]],
   ['jouer_5fson',['jouer_son',['../son_8c.html#a92d53f5e5d3cf37f86d481850df42494',1,'son.c']]],
   ['jouer_5ftour',['jouer_tour',['../gestion__partie_8c.html#a58ea1050fc334f65333957e7b244e389',1,'gestion_partie.c']]],
+  ['jouer_5ftour_5fbot_5fsdl',['jouer_tour_bot_sdl',['../gestion__partie__sdl_8c.html#a4082b037d2a24e0193050840f2624f58',1,'gestion_partie_sdl.c']]],
+  ['jouer_5ftour_5fjoueur_5fsdl',['jouer_tour_joueur_sdl',['../gestion__partie__sdl_8c.html#ae4f45b00074cb9c2e7b9cc0d84fca821',1,'gestion_partie_sdl.c']]],
   ['joueur_5fa_5fabandonne',['joueur_a_abandonne',['../joueur_8c.html#a75e9e308a43f1456ad657a773647110b',1,'joueur.c']]],
   ['joueur_5fabandon',['joueur_abandon',['../gestion__partie_8c.html#ab4752abe9709986b3cf2acd2c8307686',1,'gestion_partie.c']]],
   ['joueur_5fabandonne',['joueur_abandonne',['../joueur_8c.html#aa5e4ec59a7aa1ec721620f5ccbd2489c',1,'joueur.c']]],

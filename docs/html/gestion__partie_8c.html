@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence du fichier src/gestion_partie.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('gestion__partie_8c.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('gestion__partie_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Définitions de type</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -103,7 +94,7 @@ $(document).ready(function(){initNavTree('gestion__partie_8c.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Regroupent toutes les fonctions <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c.">gestion_partie.c</a>.  
+<p>Regroupent toutes les fonctions <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c. ">gestion_partie.c</a>.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -127,7 +118,7 @@ Fonctions</h2></td></tr>
 <tr class="memdesc:ab4752abe9709986b3cf2acd2c8307686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si tous les joueurs ont abandonné.  <a href="#ab4752abe9709986b3cf2acd2c8307686">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab4752abe9709986b3cf2acd2c8307686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07f1bd5c237bd32a3a9c3ad362727858"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#a07f1bd5c237bd32a3a9c3ad362727858">fin_de_partie</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
-<tr class="memdesc:a07f1bd5c237bd32a3a9c3ad362727858"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si c'est vraiment la fin de la partie,modifie les scores et réalise les choix à faire.  <a href="#a07f1bd5c237bd32a3a9c3ad362727858">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a07f1bd5c237bd32a3a9c3ad362727858"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si c'est vraiment la fin de la partie , modifie les scores et réalise les choix à faire.  <a href="#a07f1bd5c237bd32a3a9c3ad362727858">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a07f1bd5c237bd32a3a9c3ad362727858"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba3a3c4d624f1da955013970bf973218"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structjoueur.html">Joueur</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#aba3a3c4d624f1da955013970bf973218">tour_suivant</a> (<a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:aba3a3c4d624f1da955013970bf973218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Passe au prochain Joueur.  <a href="#aba3a3c4d624f1da955013970bf973218">Plus de détails...</a><br /></td></tr>
@@ -138,16 +129,14 @@ Fonctions</h2></td></tr>
 <tr class="memdesc:aabc2caddfe36658343dc331c2d919bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise le fonctionnement d'une manche.  <a href="#aabc2caddfe36658343dc331c2d919bc2">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aabc2caddfe36658343dc331c2d919bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a125c2e2cc30aedff98dc9676e890d9db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie_8c.html#a125c2e2cc30aedff98dc9676e890d9db">jouer_partie</a> ()</td></tr>
-<tr class="memdesc:a125c2e2cc30aedff98dc9676e890d9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise l'appelle de fonction pour jouer une partie.  <a href="#a125c2e2cc30aedff98dc9676e890d9db">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a125c2e2cc30aedff98dc9676e890d9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise l'appel de fonction pour jouer une partie.  <a href="#a125c2e2cc30aedff98dc9676e890d9db">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a125c2e2cc30aedff98dc9676e890d9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Regroupent toutes les fonctions <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c.">gestion_partie.c</a>. </p>
-<p class="">Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles. </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre </dd></dl>
+<div class="textblock"><p>Regroupent toutes les fonctions <a class="el" href="gestion__partie_8c.html" title="Regroupent toutes les fonctions gestion_partie.c. ">gestion_partie.c</a>. </p>
+<p>Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles. </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="a07f1bd5c237bd32a3a9c3ad362727858"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07f1bd5c237bd32a3a9c3ad362727858">&#9670;&nbsp;</a></span>fin_de_partie()</h2>
-
+<a class="anchor" id="a07f1bd5c237bd32a3a9c3ad362727858"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -161,8 +150,8 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Vérifie si c'est vraiment la fin de la partie,modifie les scores et réalise les choix à faire. </p>
-<p class="">Si le Joueur à une liste_vide, on le fait abandonner. Une fois que tous les Joueurs ont abandoné,mets à jour le score ,affiche les résultats et demande a l'utilisateur un choix:<br />
+<p>Vérifie si c'est vraiment la fin de la partie , modifie les scores et réalise les choix à faire. </p>
+<p>Si le Joueur à une liste_vide, on le fait abandonner. Une fois que tous les Joueurs ont abandoné , mets à jour le score , affiche les résultats et demande a l'utilisateur un choix:<br />
  -Recommencez une manche. <br />
  -Recommencez une partie. <br />
  -Quittez le programme. </p><dl class="params"><dt>Paramètres</dt><dd>
@@ -171,15 +160,14 @@ Fonctions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu): 1 - Recommence une manche. <br />
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne le choix de l'utilisateur (ou 0 s'il reste un Joueur en jeu): <br />
+ 1 - Recommence une manche. <br />
  2 - Recommence une partie. <br />
  3 - Quitte le programme. </dd></dl>
 
 </div>
 </div>
-<a id="ade3b043dd6a1eae4be50fba2076ecad7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade3b043dd6a1eae4be50fba2076ecad7">&#9670;&nbsp;</a></span>initialisation_manche()</h2>
-
+<a class="anchor" id="ade3b043dd6a1eae4be50fba2076ecad7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -204,19 +192,17 @@ Fonctions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialise une manche. </p>
-<p class="">Permets de réinitialisé le plateau de jeu et une liste de piece d'un Joueur. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Permet de réinitialiser le plateau de jeu et une liste de pièce d'un Joueur. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">pl</td><td>Plateau de jeu à vider. </td></tr>
-    <tr><td class="paramname">j</td><td>Pointeur sur une liste de joueur afin de reinitialiser la liste de piece de chaque Joueur. </td></tr>
+    <tr><td class="paramname">j</td><td>Pointeur sur une liste de Joueur afin de réinitialiser la liste de pièce de chaque Joueur. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a4c0fcfa70d86a6bc292bb5b06537cb62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c0fcfa70d86a6bc292bb5b06537cb62">&#9670;&nbsp;</a></span>initialisation_partie()</h2>
-
+<a class="anchor" id="a4c0fcfa70d86a6bc292bb5b06537cb62"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -229,7 +215,7 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Initialise une partie <br />
+<p>Initialise une partie <br />
  Crée une liste de n Joueur [2-4]. Si la liste existe, on la supprime puis on en crée une autre. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">j</td><td>Pointeur sur un Joueur pour créer la liste de Joueur. </td></tr>
@@ -239,9 +225,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="aabc2caddfe36658343dc331c2d919bc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabc2caddfe36658343dc331c2d919bc2">&#9670;&nbsp;</a></span>jouer_manche()</h2>
-
+<a class="anchor" id="aabc2caddfe36658343dc331c2d919bc2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -268,20 +252,18 @@ Fonctions</h2></td></tr>
 <p>Réalise le fonctionnement d'une manche. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pl</td><td>Plateau de jeu . </td></tr>
+    <tr><td class="paramname">pl</td><td>Plateau de jeu. </td></tr>
     <tr><td class="paramname">j</td><td>La liste de Joueur qui joue durant la manche. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>Renvoie le choix des joueurs: <br />
+<dl class="section return"><dt>Renvoie</dt><dd>Renvoie le choix des joueurs : <br />
  2 - Recommence une partie. <br />
  3 - Quitte le programme. </dd></dl>
 
 </div>
 </div>
-<a id="a125c2e2cc30aedff98dc9676e890d9db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a125c2e2cc30aedff98dc9676e890d9db">&#9670;&nbsp;</a></span>jouer_partie()</h2>
-
+<a class="anchor" id="a125c2e2cc30aedff98dc9676e890d9db"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -294,14 +276,12 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Réalise l'appelle de fonction pour jouer une partie. </p>
-<p class="">Crée une liste de joueur et un plateau de jeu.  appelle initalisation_partie et debut_manche. </p>
+<p>Réalise l'appel de fonction pour jouer une partie. </p>
+<p>Crée une liste de Joueur et un plateau de jeu.  initialisation_partie et debut_manche. </p>
 
 </div>
 </div>
-<a id="a58ea1050fc334f65333957e7b244e389"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58ea1050fc334f65333957e7b244e389">&#9670;&nbsp;</a></span>jouer_tour()</h2>
-
+<a class="anchor" id="a58ea1050fc334f65333957e7b244e389"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -324,9 +304,9 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Réalise le fonctionnement d'un tour en appellant les fonctions de gestion_tour . </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Réalise le fonctionnement d'un tour en appellant les fonctions de gestion_tour . </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pl</td><td>Plateau de jeu pour posez les Piece. </td></tr>
+    <tr><td class="paramname">pl</td><td>Plateau de jeu pour poser les Piece. </td></tr>
     <tr><td class="paramname">j</td><td>Joueur qui joue actuellement. </td></tr>
   </table>
   </dd>
@@ -334,9 +314,7 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab4752abe9709986b3cf2acd2c8307686"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4752abe9709986b3cf2acd2c8307686">&#9670;&nbsp;</a></span>joueur_abandon()</h2>
-
+<a class="anchor" id="ab4752abe9709986b3cf2acd2c8307686"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -353,17 +331,15 @@ Fonctions</h2></td></tr>
 <p>Vérifie si tous les joueurs ont abandonné. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">j</td><td>Reçois la liste des joueurs et vérifie la valeur d'abandon de chaque Joueur. </td></tr>
+    <tr><td class="paramname">j</td><td>Reçoit la liste des joueurs et vérifie la valeur d'abandon de chaque Joueur. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>renvoie 1 si tous les joueurs ont abandonné, 0 sinon. </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Renvoie 1 si tous les joueurs ont abandonné, sinon 0. </dd></dl>
 
 </div>
 </div>
-<a id="ada90f706c91efe1ab73b82898187f1b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ada90f706c91efe1ab73b82898187f1b1">&#9670;&nbsp;</a></span>maj_scores()</h2>
-
+<a class="anchor" id="ada90f706c91efe1ab73b82898187f1b1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -376,20 +352,18 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Permets de mettre à jour les scores à la fin de la partie: <br />
- +15 si le Joueur à poser toute ces Pieces. <br />
- -1 pour chaque carre d'une Piece. </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Permet de mettre à jour les scores à la fin de la partie: <br />
+ +15 si le Joueur a posé toutes ses Pieces. <br />
+ -1 pour chaque Carre d'une Piece. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">j</td><td>Prends une liste de Joueur. </td></tr>
+    <tr><td class="paramname">j</td><td>Prend une liste de Joueur. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="aba3a3c4d624f1da955013970bf973218"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba3a3c4d624f1da955013970bf973218">&#9670;&nbsp;</a></span>tour_suivant()</h2>
-
+<a class="anchor" id="aba3a3c4d624f1da955013970bf973218"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -422,7 +396,7 @@ Fonctions</h2></td></tr>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="gestion__partie_8c.html">gestion_partie.c</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

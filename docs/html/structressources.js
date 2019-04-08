@@ -25,6 +25,7 @@ var structressources =
     [ "police_p", "structressources.html#a583c20cd52f209e809adf5d966b48e91", null ],
     [ "rouge", "structressources.html#a7d5c85977ba6b296686eded624a8ad08", null ],
     [ "selection", "structressources.html#afd3e92353f436360b48822975972f03a", null ],
+    [ "selection_erreur", "structressources.html#a01ca66750cede0be36a832eb80ce0039", null ],
     [ "son", "structressources.html#ac9e3b350258b6236e54b0abc4a0696b1", null ],
     [ "son_selec", "structressources.html#a35ad04133e5320a96a5ec79285a9d3fd", null ],
     [ "tapis_bleu", "structressources.html#ae747ac5f95bf6f9f392d4ef623921be2", null ],

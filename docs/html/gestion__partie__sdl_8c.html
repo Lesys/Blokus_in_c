@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence du fichier src/gestion_partie_sdl.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('gestion__partie__sdl_8c.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('gestion__partie__sdl_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Définitions de type</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -104,11 +95,12 @@ $(document).ready(function(){initNavTree('gestion__partie__sdl_8c.html','');});
 </div><!--header-->
 <div class="contents">
 
-<p>Regroupent toutes les fonctions <a class="el" href="gestion__partie__sdl_8c.html" title="Regroupent toutes les fonctions gestion_partie_sdl.c.">gestion_partie_sdl.c</a>.  
+<p>Regroupent toutes les fonctions <a class="el" href="gestion__partie__sdl_8c.html" title="Regroupent toutes les fonctions gestion_partie_sdl.c. ">gestion_partie_sdl.c</a>.  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
 <code>#include &quot;../include/distant.h&quot;</code><br />
 <code>#include &quot;../include/commun.h&quot;</code><br />
 <code>#include &quot;../include/joueur.h&quot;</code><br />
@@ -122,16 +114,14 @@ $(document).ready(function(){initNavTree('gestion__partie__sdl_8c.html','');});
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a9fb874dbe2ea9feef68841a488867679"><td class="memItemLeft" align="right" valign="top"><a id="a9fb874dbe2ea9feef68841a488867679"></a>
+<tr class="memitem:a9fb874dbe2ea9feef68841a488867679"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9fb874dbe2ea9feef68841a488867679"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>saisir_pseudo_joueur</b> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="separator:a9fb874dbe2ea9feef68841a488867679"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20a81a81742510cc5ab26f48ea6e537c"><td class="memItemLeft" align="right" valign="top"><a id="a20a81a81742510cc5ab26f48ea6e537c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>saisir_nb_joueur</b> ()</td></tr>
+<tr class="memitem:a20a81a81742510cc5ab26f48ea6e537c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a20a81a81742510cc5ab26f48ea6e537c">saisir_nb_joueur</a> ()</td></tr>
 <tr class="separator:a20a81a81742510cc5ab26f48ea6e537c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a706a8de7224263551de7e8c8ec5855b8"><td class="memItemLeft" align="right" valign="top"><a id="a706a8de7224263551de7e8c8ec5855b8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>saisir_type_joueur</b> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:a706a8de7224263551de7e8c8ec5855b8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a706a8de7224263551de7e8c8ec5855b8">saisir_type_joueur</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="separator:a706a8de7224263551de7e8c8ec5855b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70a5e5589d9faac4110e7ccb95542fb7"><td class="memItemLeft" align="right" valign="top"><a id="a70a5e5589d9faac4110e7ccb95542fb7"></a>
+<tr class="memitem:a70a5e5589d9faac4110e7ccb95542fb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a70a5e5589d9faac4110e7ccb95542fb7"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>initialiser_joueur_distant</b> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="separator:a70a5e5589d9faac4110e7ccb95542fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88ff4d699637e53f75e2b2d32e85a3de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a88ff4d699637e53f75e2b2d32e85a3de">initialisation_partie_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
@@ -139,23 +129,21 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>initialiser_joueur_dis
 <tr class="memitem:ae2124fe33170ea2c37eee0b6856fe43d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#ae2124fe33170ea2c37eee0b6856fe43d">fin_de_partie_sdl</a> (<a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="memdesc:ae2124fe33170ea2c37eee0b6856fe43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si c'est vraiment la fin de la partie,modifie les scores et réalise les choix à faire.  <a href="#ae2124fe33170ea2c37eee0b6856fe43d">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ae2124fe33170ea2c37eee0b6856fe43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4082b037d2a24e0193050840f2624f58"><td class="memItemLeft" align="right" valign="top"><a id="a4082b037d2a24e0193050840f2624f58"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>jouer_tour_bot_sdl</b> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:a4082b037d2a24e0193050840f2624f58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a4082b037d2a24e0193050840f2624f58">jouer_tour_bot_sdl</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="separator:a4082b037d2a24e0193050840f2624f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89dc04498cdd70538434d3002c882547"><td class="memItemLeft" align="right" valign="top"><a id="a89dc04498cdd70538434d3002c882547"></a>
+<tr class="memitem:a89dc04498cdd70538434d3002c882547"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a89dc04498cdd70538434d3002c882547"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>jouer_tour_joueur_distant_sdl</b> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="separator:a89dc04498cdd70538434d3002c882547"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4f45b00074cb9c2e7b9cc0d84fca821"><td class="memItemLeft" align="right" valign="top"><a id="ae4f45b00074cb9c2e7b9cc0d84fca821"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>jouer_tour_joueur_sdl</b> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
+<tr class="memitem:ae4f45b00074cb9c2e7b9cc0d84fca821"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#ae4f45b00074cb9c2e7b9cc0d84fca821">jouer_tour_joueur_sdl</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> **j)</td></tr>
 <tr class="separator:ae4f45b00074cb9c2e7b9cc0d84fca821"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15493976aece5f82f40652cdf75fbd64"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a15493976aece5f82f40652cdf75fbd64">jouer_manche_sdl</a> (Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], <a class="el" href="structjoueur.html">Joueur</a> *j)</td></tr>
 <tr class="memdesc:a15493976aece5f82f40652cdf75fbd64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise le fonctionnement d'une manche.  <a href="#a15493976aece5f82f40652cdf75fbd64">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a15493976aece5f82f40652cdf75fbd64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade61b24f48a789b8d5105898acf0fef3"><td class="memItemLeft" align="right" valign="top"><a id="ade61b24f48a789b8d5105898acf0fef3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>type_partie</b> ()</td></tr>
+<tr class="memitem:ade61b24f48a789b8d5105898acf0fef3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#ade61b24f48a789b8d5105898acf0fef3">type_partie</a> ()</td></tr>
+<tr class="memdesc:ade61b24f48a789b8d5105898acf0fef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le type de la partie ( CREER, REJOINDRE, RETOUR).  <a href="#ade61b24f48a789b8d5105898acf0fef3">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ade61b24f48a789b8d5105898acf0fef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72c28677b4723f873b5ce17d960e6769"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a72c28677b4723f873b5ce17d960e6769">jouer_partie_sdl</a> ()</td></tr>
-<tr class="memdesc:a72c28677b4723f873b5ce17d960e6769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Réalise l'appelle de fonction pour jouer une partie.  <a href="#a72c28677b4723f873b5ce17d960e6769">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a72c28677b4723f873b5ce17d960e6769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Affiche le bouton JOUER QUITTER et appelle les fonctions en fonction du bouton appuyer retours boutons de la sdl.  <a href="#a72c28677b4723f873b5ce17d960e6769">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a72c28677b4723f873b5ce17d960e6769"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -163,22 +151,20 @@ Variables</h2></td></tr>
 <tr class="memitem:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memItemLeft" align="right" valign="top">SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a966da7a60c4ea3ba301e26ccc5efe452">renderer</a></td></tr>
 <tr class="memdesc:a966da7a60c4ea3ba301e26ccc5efe452"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renderer global.  <a href="#a966da7a60c4ea3ba301e26ccc5efe452">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="memItemLeft" align="right" valign="top"><a id="a60ecdbc1f6d5033e9fadf9942c97b0a2"></a>
+<tr class="memitem:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60ecdbc1f6d5033e9fadf9942c97b0a2"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a60ecdbc1f6d5033e9fadf9942c97b0a2">son</a></td></tr>
 <tr class="memdesc:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Son activé ou non. <br /></td></tr>
 <tr class="separator:a60ecdbc1f6d5033e9fadf9942c97b0a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7134a097269358c544de30c31767f658"><td class="memItemLeft" align="right" valign="top"><a id="a7134a097269358c544de30c31767f658"></a>
+<tr class="memitem:a7134a097269358c544de30c31767f658"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7134a097269358c544de30c31767f658"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gestion__partie__sdl_8c.html#a7134a097269358c544de30c31767f658">effet</a></td></tr>
 <tr class="memdesc:a7134a097269358c544de30c31767f658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effet activés ou non. <br /></td></tr>
 <tr class="separator:a7134a097269358c544de30c31767f658"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Regroupent toutes les fonctions <a class="el" href="gestion__partie__sdl_8c.html" title="Regroupent toutes les fonctions gestion_partie_sdl.c.">gestion_partie_sdl.c</a>. </p>
-<p class="">Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles. </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre </dd></dl>
+<div class="textblock"><p>Regroupent toutes les fonctions <a class="el" href="gestion__partie__sdl_8c.html" title="Regroupent toutes les fonctions gestion_partie_sdl.c. ">gestion_partie_sdl.c</a>. </p>
+<p>Toutes les fonctions qui permettent de gerer une partie de blokus en respectant les règles. </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="ae2124fe33170ea2c37eee0b6856fe43d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2124fe33170ea2c37eee0b6856fe43d">&#9670;&nbsp;</a></span>fin_de_partie_sdl()</h2>
-
+<a class="anchor" id="ae2124fe33170ea2c37eee0b6856fe43d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -193,7 +179,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gesti
 </div><div class="memdoc">
 
 <p>Vérifie si c'est vraiment la fin de la partie,modifie les scores et réalise les choix à faire. </p>
-<p class="">Si le Joueur à une liste_vide, on le fait abandonner. Une fois que tous les Joueurs ont abandoné,mets à jour le score ,affiche les résultats et demande a l'utilisateur un choix:<br />
+<p>Si le Joueur à une liste_vide, on le fait abandonner. Une fois que tous les Joueurs ont abandoné,mets à jour le score ,affiche les résultats dans la sdl et demande a l'utilisateur un choix:<br />
  -Recommencez une manche. <br />
  -Recommencez une partie. <br />
  -Quittez le programme. </p><dl class="params"><dt>Paramètres</dt><dd>
@@ -208,9 +194,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gesti
 
 </div>
 </div>
-<a id="a88ff4d699637e53f75e2b2d32e85a3de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88ff4d699637e53f75e2b2d32e85a3de">&#9670;&nbsp;</a></span>initialisation_partie_sdl()</h2>
-
+<a class="anchor" id="a88ff4d699637e53f75e2b2d32e85a3de"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -223,7 +207,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gesti
         </tr>
       </table>
 </div><div class="memdoc">
-<p class="">Initialise une partie <br />
+<p>Initialise une partie <br />
  Crée une liste de n Joueur [2-4]. <br />
 Initialise le pseudo des joueurs Si la liste existe, on la supprime puis on en crée une autre. </p><dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
@@ -231,14 +215,14 @@ Initialise le pseudo des joueurs Si la liste existe, on la supprime puis on en c
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>Retourne 3 si le joueur appuis sur la croix de l'aficheur<br />
- Retourne 0 si l'affectation a bien fonctionné </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 2 si le bouton retour a appuyer.<br />
+ Retourne 3 si le joueur appuis sur la croix.<br />
+ Retourne 4 si il a un problème reseau.<br />
+ Retourne 0 si l'affectation a bien fonctionné. </dd></dl>
 
 </div>
 </div>
-<a id="a15493976aece5f82f40652cdf75fbd64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15493976aece5f82f40652cdf75fbd64">&#9670;&nbsp;</a></span>jouer_manche_sdl()</h2>
-
+<a class="anchor" id="a15493976aece5f82f40652cdf75fbd64"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -276,9 +260,7 @@ Initialise le pseudo des joueurs Si la liste existe, on la supprime puis on en c
 
 </div>
 </div>
-<a id="a72c28677b4723f873b5ce17d960e6769"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72c28677b4723f873b5ce17d960e6769">&#9670;&nbsp;</a></span>jouer_partie_sdl()</h2>
-
+<a class="anchor" id="a72c28677b4723f873b5ce17d960e6769"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -291,15 +273,147 @@ Initialise le pseudo des joueurs Si la liste existe, on la supprime puis on en c
       </table>
 </div><div class="memdoc">
 
-<p>Réalise l'appelle de fonction pour jouer une partie. </p>
-<p class="">Crée une liste de joueur et un plateau de jeu.  appelle initalisation_partie et debut_manche. </p>
+<p>Affiche le bouton JOUER QUITTER et appelle les fonctions en fonction du bouton appuyer retours boutons de la sdl. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>Renvoie 3 si il veut quittez le jeu. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a4082b037d2a24e0193050840f2624f58"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int jouer_tour_bot_sdl </td>
+          <td>(</td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> **&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Réalise le fonctionnement d'un tour d'un bot en appellant la fonction gestion_tour_bot . </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pl</td><td>Plateau de jeu pour posez les Piece. </td></tr>
+    <tr><td class="paramname">j</td><td>Joueur de type bot qui joue actuellement. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>renvoie le resultat de la fonction gestion_tour_sdl<br />
+ 0 = Le Bot a joué 1 = Abandon du Bot </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae4f45b00074cb9c2e7b9cc0d84fca821"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int jouer_tour_joueur_sdl </td>
+          <td>(</td>
+          <td class="paramtype">Couleur&#160;</td>
+          <td class="paramname"><em>pl</em>[TAILLE_PLATEAU][TAILLE_PLATEAU], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> **&#160;</td>
+          <td class="paramname"><em>j</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Réalise le fonctionnement d'un tour pour un joueur local en appellant les fonctions de gestion_tour . </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pl</td><td>Plateau de jeu pour posez les Piece. </td></tr>
+    <tr><td class="paramname">j</td><td>Joueur qui joue actuellement. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>renvoie le resultat de la fonction gestion_tour_sdl<br />
+ 1 = Abandon du Joueur 3 = Quitte le jeu ( Appuis sur la croix) Renvoie l'id de la Piece </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a20a81a81742510cc5ab26f48ea6e537c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int saisir_nb_joueur </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affiche l'affichage et attends que le joueur appuis sur un bouton qui demande le nombre de joueur et le renvoie. </p><dl class="section return"><dt>Renvoie</dt><dd>Retourne -1 si le joueur appuis sur la croix de l'aficheur<br />
+ Retourne entre 1 et 4, le nombre de joueur jouable<br />
+ Retourne 5 si il appuis sur retour </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a706a8de7224263551de7e8c8ec5855b8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int saisir_type_joueur </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structjoueur.html">Joueur</a> **&#160;</td>
+          <td class="paramname"><em>j</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Affiche un écran avec 3 bouton ( LOCAL, DISTANT, BOT) et l'affecte au joueur </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">j</td><td>Pointeur sur un Joueur pour créer la liste de Joueur. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Retourne 3 si le joueur appuis sur la croix de l'aficheur<br />
+ Retourne 4 si il appuis sur retour <br />
+ Retourne 0 si l'affectation a bien fonctionné </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ade61b24f48a789b8d5105898acf0fef3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int type_partie </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Affiche le type de la partie ( CREER, REJOINDRE, RETOUR). </p>
+<p>Renvoie la valeur correspondante a la partie voulu </p><dl class="section return"><dt>Renvoie</dt><dd>Renvoie 1 si c'est le bouton créer.<br />
+ Renvoie 2 si c'est le bouton rejoindre.<br />
+ Renvoie 3 si c'est le bouton quitter.<br />
+ Renvoie 4 si c'est le bouton retour. </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Documentation des variables</h2>
-<a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a966da7a60c4ea3ba301e26ccc5efe452">&#9670;&nbsp;</a></span>renderer</h2>
-
+<a class="anchor" id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -310,7 +424,7 @@ Initialise le pseudo des joueurs Si la liste existe, on la supprime puis on en c
 </div><div class="memdoc">
 
 <p>Renderer global. </p>
-<p class="">typedef pour compatibilité </p>
+<p>typedef pour compatibilité </p>
 
 </div>
 </div>
@@ -322,7 +436,7 @@ Initialise le pseudo des joueurs Si la liste existe, on la supprime puis on en c
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="gestion__partie__sdl_8c.html">gestion_partie_sdl.c</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

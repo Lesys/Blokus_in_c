@@ -2,7 +2,6 @@ var joueur_8c =
 [
     [ "joueur_a_abandonne", "joueur_8c.html#a75e9e308a43f1456ad657a773647110b", null ],
     [ "joueur_abandonne", "joueur_8c.html#aa5e4ec59a7aa1ec721620f5ccbd2489c", null ],
-    [ "joueur_copier", "joueur_8c.html#af04d4d5b6ef2e20ef2b3b8478d08bebc", null ],
     [ "joueur_couleur", "joueur_8c.html#a0020969e75c69786a070bbc1110fbf2c", null ],
     [ "joueur_creation", "joueur_8c.html#a7b667474a9eeceb7812965f70eed1ae4", null ],
     [ "joueur_detruire", "joueur_8c.html#a866621d9d6013850b334ff0147c54614", null ],
