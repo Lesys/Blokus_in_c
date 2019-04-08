@@ -17,34 +17,84 @@
 extern SDL_Renderer* renderer;
 
 /* Accesseurs */
+/**
+	\fn Piece* coup_piece (Coup* coup);
+	\brief Permet de récupérer la copie de la Piece du Coup
+
+	\param coup Le Coup du bot
+	\return La copie de la Piece
+*/
 Piece* coup_piece (Coup* coup) {
 	if (coup != NULL)
 		return coup->piece_copie;
 	return NULL;
 }
 
+/**
+	\fn Piece* coup_piece_origine (Coup* coup);
+	\brief Permet de récupérer le pointeur de la Piece d'origine du Coup
+
+	\param coup Le Coup du bot
+	\return La Piece d'origine (pointeur dans la liste du Joueur)
+*/
 Piece* coup_piece_origine (Coup* coup) {
 	if (coup != NULL)
 		return coup->piece_origine;
 	return NULL;
 }
 
+/**
+	\fn Couleur coup_couleur (Coup* coup);
+	\brief Permet de récupérer la Couleur de la Piece (correspondant à la Couleur du Joueur)
+
+	\param coup Le Coup du bot
+	\return La Couleur de la Piece
+*/
 Couleur coup_couleur (Coup* coup) {
 	return coup->c;
 }
 
+/**
+	\fn int coup_coord_x (Coup* coup);
+	\brief Permet de récupérer la coordonnée x du Coup
+
+	\param coup Le Coup du bot
+	\return La coordonnée x de la Piece
+*/
 int coup_coord_x (Coup* coup) {
 	return coup->x;
 }
 
+/**
+	\fn int coup_coord_y (Coup* coup);
+	\brief Permet de récupérer la coordonnée y du Coup
+
+	\param coup Le Coup du bot
+	\return La coordonnée y de la Piece
+*/
 int coup_coord_y (Coup* coup) {
 	return coup->y;
 }
 
+/**
+	\fn int coup_valeur (Coup* coup);
+	\brief Permet de récupérer la valeur du Coup
+
+	La valeur est une suite d'évaluation sur l'emplacement de la Piece, le nombre de coins débloqués pour soi et le nombre de coins bloqués adverses.
+
+	\param coup Le Coup du bot
+	\return La valeur du Coup
+*/
 int coup_valeur (Coup* coup) {
 	return coup->valeur_coup;
 }
 
+/**
+	\fn void coup_detruire (Coup** coup);
+	\brief Supprime un Coup (et la copie de la Piece d'origine)
+
+	\param coup L'adresse du Coup du bot
+*/
 void coup_detruire(Coup** coup) {
 	if ((*coup) != NULL) {
 		if ((*coup)->piece_copie != NULL)
@@ -56,6 +106,13 @@ void coup_detruire(Coup** coup) {
 	*coup = NULL;
 }
 
+/**
+	\fn Coup* coup_copie (Coup* coup);
+	\brief Copie un Coup et ses attributs
+
+	\param coup Le Coup du bot
+	\return La copie du Coup
+*/
 Coup* coup_copie(Coup* coup) {
 	if (coup == NULL)
 		return NULL;
@@ -75,6 +132,12 @@ Coup* coup_copie(Coup* coup) {
 	return copie;
 }
 
+/**
+	\fn void coup_afficher (Coup* coup);
+	\brief Permet d'afficher un Coup et tous ses attributs
+
+	\param coup Le Coup du bot
+*/
 void coup_afficher(Coup* coup) {
 	printf("Couleur: %s\nX: %d, Y: %d\n", couleur_tostring(coup_couleur(coup)), coup_coord_x(coup), coup_coord_y(coup));
 
@@ -105,7 +168,8 @@ static int poser_piece_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 	return 0;
 }
 
-int meilleur_coup(Coup** tab, int compteur) {
+/* Retourne l'indice du meilleur Coup dans le tableau */
+static int meilleur_coup(Coup** tab, int compteur) {
 	/* S'il n'y a qu'un seul coup possible */
 	if (compteur == 1)
 		return 0;
@@ -149,7 +213,7 @@ static int nb_coups_dispo_2(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* 
 	if (joueur_a_abandonne(joueur))
 		return 0;
 
-	int i, j, k, nb;
+	int i, j, k;
 
     Piece * p = joueur_liste_piece(joueur);
     Piece * init = p;
@@ -169,7 +233,7 @@ static int nb_coups_dispo_2(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* 
                 {
                     /* Si la pièce est posable */
                     if(verifier_coordonnees(pl, p, i, j, joueur))
-						compteur++;
+			compteur++;
 
                     changer_orientation(p);
                 }
@@ -203,7 +267,7 @@ static int nb_coups_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 	int coord_x = coup_coord_x(coup), coord_y = coup_coord_y(coup);
 	int x, y;
 	int nb = 0;
-int cmp = 1;
+//int cmp = 1;
 	/* Pour tous les Carre de la Piece */
 	do {
 		x = coord_x + carre_get_x(c);
@@ -238,12 +302,21 @@ int cmp = 1;
 	return nb;
 }
 
+/**
+	\fn int eval_coup_bot(Coup* coup);
+	\brief Evalue un Coup selon s'il se débloque des coins, s'il bloque des coins adverses et combien de Carre il pose
+
+	Contient également des coefficients pour chaque évaluation
+
+	\param coup Le Coup du bot
+	\return La valeur du Coup
+*/
 int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* bot) {
 	Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
 
 	int i, j;
 	float eval = 0;
-	int nb_coin_bot = 0, nb_coin_adversaire = 0;
+//	int nb_coin_bot = 0;//, nb_coin_adversaire = 0;
 
 	/* Recopie du plateau */
 	for (i = 0; i < TAILLE_PLATEAU; i++)
@@ -290,12 +363,23 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 } /* TODO */
 
 /**
-	return Le nombre de Carre de la Piece du Coup joué
+	\fn int eval_nb_carres_poses(Coup* coup);
+	\brief Calcule le nombre de Carre de la Piece
+
+	\param coup Le Coup à évaluer
+	\return Le nombre de Carre de la Piece du Coup joué
 */
 int eval_nb_carres_poses(Coup* coup) {
 	return piece_nb_carre(coup_piece(coup));
 }
 
+/**
+	\fn int eval_emplacement_piece (Coup* coup);
+	\brief Calcule si l'emplacement de la Piece est plus ou moins bon
+
+	\param coup Le Coup du bot
+	\return La valeur de l'emplacement du Coup
+*/
 int eval_emplacement_piece(Coup* coup) {
 	int coord_x = coup_coord_x(coup);
 	int coord_y = coup_coord_y(coup);
@@ -325,34 +409,13 @@ int eval_emplacement_piece(Coup* coup) {
 }
 
 /**
-	return Le nombre de cases dispos autour de la Piece (adjacantes ou en diagonale)
-*/
-int eval_cases_dispo(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
-	int coord_x = coup_coord_x(coup);
-	int coord_y = coup_coord_y(coup);
+	\fn int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* joueur);
+	\brief Calcule le nombre de nouveaux coins disponibles
 
-	Carre* init = piece_liste_carre(coup_piece(coup));
-	Carre* c = init;
-	int x = 0, y = 0;
-
-	/* Regarde tous les Carre et leur position */
-	do {
-		/* Récupère les coordonnées du Carre sur le plateau */
-		x = coord_x + carre_get_x(c);
-		y = coord_y + carre_get_y(c);
-/*		if (x <= COUP_MAUVAIS || x >= TAILLE_PLATEAU - COUP_MAUVAIS || y <= COUP_MAUVAIS || y >= TAILLE_PLATEAU - COUP_MAUVAIS)
-			mauvais++;
-		else if (x <= COUP_MOYEN || x >= TAILLE_PLATEAU - COUP_MOYEN || y <= COUP_MOYEN || y >= TAILLE_PLATEAU - COUP_MOYEN)
-			moyen++;
-		else if (x <= COUP_BON || x >= TAILLE_PLATEAU - COUP_BON || y <= COUP_BON || y >= TAILLE_PLATEAU - COUP_BON)
-			bon++;*/
-	} while ((c = carre_get_suiv(c)) != init);
-
-	return 0;
-}
-
-/**
-	return L'ancien nombre de coins libres - le nouveau nombre de coins libres
+	\param pl Le plateau "fictif" où l'on peut poser les Piece sans crainte
+	\param coup Le Coup du bot
+	\param Le Joueur qui pose la Piece
+	\return Le nombre de nouveaux coins s'il pose la Piece du Coup
 */
 int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur* joueur) {
 	/* Calcul combien il y a de coins disponibles autour de chaque Carre */
@@ -361,6 +424,14 @@ int eval_nb_nouveaux_coups(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* cou
 	return nb;
 }
 
+/**
+	\fn int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup);
+	\brief Calcule si l'emplacement de la Piece est plus ou moins bon
+
+	\param pl Le plateau "fictif" où l'on peut poser les Piece sans crainte
+	\param coup Le Coup du bot
+	\return La valeur de l'emplacement du Coup
+*/
 int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup) {
 	int nb = 0;
 
@@ -427,6 +498,16 @@ int eval_nb_coups_bloques(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup
 	return nb;
 }
 
+/**
+	\fn int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot);
+	\brief Permet à un bot de jouer son tour
+
+	Calcule tous les Coup possibles, les évalues et renvoie le potentiel meilleur Coup
+
+	\param pl Le plateau dans lequel la Piece sera posée
+	\param coup Le Coup du bot
+	\return L'id de la Piece posée en négatif. Si aucune Piece posée, retourne 1 (abandon).
+*/
 int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	int retour = 0;
 
@@ -458,28 +539,6 @@ int gestion_tour_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot) {
 	while (!piece_meme_orientation(coup_piece(c), coup_piece_origine(c)))
 		piece_pivoter(1, piece_liste_carre(coup_piece_origine(c)));
 
-/*Carre* carre = piece_liste_carre(coup_piece_origine(c));
-Carre* carre2 = carre;
-do
-{
-	carre_afficher(carre2);
-
-	carre_get_suiv(carre2);
-
-} while(carre2 != carre);
-
-fprintf(stderr, "\nValeur du coup : %d\n", coup_valeur(c));
-
-Couleur pl2[TAILLE_PLATEAU][TAILLE_PLATEAU];
-
-int i, j;
-
-for (i = 0; i < TAILLE_PLATEAU; i++)
-	for (j = 0; j < TAILLE_PLATEAU; j++)
-		pl2[i][j] = pl[i][j];
-
-fprintf(stderr, "score blocage : %d\n", eval_nb_coups_bloques_test(pl2, c));*/
-
 	/* Pose la Piece et la supprime de la liste du Joueur */
 	poser_piece_sdl(pl, coup_piece_origine(c), bot, coup_coord_x(c), coup_coord_y(c));
 
@@ -487,7 +546,7 @@ fprintf(stderr, "score blocage : %d\n", eval_nb_coups_bloques_test(pl2, c));*/
 	coup_detruire(&c);
 
 	/* MAJ de l'interface graphique */
-    r = init_afficher_pieces_dispo_sdl(bot);
+/*    r = init_afficher_pieces_dispo_sdl(bot);
     SDL_RenderClear(renderer);
 
     afficher_plateau_sdl(pl);
@@ -501,7 +560,7 @@ fprintf(stderr, "score blocage : %d\n", eval_nb_coups_bloques_test(pl2, c));*/
     SDL_RenderPresent(renderer);
 
     free_afficher_pieces_dispo_sdl(&r);
-
+*/
 	sleep(TEMPS_ATTENTE_BOT);
 
 	return retour;
@@ -523,6 +582,15 @@ static void free_tab_coup(Coup*** tab, int taille)
     *tab = NULL;
 }
 
+/**
+	\fn int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profondeur);
+	\brief Fonction min-max où le bot joue récursivement
+
+	\param pl Plateau "fictif" permettant de jouer et d'évaluer les Coup
+	\param coup Le Coup du bot
+	\param profondeur La profondeur d'évaluation de la fonction récursive min-max
+	\return La valeur récursive du meilleur Coup.
+*/
 int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profondeur)
 {
 	if (joueur_a_abandonne(bot))
@@ -630,6 +698,16 @@ int bot_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, int profo
     return val_coup;
 }
 
+/**
+	\fn int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur);
+	\brief Fonction min-max où un adversaire joue récursivement
+
+	\param pl Plateau "fictif" permettant de jouer et d'évaluer les Coup
+	\param bot Le bot pour qui on doit évaluer les Coup
+	\param joueur L'adversaire qui joue
+	\param profondeur La profondeur d'évaluation de la fonction récursive min-max
+	\return La valeur récursive du meilleur Coup.
+*/
 int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Joueur* joueur, int profondeur)
 {
 	if (joueur_a_abandonne(joueur)) {
@@ -727,11 +805,13 @@ int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Jo
 		/* Pose la Piece et NE la supprime PAS de la liste du Joueur */
 		poser_piece_bot(pl2, coup);
 
+		/* Si le prochain Joueur est le bot */
 		if(joueur_suivant(joueur) == bot) {
-			//fprintf(stderr, "tour du bot\n");
+			/* Retourne la valeur du Coup suivant du bot - la valeur du Coup de l'adversaire actuel */
 			val_coup = bot_jouer(pl2, bot, profondeur - 1) - coup_valeur(coup);
 		}
 		else
+			/* Retourne la valeur du Coup suivant de l'adversaire suivant - la valeur du Coup de l'adversaire actuel */
 			val_coup = adversaire_jouer(pl2, bot, joueur_suivant(joueur), profondeur) - coup_valeur(coup);
 
 		/* Suppression du Coup qu'on a joué */
@@ -746,6 +826,17 @@ int adversaire_jouer(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot, Jo
 }
 
 /* Gestion du premier tour du bot */
+/**
+	\fn Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot);
+	\brief Premier tour du bot
+
+	Si le bot arrive vers la fin du jeu, on calcule une valeur supplémentaire avec la fonction min-max
+
+	\param pl Le plateau de jeu actuel
+	\param bot Le bot qui doit jouer son tour
+
+	\return Le meilleur Coup évalué
+*/
 Coup* bot_jouer_tour(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* bot)
 {
     int i, j, k, nb;

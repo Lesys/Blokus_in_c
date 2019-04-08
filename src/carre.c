@@ -427,15 +427,6 @@ int piece_meme_orientation(Piece* modele, Piece* pivote) {
 	return (!diff && c_pivote == init_pivote);
 }
 
-Piece* liste_piece_copie(Piece* p) {
-	Piece* init = p;
-
-	Piece* p_copie = piece_liste_creation();
-
-	/* Il faut enlever les Piece qui ne sont plus dans la liste p */
-	/*TODO*/
-}
-
 /**
 	\fn void piece_pivoter(int nb, Carre * c) {
 	\brief Fait pivoter la pièce de nb fois 90°
