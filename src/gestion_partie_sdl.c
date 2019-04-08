@@ -416,6 +416,9 @@ int attente_fin_de_partie() {
 	int retour = 1;
 	SDL_Event event;
 
+	afficher_bouton_sdl(b_fin);
+	SDL_RenderPresent(renderer);
+
 	while (retour == 1) {
        	while(SDL_PollEvent(&event)){
 			if(event.type == SDL_QUIT)
@@ -427,9 +430,6 @@ int attente_fin_de_partie() {
 				}
 			}
 		}
-
-		afficher_bouton_sdl(b_fin);
-		SDL_RenderPresent(renderer);
 	}
 
 	free_bouton_sdl(&b_fin);
