@@ -8,13 +8,17 @@
 
 typedef struct coup Coup;
 
+/**
+        \struct coup
+        \brief Structure d'un Coup
+*/
 struct coup {
-	Piece* piece_copie;
-	Piece* piece_origine;
-	Couleur c;
-	int x;
-	int y;
-	int valeur_coup;
+	Piece* piece_copie; /**< Copie de la Piece du Coup */
+	Piece* piece_origine; /**< Piece de la liste du Joueur du Coup */
+	Couleur c; /**< Couleur de la Piece */
+	int x; /**< Coordonnée x à laquelle la Piece a été évaluée */
+	int y; /**< Coordonnée y à laquelle la Piece a été évaluée */
+	int valeur_coup; /**< Valeur d'évaluation du Coup */
 };
 
 /* Accesseurs */
