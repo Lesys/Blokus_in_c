@@ -64,7 +64,7 @@ void carre_detruire(Carre**);
 struct piece {
 	Carre* liste_carre; /**< Premier carré de la liste */
 	Piece* suiv, *prec; /**< Piece* suivante et précédente de la liste */
-    int id;
+	int id; /**< Identifiant d'une Piece (entre 1 et 21) */
 };
 
 /* Renvoie VRAI si la Piece est NULL, FAUX sinon */

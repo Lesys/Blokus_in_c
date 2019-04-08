@@ -13,6 +13,13 @@
 SDL_Window * window;
 SDL_Renderer * renderer;
 
+/**
+	\fn sdl_init(int fullscreen);
+	\brief Initialise la SDL
+
+	\param fullscreen Permet de savoir si l'utilisateur veut avoir le jeu en plein écran ou non
+	\return VRAI si la fonction s'est bien déroulée, FAUX s'il y a eu un problème.
+*/
 int sdl_init(int fullscreen) {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)) {
 		printf("Erreur initialisation SDL: %s\n", SDL_GetError());
@@ -69,6 +76,10 @@ int sdl_init(int fullscreen) {
 
 }
 
+/**
+	\fn sdl_close();
+	\brief Ferme la SDL et tous les composants ouvert grâce à sdl_init
+*/
 void sdl_close() {
 
 	IMG_Quit();
