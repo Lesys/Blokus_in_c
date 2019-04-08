@@ -1,3 +1,13 @@
+/**
+	\file gestion_bot.c
+	\brief Fichier de fonctions pour faire jouer un bot
+	\author RIGUIDEL Hugo & WIDMER Alexis
+	\version 1.0
+	\date 08/04/2019
+
+	Ce fichier permet de faire jouer un bot en calculant tous les Coup possibles, la valeur de chaque Coup et de placer la Piece dans l'orientation du Coup aux coordonnées du Coup.
+*/
+
 #include "../include/gestion_bot.h"
 #include "../include/gestion_tour.h"
 #include "../include/gestion_tour_sdl.h"
@@ -365,10 +375,10 @@ int eval_coup_bot(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Coup* coup, Joueur
 		//fprintf(stderr, "Petit carré posé\n");
 		eval /= 10;
 	}
-//eval /= 10;
+
 	return eval;
 
-} /* TODO */
+}
 
 /**
 	\fn int eval_nb_carres_poses(Coup* coup);
