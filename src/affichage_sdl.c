@@ -127,6 +127,7 @@ int init_affichage_sdl(int fullscreen) {
     ressources->son_selec = init_sprite("ressources/son_selec.png", taille_carre*3, taille_carre*3);
     ressources->effet = init_sprite("ressources/effet.png", taille_carre*3, taille_carre*3);
     ressources->effet_selec = init_sprite("ressources/effet_selec.png", taille_carre*3, taille_carre*3);
+    ressources->regles = init_sprite("ressources/regles.png", hauteur_ecran, hauteur_ecran*1.77);
 
     ressources->blanc.r = 190;
     ressources->blanc.g = 190;
@@ -184,6 +185,7 @@ void free_affichage_sdl() {
         free_sprite(&ressources->son_selec);
         free_sprite(&ressources->effet);
         free_sprite(&ressources->effet_selec);
+        free_sprite(&ressources->regles);
         free(ressources);
     }
 }
@@ -955,6 +957,8 @@ Bouton * init_bouton_sdl(Type_bouton b) {
     switch(b) {
         case ABANDONNER:
         case RETOUR:
+        case REGLES:
+        case FIN:
             bouton->x_gauche = largeur_ecran - taille_carre*14;
             bouton->x_droite = largeur_ecran - taille_carre*2;
             bouton->y_haut = hauteur_ecran - taille_carre*6;
@@ -1108,6 +1112,12 @@ void afficher_bouton_sdl(Bouton * b) {
             else {
                 afficher_sprite(ressources->effet, b->x_gauche, b->y_haut); 
             }
+            break;
+        case REGLES:
+            aff_b("Règles", b->x_gauche, b->y_haut);
+            break;
+        case FIN:
+            aff_b("Fin de partie", b->x_gauche, b->y_haut);
             break;
         default:
             break;
@@ -1349,4 +1359,12 @@ void afficher_attente_nouvelle_partie() {
 
     afficher_fond_config();
     afficher_texte("En attente du début de la partie ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+}
+
+/**
+ * \fn void afficher_regles_sdl()
+ * \brief Affiche les regles
+ */
+void afficher_regles_sdl() {
+    afficher_sprite(ressources->regles, - (ressources->regles->largeur - largeur_ecran)/2, 0);
 }
