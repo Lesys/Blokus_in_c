@@ -844,6 +844,37 @@ int type_partie(){
 
 	return val_retour;
 }
+
+static
+int regles() {
+
+	Bouton* b_retour = init_bouton_sdl(RETOUR);
+	int retour = 1;
+	SDL_Event event;
+
+	while (retour == 1) {
+		SDL_RenderClear(renderer);
+       	while(SDL_PollEvent(&event)){
+			if(event.type == SDL_QUIT)
+				retour = 3;
+			else if(event.type == SDL_MOUSEBUTTONDOWN){
+				if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
+					retour = 2;
+				}
+			}
+		}
+
+		afficher_regles_sdl();
+		afficher_bouton_sdl(b_retour);
+		SDL_RenderPresent(renderer);
+	}
+
+	free_bouton_sdl(&b_retour);
+
+	return retour;
+}
+
 /**
 	*\fn int jouer_partie_sdl()
 	*\brief Affiche le bouton JOUER QUITTER et appelle les fonctions en fonction du bouton appuyer retours boutons de la sdl.
@@ -866,6 +897,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	son = 0;
 	Bouton* b_effet = init_bouton_sdl(EFFET);
 	effet = 1;
+	Bouton* b_regles = init_bouton_sdl(REGLES);
 
 	while (retour == 2){
 
@@ -883,7 +915,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				}
 				else if(curs_hover_bouton(b_quitter_jeu)) {
 					jouer_son(BOUTON_RETOUR);
-					retour= 3;
+					retour = 3;
 				}
 				else if(curs_hover_bouton(b_son)) {
 					son = (son+1)%2;
@@ -892,6 +924,10 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				else if(curs_hover_bouton(b_effet)) {
 					effet = (effet+1)%2;
 					jouer_son(BOUTON);
+				}
+				else if(curs_hover_bouton(b_regles)) {
+					jouer_son(BOUTON);
+					retour = regles();
 				}
 			}
 		}
@@ -946,6 +982,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	    afficher_bouton_sdl(b_quitter_jeu);
 	    afficher_bouton_sdl(b_son);
 	    afficher_bouton_sdl(b_effet);
+	    afficher_bouton_sdl(b_regles);
 		SDL_RenderPresent(renderer);
 	}
 

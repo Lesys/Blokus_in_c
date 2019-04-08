@@ -66,6 +66,8 @@ typedef struct ressources {
     Sprite * effet;
     /** \brief Texture du bouton effet si selectionné */
     Sprite * effet_selec;
+    /** \brief Texture contenant les règles */
+    Sprite * regles;
     /** \brief Couleur blanche */
     SDL_Color blanc;
     /** \brief Couleur jaune */
@@ -121,7 +123,8 @@ typedef enum type_bouton {
     REJOINDRE_PARTIE,
     RETOUR,
     SON,
-    EFFET
+    EFFET,
+    REGLES
 } Type_bouton;
 
 typedef struct bouton {
@@ -191,5 +194,7 @@ int curs_hover_bouton(Bouton * b);
 void afficher_erreur_reseau();
 
 void afficher_attente_nouvelle_partie();
+
+void afficher_regles_sdl();
 
 #endif
