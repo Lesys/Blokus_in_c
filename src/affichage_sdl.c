@@ -958,6 +958,7 @@ Bouton * init_bouton_sdl(Type_bouton b) {
         case ABANDONNER:
         case RETOUR:
         case REGLES:
+        case FIN:
             bouton->x_gauche = largeur_ecran - taille_carre*14;
             bouton->x_droite = largeur_ecran - taille_carre*2;
             bouton->y_haut = hauteur_ecran - taille_carre*6;
@@ -1114,6 +1115,9 @@ void afficher_bouton_sdl(Bouton * b) {
             break;
         case REGLES:
             aff_b("Règles", b->x_gauche, b->y_haut);
+            break;
+        case FIN:
+            aff_b("Fin de partie", b->x_gauche, b->y_haut);
             break;
         default:
             break;

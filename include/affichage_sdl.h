@@ -124,7 +124,8 @@ typedef enum type_bouton {
     RETOUR,
     SON,
     EFFET,
-    REGLES
+    REGLES,
+    FIN
 } Type_bouton;
 
 typedef struct bouton {
