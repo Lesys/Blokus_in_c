@@ -1024,7 +1024,12 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             bouton->y_haut = taille_carre;
             bouton->y_bas = taille_carre*4;
             break;
-
+        case SAUVEGARDER:
+            bouton->x_gauche = taille_carre*2;
+            bouton->x_droite = taille_carre*14;
+            bouton->y_haut = hauteur_ecran - taille_carre*6;
+            bouton->y_bas = hauteur_ecran - taille_carre*2;
+            break;
         default:
             break;
     }
@@ -1122,6 +1127,9 @@ void afficher_bouton_sdl(Bouton * b) {
             break;
         case FIN:
             aff_b("Fin de partie", b->x_gauche, b->y_haut);
+            break;
+        case SAUVEGARDER:
+            aff_b("Sauvegarder", b->x_gauche, b->y_haut);
             break;
         default:
             break;
