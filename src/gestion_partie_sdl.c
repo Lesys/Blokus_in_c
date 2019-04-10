@@ -840,7 +840,7 @@ int type_partie(){
 	SDL_Event event;
 	Bouton* b_creer = init_bouton_sdl(CREER_PARTIE);
 	Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
-	//Bouton* b_recharger = init_bouton_sdl();
+	Bouton* b_charger = init_bouton_sdl(CHARGER_PARTIE);
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
 	while(val_retour < 0){
 		/* Ecouter les EVENT */
@@ -857,10 +857,10 @@ int type_partie(){
 					jouer_son(BOUTON);
 					val_retour= 2;
 				}
-				//else if(curs_hover_bouton(b_recharger)){
-				//	joueur_son(bouton);
-				//	val_retour= 5;
-				//}
+				else if(curs_hover_bouton(b_charger)){
+					jouer_son(BOUTON);
+					val_retour= 5;
+				}
 
 				else if(curs_hover_bouton(b_retour)) {
 					jouer_son(BOUTON_RETOUR);
@@ -872,13 +872,13 @@ int type_partie(){
 		afficher_titres_sdl();
 	 	afficher_bouton_sdl(b_creer);
 		afficher_bouton_sdl(b_rejoindre);
-		//afficher_bouton_sdl(b_recharger);
+		afficher_bouton_sdl(b_charger);
 		afficher_bouton_sdl(b_retour);
 		SDL_RenderPresent(renderer);
 	}
  	free_bouton_sdl(&b_creer);
 	free_bouton_sdl(&b_rejoindre);
-	//free_bouton_sdl(&b_recharger);
+	free_bouton_sdl(&b_charger);
 	free_bouton_sdl(&b_retour);
 
 	return val_retour;
