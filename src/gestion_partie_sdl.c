@@ -452,7 +452,6 @@ int attente_fin_de_partie() {
 	return retour;
 }
 
->>>>>>> d42f06749c9432df500a2eaf9969183c349c9499
 
 /**
 	*\fn int fin_de_partie_sdl(Joueur** j)
@@ -872,15 +871,15 @@ int type_partie(){
 					jouer_son(BOUTON);
 					val_retour= 2;
 				}
-				else if(curs_hover_bouton(b_recharger)){
-					joueur_son(bouton);
-					val_retour= 5;
-				}
-
-				//else if(curs_hover_bouton(b_retour)) {
-				//	jouer_son(BOUTON_RETOUR);
-				//	val_retour= 4;
+				//else if(curs_hover_bouton(b_recharger)){
+				//	joueur_son(bouton);
+				//	val_retour= 5;
 				//}
+
+				else if(curs_hover_bouton(b_retour)) {
+					jouer_son(BOUTON_RETOUR);
+					val_retour= 4;
+				}
 			}
 		}
 	/* Affiche le menu type partie */
