@@ -372,6 +372,7 @@ Piece* piece_copie(Piece* p) {
 	Piece* copie = malloc(sizeof(Piece));
 	/* Cette copie de Piece n'est pas faite pour parcourir une liste */
 	copie->suiv = copie->prec = copie;
+	copie->id = piece_id(p);
 
 	Carre* init = piece_liste_carre(p);
 	Carre* parcours_p = init, *first, *parcours_copie;
@@ -425,15 +426,6 @@ int piece_meme_orientation(Piece* modele, Piece* pivote) {
 
 	/* On regarde si on n'a pas de différence ET qu'on est bien retourné au début de notre modèle (2ème vérification inutile) */
 	return (!diff && c_pivote == init_pivote);
-}
-
-Piece* liste_piece_copie(Piece* p) {
-	Piece* init = p;
-
-	Piece* p_copie = piece_liste_creation();
-
-	/* Il faut enlever les Piece qui ne sont plus dans la liste p */
-	/*TODO*/
 }
 
 /**

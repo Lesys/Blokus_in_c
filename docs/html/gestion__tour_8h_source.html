@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C:  Fichier source de include/gestion_tour.h</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('gestion__tour_8h_source.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('gestion__tour_8h_source.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Définitions de type</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -100,17 +91,43 @@ $(document).ready(function(){initNavTree('gestion__tour_8h_source.html','');});
 <div class="title">gestion_tour.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GESTION_TOUR_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GESTION_TOUR_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;joueur.h&quot;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;carre.h&quot;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;couleur.h&quot;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> orientation{HAUT=0, DROITE, BAS, GAUCHE} Orientation;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="structpiece.html">Piece</a>* <a class="code" href="gestion__tour_8c.html#a1e0f3b10e6fd5a4a94f528d2015c6db3">demander_piece</a>(<a class="code" href="structjoueur.html">Joueur</a>* j);</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#ac2e1a1888c862609d990488b365f4d99">demander_orientation</a>(<a class="code" href="structpiece.html">Piece</a>* p, <a class="code" href="structjoueur.html">Joueur</a>* j); <span class="comment">/* Affiche les 4 orientations possibles et l&#39;utilisateur choisit 1, 2, 3 ou 4 selon l&#39;orientation voulue */</span></div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#afb19cecbb94f50afd5e76761d001103e">choisir_coordonnee</a>(Couleur pl[20][20], <a class="code" href="structpiece.html">Piece</a>* pi, <span class="keywordtype">int</span>* x, <span class="keywordtype">int</span>* y, <a class="code" href="structjoueur.html">Joueur</a>* j); <span class="comment">/* Regarde si les coordonnées saisies sont dans le plateau et sur une case non prise. Renvoie les coordonnées dans x et y */</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">int</span> <a class="code" href="gestion__tour_8c.html#ae61941a1e0d286755ef50967d185044d">verification_position</a>(Couleur pl[20][20], <span class="keywordtype">int</span> x,<span class="keywordtype">int</span> y, <a class="code" href="structpiece.html">Piece</a>* p); <span class="comment">/* verifie si aucune case n&#39;est obstruee */</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> <a class="code" href="gestion__tour_8c.html#a07a516f9e79e060f91b4b81c0a08bbf8">verification_couleur</a>(Couleur pl[20][20], <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, Couleur c, <a class="code" href="structpiece.html">Piece</a>* p); <span class="comment">/* verifie si au moins un angle avec une autre piece du meme joueur et qu&#39;aucun carre n&#39;est directement adjacent a la piece */</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#a00358da662fcf8a76b416e5fcaa1f94f">poser_piece</a>(Couleur pl[20][20], <a class="code" href="structpiece.html">Piece</a>* pi, <a class="code" href="structjoueur.html">Joueur</a>* j, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y); <span class="comment">/* Pose la pièce sur le plateau (si possible) et supprime la pièce de la liste du joueur. Si impossible de poser la pièce (car les autres cases sont prises) ==&gt; renvoie 0. Sinon, autre chose */</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#a5f42fad27ffc54c4c1aad172d2c148a2">initialiser_matrice</a>(<span class="keywordtype">int</span> matrice[5][5]);</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a">affecter_matrice</a>(<span class="keywordtype">int</span> matrice[5][5], <a class="code" href="structcarre.html">Carre</a>* c);</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="gestion__tour_8c_html_afb19cecbb94f50afd5e76761d001103e"><div class="ttname"><a href="gestion__tour_8c.html#afb19cecbb94f50afd5e76761d001103e">choisir_coordonnee</a></div><div class="ttdeci">void choisir_coordonnee(Couleur pl[20][20], Piece *pi, int *x, int *y, Joueur *j)</div><div class="ttdoc">Demande au joueur à quelles coordonnées il souhaite jouer la pièce.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:238</div></div>
-<div class="ttc" id="gestion__tour_8c_html_ae61941a1e0d286755ef50967d185044d"><div class="ttname"><a href="gestion__tour_8c.html#ae61941a1e0d286755ef50967d185044d">verification_position</a></div><div class="ttdeci">int verification_position(Couleur pl[20][20], int x, int y, Piece *p)</div><div class="ttdoc">Vérifie si la pièce peut être placée.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:151</div></div>
-<div class="ttc" id="gestion__tour_8c_html_a8f410ddaa1402b721a55493d4e86657a"><div class="ttname"><a href="gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a">affecter_matrice</a></div><div class="ttdeci">void affecter_matrice(int matrice[5][5], Carre *c)</div><div class="ttdoc">Fonction d&amp;#39;initialisation d&amp;#39;une matrice.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:79</div></div>
-<div class="ttc" id="structpiece_html"><div class="ttname"><a href="structpiece.html">piece</a></div><div class="ttdoc">Structure d&amp;#39;une Piece.</div><div class="ttdef"><b>Definition:</b> carre.h:64</div></div>
-<div class="ttc" id="gestion__tour_8c_html_a1e0f3b10e6fd5a4a94f528d2015c6db3"><div class="ttname"><a href="gestion__tour_8c.html#a1e0f3b10e6fd5a4a94f528d2015c6db3">demander_piece</a></div><div class="ttdeci">Piece * demander_piece(Joueur *j)</div><div class="ttdoc">Demande au joueur la pièce qu&amp;#39;il souhaite jouer.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:26</div></div>
-<div class="ttc" id="gestion__tour_8c_html_ac2e1a1888c862609d990488b365f4d99"><div class="ttname"><a href="gestion__tour_8c.html#ac2e1a1888c862609d990488b365f4d99">demander_orientation</a></div><div class="ttdeci">void demander_orientation(Piece *p, Joueur *j)</div><div class="ttdoc">Demande au joueur l&amp;#39;orientation de la pièce qu&amp;#39;il souhaite jouer.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:119</div></div>
-<div class="ttc" id="gestion__tour_8c_html_a07a516f9e79e060f91b4b81c0a08bbf8"><div class="ttname"><a href="gestion__tour_8c.html#a07a516f9e79e060f91b4b81c0a08bbf8">verification_couleur</a></div><div class="ttdeci">int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece *p)</div><div class="ttdoc">Vérifie la position des pièces d&amp;#39;une même couleur entre elles.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:184</div></div>
-<div class="ttc" id="structjoueur_html"><div class="ttname"><a href="structjoueur.html">joueur</a></div><div class="ttdoc">Structure d&amp;#39;un Joueur.</div><div class="ttdef"><b>Definition:</b> joueur.h:22</div></div>
-<div class="ttc" id="gestion__tour_8c_html_a00358da662fcf8a76b416e5fcaa1f94f"><div class="ttname"><a href="gestion__tour_8c.html#a00358da662fcf8a76b416e5fcaa1f94f">poser_piece</a></div><div class="ttdeci">void poser_piece(Couleur pl[20][20], Piece *pi, Joueur *j, int x, int y)</div><div class="ttdoc">Pose une pièce.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:378</div></div>
-<div class="ttc" id="gestion__tour_8c_html_a5f42fad27ffc54c4c1aad172d2c148a2"><div class="ttname"><a href="gestion__tour_8c.html#a5f42fad27ffc54c4c1aad172d2c148a2">initialiser_matrice</a></div><div class="ttdeci">void initialiser_matrice(int matrice[5][5])</div><div class="ttdoc">Fonction d&amp;#39;initialisation d&amp;#39;une matrice.</div><div class="ttdef"><b>Definition:</b> gestion_tour.c:57</div></div>
-<div class="ttc" id="structcarre_html"><div class="ttname"><a href="structcarre.html">carre</a></div><div class="ttdoc">Structure d&amp;#39;un Carre.</div><div class="ttdef"><b>Definition:</b> carre.h:22</div></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GESTION_TOUR_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define GESTION_TOUR_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;joueur.h&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;carre.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;couleur.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> orientation{HAUT=0, DROITE, BAS, GAUCHE} Orientation;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="structpiece.html">Piece</a>* <a class="code" href="gestion__tour_8c.html#a1e0f3b10e6fd5a4a94f528d2015c6db3">demander_piece</a>(<a class="code" href="structjoueur.html">Joueur</a>* j);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#ac2e1a1888c862609d990488b365f4d99">demander_orientation</a>(<a class="code" href="structpiece.html">Piece</a>* p, <a class="code" href="structjoueur.html">Joueur</a>* j); <span class="comment">/* Affiche les 4 orientations possibles et l&#39;utilisateur choisit 1, 2, 3 ou 4 selon l&#39;orientation voulue */</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#afb19cecbb94f50afd5e76761d001103e">choisir_coordonnee</a>(Couleur pl[20][20], <a class="code" href="structpiece.html">Piece</a>* pi, <span class="keywordtype">int</span>* x, <span class="keywordtype">int</span>* y, <a class="code" href="structjoueur.html">Joueur</a>* j); <span class="comment">/* Regarde si les coordonnées saisies sont dans le plateau et sur une case non prise. Renvoie les coordonnées dans x et y */</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">int</span> <a class="code" href="gestion__tour_8c.html#ae61941a1e0d286755ef50967d185044d">verification_position</a>(Couleur pl[20][20], <span class="keywordtype">int</span> x,<span class="keywordtype">int</span> y, <a class="code" href="structpiece.html">Piece</a>* p); <span class="comment">/* verifie si aucune case n&#39;est obstruee */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> <a class="code" href="gestion__tour_8c.html#a07a516f9e79e060f91b4b81c0a08bbf8">verification_couleur</a>(Couleur pl[20][20], <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, Couleur c, <a class="code" href="structpiece.html">Piece</a>* p); <span class="comment">/* verifie si au moins un angle avec une autre piece du meme joueur et qu&#39;aucun carre n&#39;est directement adjacent a la piece */</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#a00358da662fcf8a76b416e5fcaa1f94f">poser_piece</a>(Couleur pl[20][20], <a class="code" href="structpiece.html">Piece</a>* pi, <a class="code" href="structjoueur.html">Joueur</a>* j, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y); <span class="comment">/* Pose la pièce sur le plateau (si possible) et supprime la pièce de la liste du joueur. Si impossible de poser la pièce (car les autres cases sont prises) ==&gt; renvoie 0. Sinon, autre chose */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#a5f42fad27ffc54c4c1aad172d2c148a2">initialiser_matrice</a>(<span class="keywordtype">int</span> matrice[5][5]);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> <a class="code" href="gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a">affecter_matrice</a>(<span class="keywordtype">int</span> matrice[5][5], <a class="code" href="structcarre.html">Carre</a>* c);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="gestion__tour_8c_html_afb19cecbb94f50afd5e76761d001103e"><div class="ttname"><a href="gestion__tour_8c.html#afb19cecbb94f50afd5e76761d001103e">choisir_coordonnee</a></div><div class="ttdeci">void choisir_coordonnee(Couleur pl[20][20], Piece *pi, int *x, int *y, Joueur *j)</div><div class="ttdoc">Demande au joueur à quelles coordonnées il souhaite jouer la pièce. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:238</div></div>
+<div class="ttc" id="gestion__tour_8c_html_ae61941a1e0d286755ef50967d185044d"><div class="ttname"><a href="gestion__tour_8c.html#ae61941a1e0d286755ef50967d185044d">verification_position</a></div><div class="ttdeci">int verification_position(Couleur pl[20][20], int x, int y, Piece *p)</div><div class="ttdoc">Vérifie si la pièce peut être placée. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:151</div></div>
+<div class="ttc" id="gestion__tour_8c_html_a8f410ddaa1402b721a55493d4e86657a"><div class="ttname"><a href="gestion__tour_8c.html#a8f410ddaa1402b721a55493d4e86657a">affecter_matrice</a></div><div class="ttdeci">void affecter_matrice(int matrice[5][5], Carre *c)</div><div class="ttdoc">Fonction d&#39;initialisation d&#39;une matrice. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:79</div></div>
+<div class="ttc" id="structpiece_html"><div class="ttname"><a href="structpiece.html">piece</a></div><div class="ttdoc">Structure d&#39;une Piece. </div><div class="ttdef"><b>Definition:</b> carre.h:64</div></div>
+<div class="ttc" id="gestion__tour_8c_html_a1e0f3b10e6fd5a4a94f528d2015c6db3"><div class="ttname"><a href="gestion__tour_8c.html#a1e0f3b10e6fd5a4a94f528d2015c6db3">demander_piece</a></div><div class="ttdeci">Piece * demander_piece(Joueur *j)</div><div class="ttdoc">Demande au joueur la pièce qu&#39;il souhaite jouer. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:26</div></div>
+<div class="ttc" id="gestion__tour_8c_html_ac2e1a1888c862609d990488b365f4d99"><div class="ttname"><a href="gestion__tour_8c.html#ac2e1a1888c862609d990488b365f4d99">demander_orientation</a></div><div class="ttdeci">void demander_orientation(Piece *p, Joueur *j)</div><div class="ttdoc">Demande au joueur l&#39;orientation de la pièce qu&#39;il souhaite jouer. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:119</div></div>
+<div class="ttc" id="gestion__tour_8c_html_a07a516f9e79e060f91b4b81c0a08bbf8"><div class="ttname"><a href="gestion__tour_8c.html#a07a516f9e79e060f91b4b81c0a08bbf8">verification_couleur</a></div><div class="ttdeci">int verification_couleur(Couleur pl[20][20], int x, int y, Couleur col, Piece *p)</div><div class="ttdoc">Vérifie la position des pièces d&#39;une même couleur entre elles. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:184</div></div>
+<div class="ttc" id="structjoueur_html"><div class="ttname"><a href="structjoueur.html">joueur</a></div><div class="ttdoc">Structure d&#39;un Joueur. </div><div class="ttdef"><b>Definition:</b> joueur.h:22</div></div>
+<div class="ttc" id="gestion__tour_8c_html_a00358da662fcf8a76b416e5fcaa1f94f"><div class="ttname"><a href="gestion__tour_8c.html#a00358da662fcf8a76b416e5fcaa1f94f">poser_piece</a></div><div class="ttdeci">void poser_piece(Couleur pl[20][20], Piece *pi, Joueur *j, int x, int y)</div><div class="ttdoc">Pose une pièce. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:378</div></div>
+<div class="ttc" id="gestion__tour_8c_html_a5f42fad27ffc54c4c1aad172d2c148a2"><div class="ttname"><a href="gestion__tour_8c.html#a5f42fad27ffc54c4c1aad172d2c148a2">initialiser_matrice</a></div><div class="ttdeci">void initialiser_matrice(int matrice[5][5])</div><div class="ttdoc">Fonction d&#39;initialisation d&#39;une matrice. </div><div class="ttdef"><b>Definition:</b> gestion_tour.c:57</div></div>
+<div class="ttc" id="structcarre_html"><div class="ttname"><a href="structcarre.html">carre</a></div><div class="ttdoc">Structure d&#39;un Carre. </div><div class="ttdef"><b>Definition:</b> carre.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
@@ -119,7 +136,7 @@ $(document).ready(function(){initNavTree('gestion__tour_8h_source.html','');});
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><b>gestion_tour.h</b></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>

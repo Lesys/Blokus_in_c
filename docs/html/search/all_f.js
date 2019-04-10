@@ -7,5 +7,6 @@ var searchData=
   ['tapis_5fvert',['tapis_vert',['../structressources.html#ad54798e918f128d12d12dcbcf34382f8',1,'ressources']]],
   ['texture',['texture',['../structsprite.html#a121399c767b569f4bf0abcade2d2f264',1,'sprite']]],
   ['tour_5fsuivant',['tour_suivant',['../gestion__partie_8c.html#aba3a3c4d624f1da955013970bf973218',1,'gestion_partie.c']]],
-  ['type',['type',['../structbouton.html#a187733795c050c61be68bb5a9d4f2902',1,'bouton::type()'],['../structjoueur.html#ad6aaea00832ba637ac31b481dfbe0577',1,'joueur::type()']]]
+  ['type',['type',['../structbouton.html#a187733795c050c61be68bb5a9d4f2902',1,'bouton::type()'],['../structjoueur.html#ad6aaea00832ba637ac31b481dfbe0577',1,'joueur::type()']]],
+  ['type_5fpartie',['type_partie',['../gestion__partie__sdl_8c.html#ade61b24f48a789b8d5105898acf0fef3',1,'gestion_partie_sdl.c']]]
 ];

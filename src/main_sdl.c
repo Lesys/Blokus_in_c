@@ -4,7 +4,9 @@
 
 int main_sdl(int fullscreen){
 
-	sdl_init(fullscreen);
+	/* S'il y a eu un problème dans l'ouverture de la SDL */
+	if (!sdl_init(fullscreen))
+		return 1;
 
 	jouer_partie_sdl();
 

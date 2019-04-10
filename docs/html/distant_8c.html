@@ -3,27 +3,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.15"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="generator" content="Doxygen 1.8.8"/>
 <title>Blokus in C: Référence du fichier src/distant.c</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
   $(document).ready(initResizable);
-/* @license-end */</script>
+  $(window).load(resizeHeight);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(function() { init_search(); });
-/* @license-end */
+  $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +28,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectalign" style="padding-left: 0.5em;">
+  <td style="padding-left: 0.5em;">
    <div id="projectname">Blokus in C
    </div>
    <div id="projectbrief">Implémentation d&#39;un jeu de type blokus en C</div>
@@ -58,11 +53,9 @@
 </table>
 </div>
 <!-- end header part -->
-<!-- Généré par Doxygen 1.8.15 -->
+<!-- Généré par Doxygen 1.8.8 -->
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
-/* @license-end */
 </script>
 </div><!-- top -->
 <div id="side-nav" class="ui-resizable side-nav-resizable">
@@ -76,9 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
   </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
 $(document).ready(function(){initNavTree('distant_8c.html','');});
-/* @license-end */
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -86,7 +77,7 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>Tout</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Structures de données</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Fichiers</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Fonctions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Définitions de type</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -133,38 +124,38 @@ $(document).ready(function(){initNavTree('distant_8c.html','');});
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a26769957ec1a2beaf223f33b66ee64ab"><td class="memItemLeft" align="right" valign="top"><a id="a26769957ec1a2beaf223f33b66ee64ab"></a>
+<tr class="memitem:a26769957ec1a2beaf223f33b66ee64ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a26769957ec1a2beaf223f33b66ee64ab"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a26769957ec1a2beaf223f33b66ee64ab">INVALID_SOCKET</a>&#160;&#160;&#160;-1</td></tr>
 <tr class="memdesc:a26769957ec1a2beaf223f33b66ee64ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
 <tr class="separator:a26769957ec1a2beaf223f33b66ee64ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a633b0396ff93d336a088412a190a5072"><td class="memItemLeft" align="right" valign="top"><a id="a633b0396ff93d336a088412a190a5072"></a>
+<tr class="memitem:a633b0396ff93d336a088412a190a5072"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a633b0396ff93d336a088412a190a5072"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a633b0396ff93d336a088412a190a5072">SOCKET_ERROR</a>&#160;&#160;&#160;-1</td></tr>
 <tr class="memdesc:a633b0396ff93d336a088412a190a5072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
 <tr class="separator:a633b0396ff93d336a088412a190a5072"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a3eb971b466278ada4f7f87399a537c"><td class="memItemLeft" align="right" valign="top"><a id="a5a3eb971b466278ada4f7f87399a537c"></a>
+<tr class="memitem:a5a3eb971b466278ada4f7f87399a537c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5a3eb971b466278ada4f7f87399a537c"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a5a3eb971b466278ada4f7f87399a537c">closesocket</a>(s)&#160;&#160;&#160;close(s)</td></tr>
 <tr class="memdesc:a5a3eb971b466278ada4f7f87399a537c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
 <tr class="separator:a5a3eb971b466278ada4f7f87399a537c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d04a8261523c8f3473946257c12ce5b"><td class="memItemLeft" align="right" valign="top"><a id="a4d04a8261523c8f3473946257c12ce5b"></a>
+<tr class="memitem:a4d04a8261523c8f3473946257c12ce5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d04a8261523c8f3473946257c12ce5b"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a4d04a8261523c8f3473946257c12ce5b">h_addr</a>&#160;&#160;&#160;h_addr_list[0]</td></tr>
 <tr class="memdesc:a4d04a8261523c8f3473946257c12ce5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define pour compatibilité <br /></td></tr>
 <tr class="separator:a4d04a8261523c8f3473946257c12ce5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Définitions de type</h2></td></tr>
-<tr class="memitem:a8dc8083897335125630f1af5dafd5831"><td class="memItemLeft" align="right" valign="top"><a id="a8dc8083897335125630f1af5dafd5831"></a>
+<tr class="memitem:a8dc8083897335125630f1af5dafd5831"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8dc8083897335125630f1af5dafd5831"></a>
 typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a8dc8083897335125630f1af5dafd5831">SOCKET</a></td></tr>
 <tr class="memdesc:a8dc8083897335125630f1af5dafd5831"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
 <tr class="separator:a8dc8083897335125630f1af5dafd5831"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29046dc0232f0e5c70adbc25090d77b8"><td class="memItemLeft" align="right" valign="top"><a id="a29046dc0232f0e5c70adbc25090d77b8"></a>
+<tr class="memitem:a29046dc0232f0e5c70adbc25090d77b8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29046dc0232f0e5c70adbc25090d77b8"></a>
 typedef struct sockaddr_in&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a29046dc0232f0e5c70adbc25090d77b8">SOCKADDR_IN</a></td></tr>
 <tr class="memdesc:a29046dc0232f0e5c70adbc25090d77b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
 <tr class="separator:a29046dc0232f0e5c70adbc25090d77b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae334b73cedf7204187dce3f817576009"><td class="memItemLeft" align="right" valign="top"><a id="ae334b73cedf7204187dce3f817576009"></a>
+<tr class="memitem:ae334b73cedf7204187dce3f817576009"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae334b73cedf7204187dce3f817576009"></a>
 typedef struct sockaddr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#ae334b73cedf7204187dce3f817576009">SOCKADDR</a></td></tr>
 <tr class="memdesc:ae334b73cedf7204187dce3f817576009"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
 <tr class="separator:ae334b73cedf7204187dce3f817576009"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a328d951616d1a7f289fef8e6b23a926b"><td class="memItemLeft" align="right" valign="top"><a id="a328d951616d1a7f289fef8e6b23a926b"></a>
+<tr class="memitem:a328d951616d1a7f289fef8e6b23a926b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a328d951616d1a7f289fef8e6b23a926b"></a>
 typedef struct in_addr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="distant_8c.html#a328d951616d1a7f289fef8e6b23a926b">IN_ADDR</a></td></tr>
 <tr class="memdesc:a328d951616d1a7f289fef8e6b23a926b"><td class="mdescLeft">&#160;</td><td class="mdescRight">typedef pour compatibilité <br /></td></tr>
 <tr class="separator:a328d951616d1a7f289fef8e6b23a926b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,12 +230,10 @@ Variables</h2></td></tr>
 <tr class="separator:a966da7a60c4ea3ba301e26ccc5efe452"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p class="">Fonctions pour le jeu multijoueur. </p>
-<p class="">Fonction qui gèrent les connexions des joueurs distants ainsi que la logique du jeu pour ces joueurs </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre et BASTIDE Robin </dd></dl>
+<div class="textblock"><p>Fonctions pour le jeu multijoueur. </p>
+<p>Fonction qui gèrent les connexions des joueurs distants ainsi que la logique du jeu pour ces joueurs </p><dl class="section author"><dt>Auteur</dt><dd>JODEAU Alexandre et BASTIDE Robin </dd></dl>
 </div><h2 class="groupheader">Documentation des fonctions</h2>
-<a id="aacad3d467de6ab2f888fe71a65ecbfb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacad3d467de6ab2f888fe71a65ecbfb2">&#9670;&nbsp;</a></span>accepter_connexion()</h2>
-
+<a class="anchor" id="aacad3d467de6ab2f888fe71a65ecbfb2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -269,9 +258,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a3981cceed89f0e01920cdf9833d9e40f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3981cceed89f0e01920cdf9833d9e40f">&#9670;&nbsp;</a></span>attente_nouvelle_partie_distant()</h2>
-
+<a class="anchor" id="a3981cceed89f0e01920cdf9833d9e40f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -296,9 +283,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aa91adb8f875d01089b22cae039fd3010"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa91adb8f875d01089b22cae039fd3010">&#9670;&nbsp;</a></span>connexion()</h2>
-
+<a class="anchor" id="aa91adb8f875d01089b22cae039fd3010"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -334,9 +319,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a8d501b993ada0f376daa181f50510b7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d501b993ada0f376daa181f50510b7b">&#9670;&nbsp;</a></span>creer_socket_connexion()</h2>
-
+<a class="anchor" id="a8d501b993ada0f376daa181f50510b7b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -361,9 +344,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a00fc4ce5d2292a268fd2b7349b36f65a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00fc4ce5d2292a268fd2b7349b36f65a">&#9670;&nbsp;</a></span>envoyer_abandon_joueur()</h2>
-
+<a class="anchor" id="a00fc4ce5d2292a268fd2b7349b36f65a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -399,9 +380,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5fce99356545b2405276662be6f43397"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fce99356545b2405276662be6f43397">&#9670;&nbsp;</a></span>envoyer_liste_joueurs()</h2>
-
+<a class="anchor" id="a5fce99356545b2405276662be6f43397"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -437,9 +416,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a45df57ef4495c2623cedd951dd0c1ff0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45df57ef4495c2623cedd951dd0c1ff0">&#9670;&nbsp;</a></span>envoyer_plateau()</h2>
-
+<a class="anchor" id="a45df57ef4495c2623cedd951dd0c1ff0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -482,9 +459,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a41133fce963a33b1723288a9282dc138"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41133fce963a33b1723288a9282dc138">&#9670;&nbsp;</a></span>envoyer_pret()</h2>
-
+<a class="anchor" id="a41133fce963a33b1723288a9282dc138"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -509,9 +484,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a249f969c32892a22364787d85f4e39aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a249f969c32892a22364787d85f4e39aa">&#9670;&nbsp;</a></span>envoyer_pseudo()</h2>
-
+<a class="anchor" id="a249f969c32892a22364787d85f4e39aa"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -547,9 +520,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a3ee1a26b79d843436a20afedb5e74ade"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ee1a26b79d843436a20afedb5e74ade">&#9670;&nbsp;</a></span>erreur_reseau()</h2>
-
+<a class="anchor" id="a3ee1a26b79d843436a20afedb5e74ade"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -567,9 +538,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ab0f679f703c33d5f2666b7ff97b5a11c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0f679f703c33d5f2666b7ff97b5a11c">&#9670;&nbsp;</a></span>fermer_connexion()</h2>
-
+<a class="anchor" id="ab0f679f703c33d5f2666b7ff97b5a11c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -593,9 +562,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a856c2277fa7628ef75bc1e5861c5fd26"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a856c2277fa7628ef75bc1e5861c5fd26">&#9670;&nbsp;</a></span>fermer_connexions_distantes()</h2>
-
+<a class="anchor" id="a856c2277fa7628ef75bc1e5861c5fd26"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -619,9 +586,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a1a66821bb11425511c990520e3499cef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a66821bb11425511c990520e3499cef">&#9670;&nbsp;</a></span>initialisation_partie_distant_sdl()</h2>
-
+<a class="anchor" id="a1a66821bb11425511c990520e3499cef"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -646,9 +611,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a685700946da3b1f5cb06c1d78c11abe0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a685700946da3b1f5cb06c1d78c11abe0">&#9670;&nbsp;</a></span>jouer_manche_distant_sdl()</h2>
-
+<a class="anchor" id="a685700946da3b1f5cb06c1d78c11abe0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -691,9 +654,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a5055c3172eee5061edc819523609ec39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5055c3172eee5061edc819523609ec39">&#9670;&nbsp;</a></span>recevoir_abandon_joueur()</h2>
-
+<a class="anchor" id="a5055c3172eee5061edc819523609ec39"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -728,9 +689,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ab74c4e6a9a792cfa17d4de3bb94b624d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab74c4e6a9a792cfa17d4de3bb94b624d">&#9670;&nbsp;</a></span>recevoir_buffer()</h2>
-
+<a class="anchor" id="ab74c4e6a9a792cfa17d4de3bb94b624d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -766,9 +725,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a964acd81714270828b5daea75aab73f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a964acd81714270828b5daea75aab73f0">&#9670;&nbsp;</a></span>recevoir_liste_joueurs()</h2>
-
+<a class="anchor" id="a964acd81714270828b5daea75aab73f0"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -793,9 +750,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a445fa473811425d3a67425628b0f23a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a445fa473811425d3a67425628b0f23a9">&#9670;&nbsp;</a></span>recevoir_plateau()</h2>
-
+<a class="anchor" id="a445fa473811425d3a67425628b0f23a9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -830,9 +785,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a08b5a0b1c3b8be6e92235455605dd001"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08b5a0b1c3b8be6e92235455605dd001">&#9670;&nbsp;</a></span>recevoir_pseudo()</h2>
-
+<a class="anchor" id="a08b5a0b1c3b8be6e92235455605dd001"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -867,9 +820,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac8981669edeedb5e7afa24381fa72c29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8981669edeedb5e7afa24381fa72c29">&#9670;&nbsp;</a></span>recup_type()</h2>
-
+<a class="anchor" id="ac8981669edeedb5e7afa24381fa72c29"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -895,9 +846,7 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Documentation des variables</h2>
-<a id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a966da7a60c4ea3ba301e26ccc5efe452">&#9670;&nbsp;</a></span>renderer</h2>
-
+<a class="anchor" id="a966da7a60c4ea3ba301e26ccc5efe452"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -908,7 +857,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>typedef pour compatibilité </p>
-<p class="">typedef pour compatibilité </p>
+<p>typedef pour compatibilité </p>
 
 </div>
 </div>
@@ -920,7 +869,7 @@ Variables</h2></td></tr>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="distant_8c.html">distant.c</a></li>
     <li class="footer">Généré par
     <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.15 </li>
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.8 </li>
   </ul>
 </div>
 </body>
