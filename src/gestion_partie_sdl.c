@@ -18,6 +18,7 @@
 #include "../include/gestion_bot.h"
 #include "../include/affichage_sdl.h"
 #include "../include/son.h"
+//#include "../include/sauvegarde.h"
 
 extern SDL_Renderer* renderer;
 int son;
@@ -408,21 +409,6 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	} while(*j != j_pivot);
 	return 0;
 }
-/*
-int initialisation_partie_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur ** j){
-	charger_plateau(pl);
-	charger_liste_joueur(*j);
-	Joueur* pivot = *j;
-	do{
-		if((*j)->type == DISTANT){
-
-		}
-
-
-	} while(pivot != *j);
-
-}
-*/
 
 static
 int attente_fin_de_partie() {
@@ -1003,7 +989,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				/* Recharge une partie */
 
 				//else if(val_partie == 5)
-				//	retour = initialisation_partie_charger_partie(pl,&j);
+				//	retour = charger_partie(pl,&j);
 
 				/*Retour au menu*/
 
