@@ -408,9 +408,20 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 	} while(*j != j_pivot);
 	return 0;
 }
+/*
+int initialisation_partie_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur ** j){
+	charger_plateau(pl);
+	charger_liste_joueur(*j);
+	Joueur* pivot = *j;
+	do{
+		if((*j)->type == DISTANT){
+			
+		}
 
-
-
+	} while(pivot != *j);
+	
+}
+*/
 
 /**
 	*\fn int fin_de_partie_sdl(Joueur** j)
@@ -806,8 +817,9 @@ int type_partie(){
 	int val_retour=-1;
 	SDL_Event event;
 	Bouton* b_creer = init_bouton_sdl(CREER_PARTIE);
-    Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
-  	Bouton* b_retour = init_bouton_sdl(RETOUR);
+	Bouton* b_rejoindre = init_bouton_sdl(REJOINDRE_PARTIE);
+	//Bouton* b_recharger = init_bouton_sdl();
+	Bouton* b_retour = init_bouton_sdl(RETOUR);
 	while(val_retour < 0){
 		/* Ecouter les EVENT */
                 SDL_RenderClear(renderer);
@@ -823,22 +835,28 @@ int type_partie(){
 					jouer_son(BOUTON);
 					val_retour= 2;
 				}
-
-				else if(curs_hover_bouton(b_retour)) {
-					jouer_son(BOUTON_RETOUR);
-					val_retour= 4;
+				else if(curs_hover_bouton(b_recharger)){
+					joueur_son(bouton);
+					val_retour= 5;
 				}
+
+				//else if(curs_hover_bouton(b_retour)) {
+				//	jouer_son(BOUTON_RETOUR);
+				//	val_retour= 4;
+				//}
 			}
 		}
 	/* Affiche le menu type partie */
 		afficher_titres_sdl();
 	 	afficher_bouton_sdl(b_creer);
 		afficher_bouton_sdl(b_rejoindre);
+		//afficher_bouton_sdl(b_recharger);
 		afficher_bouton_sdl(b_retour);
 		SDL_RenderPresent(renderer);
 	}
  	free_bouton_sdl(&b_creer);
 	free_bouton_sdl(&b_rejoindre);
+	//free_bouton_sdl(&b_recharger);
 	free_bouton_sdl(&b_retour);
 
 	return val_retour;
@@ -910,6 +928,10 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				/*Partie rejoindre */
 				else if(val_partie == 2)
 					retour = initialisation_partie_distant_sdl(&j);
+				/* Recharge une partie */
+
+				//else if(val_partie == 5)
+				//	retour = initialisation_partie_charger_partie(pl,&j);
 
 				/*Retour au menu*/
 
@@ -924,7 +946,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				retour =2;
 
 			else if (retour != 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
-				if(val_partie == 1)
+				if(val_partie == 1 || val_partie == 5)
 					retour = jouer_manche_sdl(pl,j);
 				else if(val_partie == 2)
 					retour = jouer_manche_distant_sdl(pl, j, retour);
