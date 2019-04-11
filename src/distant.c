@@ -21,6 +21,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <ifaddrs.h>
 /** \brief Define pour compatibilité */
 #define INVALID_SOCKET -1
 /** \brief Define pour compatibilité */
@@ -163,7 +164,7 @@ int creer_socket_connexion(int port, char * adresse) {
         tmp = tmp->ifa_next;
     }
 
-    freeifaddrs(addrs);
+    freeifaddrs(tmp);
 #endif
 #ifdef WINDOWS
     unsigned long mode = 1;
