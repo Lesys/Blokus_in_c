@@ -775,7 +775,7 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 }
 
 int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
-	char* nom_fichier;
+	char* nom_fichier= malloc(sizeof(TAILLE_NOM_FICHIER));
 	int continuer;
 	Joueur* pivot =*j;
 	continuer= saisir_nom_fichier(nom_fichier);
@@ -1044,7 +1044,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
 	int retour = 2;
 	int val_partie=1;
-	char* nom_fichier;
+
 	SDL_Event event;
 	Bouton* b_jouer = init_bouton_sdl(JOUER);
 	Bouton* b_quitter_jeu = init_bouton_sdl(QUITTER_JEU);
