@@ -109,9 +109,10 @@ int connexion(char * adresse, int port) {
  * \fn int creer_socket_connexion(int port)
  * \brief Créé un socket le met sur écoute
  * \param port Port sur lequel créer le socket
+ * \param adresse Paramètre formel pour récupérer l'adresse sur laquelle se connecter
  * \return Numéro du socket si réussi, 0 sinon
  */
-int creer_socket_connexion(int port) {
+int creer_socket_connexion(int port, char * adresse) {
 
     SOCKET sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if(sockfd == INVALID_SOCKET)
@@ -148,6 +149,21 @@ int creer_socket_connexion(int port) {
 #ifndef WINDOWS
     int flags = fcntl(sockfd, F_GETFL);
     fcntl(sockfd, F_SETFL, flags | O_NONBLOCK);
+    struct ifaddrs *tmp = NULL;
+    getifaddrs(&tmp);
+
+    while (tmp) 
+    {
+        if (tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_INET)
+        {
+            struct sockaddr_in *pAddr = (struct sockaddr_in *)tmp->ifa_addr;
+            printf("%s: %s\n", tmp->ifa_name, inet_ntoa(pAddr->sin_addr));
+        }
+
+        tmp = tmp->ifa_next;
+    }
+
+    freeifaddrs(addrs);
 #endif
 #ifdef WINDOWS
     unsigned long mode = 1;

@@ -264,7 +264,8 @@ int initialiser_joueur_distant(Joueur **j){
 
 	SDL_Event event;
 	int sockfd = -1;
-	int sockfd_connexion = creer_socket_connexion(PORT_DEFAUT);
+	char adresse[255];
+	int sockfd_connexion = creer_socket_connexion(PORT_DEFAUT, adresse);
 	int continuer = 0;
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
 
@@ -289,7 +290,7 @@ int initialiser_joueur_distant(Joueur **j){
 			}
 		}
 
-		afficher_attente_connexion_sdl();
+		afficher_attente_connexion_sdl(adresse);
 		afficher_bouton_sdl(b_retour);
 		SDL_RenderPresent(renderer);
 

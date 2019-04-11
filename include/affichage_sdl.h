@@ -182,7 +182,7 @@ void afficher_saisie_pseudo_sdl(Joueur * j);
 
 void afficher_choix_type_partie_sdl();
 
-void afficher_attente_connexion_sdl();
+void afficher_attente_connexion_sdl(char * adresse);
 
 void afficher_attente_pseudo_sdl();
 
