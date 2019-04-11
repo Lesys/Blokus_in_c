@@ -753,7 +753,7 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 			else if(valeur_r ==  3){
 				valeur_r= saisir_nom_fichier(nom_fichier);
 				if(!valeur_r){
-					sauvegarder(pl,*j,nom_fichier);
+					sauvegarder_partie(pl,*j,nom_fichier);
 					valeur_r= 3;
 				}
 			}
