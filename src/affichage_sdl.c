@@ -1318,10 +1318,12 @@ void afficher_choix_type_partie_sdl() {
  * \fn void afficher_attente_connexion_sdl()
  * \brief Affiche un message d'attente de connexion
  */
-void afficher_attente_connexion_sdl() {
+void afficher_attente_connexion_sdl(char * adresse) {
 
+    char msg[500];
+    sprintf(msg, "En attente de la connexion d'un joueur distant sur %s ...", adresse);
     afficher_fond_config();
-    afficher_texte("En attente de la connexion d'un joueur distant ...", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+    afficher_texte(msg, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
 }
 
 /**
