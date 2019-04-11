@@ -598,6 +598,7 @@ void liste_piece_detruire(Piece** p) {
 	\brief Renvoie le nombre de Carre d'une Piece
 
 	\param p L'adresse de la Piece* pour laquelle on veut connaître le nombre de Carre
+	\return Le nombre de Carre de la Piece*
 */
 int piece_nb_carre(Piece* p) {
 	/* Si la Piece est NULL */
@@ -616,4 +617,44 @@ int piece_nb_carre(Piece* p) {
 		} while (init != c);
 
 	return nb;
+}
+
+
+/* Permet de savoir si "id" est dans "tab" */
+static int trouver_int(int* tab, int nb_tab, int id) {
+	int i;
+
+	/* Parcours du tableau */
+	for (i = 0; i < nb_tab; i++)
+		/* Si on trouve l'ID dans le tableau */
+		if (tab[i] == id)
+			return 1;
+
+	/* L'ID n'a pas été trouvé dans le tableau */
+	return 0;
+}
+
+/**
+	\fn void liste_piece_charger(int* tab, Piece* p);
+	\brief Permet de supprimer les Pieces qui ne sont pas dans "tab"
+
+	\param tab Les ID des Piece à conserver
+	\param nb_tab Le nombre d'ID de Piece dans le tableau
+	\param p L'adresse de la Piece* pour laquelle on veut connaître le nombre de Carre
+*/
+void liste_piece_charger(int* tab, int nb_tab, Piece* p) {
+	Piece* init = p;
+
+	/* Si la liste est bien non NULL */
+	if (!piece_hors_liste(p)) {
+		/* Tant qu'on n'a pas parcouru toute la liste */
+		do {
+			/* Si on ne trouve pas l'ID de la Piece dans le tableau à conserver */
+			if (!trouver_int(tab, nb_tab, piece_id(p)))
+				/* Suppression de la Piece actuelle et passe à la Piece suivante */
+				liste_piece_suppr_elem(&p);
+			else
+				p = piece_suivant(p);
+		} while (p != init);
+	}
 }
