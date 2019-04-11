@@ -1,5 +1,5 @@
 #include "../include/sdl.h"
 
 int main() {
-	sdl_init();
+//	sdl_init();
 }

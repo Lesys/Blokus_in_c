@@ -410,11 +410,19 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 }
 
 static
-int attente_fin_de_partie() {
+int attente_fin_de_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j){
+
+	Reserves* r = init_afficher_pieces_dispo_sdl(j);
 
 	Bouton* b_fin = init_bouton_sdl(FIN);
 	int retour = 1;
 	SDL_Event event;
+	SDL_RenderClear(renderer);
+
+	afficher_plateau_sdl(pl);
+	afficher_pieces_dispo_sdl(r, j, NULL);
+	afficher_scores_sdl(j);
+	afficher_tour_sdl(j);
 
 	afficher_bouton_sdl(b_fin);
 	SDL_RenderPresent(renderer);
@@ -457,7 +465,7 @@ int attente_fin_de_partie() {
 
 /* Affiche les résultats,mets à jour le score ,propose les options de fin de partie et renvoie le résultat correspondant */
 
-int fin_de_partie_sdl(Joueur** j){
+int fin_de_partie_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	/*Si le joueur n'a plus de piece dans sa liste, fait abandonner le joueur automatiquement*/
 	if(joueur_liste_piece(*j) == NULL)
 		joueur_abandonne(*j);
@@ -467,7 +475,7 @@ int fin_de_partie_sdl(Joueur** j){
 		return 0;
 
 	/* Sinon attente */
-	int choix = attente_fin_de_partie();
+	int choix = attente_fin_de_partie(pl,*j);
 	if (choix == 3)
 		return choix;
 
@@ -658,25 +666,91 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 	Renvoie l'id de la Piece
 */
 
+static
+int saisir_nom_fichier(char * nom_fichier){
+/********PARTIE SAISI NOM DU FICHIER*********/
+        SDL_Event event_saisie;
+        int continuer=1;
+	SDL_StartTextInput();
+        Bouton* b_retour = init_bouton_sdl(RETOUR);
+        /*Boucle d'évenement*/
+        while(continuer == 1){
+
+                SDL_RenderClear(renderer);
+                /*Attend l'appuis d'une touche*/
+                while(SDL_PollEvent(&event_saisie)){
+                        /*Si c'est la croix, on arrete*/
+                        if(event_saisie.type == SDL_QUIT)
+                                continuer= 2;
+                        /*Si c'est la touche entrée, on passe au joueur suivant*/
+                        else if(strlen(nom_fichier) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) ) {
+                                jouer_son(BOUTON);
+                                continuer = 0;
+                        }
+                        /*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
+                        else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
+                                if (strlen(nom_fichier) > 0)
+                                        nom_fichier[strlen(nom_fichier) - 1] = '\0';
+                        }
+                        /*Si c'est une touche du clavier, on l'entre dans le pseudo*/
+                        else if(event_saisie.type == SDL_TEXTINPUT && strlen(nom_fichier) < TAILLE_NOM_FICHIER) {
+                                strcat(nom_fichier, event_saisie.text.text);
+                        }
+                        else if(event_saisie.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour)) {
+                                jouer_son(BOUTON_RETOUR);
+                                continuer= 3;
+                        }
+
+                }
+                afficher_bouton_sdl(b_retour);
+                afficher_saisie_nom_fichier_sdl(nom_fichier);
+                SDL_RenderPresent(renderer);
+                }
+        SDL_StopTextInput();
+	if(!continuer){
+                /* Si le pseudo n'est pas trop grand */
+                if (strlen(nom_fichier) < TAILLE_NOM_FICHIER) {
+                        /* Réalloue la bonne taille pour le pseudo */
+                        nom_fichier = realloc(nom_fichier, sizeof(char) * (strlen(nom_fichier) + 1));
+                        nom_fichier[strlen(nom_fichier)]='\0';
+                }
+                else /* S'il est trop grand: troncature */
+                        nom_fichier[TAILLE_NOM_FICHIER]='\0';
+        }
+        free_bouton_sdl(&b_retour);
+
+        return continuer;
+
+}
+
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int valeur_r = 4;
-
+	char * nom_fichier;
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
 		*j=joueur_suivant(*j);
 
 	}
 	else{
-		valeur_r=gestion_tour_sdl(pl,*j);
+		do{
+			if(valeur_r != 2)
+				valeur_r = gestion_tour_sdl(pl,*j);
 
-		if(valeur_r == 1){//Le joueur a abandonné
-//			printf("Vous avez abandonné\n");
-			joueur_abandonne(*j);
-		}
-		else if(valeur_r == 2){
-			return 3;//Quitte le jeu
-		}
+			if(valeur_r == 1){//Le joueur a abandonné
+//				printf("Vous avez abandonné\n");
+				joueur_abandonne(*j);
+			}
+			else if(valeur_r == 2){
+				return 3;//Quitte le jeu
+			}
+
+			else if(valeur_r ==  3){
+				saisir_nom_fichier(nom_fichier);
+				printf("AFFICHAGE NOM_FICHIER %s\n",nom_fichier);
+			//	sauvegarder(pl,*j,
+			}
+		} while (valeur_r == 3);
 		*j=joueur_suivant(*j);
 
 	}
@@ -802,7 +876,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
                     j = joueur_suivant(j);
 			}
 
-			choix=fin_de_partie_sdl(&j);
+			choix=fin_de_partie_sdl(pl,&j);
 			//Si le joueur veut continuer, alors on regarde si tous les joueurs veulent continuez de jouer
 			if (choix == 1) {
 			       choix = attente_nouvelle_partie(j);

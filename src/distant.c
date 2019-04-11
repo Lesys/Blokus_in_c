@@ -820,7 +820,7 @@ int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur 
                 return choix;
             }
 
-            choix=fin_de_partie_sdl(&j);
+            choix=fin_de_partie_sdl(pl,&j);
 
             if (choix == 1) {
                 choix = attente_nouvelle_partie_distant(hote);

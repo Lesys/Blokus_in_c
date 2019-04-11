@@ -13,7 +13,7 @@ int main()
 
     Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
 
-    sdl_init();
+    sdl_init(0);
 
     gestion_tour_sdl(pl, j);
 

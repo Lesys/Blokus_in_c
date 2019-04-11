@@ -242,6 +242,10 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
         {
             changer_orientation(*p);
         }
+	//else if(event.type == SDL_MOUSEBUTOONDOWN){
+	//if(curs_hover_bouton(b_sauvegarder))	
+	//	etat = 3;
+	//}
     }
 
     return etat;

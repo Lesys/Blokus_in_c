@@ -13,7 +13,7 @@
 extern SDL_Renderer * renderer;
 
 int main(int arc, char * argv[]) {
-    Joueur * lj = joueur_liste_creation(4);
+/*    Joueur * lj = joueur_liste_creation(4);
 
 	if (!sdl_init()) {
 		printf("Pas d'accord\n");
@@ -109,4 +109,5 @@ int main(int arc, char * argv[]) {
 
 	// fin sdl
 	sdl_close();
+*/
 }

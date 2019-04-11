@@ -18,7 +18,7 @@ int initialiser_joueur_distant(Joueur** j);/*initialise un joueur distant*/
 
 int initialisation_partie_sdl(Joueur** j); /*Initialisation de la partie, appel des fonctions pour crée les joueurs, le plateau*/
 
-int fin_de_partie_sdl(Joueur** j); /* Affiche les résultats, propose les options de fin de partie et renvoie le résultat correspondant */
+int fin_de_partie_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j); /* Affiche les résultats, propose les options de fin de partie et renvoie le résultat correspondant */
 
 int jouer_tour_bot_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j);
 

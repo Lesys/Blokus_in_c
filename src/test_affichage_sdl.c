@@ -12,7 +12,7 @@ SDL_Window * window;
 SDL_Renderer * renderer;
 
 int main(int arc, char * argv[]) {
-    Joueur * lj = joueur_liste_creation(4);
+/*    Joueur * lj = joueur_liste_creation(4);
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
     window = SDL_CreateWindow("test_affichage_sdl", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, L_FENETRE, H_FENETRE, SDL_WINDOW_SHOWN);
@@ -45,7 +45,7 @@ int main(int arc, char * argv[]) {
     SDL_SetRenderDrawColor(renderer, 240, 240, 240, 255);
 
     SDL_RenderClear(renderer);
-
+*/
     /*afficher_plateau_sdl(plateau);
       afficher_pieces_dispo_sdl(r, lj, NULL);
       afficher_scores_sdl(lj);
@@ -62,12 +62,12 @@ int main(int arc, char * argv[]) {
        afficher_bouton_sdl(b_quitter_jeu);
        */
 
-
+/*
     afficher_nb_joueurs_sdl();
     afficher_bouton_sdl(b_nb_joueurs_2);
     afficher_bouton_sdl(b_nb_joueurs_3);
     afficher_bouton_sdl(b_nb_joueurs_4);
-
+*/
     /*
        afficher_type_joueur_sdl();
        afficher_bouton_sdl(b_type_joueur_local);
@@ -76,7 +76,7 @@ int main(int arc, char * argv[]) {
        */
 
     //afficher_saisie_pseudo_sdl("Pseudotaillemax");
-
+/*
     SDL_RenderPresent(renderer);
 
     sleep(10);
@@ -100,4 +100,5 @@ int main(int arc, char * argv[]) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+*/
 }
