@@ -14,7 +14,7 @@
 	\fn int sauvegarder_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur, char* filename);
 	\brief Sauvegarde la partie dans un fichier f
 
-	\param pl Le plateau de la parite à sauvegarder
+	\param pl Le plateau de la partie à sauvegarder
 	\param joueur la liste des joueurs avec en premier, le joueur devant jouer au moment de la sauvegarde
     \param filename nom du fichier dans lequel sera sauvegardée la partie
 	\return code d'erreur : 0 si le fichier a été ouvert, 1 si le fichier n'a pas pu être ouvert
@@ -23,8 +23,8 @@ int sauvegarder_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueu
 {
     struct stat st = {0};
 
-    if (stat("./save", &st) == -1)
-        mkdir("./save", 0700);
+    if (stat(DOSSIER_SAVE_FICHIER, &st) == -1)
+        mkdir(DOSSIER_SAVE_FICHIER, 0700);
     FILE* f;
 
     /* Création de la chaine de caractère dossier/fichier.extension */
@@ -75,19 +75,28 @@ int sauvegarder_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueu
 
         } while((joueur = joueur_suivant(joueur)) != joueur2);
 
+        fclose(f);
     }
     else
     {
         return 1;
     }
 
-    fclose(f);
-
     return 0;
 }
 
-int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur, char* filename)
+/**
+	\fn int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur, char* filename)
+	\brief Charge la partie depuis un fichier f
+
+	\param pl Le plateau de la partie à sauvegarder
+	\param joueur la liste des joueurs avec en premier, le joueur devant jouer au moment de la sauvegarde
+    \param filename nom du fichier de sauvegarde depuis lequel charger la partie
+	\return code d'erreur : 0 si le fichier a été ouvert, 1 si le fichier n'a pas pu être ouvert
+*/
+int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** p_joueur, char* filename)
 {
+    fprintf(stderr, "début charger\n");
     /* Création de la chaine de caractère dossier/fichier.extension */
     char nom_fichier[TAILLE_NOM_FICHIER + 4];
     strcpy(nom_fichier, strcat(filename, EXTENSION_SAVE_FICHIER));
@@ -99,10 +108,13 @@ int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur, c
 
     FILE* f;
 
-    f = fopen(strcat(DOSSIER_SAVE_FICHIER, strcat(filename, EXTENSION_SAVE_FICHIER)), "r");
+        fprintf(stderr, "début file\n");
+    f = fopen(nom_dossier, "r");
 
+        fprintf(stderr, "après file\n");
     if(f)
     {
+        fprintf(stderr, "dans f\n");
         int i, j;
 
         /* Chargement du plateau depuis le fichier f */
@@ -112,52 +124,73 @@ int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueur, c
                 fscanf(f, "%d", &(pl[i][j]));
         }
 
-        Joueur* joueur2 = NULL;
+        //Joueur* joueur2 = joueur;
         Couleur c;
-        char nom [TAILLE_PSEUDO];
+        char* nom = malloc(sizeof(TAILLE_PSEUDO + 1));
         int type, abandon, score, sockfd, id;
         int tab[NB_PIECES];
         int cpt;
+        Joueur* joueur2 = NULL;
 
+            fprintf(stderr, "chargement joueurs\n");
         /* Chargement des joueurs et de leurs pièces depuis le fichier f */
-        while(fscanf(f, "%d %s %d %d %d %d ", &c, nom, &type, &abandon, &score, &sockfd))
+        while(fscanf(f, "%d %s %d %d %d %d ", &c, nom, &type, &abandon, &score, &sockfd) != EOF)
         {
             cpt = 0;
 
             /* Si ce n'est pas le premier joueur */
-            if(joueur2 != NULL)
-                joueur2 = joueur2->suiv;
+            if(*p_joueur == NULL) {
+                *p_joueur = malloc(sizeof(**p_joueur));
+                joueur2 = *p_joueur;
+                joueur2->prec = joueur2;
+                joueur2->suiv = joueur2;
+            }
+            else {
+                joueur2->suiv = malloc(sizeof(Joueur));
+                joueur2->suiv->prec = joueur2;
+                joueur2 = joueur_suivant(joueur2);
+            }
 
-            joueur2 = malloc(sizeof(Joueur));
 
-            /* Chargement des informations des joueurs */
-            joueur2->couleur = c;
+            /* Chargement de
+            joueur2 = malloc(sizeof(Joueur));s informations des joueurs */
+            joueur2->couleur = (Couleur)c;
             joueur2->pseudo = nom;
-            joueur2->type = type;
+                            fprintf(stderr, "type joueur: %d\n", type);
+            joueur2->type = (Type_Joueur)type;
             joueur2->abandon = abandon;
             joueur2->score = score;
             joueur2->sockfd = sockfd;
 
             joueur2->liste_piece = piece_liste_creation();
 
+                fprintf(stderr, "chargement pièces\n");
             /* Récupère les id des pièces restantes pour le joueur sauvegardées dans le fichier f */
-            while (fscanf(f, "%d", id) && id != 0)
+            while (fscanf(f, "%d", &id) && id != 0) {
+                            fprintf(stderr, "pièce %d: %d\n", cpt, id);
                 tab[cpt++] = id;
+            }
 
+                    fprintf(stderr, "après pièces\n");
             liste_piece_charger(tab, cpt, joueur2->liste_piece);
+                                fprintf(stderr, "après charger piece\n");
 
-            joueur2->suiv = NULL;
+            //joueur2->suiv = NULL;
+            nom = malloc(sizeof(TAILLE_PSEUDO + 1));
         }
 
+        free(nom);
+                            fprintf(stderr, "fin while\n");
         /* Permet de terminer la boucle en faisant pointer le joueur suivant du dernier joueur sur le premier */
-        joueur2->suiv = joueur;
+        joueur2->suiv = *p_joueur;
+                                    fprintf(stderr, "avant fclose\n");
+        fclose(f);
+                                    fprintf(stderr, "après fclose\n");
     }
     else
     {
         return 1;
     }
-
-    fclose(f);
 
     return 0;
 }

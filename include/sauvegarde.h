@@ -10,6 +10,6 @@
 
 int sauvegarder_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*, char*);
 
-int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur*, char*);
+int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur**, char*);
 
 #endif

@@ -776,24 +776,26 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 
 int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	char* nom_fichier= malloc(sizeof(TAILLE_NOM_FICHIER));
+	*nom_fichier='\0';
 	int continuer;
 	Joueur* pivot =*j;
 	continuer= saisir_nom_fichier(nom_fichier);
 	if(!continuer){
-		continuer = charger_partie(pl,*j,nom_fichier);
+		continuer = charger_partie(pl,j,nom_fichier);
+		pivot = *j;
 		if(continuer){
 			continuer=2;
 		}
 		else{
 			do{
-				if((*j)->type == DISTANT) {
+				if(joueur_type_joueur(*j) == DISTANT) {
 					(*j)->type = BOT;
 				//	(*j)->sockfd=creer_connexion();
 				}
 				*j=joueur_suivant(*j);
 			} while( *j != pivot);
 		}
-	continuer= 1;
+		continuer= 0;
 	}
 	else{
 		return 2;

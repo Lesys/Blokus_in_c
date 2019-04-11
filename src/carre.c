@@ -653,8 +653,10 @@ void liste_piece_charger(int* tab, int nb_tab, Piece* p) {
 			if (!trouver_int(tab, nb_tab, piece_id(p)))
 				/* Suppression de la Piece actuelle et passe à la Piece suivante */
 				liste_piece_suppr_elem(&p);
-			else
+			else {
+				fprintf(stderr, "Piece %d trouvée\n", piece_id(p));
 				p = piece_suivant(p);
+			}
 		} while (p != init);
 	}
 }
