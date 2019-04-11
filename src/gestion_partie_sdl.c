@@ -668,7 +668,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 */
 
 static
-int saisir_nom_fichier(char * nom_fichier){
+int saisir_nom_fichier(char* nom_fichier){
 /********PARTIE SAISI NOM DU FICHIER*********/
         SDL_Event event_saisie;
         int continuer=1;
@@ -681,8 +681,10 @@ int saisir_nom_fichier(char * nom_fichier){
                 /*Attend l'appuis d'une touche*/
                 while(SDL_PollEvent(&event_saisie)){
                         /*Si c'est la croix, on arrete*/
-                        if(event_saisie.type == SDL_QUIT)
+                        if(event_saisie.type == SDL_QUIT){
+				nom_fichier[0]='\0';
                                 continuer= 2;
+			}
                         /*Si c'est la touche entrée, on passe au joueur suivant*/
                         else if(strlen(nom_fichier) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) ) {
                                 jouer_son(BOUTON);
@@ -699,6 +701,7 @@ int saisir_nom_fichier(char * nom_fichier){
                         }
                         else if(event_saisie.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour)) {
                                 jouer_son(BOUTON_RETOUR);
+				nom_fichier[0]='\0';
                                 continuer= 3;
                         }
 
@@ -727,7 +730,8 @@ int saisir_nom_fichier(char * nom_fichier){
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int valeur_r = 4;
-	char * nom_fichier;
+	char* nom_fichier= malloc(sizeof(TAILLE_NOM_FICHIER));
+	*nom_fichier='\0';
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
 		*j=joueur_suivant(*j);
@@ -747,9 +751,10 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 			}
 
 			else if(valeur_r ==  3){
-				saisir_nom_fichier(nom_fichier);
-				printf("AFFICHAGE NOM_FICHIER %s\n",nom_fichier);
-			//	sauvegarder(pl,*j,
+				valeur_r= saisir_nom_fichier(nom_fichier);
+				if(!valeur_r)
+					sauvegarder(pl,*j,nom_fichier);
+
 			}
 		} while (valeur_r == 3);
 		*j=joueur_suivant(*j);

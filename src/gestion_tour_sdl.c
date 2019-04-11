@@ -193,7 +193,7 @@ void poser_piece_sdl(Couleur pl[20][20], Piece* pi, Joueur* j, int x, int y)
     }
 }
 
-int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reserves* r, Piece** p, Bouton* b)
+int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reserves* r, Piece** p, Bouton* b_abandonner, Bouton* b_sauvegarder)
 {
     int etat = 0;
 
@@ -208,11 +208,14 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
         else if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
             *p = curs_hover_piece(r, joueur_couleur(j));
-            if(curs_hover_bouton(b))
+            if(curs_hover_bouton(b_abandonner))
             {
                 etat = 1;
             }
-
+		else if( curs_hover_bouton(b_sauvegarder)){
+			etat = 3;
+			printf("J'APPUIS SUR LE BOUTON ET JE RENVOIE 3");
+		}
 
         }
         else if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT && *p)
@@ -242,10 +245,6 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
         {
             changer_orientation(*p);
         }
-	//else if(event.type == SDL_MOUSEBUTOONDOWN){
-	//if(curs_hover_bouton(b_sauvegarder))	
-	//	etat = 3;
-	//}
     }
 
     return etat;
@@ -295,7 +294,7 @@ int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
     {
         SDL_RenderClear(renderer);
 
-        etat = selection_piece(pl, j, r, &p, b_abandonner);
+        etat = selection_piece(pl, j, r, &p, b_abandonner, b_sauvegarder);
 
         int x, y;
 
