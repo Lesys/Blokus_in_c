@@ -1,3 +1,4 @@
+
 /**
 	*\file gestion_partie_sdl.c
 	*\brief Regroupent toutes les fonctions gestion_partie_sdl.c
@@ -301,10 +302,11 @@ int creer_connexion(){
 int initialiser_joueur_distant(Joueur **j){
 
 	SDL_Event event;
-	//La OK
+	int continuer;
 	unsigned char buffer[TAILLE_BUFF];
 	int sockfd;
 	int r = 0;
+	Bouton* b_retour = init_bouton_sdl(RETOUR);
 	sockfd= creer_connexion();
 	if(sockfd > 0){
 
@@ -773,6 +775,7 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 
 int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	char* nom_fichier;
+	int continuer;
 	Joueur* pivot =*j;
 	continuer= saisir_nom_fichier(nom_fichier);
 	if(!continuer){
@@ -786,7 +789,9 @@ int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Jou
 					(*j)->type = BOT;
 				//	(*j)->sockfd=creer_connexion();
 				}
+				*j=joueur_suivant(*j);
 			} while( *j != pivot);
+		}
 	continuer= 1;
 	}
 	else{
