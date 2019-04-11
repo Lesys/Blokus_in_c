@@ -180,6 +180,8 @@ void afficher_type_joueur_sdl();
 
 void afficher_saisie_pseudo_sdl(Joueur * j);
 
+void afficher_saisie_nom_fichier_sdl(char * nom_fichier);
+
 void afficher_choix_type_partie_sdl();
 
 void afficher_attente_connexion_sdl(char * adresse);

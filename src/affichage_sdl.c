@@ -1288,6 +1288,23 @@ void afficher_saisie_pseudo_sdl(Joueur * j) {
 }
 
 /**
+ * \fn void afficher_saisie_nom_fichier_sdl(char * nom_fichier)
+ * \brief Affiche le fond et le texte demandant la saisie du
+ * pseudo ainsi que le pseudo en cours de saisie
+ * \param j Joueur dont on saisie le pseudo
+ */
+void afficher_saisie_nom_fichier_sdl(char * nom_fichier) {
+
+    char message[50];
+
+    afficher_fond_config();
+    afficher_sprite(ressources->fond_saisie, largeur_ecran/2 - taille_carre*8, hauteur_ecran/2 + taille_carre*2);
+    sprintf(message, "Entrez le nom du fichier (Entree pour valider) :");
+    afficher_texte(message, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*4);
+    afficher_texte(nom_fichier, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 + taille_carre*2);
+}
+
+/**
  * \fn void afficher_choix_type_partie_sdl()
  * \brief Affiche le choix du type de partie
  */

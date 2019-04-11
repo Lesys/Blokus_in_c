@@ -9,7 +9,7 @@ extern SDL_Renderer* renderer;
 int main(){
 /* DEBUT DU TEST */
 
-	sdl_init();
+	sdl_init(0);
 
 	fprintf(stderr, "\nAVANT SDL_RENDERCLEAR\n");
 	SDL_RenderClear(renderer);

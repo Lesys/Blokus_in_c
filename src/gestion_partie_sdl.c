@@ -18,7 +18,7 @@
 #include "../include/gestion_bot.h"
 #include "../include/affichage_sdl.h"
 #include "../include/son.h"
-//#include "../include/sauvegarde.h"
+#include "../include/sauvegarde.h"
 
 extern SDL_Renderer* renderer;
 int son;
@@ -246,22 +246,9 @@ int saisir_type_joueur(Joueur** j){
 	return continuer;
 }
 
-/**
-	*\fn void initialisation_joueur_distant(Joueur **j)
-	*\details Initialise un joueur distant, creer la connexion entre les deux et recuperent le sockfd. <br>
-	*Attend que le joueur distant lui envoie le pseudo , si il le reçois, le programme l'affecte au pseudo et le rajoute en type distant,<br>
-	sinon il ferme la connexion
-	* Si la liste existe, on la supprime puis on en crée une autre.
-	*\param j Pointeur sur un Joueur pour affecter le joueur à la liste de Joueur.
-	*\return Retourne 2 si il appuis sur le bouton retour.<br>
-		Retourne 3 si le joueur appuis sur la croix de l'aficheur.<br>
-		Retourne 4 si il a un problème avec le buffer.<br>
-		Retourne 0 si l'affectation a bien fonctionné.
-*/
-
-
-int initialiser_joueur_distant(Joueur **j){
-
+//Fonction qui permet de creer une connexion et attribut un socket
+static
+int creer_connexion(){
 	SDL_Event event;
 	int sockfd = -1;
 	char adresse[255];
@@ -296,10 +283,30 @@ int initialiser_joueur_distant(Joueur **j){
 
 		sockfd = accepter_connexion(sockfd_connexion);
 	}
+	return sockfd;
+}
+/**
+	*\fn void initialisation_joueur_distant(Joueur **j)
+	*\details Initialise un joueur distant, creer la connexion entre les deux et recuperent le sockfd. <br>
+	*Attend que le joueur distant lui envoie le pseudo , si il le reçois, le programme l'affecte au pseudo et le rajoute en type distant,<br>
+	sinon il ferme la connexion
+	* Si la liste existe, on la supprime puis on en crée une autre.
+	*\param j Pointeur sur un Joueur pour affecter le joueur à la liste de Joueur.
+	*\return Retourne 2 si il appuis sur le bouton retour.<br>
+		Retourne 3 si le joueur appuis sur la croix de l'aficheur.<br>
+		Retourne 4 si il a un problème avec le buffer.<br>
+		Retourne 0 si l'affectation a bien fonctionné.
+*/
+
+
+int initialiser_joueur_distant(Joueur **j){
+
+	SDL_Event event;
 	//La OK
 	unsigned char buffer[TAILLE_BUFF];
+	int sockfd;
 	int r = 0;
-
+	sockfd= creer_connexion();
 	if(sockfd > 0){
 
                 continuer = 0;
@@ -374,7 +381,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 			}
 
 			switch((*j)->type){
-				case BOT: sprintf((*j)->pseudo,"Bot %s",couleur_tostring((*j)->couleur));break;
+				case BOT: sprintf((*j)->pseudo,"Bot_%s",couleur_tostring((*j)->couleur));break;
 
 				case LOCAL:
 					retour=saisir_pseudo_joueur(j);
@@ -412,11 +419,19 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 }
 
 static
-int attente_fin_de_partie() {
+int attente_fin_de_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j){
+
+	Reserves* r = init_afficher_pieces_dispo_sdl(j);
 
 	Bouton* b_fin = init_bouton_sdl(FIN);
 	int retour = 1;
 	SDL_Event event;
+	SDL_RenderClear(renderer);
+
+	afficher_plateau_sdl(pl);
+	afficher_pieces_dispo_sdl(r, j, NULL);
+	afficher_scores_sdl(j);
+	afficher_tour_sdl(j);
 
 	afficher_bouton_sdl(b_fin);
 	SDL_RenderPresent(renderer);
@@ -459,7 +474,7 @@ int attente_fin_de_partie() {
 
 /* Affiche les résultats,mets à jour le score ,propose les options de fin de partie et renvoie le résultat correspondant */
 
-int fin_de_partie_sdl(Joueur** j){
+int fin_de_partie_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
 	/*Si le joueur n'a plus de piece dans sa liste, fait abandonner le joueur automatiquement*/
 	if(joueur_liste_piece(*j) == NULL)
 		joueur_abandonne(*j);
@@ -469,7 +484,7 @@ int fin_de_partie_sdl(Joueur** j){
 		return 0;
 
 	/* Sinon attente */
-	int choix = attente_fin_de_partie();
+	int choix = attente_fin_de_partie(pl,*j);
 	if (choix == 3)
 		return choix;
 
@@ -660,31 +675,126 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 	Renvoie l'id de la Piece
 */
 
+static
+int saisir_nom_fichier(char* nom_fichier){
+/********PARTIE SAISI NOM DU FICHIER*********/
+        SDL_Event event_saisie;
+        int continuer=1;
+	SDL_StartTextInput();
+        Bouton* b_retour = init_bouton_sdl(RETOUR);
+        /*Boucle d'évenement*/
+        while(continuer == 1){
+
+                SDL_RenderClear(renderer);
+                /*Attend l'appuis d'une touche*/
+                while(SDL_PollEvent(&event_saisie)){
+                        /*Si c'est la croix, on arrete*/
+                        if(event_saisie.type == SDL_QUIT){
+				nom_fichier[0]='\0';
+                                continuer= 2;
+			}
+                        /*Si c'est la touche entrée, on passe au joueur suivant*/
+                        else if(strlen(nom_fichier) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) ) {
+                                jouer_son(BOUTON);
+                                continuer = 0;
+                        }
+                        /*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
+                        else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
+                                if (strlen(nom_fichier) > 0)
+                                        nom_fichier[strlen(nom_fichier) - 1] = '\0';
+                        }
+                        /*Si c'est une touche du clavier, on l'entre dans le pseudo*/
+                        else if(event_saisie.type == SDL_TEXTINPUT && strlen(nom_fichier) < TAILLE_NOM_FICHIER) {
+                                strcat(nom_fichier, event_saisie.text.text);
+                        }
+                        else if(event_saisie.type == SDL_MOUSEBUTTONDOWN && curs_hover_bouton(b_retour)) {
+                                jouer_son(BOUTON_RETOUR);
+				nom_fichier[0]='\0';
+                                continuer= 3;
+                        }
+
+                }
+                afficher_bouton_sdl(b_retour);
+                afficher_saisie_nom_fichier_sdl(nom_fichier);
+                SDL_RenderPresent(renderer);
+                }
+        SDL_StopTextInput();
+	if(!continuer){
+                /* Si le pseudo n'est pas trop grand */
+                if (strlen(nom_fichier) < TAILLE_NOM_FICHIER) {
+                        /* Réalloue la bonne taille pour le pseudo */
+                        nom_fichier = realloc(nom_fichier, sizeof(char) * (strlen(nom_fichier) + 1));
+                        nom_fichier[strlen(nom_fichier)]='\0';
+                }
+                else /* S'il est trop grand: troncature */
+                        nom_fichier[TAILLE_NOM_FICHIER]='\0';
+        }
+        free_bouton_sdl(&b_retour);
+
+        return continuer;
+
+}
+
 /*Appel toute les fonctions pour réalisé un tour*/
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j){
 	int valeur_r = 4;
-
+	char* nom_fichier= malloc(sizeof(TAILLE_NOM_FICHIER));
+	*nom_fichier='\0';
 	if(joueur_a_abandonne(*j)){
 //		printf("\n Ce joueur à abandonne\n");
 		*j=joueur_suivant(*j);
 
 	}
 	else{
-		valeur_r=gestion_tour_sdl(pl,*j);
+		do{
+			if(valeur_r != 2)
+				valeur_r = gestion_tour_sdl(pl,*j);
 
-		if(valeur_r == 1){//Le joueur a abandonné
-//			printf("Vous avez abandonné\n");
-			joueur_abandonne(*j);
-		}
-		else if(valeur_r == 2){
-			return 3;//Quitte le jeu
-		}
+			if(valeur_r == 1){//Le joueur a abandonné
+//				printf("Vous avez abandonné\n");
+				joueur_abandonne(*j);
+			}
+			else if(valeur_r == 2){
+				return 3;//Quitte le jeu
+			}
+
+			else if(valeur_r ==  3){
+				valeur_r= saisir_nom_fichier(nom_fichier);
+				if(!valeur_r){
+					sauvegarder_partie(pl,*j,nom_fichier);
+					valeur_r= 3;
+				}
+			}
+		} while (valeur_r == 3);
 		*j=joueur_suivant(*j);
 
 	}
 	return valeur_r;
 }
 
+int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
+	char* nom_fichier;
+	Joueur* pivot =*j;
+	continuer= saisir_nom_fichier(nom_fichier);
+	if(!continuer){
+		continuer = charger_partie(pl,*j,nom_fichier);
+		if(continuer){
+			continuer=2;
+		}
+		else{
+			do{
+				if((*j)->type == DISTANT) {
+					(*j)->type = BOT;
+				//	(*j)->sockfd=creer_connexion();
+				}
+			} while( *j != pivot);
+	continuer= 1;
+	}
+	else{
+		return 2;
+	}
+	return continuer;
+}
 // 1 si tout est ok, 2 si deconnexion, 3 si croix
 static
 int attente_nouvelle_partie(Joueur * j) {
@@ -804,7 +914,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
                     j = joueur_suivant(j);
 			}
 
-			choix=fin_de_partie_sdl(&j);
+			choix=fin_de_partie_sdl(pl,&j);
 			//Si le joueur veut continuer, alors on regarde si tous les joueurs veulent continuez de jouer
 			if (choix == 1) {
 			       choix = attente_nouvelle_partie(j);
@@ -923,13 +1033,13 @@ int regles() {
 */
 
 int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
-
 	jouer_son(MUSIQUE_FOND);
 
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
 	int retour = 2;
 	int val_partie=1;
+	char* nom_fichier;
 	SDL_Event event;
 	Bouton* b_jouer = init_bouton_sdl(JOUER);
 	Bouton* b_quitter_jeu = init_bouton_sdl(QUITTER_JEU);
@@ -989,8 +1099,8 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 					retour = initialisation_partie_distant_sdl(&j);
 				/* Recharge une partie */
 
-				//else if(val_partie == 5)
-				//	retour = charger_partie(pl,&j);
+				else if(val_partie == 5)
+					retour = initialisation_charger_partie(pl,&j);
 
 				/*Retour au menu*/
 
