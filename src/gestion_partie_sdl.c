@@ -373,7 +373,7 @@ int initialisation_partie_sdl(Joueur** j ){ /*Initialisation de la partie, appel
 			}
 
 			switch((*j)->type){
-				case BOT: sprintf((*j)->pseudo,"Bot %s",couleur_tostring((*j)->couleur));break;
+				case BOT: sprintf((*j)->pseudo,"Bot_%s",couleur_tostring((*j)->couleur));break;
 
 				case LOCAL:
 					retour=saisir_pseudo_joueur(j);
@@ -688,7 +688,7 @@ int saisir_nom_fichier(char* nom_fichier){
                         /*Si c'est la touche entrée, on passe au joueur suivant*/
                         else if(strlen(nom_fichier) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) ) {
                                 jouer_son(BOUTON);
-                                continuer = 0;
+                                continuer = 3;
                         }
                         /*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
                         else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){

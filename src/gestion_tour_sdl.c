@@ -214,7 +214,6 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
             }
 		else if( curs_hover_bouton(b_sauvegarder)){
 			etat = 3;
-			printf("J'APPUIS SUR LE BOUTON ET JE RENVOIE 3");
 		}
 
         }
