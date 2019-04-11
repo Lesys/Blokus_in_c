@@ -872,12 +872,15 @@ int attente_nouvelle_partie(Joueur * j) {
 */
 
 
-int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j){
+int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j, int valeur_partie){
 	int choix;
         Joueur * init;
 	do{
+		if(valeur_partie == 5)
+			val_partie = 1;
+		else{
 		initialisation_manche(pl,&j);
-
+		}
 		do{
 
 	            init = j;
@@ -1123,7 +1126,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 
 			else if (retour != 3){ /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
 				if(val_partie == 1 || val_partie == 5)
-					retour = jouer_manche_sdl(pl,j);
+					retour = jouer_manche_sdl(pl,j,val_partie);
 				else if(val_partie == 2)
 					retour = jouer_manche_distant_sdl(pl, j, retour);
 			/*?*/	joueur_liste_detruire(&j);

@@ -26,7 +26,7 @@ int jouer_tour_joueur_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Jo
 
 int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j);
 
-int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j);
+int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j,int valeur_partie);
 
 int jouer_partie_sdl();
 

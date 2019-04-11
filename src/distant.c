@@ -158,7 +158,7 @@ int creer_socket_connexion(int port, char * adresse) {
         if (tmp->ifa_addr && tmp->ifa_addr->sa_family == AF_INET)
         {
             struct sockaddr_in *pAddr = (struct sockaddr_in *)tmp->ifa_addr;
-            printf("%s: %s\n", tmp->ifa_name, inet_ntoa(pAddr->sin_addr));
+            strcpy(adresse, inet_ntoa(pAddr->sin_addr));
         }
 
         tmp = tmp->ifa_next;
