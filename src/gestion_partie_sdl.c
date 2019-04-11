@@ -688,7 +688,7 @@ int saisir_nom_fichier(char* nom_fichier){
                         /*Si c'est la touche entrée, on passe au joueur suivant*/
                         else if(strlen(nom_fichier) > 0 && event_saisie.type == SDL_KEYDOWN && (event_saisie.key.keysym.sym == SDLK_RETURN || event_saisie.key.keysym.sym == SDLK_KP_ENTER) ) {
                                 jouer_son(BOUTON);
-                                continuer = 3;
+                                continuer = 0;
                         }
                         /*Si c'est une touche supprimer, on efface le dernier caractère saisie*/
                         else if(event_saisie.key.keysym.sym == SDLK_BACKSPACE && event_saisie.type == SDL_KEYDOWN){
@@ -752,9 +752,10 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 
 			else if(valeur_r ==  3){
 				valeur_r= saisir_nom_fichier(nom_fichier);
-				if(!valeur_r)
+				if(!valeur_r){
 					sauvegarder(pl,*j,nom_fichier);
-
+					valeur_r= 3;
+				}
 			}
 		} while (valeur_r == 3);
 		*j=joueur_suivant(*j);
