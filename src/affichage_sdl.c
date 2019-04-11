@@ -1320,10 +1320,9 @@ void afficher_choix_type_partie_sdl() {
  */
 void afficher_attente_connexion_sdl(char * adresse) {
 
-    char msg[500];
-    sprintf(msg, "En attente de la connexion d'un joueur distant sur %s ...", adresse);
     afficher_fond_config();
-    afficher_texte(msg, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*1);
+    afficher_texte("En attente de la connexion d'un joueur distant sur :", ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*2);
+    afficher_texte(adresse, ressources->police_m, ressources->blanc, largeur_ecran/2, hauteur_ecran/2 - taille_carre*0.5);
 }
 
 /**
