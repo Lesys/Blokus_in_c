@@ -4,6 +4,8 @@
 #define TAILLE_PLATEAU 20
 #define TAILLE_PSEUDO 15
 #define TAILLE_NOM_FICHIER 15
+#define EXTENSION_SAVE_FICHIER ".blk"
+#define DOSSIER_SAVE_FICHIER "save/"
 #define NB_PIECES 21
 #define NB_JOUEUR_MIN 2
 #define NB_JOUEUR_MAX 4

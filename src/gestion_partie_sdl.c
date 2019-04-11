@@ -18,7 +18,7 @@
 #include "../include/gestion_bot.h"
 #include "../include/affichage_sdl.h"
 #include "../include/son.h"
-//#include "../include/sauvegarde.h"
+#include "../include/sauvegarde.h"
 
 extern SDL_Renderer* renderer;
 int son;
@@ -753,7 +753,7 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 			else if(valeur_r ==  3){
 				valeur_r= saisir_nom_fichier(nom_fichier);
 				if(!valeur_r)
-					sauvegarder(pl,*j,nom_fichier);
+					sauvegarder_partie(pl,*j,nom_fichier);
 
 			}
 		} while (valeur_r == 3);
