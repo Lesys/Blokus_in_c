@@ -105,6 +105,10 @@ void joueur_abandonne(Joueur* j) {
 	j->abandon = 1;
 }
 
+int joueur_sockfd(Joueur* j) {
+	return j->sockfd;
+}
+
 
 /*Joueur* joueur_copier(Joueur* j) {
 	Joueur* j_copie = joueur_creation(joueur_couleur(j));

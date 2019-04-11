@@ -101,4 +101,6 @@ int piece_nb_carre(Piece*);
 
 Piece* piece_copie(Piece*);
 
+void liste_piece_charger(int*, int, Piece*);
+
 #endif
