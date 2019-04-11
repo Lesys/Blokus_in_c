@@ -794,8 +794,9 @@ int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Jou
 				}
 				*j=joueur_suivant(*j);
 			} while( *j != pivot);
+			
+			continuer= 0;
 		}
-		continuer= 0;
 	}
 	else{
 		return 2;
@@ -877,7 +878,7 @@ int jouer_manche_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur* j, int v
         Joueur * init;
 	do{
 		if(valeur_partie == 5)
-			val_partie = 1;
+			valeur_partie = 1;
 		else{
 		initialisation_manche(pl,&j);
 		}
