@@ -977,14 +977,12 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             bouton->y_bas = hauteur_ecran/3*2 + taille_carre*2;
             break;
         case JOUER:
-        case CREER_PARTIE:
             bouton->x_gauche = largeur_ecran/2 - taille_carre*14;
             bouton->x_droite = largeur_ecran/2 - taille_carre*2;
             bouton->y_haut = hauteur_ecran/2  + taille_carre*4;
             bouton->y_bas = hauteur_ecran/2 + taille_carre*8;
             break;
         case QUITTER_JEU:
-        case REJOINDRE_PARTIE:
             bouton->x_gauche = largeur_ecran/2 + taille_carre*2;
             bouton->x_droite = largeur_ecran/2 + taille_carre*14;
             bouton->y_haut = hauteur_ecran/2  + taille_carre*4;
@@ -992,6 +990,7 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             break;
         case NB_JOUEURS_2:
         case TYPE_JOUEUR_LOCAL:
+        case CREER_PARTIE:
             bouton->x_gauche = largeur_ecran/2 - taille_carre*19;
             bouton->x_droite = largeur_ecran/2 - taille_carre*7;
             bouton->y_haut = hauteur_ecran/2  + taille_carre*2;
@@ -999,6 +998,7 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             break;
         case NB_JOUEURS_3:
         case TYPE_JOUEUR_DISTANT:
+        case REJOINDRE_PARTIE:
             bouton->x_gauche = largeur_ecran/2 - taille_carre*6;
             bouton->x_droite = largeur_ecran/2 + taille_carre*6;
             bouton->y_haut = hauteur_ecran/2  + taille_carre*2;
@@ -1006,6 +1006,7 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             break;
         case NB_JOUEURS_4:
         case TYPE_JOUEUR_BOT:
+        case CHARGER_PARTIE:
             bouton->x_gauche = largeur_ecran/2 + taille_carre*7;
             bouton->x_droite = largeur_ecran/2 + taille_carre*19;
             bouton->y_haut = hauteur_ecran/2  + taille_carre*2;
@@ -1023,7 +1024,12 @@ Bouton * init_bouton_sdl(Type_bouton b) {
             bouton->y_haut = taille_carre;
             bouton->y_bas = taille_carre*4;
             break;
-
+        case SAUVEGARDER:
+            bouton->x_gauche = taille_carre*2;
+            bouton->x_droite = taille_carre*14;
+            bouton->y_haut = hauteur_ecran - taille_carre*6;
+            bouton->y_bas = hauteur_ecran - taille_carre*2;
+            break;
         default:
             break;
     }
@@ -1094,6 +1100,9 @@ void afficher_bouton_sdl(Bouton * b) {
         case REJOINDRE_PARTIE:
             aff_b("Rejoindre Partie", b->x_gauche, b->y_haut);
             break;
+        case CHARGER_PARTIE:
+            aff_b("Charger Partie", b->x_gauche, b->y_haut);
+            break;
         case RETOUR:
             aff_b("Retour", b->x_gauche, b->y_haut);
             break;
@@ -1118,6 +1127,9 @@ void afficher_bouton_sdl(Bouton * b) {
             break;
         case FIN:
             aff_b("Fin de partie", b->x_gauche, b->y_haut);
+            break;
+        case SAUVEGARDER:
+            aff_b("Sauvegarder", b->x_gauche, b->y_haut);
             break;
         default:
             break;

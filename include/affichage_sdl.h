@@ -121,11 +121,13 @@ typedef enum type_bouton {
     TYPE_JOUEUR_BOT,
     CREER_PARTIE,
     REJOINDRE_PARTIE,
+    CHARGER_PARTIE,
     RETOUR,
     SON,
     EFFET,
     REGLES,
-    FIN
+    FIN,
+    SAUVEGARDER
 } Type_bouton;
 
 typedef struct bouton {

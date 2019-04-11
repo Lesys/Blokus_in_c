@@ -428,6 +428,121 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
 }
 
 /**
+ * \fn int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
+ * \brief Envoie l'état d'une partie chargée au joueur distant
+ * \param sockfd Numéro du socket à qui envoyer
+ * \param j Liste des joueurs (positionné sur le joueur à qui l'on envoie)
+ * \param pl Plateau courant
+ * \return Nombre d'octets lus, -1 si erreur
+ */
+int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
+
+    int type = PARTIE;
+    unsigned char buffer[TAILLE_BUFF] = {0};
+    unsigned char c;
+    Couleur couleur = joueur_couleur(j);
+    int offset = 0;
+
+    // On commence par le joueur bleu (premier joueur)
+    while (joueur_couleur(j) != BLEU) j = joueur_suivant(j);
+
+    // Ecriture du type
+    memcpy(buffer + offset, &type, sizeof(int));
+    offset += sizeof(int);
+
+    // Calcul du nombre de joueurs
+    Joueur * init = j;
+    int nb_joueurs =  0;
+
+    do {
+        nb_joueurs++;
+        j = joueur_suivant(j);
+    } while (j != init);
+
+    // Ecriture du nombre de joueurs
+    memcpy(buffer + offset, &nb_joueurs, sizeof(int));
+    offset += sizeof(int);
+
+    // Ecriture des pseudos + score + pièces jouées ou non
+    do {
+        memcpy(buffer + offset, joueur_pseudo(j), TAILLE_PSEUDO);
+        offset += TAILLE_PSEUDO;
+        memcpy(buffer + offset, j->score, sizeof(int));
+        offset += sizeof(int);
+        Piece * l = joueur_liste_piece(j);
+        for (int i = 1; i <= 21; i++) {
+            c = (l->id == i);
+            memcpy(buffer + offset, &c, sizeof(unsigned char));
+            offset += sizeof(unsigned char);
+            l = piece_suivant(l);
+        }
+        j = joueur_suivant(j);
+    } while(j != init);
+
+    // Ecriture de la couleur du joueur distant
+    memcpy(buffer + offset, &couleur, sizeof(int));
+    offset += sizeof(int);
+
+    // Vérification socket encore ouvert
+    if (recv(sockfd, &c, 1, 0) == 0) {
+        return -1;
+    }
+
+    // Envoi
+    return send(sockfd, buffer, offset, 0);
+}
+
+/**
+ * \fn Joueur * recevoir_partie(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
+ * \brief recoit la liste des joueurs et en créer une local
+ * \param buffer buffer à lire
+ * \param pl Plateau courant
+ * \return Liste des joueurs local
+ */
+Joueur * recevoir_partie(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
+
+    int offset = sizeof(int);
+    int nb_joueurs = 0;
+    unsigned char c;
+    Couleur couleur;
+
+    // Récupération du nombre de joueurs
+    memcpy(&nb_joueurs, buffer + offset, sizeof(int));
+    offset += sizeof(int);
+
+    // Création de la liste des joueurs
+    Joueur * j = joueur_liste_creation(nb_joueurs);
+    Joueur * jc = j;
+
+    // Récupération des pseudos + score + pièces jouées ou non
+    for (int i = 0; i < nb_joueurs; i++) {
+        memcpy(j->pseudo, buffer + offset, TAILLE_PSEUDO);
+        offset += TAILLE_PSEUDO;
+        memcpy(j->score, buffer + offset, sizeof(int));
+        offset += sizeof(int);
+        Piece * l = joueur_liste_piece(j);
+        for (int i = 1; i <= 21; i++) {
+            memcpy(&c, buffer + offset, sizeof(unsigned char));
+            offset += sizeof(unsigned char);
+            if (!c) {
+                liste_piece_suppr_elem(&l);
+            }
+            else {
+                l = piece_suivant(l);
+            }
+        }
+        j = joueur_suivant(j);
+    }
+
+    // Récupération de la couleur et mise du sockfd à -1 du joueur local
+    memcpy(&couleur, buffer + offset, sizeof(int));
+    while (joueur_couleur(jc) != couleur) jc = joueur_suivant(jc);
+    jc->sockfd = -1;
+
+    return j;
+}
+
+/**
  * \fn int envoyer_abandon_joueur(int sockfd, Joueur * j);
  * \brief Envoi un message annoncant l'abandon d'un joueur
  * \param sockfd Numéro du socket à qui envoyer

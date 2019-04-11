@@ -288,13 +288,14 @@ int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
 
     Reserves* r = init_afficher_pieces_dispo_sdl(j);
 
-    Bouton* b = init_bouton_sdl(ABANDONNER);
+    Bouton* b_abandonner = init_bouton_sdl(ABANDONNER);
+    Bouton* b_sauvegarder = init_bouton_sdl(SAUVEGARDER);
 
     while(!etat)
     {
         SDL_RenderClear(renderer);
 
-        etat = selection_piece(pl, j, r, &p, b);
+        etat = selection_piece(pl, j, r, &p, b_abandonner);
 
         int x, y;
 
@@ -319,13 +320,15 @@ int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
         afficher_pieces_dispo_sdl(r, j, p);
         afficher_scores_sdl(j);
         afficher_tour_sdl(j);
-        afficher_bouton_sdl(b);
+        afficher_bouton_sdl(b_abandonner);
+        afficher_bouton_sdl(b_sauvegarder);
 
         SDL_RenderPresent(renderer);
     }
 
     free_afficher_pieces_dispo_sdl(&r);
-    free_bouton_sdl(&b);
+    free_bouton_sdl(&b_abandonner);
+    free_bouton_sdl(&b_sauvegarder);
 
     return etat;
 }
