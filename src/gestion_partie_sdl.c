@@ -246,22 +246,9 @@ int saisir_type_joueur(Joueur** j){
 	return continuer;
 }
 
-/**
-	*\fn void initialisation_joueur_distant(Joueur **j)
-	*\details Initialise un joueur distant, creer la connexion entre les deux et recuperent le sockfd. <br>
-	*Attend que le joueur distant lui envoie le pseudo , si il le reçois, le programme l'affecte au pseudo et le rajoute en type distant,<br>
-	sinon il ferme la connexion
-	* Si la liste existe, on la supprime puis on en crée une autre.
-	*\param j Pointeur sur un Joueur pour affecter le joueur à la liste de Joueur.
-	*\return Retourne 2 si il appuis sur le bouton retour.<br>
-		Retourne 3 si le joueur appuis sur la croix de l'aficheur.<br>
-		Retourne 4 si il a un problème avec le buffer.<br>
-		Retourne 0 si l'affectation a bien fonctionné.
-*/
-
-
-int initialiser_joueur_distant(Joueur **j){
-
+//Fonction qui permet de creer une connexion et attribut un socket
+static
+int creer_connexion(){
 	SDL_Event event;
 	int sockfd = -1;
 	int sockfd_connexion = creer_socket_connexion(PORT_DEFAUT);
@@ -295,10 +282,30 @@ int initialiser_joueur_distant(Joueur **j){
 
 		sockfd = accepter_connexion(sockfd_connexion);
 	}
+	return sockfd;
+}
+/**
+	*\fn void initialisation_joueur_distant(Joueur **j)
+	*\details Initialise un joueur distant, creer la connexion entre les deux et recuperent le sockfd. <br>
+	*Attend que le joueur distant lui envoie le pseudo , si il le reçois, le programme l'affecte au pseudo et le rajoute en type distant,<br>
+	sinon il ferme la connexion
+	* Si la liste existe, on la supprime puis on en crée une autre.
+	*\param j Pointeur sur un Joueur pour affecter le joueur à la liste de Joueur.
+	*\return Retourne 2 si il appuis sur le bouton retour.<br>
+		Retourne 3 si le joueur appuis sur la croix de l'aficheur.<br>
+		Retourne 4 si il a un problème avec le buffer.<br>
+		Retourne 0 si l'affectation a bien fonctionné.
+*/
+
+
+int initialiser_joueur_distant(Joueur **j){
+
+	SDL_Event event;
 	//La OK
 	unsigned char buffer[TAILLE_BUFF];
+	int sockfd;
 	int r = 0;
-
+	sockfd= creer_connexion();
 	if(sockfd > 0){
 
                 continuer = 0;
@@ -764,6 +771,29 @@ int jouer_tour_joueur_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** j
 	return valeur_r;
 }
 
+int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Joueur** j){
+	char* nom_fichier;
+	Joueur* pivot =*j;
+	continuer= saisir_nom_fichier(nom_fichier);
+	if(!continuer){
+		continuer = charger_partie(pl,*j,nom_fichier);
+		if(continuer){
+			continuer=2;
+		}
+		else{
+			do{
+				if((*j)->type == DISTANT) {
+					(*j)->type = BOT;
+				//	(*j)->sockfd=creer_connexion();
+				}
+			} while( *j != pivot);
+	continuer= 1;
+	}
+	else{
+		return 2;
+	}
+	return continuer;
+}
 // 1 si tout est ok, 2 si deconnexion, 3 si croix
 static
 int attente_nouvelle_partie(Joueur * j) {
@@ -1002,13 +1032,13 @@ int regles() {
 */
 
 int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
-
 	jouer_son(MUSIQUE_FOND);
 
 	Joueur * j = NULL;
 	Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU] = {0};
 	int retour = 2;
 	int val_partie=1;
+	char* nom_fichier;
 	SDL_Event event;
 	Bouton* b_jouer = init_bouton_sdl(JOUER);
 	Bouton* b_quitter_jeu = init_bouton_sdl(QUITTER_JEU);
@@ -1068,8 +1098,8 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 					retour = initialisation_partie_distant_sdl(&j);
 				/* Recharge une partie */
 
-				//else if(val_partie == 5)
-				//	retour = charger_partie(pl,&j);
+				else if(val_partie == 5)
+					retour = initialisation_charger_partie(pl,&j);
 
 				/*Retour au menu*/
 
