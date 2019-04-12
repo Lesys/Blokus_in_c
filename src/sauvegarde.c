@@ -96,6 +96,13 @@ int sauvegarder_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* joueu
 */
 int charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur** p_joueur, char* filename)
 {
+    struct stat st = {0};
+
+	/* Si le dossier n'existe pas */
+    if (stat(DOSSIER_SAVE_FICHIER, &st) == -1)
+	return 2;
+
+
     /* Création de la chaine de caractère dossier/fichier.extension */
     char nom_fichier[TAILLE_NOM_FICHIER + 4];
     strcpy(nom_fichier, strcat(filename, EXTENSION_SAVE_FICHIER));

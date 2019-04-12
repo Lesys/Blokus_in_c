@@ -799,14 +799,16 @@ int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Jou
 				}
 				*j=joueur_suivant(*j);
 			} while( *j != pivot);
-			
+
 			continuer= 0;
+
+			do{
+				if((*j)->sockfd)
+					envoyer_partie((*j)->sockfd, *j, pl, joueur_couleur(pivot));
+				*j=joueur_suivant(*j);
+			} while(*j != pivot);
+
 		}
-		do{
-			if((*j)->sockfd)
-				envoyer_partie((*j)->sockfd, *j, pl, joueur_couleur(pivot));
-			*j=joueur_suivant(*j);
-		} while(*j != pivot);
 	}
 	else{
 		return 2;
