@@ -1,3 +1,12 @@
+/**
+        \file sdl.c
+        \brief Fichier de fonctions pour initialiser la SDL
+        \author WIDMER Alexis
+        \version 1.0
+        \date 13/04/2019
+
+        Ce fichier permet d'initialiser toutes les variables nécessaires pour la SDL, de lancer en plein écran ou fenêtré et également de libérer les variables globales de la SDL.
+*/
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
