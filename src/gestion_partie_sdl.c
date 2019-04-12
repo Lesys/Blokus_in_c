@@ -1072,11 +1072,18 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 
 	while (retour == 2){
 
-		/* Menu */
+		/* Affiche le menu */
+		SDL_RenderClear(renderer);
+		afficher_titres_sdl();
+	 	afficher_bouton_sdl(b_jouer);
+	    afficher_bouton_sdl(b_quitter_jeu);
+	    afficher_bouton_sdl(b_son);
+	    afficher_bouton_sdl(b_effet);
+	    afficher_bouton_sdl(b_regles);
+		SDL_RenderPresent(renderer);
 
 		/* Ecouter les EVENT */
-                SDL_RenderClear(renderer);
-       	        while(SDL_PollEvent(&event)){
+       	while(SDL_PollEvent(&event)){
 			if(event.type == SDL_QUIT)
 				retour = 3;
 			else if(event.type == SDL_MOUSEBUTTONDOWN){
@@ -1150,15 +1157,6 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 		//else if (retour == 3) { /*Appuie sur le bouton Quitter || Appuie sur la croix*/
 		//	return retour;
 		//}
-
-		/* Affiche le menu */
-		afficher_titres_sdl();
-	 	afficher_bouton_sdl(b_jouer);
-	    afficher_bouton_sdl(b_quitter_jeu);
-	    afficher_bouton_sdl(b_son);
-	    afficher_bouton_sdl(b_effet);
-	    afficher_bouton_sdl(b_regles);
-		SDL_RenderPresent(renderer);
 	}
 
 	if (j) { /* Si les Joueurs arrêtent le programme pendant la saisie des pseudos / nb_joueur */
