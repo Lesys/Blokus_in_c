@@ -25,7 +25,7 @@ int envoyer_plateau(int sockfd, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], int 
 int recevoir_plateau(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
 int envoyer_liste_joueurs(int sockfd, Joueur * j);
 Joueur * recevoir_liste_joueurs(unsigned char * buffer);
-int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
+int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Couleur tour);
 Joueur * recevoir_partie(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
 int envoyer_abandon_joueur(int sockfd, Joueur * j);
 void recevoir_abandon_joueur(unsigned char * buffer, Joueur * j);
@@ -35,7 +35,7 @@ int envoyer_pret(int sockfd);
 
 int erreur_reseau();
 
-int initialisation_partie_distant_sdl(Joueur ** j);
+int initialisation_partie_distant_sdl(Joueur ** j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
 int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote);
 
 #endif

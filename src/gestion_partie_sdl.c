@@ -278,10 +278,14 @@ int creer_connexion(){
 			}
 		}
 
+		#ifndef WINDOWS
 		afficher_attente_connexion_sdl(adresse);
+		#endif
+		#ifdef WINDOWS
+		afficher_attente_connexion_sdl("adresse ip non trouvée");
+		#endif
 		afficher_bouton_sdl(b_retour);
 		SDL_RenderPresent(renderer);
-
 		sockfd = accepter_connexion(sockfd_connexion);
 	}
 	return sockfd;
@@ -308,10 +312,10 @@ int initialiser_joueur_distant(Joueur **j){
 	int sockfd;
 	int r = 0;
 	Bouton* b_retour = init_bouton_sdl(RETOUR);
-	sockfd= creer_connexion();
+	sockfd = creer_connexion();
 	if(sockfd > 0){
 
-                continuer = 0;
+        continuer = 0;
 
 		do {
 			SDL_RenderClear(renderer);
@@ -789,14 +793,20 @@ int initialisation_charger_partie(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU],Jou
 		else{
 			do{
 				if(joueur_type_joueur(*j) == DISTANT) {
-					(*j)->type = BOT;
-				//	(*j)->sockfd=creer_connexion();
+					if (initialiser_joueur_distant(j) != 0) {
+						return 4;
+					};
 				}
 				*j=joueur_suivant(*j);
 			} while( *j != pivot);
 			
 			continuer= 0;
 		}
+		do{
+			if((*j)->sockfd)
+				envoyer_partie((*j)->sockfd, *j, pl, joueur_couleur(pivot));
+			*j=joueur_suivant(*j);
+		} while(*j != pivot);
 	}
 	else{
 		return 2;
@@ -822,17 +832,17 @@ int attente_nouvelle_partie(Joueur * j) {
 					if(event.type == SDL_QUIT)
 						return 3;
 				}
-			SDL_RenderClear(renderer);
+				SDL_RenderClear(renderer);
 		        afficher_attente_debut_sdl();
 		        SDL_RenderPresent(renderer);
-			nb_recois= recevoir_buffer(pivot->sockfd,buffer);
+				nb_recois = recevoir_buffer(pivot->sockfd,buffer);
 
 			}while( nb_recois == 0);
 
 			if( nb_recois < 0)
 				retour = 3;
 			else
-				type=recup_type(buffer);
+				type = recup_type(buffer);
 		}
 		else
 			type = PRET;
@@ -843,12 +853,12 @@ int attente_nouvelle_partie(Joueur * j) {
 
 	//si tous le monde est Prêt,on envoie prêt à tout les joueurs distants
 	if(type == PRET){
-		if(pivot->type == DISTANT){
-			do{
+		do{
+			if(pivot->type == DISTANT) {
 				envoyer_pret(pivot->sockfd);
-				pivot=joueur_suivant(pivot);
-			} while(pivot != j);
-		}
+			}
+			pivot=joueur_suivant(pivot);
+		} while(pivot != j);
 		retour = 1;
 	}
 	//Sinon on ferme la connexion
@@ -1107,7 +1117,7 @@ int jouer_partie_sdl(){ /*Appel de toute les fonctions partie */
 				}
 				/*Partie rejoindre */
 				else if(val_partie == 2)
-					retour = initialisation_partie_distant_sdl(&j);
+					retour = initialisation_partie_distant_sdl(&j, pl);
 				/* Recharge une partie */
 
 				else if(val_partie == 5)

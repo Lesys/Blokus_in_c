@@ -212,7 +212,7 @@ int selection_piece(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j, Reser
             {
                 etat = 1;
             }
-		else if( curs_hover_bouton(b_sauvegarder)){
+		else if( curs_hover_bouton(b_sauvegarder) && j->sockfd != -1){
 			etat = 3;
 		}
 
@@ -319,7 +319,8 @@ int gestion_tour_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur* j)
         afficher_scores_sdl(j);
         afficher_tour_sdl(j);
         afficher_bouton_sdl(b_abandonner);
-        afficher_bouton_sdl(b_sauvegarder);
+        if (j->sockfd != -1)
+            afficher_bouton_sdl(b_sauvegarder);
 
         SDL_RenderPresent(renderer);
     }

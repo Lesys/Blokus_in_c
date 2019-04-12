@@ -445,14 +445,15 @@ Joueur * recevoir_liste_joueurs(unsigned char * buffer) {
 }
 
 /**
- * \fn int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]);
+ * \fn int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Couleur tour);
  * \brief Envoie l'état d'une partie chargée au joueur distant
  * \param sockfd Numéro du socket à qui envoyer
  * \param j Liste des joueurs (positionné sur le joueur à qui l'on envoie)
  * \param pl Plateau courant
+ * \param tour Couleur de la personne qui doit jouer
  * \return Nombre d'octets lus, -1 si erreur
  */
-int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
+int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Couleur tour) {
 
     int type = PARTIE;
     unsigned char buffer[TAILLE_BUFF] = {0};
@@ -480,24 +481,43 @@ int envoyer_partie(int sockfd, Joueur * j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLA
     memcpy(buffer + offset, &nb_joueurs, sizeof(int));
     offset += sizeof(int);
 
+    // Ecriture des cases une à une
+    for(int i = 0; i < TAILLE_PLATEAU; i++) {
+        for(int j = 0; j < TAILLE_PLATEAU; j++) {
+            c = pl[i][j];
+            memcpy(buffer + offset, &c, sizeof(unsigned char));
+            offset += sizeof(unsigned char);
+        }
+    }
+
     // Ecriture des pseudos + score + pièces jouées ou non
     do {
         memcpy(buffer + offset, joueur_pseudo(j), TAILLE_PSEUDO);
         offset += TAILLE_PSEUDO;
-        memcpy(buffer + offset, j->score, sizeof(int));
+
+        memcpy(buffer + offset, &j->score, sizeof(int));
         offset += sizeof(int);
+
         Piece * l = joueur_liste_piece(j);
+        while(l->id != 1) l = piece_suivant(l);
+
         for (int i = 1; i <= 21; i++) {
+
             c = (l->id == i);
             memcpy(buffer + offset, &c, sizeof(unsigned char));
             offset += sizeof(unsigned char);
-            l = piece_suivant(l);
+
+            if (c) l = piece_suivant(l);
         }
         j = joueur_suivant(j);
     } while(j != init);
 
     // Ecriture de la couleur du joueur distant
     memcpy(buffer + offset, &couleur, sizeof(int));
+    offset += sizeof(int);
+
+    // Ecriture de la couleur du joueur qui doit jouer
+    memcpy(buffer + offset, &tour, sizeof(int));
     offset += sizeof(int);
 
     // Vérification socket encore ouvert
@@ -529,13 +549,21 @@ Joueur * recevoir_partie(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAIL
 
     // Création de la liste des joueurs
     Joueur * j = joueur_liste_creation(nb_joueurs);
-    Joueur * jc = j;
+
+    // Lecture des cases une à une
+    for(int i = 0; i < TAILLE_PLATEAU; i++) {
+        for(int j = 0; j < TAILLE_PLATEAU; j++) {
+            memcpy(&c, buffer + offset, sizeof(unsigned char));
+            offset += sizeof(unsigned char);
+            pl[i][j] = c;
+        }
+    }
 
     // Récupération des pseudos + score + pièces jouées ou non
     for (int i = 0; i < nb_joueurs; i++) {
         memcpy(j->pseudo, buffer + offset, TAILLE_PSEUDO);
         offset += TAILLE_PSEUDO;
-        memcpy(j->score, buffer + offset, sizeof(int));
+        memcpy(&j->score, buffer + offset, sizeof(int));
         offset += sizeof(int);
         Piece * l = joueur_liste_piece(j);
         for (int i = 1; i <= 21; i++) {
@@ -553,8 +581,13 @@ Joueur * recevoir_partie(unsigned char * buffer, Couleur pl[TAILLE_PLATEAU][TAIL
 
     // Récupération de la couleur et mise du sockfd à -1 du joueur local
     memcpy(&couleur, buffer + offset, sizeof(int));
-    while (joueur_couleur(jc) != couleur) jc = joueur_suivant(jc);
-    jc->sockfd = -1;
+    while (joueur_couleur(j) != couleur) j = joueur_suivant(j);
+    offset += sizeof(int);
+    j->sockfd = -2;
+
+    // Récupération de la couleur qui doit jouer et mise du pointeur sur ce joueur
+    memcpy(&couleur, buffer + offset, sizeof(int));
+    while (joueur_couleur(j) != couleur) j = joueur_suivant(j);
 
     return j;
 }
@@ -719,12 +752,13 @@ int erreur_reseau() {
 }
 
 /**
- * \fn int initialisation_partie_distant_sdl(Joueur ** j)
+ * \fn int initialisation_partie_distant_sdl(Joueur ** j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU])
  * \brief Initialise la connexion avec un hote et attends le début de la partie
  * \param j Liste des joueurs
+ * \param pl Plateau de jeu
  * \return numéro de socket de l'hote si ok,  2 si appui sur le bouton retour, 3 si appui sur la croix
  */
-int initialisation_partie_distant_sdl(Joueur ** j) {
+int initialisation_partie_distant_sdl(Joueur ** j, Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU]) {
 
     SDL_Event event;
     int continuer = 1;
@@ -839,14 +873,20 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
         SDL_RenderPresent(renderer);
         r = recevoir_buffer(sockfd, buffer);
     } while (r == 0);
+
     if (r < 0) {
         return erreur_reseau();
     }
     else {
-        *j = recevoir_liste_joueurs(buffer);
+        if (recup_type(buffer) == PARTIE) {
+            *j = recevoir_partie(buffer, pl);
+        }
+        else {
+            *j = recevoir_liste_joueurs(buffer);
+        }
         Joueur * init = *j;
         do {
-            if ((*j)->sockfd != -1) {
+            if ((*j)->sockfd != -1 && (*j)->sockfd != -2) {
                 (*j)->sockfd = sockfd;
             }
             *j = joueur_suivant(*j);
@@ -864,6 +904,7 @@ int initialisation_partie_distant_sdl(Joueur ** j) {
  * \return 1 quand début nouvelle partie, 2 si hote déconnecté, 3 si croix
  */
 int attente_nouvelle_partie_distant(int hote) {
+
     envoyer_pret(hote); // Envoyer_pret() à l'hote
     int nb_recois = 0;
     int type;
@@ -910,11 +951,21 @@ int attente_nouvelle_partie_distant(int hote) {
 int jouer_manche_distant_sdl(Couleur pl[TAILLE_PLATEAU][TAILLE_PLATEAU], Joueur * j, int hote) {
 
     int choix;
-    Joueur * init;
+    Joueur * init = j;
     int r = 0;
+    int partie_chargee = 0;
+
+    do {
+        if(j->sockfd == -2) {
+            partie_chargee = 1;
+            j->sockfd = -1;
+        }
+        j = joueur_suivant(j);
+    } while(j != init);
 
     do{
-        initialisation_manche(pl,&j);
+        if(!partie_chargee) initialisation_manche(pl,&j);
+        partie_chargee = 0;
         do {
             if(j->sockfd == -1) {
                 jouer_son(CLOCHE);
