@@ -14,6 +14,15 @@ Compilation du projet :
 Compilation de la documentation :  
     - doxygen  
 
+## Comment jouer?
+
+Tout d'abord, il faut compiler la SDL (voir plus haut).
+Ensuite, il faut de compiler le projet (voir plus haut).
+Enfin, il suffit de lancer le programme à l'emplacement "build/blokus.static" pour que le jeu se lance.
+
+=========================================================
+
+
 ## Version 1 (console)
 
 [Fichier conception V1 (console)](https://annuel.framapad.org/p/conduite-projet-l2info-zi-projet)
