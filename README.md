@@ -18,7 +18,7 @@ Compilation de la documentation :
 
 - Tout d'abord, il faut compiler la SDL (voir plus haut).
 
-- Ensuite, il faut de compiler le projet (voir plus haut).
+- Ensuite, il faut compiler le projet (voir plus haut).
 
 - Enfin, il suffit de lancer le programme à l'emplacement "build/blokus.static" pour que le jeu se lance.
 
